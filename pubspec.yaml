@@ -22,6 +22,7 @@ dependencies:
 
   # UTILS
   ms_material_color: ^1.0.0
+  flutter_svg: ^1.1.6
 
 dev_dependencies:
   flutter_test:

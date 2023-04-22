@@ -25,6 +25,8 @@ class ActiveYouTheme {
 
   static const Color iconColor = Color(0xFF130F26);
 
+  static const Color shadowColorBlue = Color(0xFF95ADFE);
+
   static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     scaffoldBackgroundColor: colorScaffold,
