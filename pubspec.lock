@@ -453,6 +453,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  ms_material_color:
+    dependency: "direct main"
+    description:
+      name: ms_material_color
+      sha256: effedd90d588184468faaf90d6dc75d3ad54a4bff82f404e29de3776569be00d
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   package_config:
     dependency: transitive
     description:

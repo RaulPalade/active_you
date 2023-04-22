@@ -20,6 +20,8 @@ dependencies:
   # LOCALIZATIONS
   easy_localization: ^3.0.1
 
+  # UTILS
+  ms_material_color: ^1.0.0
 
 dev_dependencies:
   flutter_test:
