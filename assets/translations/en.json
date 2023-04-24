@@ -3,5 +3,14 @@
   "generic.loading": "Caricamento in corso...",
   "general.noConnection": "Nessuna connessione, collegarsi ad internet e riprovare.",
   "general.retry": "Retry",
-  "main.home": "Home"
+  "main.home": "Home",
+  "welcomePage.getStarted": "Get Started",
+  "onBoardingCarousel.title1": "Track Your Goal",
+  "onBoardingCarousel.description1": "Don't worry if you have trouble determining your goals, We can help you determine your goals and track your goals!",
+  "onBoardingCarousel.title2": "Get Burn",
+  "onBoardingCarousel.description2": "Let’s keep burning, to achive yours goals, it hurts only temporarily, if you give up now you will be in pain forever!",
+  "onBoardingCarousel.title3": "Eat Well",
+  "onBoardingCarousel.description3": "Let's start a healthy lifestyle with us, we can determine your diet every day. healthy eating is fun!",
+  "onBoardingCarousel.title4": "Share your results",
+  "onBoardingCarousel.description4": "Showcase your fitness journey and inspire others with your progress. Get inspired and share your results now!"
 }

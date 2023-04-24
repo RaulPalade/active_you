@@ -1,3 +1,4 @@
+import 'package:active_you/navigation/modal_route.dart';
 import 'package:active_you/pages/splash/splash_page.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -17,11 +18,10 @@ Future<void> initMain() async {
       container: container,
       child: EasyLocalization(
         supportedLocales: const [
-          Locale("it"),
           Locale("en"),
         ],
         path: "assets/translations",
-        fallbackLocale: const Locale("it"),
+        fallbackLocale: const Locale("en"),
         child: const MaterialApp(
           home: MyApp(),
           debugShowCheckedModeBanner: false,
@@ -42,6 +42,7 @@ class MyApp extends ConsumerWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
+      onGenerateRoute: modalRoute,
       home: const SplashPage(),
     );
   }
