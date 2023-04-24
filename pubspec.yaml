@@ -20,6 +20,9 @@ dependencies:
   # LOCALIZATIONS
   easy_localization: ^3.0.1
 
+  # UTILS
+  ms_material_color: ^1.0.0
+  flutter_svg: ^1.1.6
 
 dev_dependencies:
   flutter_test:
@@ -55,3 +58,9 @@ flutter:
     - family: Poppins
       fonts:
         - asset: assets/fonts/Poppins-Regular.ttf
+    - family: Poppins-Bold
+      fonts:
+        - asset: assets/fonts/Poppins-Bold.ttf
+    - family: Poppins-ExtraBold
+      fonts:
+        - asset: assets/fonts/Poppins-ExtraBold.ttf
