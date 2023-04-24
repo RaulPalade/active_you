@@ -1,5 +1,9 @@
 import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/pages/auth/login_page.dart';
+import 'package:active_you/pages/auth/registration_credentials_page.dart';
+import 'package:active_you/pages/auth/registration_info_page.dart';
+import 'package:active_you/pages/auth/success_registration_page.dart';
+import 'package:active_you/pages/home/home_page.dart';
 import 'package:active_you/pages/intro/onboarding_page.dart';
 import 'package:active_you/pages/intro/welcome_page.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +23,23 @@ PageRoute modalRoute(RouteSettings settings) {
     case EndPoint.login:
       return MaterialPageRoute(
           builder: (_) => const LoginPage(), settings: settings);
+
+    case EndPoint.registerCredentials:
+      return MaterialPageRoute(
+          builder: (_) => const RegistrationCredentialsPage(),
+          settings: settings);
+
+    case EndPoint.registerInfo:
+      return MaterialPageRoute(
+          builder: (_) => const RegistrationInfoPage(), settings: settings);
+
+    case EndPoint.successRegistration:
+      return MaterialPageRoute(
+          builder: (_) => const SuccessRegistrationPage(), settings: settings);
+
+    case EndPoint.home:
+      return MaterialPageRoute(
+          builder: (_) => const HomePage(), settings: settings);
 
     default:
       return MaterialPageRoute(

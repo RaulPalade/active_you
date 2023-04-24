@@ -5,11 +5,13 @@ class LinkButton extends StatelessWidget {
       {Key? key,
       required this.title,
       required this.textColor,
+      required this.underline,
       required this.onClick})
       : super(key: key);
 
   final String title;
   final Color textColor;
+  final bool underline;
   final Function onClick;
 
   @override
@@ -21,9 +23,11 @@ class LinkButton extends StatelessWidget {
       child: Text(
         title,
         style: TextStyle(
-          fontFamily: "Poppins-Medium",
+          fontFamily: "Poppins-Light",
           fontSize: 14,
           color: textColor,
+          decoration:
+              underline ? TextDecoration.underline : TextDecoration.none,
         ),
       ),
     );

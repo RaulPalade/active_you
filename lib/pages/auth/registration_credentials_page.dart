@@ -1,7 +1,7 @@
 import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/widgets/buttons/link_button.dart';
-import 'package:active_you/widgets/buttons/login_button.dart';
+import 'package:active_you/widgets/buttons/primary_button.dart';
 import 'package:active_you/widgets/buttons/social_button.dart';
 import 'package:active_you/widgets/form/form_divier.dart';
 import 'package:active_you/widgets/form/password_text_form_field.dart';
@@ -9,15 +9,18 @@ import 'package:active_you/widgets/form/simple_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegistrationCredentialsPage extends StatefulWidget {
+  const RegistrationCredentialsPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegistrationCredentialsPage> createState() =>
+      _RegistrationUserCredentialsState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegistrationUserCredentialsState
+    extends State<RegistrationCredentialsPage> {
+  bool _isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,18 +33,10 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               const SizedBox(height: 20),
               const Text(
-                "Hey There,",
+                "Register to Active You",
                 style: TextStyle(
-                    fontFamily: "Poppins-Light",
+                    fontFamily: "Poppins-Medium",
                     fontSize: 16,
-                    color: ActiveYouTheme.textBlackColor),
-              ),
-              const SizedBox(height: 4),
-              const Text(
-                "Welcome Back",
-                style: TextStyle(
-                    fontFamily: "Poppins-Bold",
-                    fontSize: 20,
                     color: ActiveYouTheme.textBlackColor),
               ),
               const SizedBox(height: 10),
@@ -51,22 +46,64 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: [
                     SimpleTextFormField(
+                      hintText: "First Name",
+                      icon: SvgPicture.asset("assets/icons/profile.svg"),
+                    ),
+                    const SizedBox(height: 10),
+                    SimpleTextFormField(
+                      hintText: "Last Name",
+                      icon: SvgPicture.asset("assets/icons/profile.svg"),
+                    ),
+                    const SizedBox(height: 10),
+                    SimpleTextFormField(
                       hintText: "Email",
                       icon: SvgPicture.asset("assets/icons/email.svg"),
                     ),
                     const SizedBox(height: 10),
                     const PasswordTextFormField(),
-                    const SizedBox(height: 10),
-                    LinkButton(
-                        title: "Forgot your password?",
-                        textColor: ActiveYouTheme.grayMediumColor,
-                        underline: true,
-                        onClick: () => {}),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Row(
+                  children: [
+                    Checkbox(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      checkColor: Colors.white,
+                      fillColor: _isChecked
+                          ? MaterialStateProperty.all(
+                              ActiveYouTheme.secondaryLightColor)
+                          : MaterialStateProperty.all(
+                              ActiveYouTheme.grayMediumColor),
+                      value: _isChecked,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          _isChecked = value!;
+                        });
+                      },
+                    ),
+                    const Expanded(
+                      child: Text(
+                        "By continuing you accept our Privacy Policy and Term of Use",
+                        style: TextStyle(
+                          fontFamily: "Poppins-Light",
+                          fontSize: 10,
+                          color: ActiveYouTheme.grayMediumColor,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
               const Spacer(),
-              LoginButton(onClick: () => {}),
+              PrimaryButton(
+                  title: "Register",
+                  onClick: () => {
+                        Navigator.pushNamed(context, EndPoint.registerInfo),
+                      }),
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                 child: FormDivider(),
@@ -87,18 +124,19 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Don't you have an account?",
+                    "Already have and account?",
                     style: TextStyle(
                       fontFamily: "Poppins-Light",
                       fontSize: 14,
                     ),
                   ),
                   LinkButton(
-                      title: "Register",
+                      title: "Login",
                       textColor: ActiveYouTheme.secondaryLightColor,
                       underline: false,
-                      onClick: () =>
-                          {Navigator.pushNamed(context, EndPoint.registerCredentials)}),
+                      onClick: () => {
+                            Navigator.pushNamed(context, EndPoint.login)
+                          }),
                 ],
               )
             ],

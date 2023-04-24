@@ -3,4 +3,8 @@ class EndPoint {
   static const welcomePage = "/welcome-page";
   static const onBoardingPage = "/onboarding-page";
   static const login = "/login";
+  static const registerCredentials = "/register-credentials";
+  static const registerInfo = "/register-info";
+  static const successRegistration = "/success-registration";
+  static const home = "/home";
 }
