@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ms_material_color/ms_material_color.dart';
 
 class ActiveYouTheme {
-  static MsMaterialColor colorScaffold = MsMaterialColor(0xFFFFFFFF);
+  static MsMaterialColor scaffoldColor = MsMaterialColor(0xFFFFFFFF);
 
   static const Color brandLightColor = Color(0xFF9DCEFF);
   static const Color brandDarkColor = Color(0xFF92A3FD);
@@ -29,7 +29,7 @@ class ActiveYouTheme {
 
   static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,
-    scaffoldBackgroundColor: colorScaffold,
+    scaffoldBackgroundColor: scaffoldColor,
     iconTheme: const IconThemeData(color: iconColor),
 
     // TEXT STYLE

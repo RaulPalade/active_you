@@ -1,4 +1,6 @@
+import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/theme/active_you_theme.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:active_you/widgets/buttons/white_button.dart';
 
@@ -37,10 +39,9 @@ class WelcomePage extends StatelessWidget {
                 Text(
                   "Active",
                   style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Poppins-Bold"
-                  ),
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Poppins-Bold"),
                 ),
                 Text(
                   "You",
@@ -66,10 +67,12 @@ class WelcomePage extends StatelessWidget {
         ),
         bottomNavigationBar: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             child: WhiteButton(
-              title: "Get Started",
-              onClick: () => {},
+              title: "welcomePage.getStarted".tr(),
+              onClick: () {
+                Navigator.pushNamed(context, EndPoint.onBoardingPage);
+              },
             ),
           ),
         ),
