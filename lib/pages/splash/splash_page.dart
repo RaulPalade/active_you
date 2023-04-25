@@ -3,6 +3,8 @@ import 'package:active_you/pages/intro/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:active_you/theme/active_you_theme.dart';
+
 class SplashPage extends ConsumerWidget {
   const SplashPage({Key? key}) : super(key: key);
 
@@ -12,7 +14,9 @@ class SplashPage extends ConsumerWidget {
       if (!(previous?.endInit ?? false) && next.endInit) {
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => const WelcomePage()),
+            MaterialPageRoute(
+              builder: (context) => const WelcomePage(),
+            ),
             (route) => false);
       }
     });
@@ -23,8 +27,31 @@ class SplashPage extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset("assets/images/logo/logo-man.png", width: 80,),
-            const Text("ACTIVE YOU"),
+            Image.asset(
+              "assets/images/logo/logo-man.png",
+              width: 180,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const [
+                Text(
+                  "Active",
+                  style: TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Poppins-Bold"),
+                ),
+                Text(
+                  "You",
+                  style: TextStyle(
+                    fontSize: 36,
+                    fontFamily: "Poppins-Bold",
+                    color: ActiveYouTheme.secondaryLightColor,
+                  ),
+                )
+              ],
+            ),
           ],
         ),
       ),

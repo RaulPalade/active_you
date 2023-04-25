@@ -56,9 +56,9 @@ class WelcomePage extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            const Text(
-              "Everybody Can Train",
-              style: TextStyle(
+            Text(
+              "welcomePage.logo.motto".tr(),
+              style: const TextStyle(
                 fontSize: 18,
                 color: ActiveYouTheme.textGreyColor,
               ),

@@ -18,6 +18,7 @@ class ActiveYouTheme {
   static const Color grayLightColor = Color(0xFFDDDADA);
 
   static const Color borderColor = Color(0xFFF7F8F8);
+  static const Color cardColor = Color(0xFFF7F8F8);
 
   static const Color textBlackColor = blackColor;
   static const Color textGreyColor = grayDarkColor;
