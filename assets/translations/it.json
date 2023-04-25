@@ -1,7 +1,7 @@
 {
-  "generic.error": "An error has occurred, please retry!",
-  "generic.loading": "Loading...",
-  "general.noConnection": "No connection, connect to internet and retry!",
+  "generic.error": "È avvenuto un errore, si prega di riprovare.",
+  "generic.loading": "Caricamento in corso...",
+  "general.noConnection": "Nessuna connessione, collegarsi ad internet e riprovare.",
   "general.retry": "Retry",
   "button.login": "Login",
   "button.register": "Register",

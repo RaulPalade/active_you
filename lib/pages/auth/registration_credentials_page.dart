@@ -6,6 +6,7 @@ import 'package:active_you/widgets/buttons/social_button.dart';
 import 'package:active_you/widgets/form/form_divier.dart';
 import 'package:active_you/widgets/form/password_text_form_field.dart';
 import 'package:active_you/widgets/form/simple_text_form_field.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -32,9 +33,9 @@ class _RegistrationUserCredentialsState
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 20),
-              const Text(
-                "Register to Active You",
-                style: TextStyle(
+              Text(
+                "registrationCredentials.header".tr(),
+                style: const TextStyle(
                     fontFamily: "Poppins-Medium",
                     fontSize: 16,
                     color: ActiveYouTheme.textBlackColor),
@@ -46,12 +47,12 @@ class _RegistrationUserCredentialsState
                 child: Column(
                   children: [
                     SimpleTextFormField(
-                      hintText: "First Name",
+                      hintText: "registrationCredentials.firstName".tr(),
                       icon: SvgPicture.asset("assets/icons/profile.svg"),
                     ),
                     const SizedBox(height: 10),
                     SimpleTextFormField(
-                      hintText: "Last Name",
+                      hintText: "registrationCredentials.lastName".tr(),
                       icon: SvgPicture.asset("assets/icons/profile.svg"),
                     ),
                     const SizedBox(height: 10),
@@ -85,10 +86,10 @@ class _RegistrationUserCredentialsState
                         });
                       },
                     ),
-                    const Expanded(
+                    Expanded(
                       child: Text(
-                        "By continuing you accept our Privacy Policy and Term of Use",
-                        style: TextStyle(
+                        "registrationCredentials.privacyPolicy".tr(),
+                        style: const TextStyle(
                           fontFamily: "Poppins-Light",
                           fontSize: 10,
                           color: ActiveYouTheme.grayMediumColor,
@@ -100,7 +101,7 @@ class _RegistrationUserCredentialsState
               ),
               const Spacer(),
               PrimaryButton(
-                  title: "Register",
+                  title: "button.register".tr(),
                   onClick: () => {
                         Navigator.pushNamed(context, EndPoint.registerInfo),
                       }),
@@ -123,20 +124,19 @@ class _RegistrationUserCredentialsState
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    "Already have and account?",
-                    style: TextStyle(
+                  Text(
+                    "registrationCredentials.haveAccountMessage".tr(),
+                    style: const TextStyle(
                       fontFamily: "Poppins-Light",
                       fontSize: 14,
                     ),
                   ),
                   LinkButton(
-                      title: "Login",
+                      title: "button.login".tr(),
                       textColor: ActiveYouTheme.secondaryLightColor,
                       underline: false,
-                      onClick: () => {
-                            Navigator.pushNamed(context, EndPoint.login)
-                          }),
+                      onClick: () =>
+                          {Navigator.pushNamed(context, EndPoint.login)}),
                 ],
               )
             ],

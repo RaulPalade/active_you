@@ -13,14 +13,14 @@ class OnBoardingPage extends StatefulWidget {
 
 class _OnBoardingPageState extends State<OnBoardingPage> {
   int _pageNumber = 0;
-  List<String> illustrations = [
+  final List<String> _illustrations = [
     "assets/icons/carousel/frame1.png",
     "assets/icons/carousel/frame2.png",
     "assets/icons/carousel/frame3.png",
     "assets/icons/carousel/frame4.png"
   ];
 
-  List<String> buttons = [
+  final List<String> _buttons = [
     "assets/icons/carousel/button1.png",
     "assets/icons/carousel/button2.png",
     "assets/icons/carousel/button3.png",
@@ -48,22 +48,22 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     }),
                     children: [
                       CarouselItem(
-                        image: Image.asset(illustrations[_pageNumber]),
+                        image: Image.asset(_illustrations[_pageNumber]),
                         title: "onBoardingCarousel.title1".tr(),
                         description: "onBoardingCarousel.description1".tr(),
                       ),
                       CarouselItem(
-                        image: Image.asset(illustrations[_pageNumber]),
+                        image: Image.asset(_illustrations[_pageNumber]),
                         title: "onBoardingCarousel.title2".tr(),
                         description: "onBoardingCarousel.description2".tr(),
                       ),
                       CarouselItem(
-                        image: Image.asset(illustrations[_pageNumber]),
+                        image: Image.asset(_illustrations[_pageNumber]),
                         title: "onBoardingCarousel.title3".tr(),
                         description: "onBoardingCarousel.description3".tr(),
                       ),
                       CarouselItem(
-                        image: Image.asset(illustrations[_pageNumber]),
+                        image: Image.asset(_illustrations[_pageNumber]),
                         title: "onBoardingCarousel.title4".tr(),
                         description: "onBoardingCarousel.description4".tr(),
                       ),
@@ -78,7 +78,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     child: IconButton(
                       splashRadius: null,
                       icon: Image.asset(
-                        buttons[_pageNumber],
+                        _buttons[_pageNumber],
                         width: 60,
                       ),
                       onPressed: () {

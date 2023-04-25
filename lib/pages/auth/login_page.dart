@@ -6,9 +6,9 @@ import 'package:active_you/widgets/buttons/social_button.dart';
 import 'package:active_you/widgets/form/form_divier.dart';
 import 'package:active_you/widgets/form/password_text_form_field.dart';
 import 'package:active_you/widgets/form/simple_text_form_field.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -29,20 +29,22 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 20),
-              const Text(
-                "Hey There,",
-                style: TextStyle(
-                    fontFamily: "Poppins-Light",
-                    fontSize: 16,
-                    color: ActiveYouTheme.textBlackColor),
+              Text(
+                "login.message1".tr(),
+                style: const TextStyle(
+                  fontFamily: "Poppins-Light",
+                  fontSize: 16,
+                  color: ActiveYouTheme.textBlackColor,
+                ),
               ),
               const SizedBox(height: 4),
-              const Text(
-                "Welcome Back",
-                style: TextStyle(
-                    fontFamily: "Poppins-Bold",
-                    fontSize: 20,
-                    color: ActiveYouTheme.textBlackColor),
+              Text(
+                "login.message2".tr(),
+                style: const TextStyle(
+                  fontFamily: "Poppins-Bold",
+                  fontSize: 20,
+                  color: ActiveYouTheme.textBlackColor,
+                ),
               ),
               const SizedBox(height: 10),
               Padding(
@@ -58,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                     const PasswordTextFormField(),
                     const SizedBox(height: 10),
                     LinkButton(
-                        title: "Forgot your password?",
+                        title: "login.forgotPassword".tr(),
                         textColor: ActiveYouTheme.grayMediumColor,
                         underline: true,
                         onClick: () => {}),
@@ -86,19 +88,21 @@ class _LoginPageState extends State<LoginPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    "Don't you have an account?",
-                    style: TextStyle(
+                  Text(
+                    "login.registerMessage".tr(),
+                    style: const TextStyle(
                       fontFamily: "Poppins-Light",
                       fontSize: 14,
                     ),
                   ),
                   LinkButton(
-                      title: "Register",
+                      title: "button.register".tr(),
                       textColor: ActiveYouTheme.secondaryLightColor,
                       underline: false,
-                      onClick: () =>
-                          {Navigator.pushNamed(context, EndPoint.registerCredentials)}),
+                      onClick: () => {
+                            Navigator.pushNamed(
+                                context, EndPoint.registerCredentials)
+                          }),
                 ],
               )
             ],

@@ -1,6 +1,7 @@
 import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/widgets/buttons/primary_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -27,25 +28,25 @@ class _SuccessRegistrationPageState extends State<SuccessRegistrationPage> {
               SvgPicture.asset(
                   "assets/icons/illustrations/success-registration.svg"),
               const SizedBox(height: 50),
-              const Text(
-                "Welcome, Raul",
-                style: TextStyle(
+              Text(
+                "${"registrationSuccess.welcomeMessage".tr()}Raul",
+                style: const TextStyle(
                     fontFamily: "Poppins-Bold",
-                    fontSize: 20,
+                    fontSize: 28,
                     color: ActiveYouTheme.textBlackColor),
               ),
               const SizedBox(height: 6),
-              const Text(
-                "You are all set now, let’s reach your \ngoals together with us",
-                style: TextStyle(
+              Text(
+                "registrationSuccess.subHeader".tr(),
+                style: const TextStyle(
                     fontFamily: "Poppins-Light",
-                    fontSize: 12,
+                    fontSize: 16,
                     color: ActiveYouTheme.textBlackColor),
                 textAlign: TextAlign.center,
               ),
               const Spacer(),
               PrimaryButton(
-                  title: "Go To Home",
+                  title: "button.goToHome".tr(),
                   onClick: () => {Navigator.pushNamed(context, EndPoint.home)}),
             ],
           ),

@@ -1,4 +1,5 @@
 import 'package:active_you/theme/active_you_theme.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class GenderSelectionCard extends StatefulWidget {
@@ -59,20 +60,20 @@ class GenderSelectionCardState extends State<GenderSelectionCard>
             Tab(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(Icons.male), // Icona da aggiungere
-                  SizedBox(width: 8), // Spazio tra l'icona e il testo
-                  Text('Male'), // Testo del tab
+                children: [
+                  const Icon(Icons.male),
+                  const SizedBox(width: 8),
+                  Text("registrationInfo.genderMale".tr()),
                 ],
               ),
             ),
             Tab(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(Icons.female), // Icona da aggiungere
-                  SizedBox(width: 8), // Spazio tra l'icona e il testo
-                  Text('Female'), // Testo del tab
+                children: [
+                  const Icon(Icons.female),
+                  const SizedBox(width: 8),
+                  Text('registrationInfo.genderFemale'.tr()),
                 ],
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:active_you/theme/active_you_theme.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -43,7 +44,7 @@ class MyDatePicker extends StatelessWidget {
                 },
               ),
               iconColor: ActiveYouTheme.grayDarkColor,
-              hintText: "Date of Birth",
+              hintText: "registrationInfo.calendar".tr(),
               border: InputBorder.none,
             ),
             style: const TextStyle(

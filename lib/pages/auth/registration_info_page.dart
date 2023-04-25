@@ -5,6 +5,7 @@ import 'package:active_you/widgets/form/gender_selection_card.dart';
 import 'package:active_you/widgets/form/my_date_picker.dart';
 import 'package:active_you/widgets/form/simple_text_form_field.dart';
 import 'package:active_you/widgets/form/unit_measure.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -29,17 +30,17 @@ class _RegistrationInfoPageState extends State<RegistrationInfoPage> {
               const Spacer(),
               SvgPicture.asset("assets/icons/illustrations/registration2.svg"),
               const Spacer(),
-              const Text(
-                "Let's complete your profile",
-                style: TextStyle(
+              Text(
+                "registrationInfo.header".tr(),
+                style: const TextStyle(
                     fontFamily: "Poppins-Bold",
                     fontSize: 20,
                     color: ActiveYouTheme.textBlackColor),
               ),
               const SizedBox(height: 4),
-              const Text(
-                "It will help us to know more about you!",
-                style: TextStyle(
+              Text(
+                "registrationInfo.subHeader".tr(),
+                style: const TextStyle(
                     fontFamily: "Poppins-Light",
                     fontSize: 12,
                     color: ActiveYouTheme.textBlackColor),
@@ -60,7 +61,7 @@ class _RegistrationInfoPageState extends State<RegistrationInfoPage> {
                       children: [
                         Expanded(
                           child: SimpleTextFormField(
-                            hintText: "Your Weight",
+                            hintText: "registrationInfo.weight".tr(),
                             icon: SvgPicture.asset("assets/icons/weight.svg"),
                           ),
                         ),
@@ -73,7 +74,7 @@ class _RegistrationInfoPageState extends State<RegistrationInfoPage> {
                       children: [
                         Expanded(
                           child: SimpleTextFormField(
-                            hintText: "Your Height",
+                            hintText: "registrationInfo.height".tr(),
                             icon: SvgPicture.asset("assets/icons/swap.svg"),
                           ),
                         ),

@@ -3,6 +3,8 @@ import 'package:active_you/pages/intro/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:active_you/theme/active_you_theme.dart';
+
 class SplashPage extends ConsumerWidget {
   const SplashPage({Key? key}) : super(key: key);
 
@@ -27,9 +29,29 @@ class SplashPage extends ConsumerWidget {
           children: [
             Image.asset(
               "assets/images/logo/logo-man.png",
-              width: 80,
+              width: 180,
             ),
-            const Text("ACTIVE YOU"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const [
+                Text(
+                  "Active",
+                  style: TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Poppins-Bold"),
+                ),
+                Text(
+                  "You",
+                  style: TextStyle(
+                    fontSize: 36,
+                    fontFamily: "Poppins-Bold",
+                    color: ActiveYouTheme.secondaryLightColor,
+                  ),
+                )
+              ],
+            ),
           ],
         ),
       ),
