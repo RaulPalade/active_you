@@ -100,11 +100,14 @@ class _RegistrationUserCredentialsState
                 ),
               ),
               const Spacer(),
-              PrimaryButton(
-                  title: "button.register".tr(),
-                  onClick: () => {
-                        Navigator.pushNamed(context, EndPoint.registerInfo),
-                      }),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: PrimaryButton(
+                    title: "button.register".tr(),
+                    onClick: () => {
+                          Navigator.pushNamed(context, EndPoint.registerInfo),
+                        }),
+              ),
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                 child: FormDivider(),

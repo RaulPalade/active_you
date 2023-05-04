@@ -7,4 +7,6 @@ class EndPoint {
   static const registerInfo = "/register-info";
   static const successRegistration = "/success-registration";
   static const home = "/home";
+
+  static const userProfile = "user-profile";
 }

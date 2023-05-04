@@ -13,21 +13,22 @@ class SecondaryButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(99),
-            gradient: const LinearGradient(
-              colors: [
-                ActiveYouTheme.secondaryLightColor,
-                ActiveYouTheme.secondaryDarkColor,
-              ],
+          borderRadius: BorderRadius.circular(99),
+          gradient: const LinearGradient(
+            colors: [
+              ActiveYouTheme.secondaryLightColor,
+              ActiveYouTheme.secondaryDarkColor,
+            ],
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: ActiveYouTheme.grayMediumColor.withOpacity(0.4),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 3), // changes position of shadow
             ),
-            boxShadow: [
-              BoxShadow(
-                color: ActiveYouTheme.grayMediumColor.withOpacity(0.4),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: const Offset(0, 3), // changes position of shadow
-              ),
-            ]),
+          ],
+        ),
         child: TextButton(
           style: ButtonStyle(
             foregroundColor:

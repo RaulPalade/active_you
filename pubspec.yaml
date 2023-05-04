@@ -52,14 +52,19 @@ flutter:
     - assets/fonts/
     - assets/images/
     - assets/images/logo/
+    - assets/images/profile-mock/
     - assets/icons/
     - assets/icons/carousel/
     - assets/icons/illustrations/
+    - assets/icons/interface/
 
   fonts:
     - family: Poppins
       fonts:
         - asset: assets/fonts/Poppins-Regular.ttf
+    - family: Poppins-SemiBold
+      fonts:
+        - asset: assets/fonts/Poppins-SemiBold.ttf
     - family: Poppins-Bold
       fonts:
         - asset: assets/fonts/Poppins-Bold.ttf

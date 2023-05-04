@@ -1,0 +1,53 @@
+import 'package:active_you/theme/active_you_theme.dart';
+import 'package:flutter/material.dart';
+
+import 'card_row.dart';
+
+class OtherCard extends StatelessWidget {
+  const OtherCard({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: ActiveYouTheme.grayMediumColor.withOpacity(0.1),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+            child: Text(
+              "Other",
+              style: TextStyle(
+                fontFamily: "Poppins-SemiBold",
+                fontSize: 16,
+              ),
+            ),
+          ),
+          CardRow(
+            iconPath: "assets/icons/shield.svg",
+            title: "Privacy Policy",
+            onClick: () {},
+          ),
+          CardRow(
+            iconPath: "assets/icons/interface/settings.svg",
+            title: "Settings",
+            onClick: () {},
+          ),
+          const SizedBox(height: 10),
+        ],
+      ),
+    );
+  }
+}
