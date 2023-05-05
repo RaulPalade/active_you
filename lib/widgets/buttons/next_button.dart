@@ -47,7 +47,7 @@ class NextButton extends StatelessWidget {
               const SizedBox(
                 width: 4,
               ),
-              SvgPicture.asset("assets/icons/arrow-right.svg"),
+              SvgPicture.asset("assets/icons/2.svg"),
             ],
           ),
           onPressed: () => onClick(),

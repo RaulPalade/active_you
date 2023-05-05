@@ -1,4 +1,4 @@
-import 'package:active_you/widgets/item_lists/user_item_list.dart';
+import 'package:active_you/widgets/item_lists/user_list_item.dart';
 import 'package:active_you/widgets/my_app_bar.dart';
 import 'package:active_you/widgets/tab/my_switch.dart';
 import 'package:flutter/material.dart';

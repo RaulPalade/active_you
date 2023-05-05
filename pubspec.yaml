@@ -58,6 +58,7 @@ flutter:
     - assets/icons/carousel/
     - assets/icons/illustrations/
     - assets/icons/interface/
+    - assets/icons/workouts-images/
 
   fonts:
     - family: Poppins

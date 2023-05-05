@@ -28,6 +28,8 @@ class ActiveYouTheme {
 
   static const Color shadowColorBlue = Color(0xFF95ADFE);
 
+  static const Color workoutCardBlue = Color(0xFFE7F0FF);
+
   static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     scaffoldBackgroundColor: scaffoldColor,

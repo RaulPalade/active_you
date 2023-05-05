@@ -33,7 +33,7 @@ class UserListItem extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
