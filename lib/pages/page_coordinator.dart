@@ -40,8 +40,8 @@ class _PageCoordinatorState extends State<PageCoordinator> {
         children: _pages,
       ),
       bottomNavigationBar: CurvedNavigationBar(
-        color: ActiveYouTheme.brandLightColor,
-        backgroundColor: Colors.white,
+        color: ActiveYouTheme.brandDarkColor,
+        backgroundColor: Colors.transparent,
         items: [
           SvgPicture.asset("assets/icons/interface/home.svg"),
           SvgPicture.asset("assets/icons/interface/3-users.svg"),
