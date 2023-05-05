@@ -68,7 +68,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const Spacer(),
-              LoginButton(onClick: () => {}),
+              LoginButton(onClick: () => {
+                Navigator.popAndPushNamed(context, EndPoint.pageCoordinator)
+              }),
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                 child: FormDivider(),

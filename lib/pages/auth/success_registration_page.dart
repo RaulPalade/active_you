@@ -47,7 +47,8 @@ class _SuccessRegistrationPageState extends State<SuccessRegistrationPage> {
               const Spacer(),
               PrimaryButton(
                   title: "button.goToHome".tr(),
-                  onClick: () => {Navigator.pushNamed(context, EndPoint.home)}),
+                  onClick: () =>
+                      {Navigator.pushNamed(context, EndPoint.userProfile)}),
             ],
           ),
         ),

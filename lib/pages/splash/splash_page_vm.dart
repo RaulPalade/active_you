@@ -10,7 +10,7 @@ class SplashPageVM extends StateNotifier<SplashPageState> {
 
   Future<void> initAsync() async {
     state = state.copyWith(loading: true);
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 0));
     state = state.copyWith(loading: false);
     await Future.delayed(const Duration(milliseconds: 500));
     state = state.copyWith(endInit: true);
