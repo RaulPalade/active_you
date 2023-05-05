@@ -36,12 +36,12 @@ class OtherCard extends StatelessWidget {
             ),
           ),
           CardRow(
-            iconPath: "assets/icons/shield.svg",
+            iconPath: "assets/icons/interface/shield.svg",
             title: "Privacy Policy",
             onClick: () {},
           ),
           CardRow(
-            iconPath: "assets/icons/interface/settings.svg",
+            iconPath: "assets/icons/interface/setting.svg",
             title: "Settings",
             onClick: () {},
           ),

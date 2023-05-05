@@ -23,13 +23,10 @@ class ProfileHeader extends StatelessWidget {
       children: [
         Row(
           children: [
-            Container(
-              decoration: const BoxDecoration(
-                color: Colors.lightBlueAccent,
-                shape: BoxShape.circle,
-              ),
-              child: SvgPicture.asset(
-                  "assets/images/profile-mock/profile-pic.svg"),
+            const CircleAvatar(
+              radius: 30,
+              backgroundImage:
+                  AssetImage("assets/images/profile-mock/profile-pic.png"),
             ),
             const SizedBox(width: 15),
             Expanded(
