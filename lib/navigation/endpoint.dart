@@ -9,4 +9,6 @@ class EndPoint {
   static const home = "/home";
 
   static const userProfile = "user-profile";
+
+  static const pageCoordinator = "page-coordinator";
 }

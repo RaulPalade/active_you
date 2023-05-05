@@ -6,6 +6,7 @@ import 'package:active_you/pages/auth/success_registration_page.dart';
 import 'package:active_you/pages/home/home_page.dart';
 import 'package:active_you/pages/intro/onboarding_page.dart';
 import 'package:active_you/pages/intro/welcome_page.dart';
+import 'package:active_you/pages/page_coordinator.dart';
 import 'package:active_you/pages/user_profile/user_profile_page.dart';
 import 'package:flutter/material.dart';
 
@@ -45,6 +46,10 @@ PageRoute modalRoute(RouteSettings settings) {
     case EndPoint.userProfile:
       return MaterialPageRoute(
           builder: (_) => const UserProfilePage(), settings: settings);
+
+    case EndPoint.pageCoordinator:
+      return MaterialPageRoute(
+          builder: (_) => const PageCoordinator(), settings: settings);
 
     default:
       return MaterialPageRoute(
