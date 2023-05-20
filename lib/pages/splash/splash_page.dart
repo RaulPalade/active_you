@@ -1,8 +1,5 @@
 import 'package:active_you/business/providers/splash_page_provider.dart';
-import 'package:active_you/pages/auth/success_registration_page.dart';
-import 'package:active_you/pages/intro/welcome_page.dart';
 import 'package:active_you/pages/page_coordinator.dart';
-import 'package:active_you/pages/user_profile/user_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -34,10 +31,10 @@ class SplashPage extends ConsumerWidget {
               "assets/images/logo/logo-man.png",
               width: 180,
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
+              children: [
                 Text(
                   "Active",
                   style: TextStyle(

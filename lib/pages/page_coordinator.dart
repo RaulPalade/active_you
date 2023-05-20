@@ -1,8 +1,8 @@
 import 'package:active_you/pages/explore_workouts/explore_workouts_page.dart';
 import 'package:active_you/pages/home/home_page.dart';
 import 'package:active_you/pages/my_workouts/my_workouts_page.dart';
-import 'package:active_you/pages/user_profile/user_profile_page.dart';
-import 'package:active_you/pages/users_and_trainers/users_and_trainers_page.dart';
+import 'package:active_you/pages/person_profile/person_profile_page.dart';
+import 'package:active_you/pages/users_and_trainers/persons_and_trainers_page.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +20,10 @@ class _PageCoordinatorState extends State<PageCoordinator> {
 
   static const List<Widget> _pages = <Widget>[
     HomePage(),
-    UsersAndTrainersPage(),
+    PersonsAndTrainersPage(),
     ExploreWorkoutsPage(),
     MyWorkoutsPage(),
-    UserProfilePage(),
+    PersonProfilePage(),
   ];
 
   void _onItemTapped(int index) {

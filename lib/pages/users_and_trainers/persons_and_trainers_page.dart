@@ -4,37 +4,37 @@ import 'package:active_you/widgets/tab/my_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UsersAndTrainersPage extends ConsumerStatefulWidget {
-  const UsersAndTrainersPage({Key? key}) : super(key: key);
+class PersonsAndTrainersPage extends ConsumerStatefulWidget {
+  const PersonsAndTrainersPage({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<UsersAndTrainersPage> createState() => _UsersAndTrainersState();
+  ConsumerState<PersonsAndTrainersPage> createState() => _PersonsAndTrainersState();
 }
 
-class _UsersAndTrainersState extends ConsumerState<UsersAndTrainersPage>
+class _PersonsAndTrainersState extends ConsumerState<PersonsAndTrainersPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   int _tabIndex = 0;
   final fakeUserList = [
-    FakeUser("Michelle Rodgriguez", "Female"),
-    FakeUser("Michael Johnson", "Male"),
-    FakeUser("Jack Hogan", "Male"),
-    FakeUser("Mario Wallace ", "Male"),
-    FakeUser("Anna Dunlap", "Female"),
-    FakeUser("Tiffany Smith", "Female"),
-    FakeUser("Anna Dunlap", "Female"),
-    FakeUser("Deborah Cohen", "Female"),
+    FakePerson("Michelle Rodgriguez", "Female"),
+    FakePerson("Michael Johnson", "Male"),
+    FakePerson("Jack Hogan", "Male"),
+    FakePerson("Mario Wallace ", "Male"),
+    FakePerson("Anna Dunlap", "Female"),
+    FakePerson("Tiffany Smith", "Female"),
+    FakePerson("Anna Dunlap", "Female"),
+    FakePerson("Deborah Cohen", "Female"),
   ];
 
   final fakeTrainerList = [
-    FakeUser("Jessica Hunt", "Female"),
-    FakeUser("John Carr", "Male"),
-    FakeUser("Michael Pollard", "Male"),
-    FakeUser("Mark Brost ", "Male"),
-    FakeUser("Natalie Bell", "Female"),
-    FakeUser("Sandra Contreras", "Female"),
-    FakeUser("Joanne White", "Female"),
-    FakeUser("Larry Barrett", "Male"),
+    FakePerson("Jessica Hunt", "Female"),
+    FakePerson("John Carr", "Male"),
+    FakePerson("Michael Pollard", "Male"),
+    FakePerson("Mark Brost ", "Male"),
+    FakePerson("Natalie Bell", "Female"),
+    FakePerson("Sandra Contreras", "Female"),
+    FakePerson("Joanne White", "Female"),
+    FakePerson("Larry Barrett", "Male"),
   ];
 
   @override
@@ -84,9 +84,9 @@ class _UsersAndTrainersState extends ConsumerState<UsersAndTrainersPage>
   }
 }
 
-class FakeUser {
+class FakePerson {
   late final String fullName;
   late final String sex;
 
-  FakeUser(this.fullName, this.sex);
+  FakePerson(this.fullName, this.sex);
 }

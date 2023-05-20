@@ -1,6 +1,7 @@
-import 'package:active_you/pages/user_profile/widget/card_row.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:flutter/material.dart';
+
+import 'card_row.dart';
 
 class StatusCard extends StatelessWidget {
   const StatusCard({Key? key}) : super(key: key);

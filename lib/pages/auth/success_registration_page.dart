@@ -48,7 +48,7 @@ class _SuccessRegistrationPageState extends State<SuccessRegistrationPage> {
               PrimaryButton(
                   title: "button.goToHome".tr(),
                   onClick: () =>
-                      {Navigator.pushNamed(context, EndPoint.userProfile)}),
+                      {Navigator.pushNamed(context, EndPoint.personProfile)}),
             ],
           ),
         ),

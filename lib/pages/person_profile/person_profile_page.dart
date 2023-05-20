@@ -1,26 +1,18 @@
-import 'package:active_you/pages/user_profile/widget/other_card.dart';
-import 'package:active_you/pages/user_profile/widget/profile_header.dart';
-import 'package:active_you/pages/user_profile/widget/stats_card.dart';
-import 'package:active_you/pages/user_profile/widget/status_card.dart';
+import 'package:active_you/pages/person_profile/widget/other_card.dart';
+import 'package:active_you/pages/person_profile/widget/profile_header.dart';
+import 'package:active_you/pages/person_profile/widget/stats_card.dart';
+import 'package:active_you/pages/person_profile/widget/status_card.dart';
 import 'package:active_you/widgets/my_app_bar.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UserProfilePage extends ConsumerStatefulWidget
-    implements PreferredSizeWidget {
-  const UserProfilePage({Key? key}) : super(key: key);
+class PersonProfilePage extends ConsumerWidget {
+  const PersonProfilePage({Key? key}) : super(key: key);
 
-  @override
-  ConsumerState<UserProfilePage> createState() => _UserProfilePageState();
-
-  @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-}
 
-class _UserProfilePageState extends ConsumerState<UserProfilePage> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: const MyAppBar(title: "Profile"),
       body: Padding(
