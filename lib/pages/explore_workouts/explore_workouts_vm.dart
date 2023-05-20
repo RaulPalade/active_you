@@ -3,7 +3,7 @@ import 'package:active_you/pages/explore_workouts/explore_workouts_state.dart';
 import 'package:active_you/utils/api_errors.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class ExploreWorkoutsVM extends StateNotifier<ExploreWorkoutsState> {
   final Ref ref;
@@ -30,9 +30,9 @@ class ExploreWorkoutsVM extends StateNotifier<ExploreWorkoutsState> {
   }
 
   Future<void> _catchErrorOnFetch(Object err) async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
+    var connectivityResult = await InternetConnectionChecker().hasConnection;
     ErrorApiCall errorType = ErrorApiCall.generic;
-    if (connectivityResult == ConnectivityResult.none) {
+    if (!connectivityResult) {
       errorType = ErrorApiCall.noConnection;
     }
     state =

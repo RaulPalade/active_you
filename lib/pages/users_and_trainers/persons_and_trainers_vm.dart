@@ -2,9 +2,9 @@ import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/business/providers/api_provider.dart';
 import 'package:active_you/pages/users_and_trainers/persons_and_trainers_state.dart';
 import 'package:active_you/utils/api_errors.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
   final Ref ref;
@@ -57,9 +57,9 @@ class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
   }
 
   Future<void> _catchErrorOnFetch(Object err) async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
+    var connectivityResult = await InternetConnectionChecker().hasConnection;
     ErrorApiCall errorType = ErrorApiCall.generic;
-    if (connectivityResult == ConnectivityResult.none) {
+    if (!connectivityResult) {
       errorType = ErrorApiCall.noConnection;
     }
     state = PersonsAndTrainersState(
