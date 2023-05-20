@@ -1,3 +1,4 @@
+import 'package:active_you/business/models/auth/signin/sign_in.dart';
 import 'package:active_you/business/models/goal/goal.dart';
 import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/business/models/workout/workout.dart';
@@ -12,9 +13,9 @@ abstract class RestClientPerson {
 
   @GET("api/v1/login")
   Future<Person> login(
-      @CancelRequest() CancelToken cancelToken,
-      @Body() LoginData,
-      );
+    @CancelRequest() CancelToken cancelToken,
+    @Body() SignIn signInData,
+  );
 
   @GET("api/v1/persons/{id}")
   Future<Person> getPersonById(
@@ -55,7 +56,6 @@ abstract class RestClientPerson {
   Future<Workout> markWorkoutCompleted(
     @CancelRequest() CancelToken cancelToken,
     @Path("id") int id,
-    @Body() Workout workout,
   );
 
   @POST("api/v1/persons/follow/{id}")

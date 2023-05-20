@@ -21,12 +21,13 @@ class _RestClientPerson implements RestClientPerson {
   @override
   Future<Person> login(
     cancelToken,
-    LoginData,
+    signInData,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = LoginData;
+    final _data = <String, dynamic>{};
+    _data.addAll(signInData.toJson());
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<Person>(Options(
       method: 'GET',
@@ -213,13 +214,11 @@ class _RestClientPerson implements RestClientPerson {
   Future<Workout> markWorkoutCompleted(
     cancelToken,
     id,
-    workout,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(workout.toJson());
+    final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<Workout>(Options(
       method: 'POST',

@@ -19,9 +19,6 @@ _$_Goal _$$_GoalFromJson(Map<String, dynamic> json) => _$_Goal(
           ? null
           : DateTime.parse(json['endDate'] as String),
       completed: json['completed'] as bool?,
-      person: json['person'] == null
-          ? null
-          : Person.fromJson(json['person'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_GoalToJson(_$_Goal instance) => <String, dynamic>{
@@ -33,5 +30,4 @@ Map<String, dynamic> _$$_GoalToJson(_$_Goal instance) => <String, dynamic>{
       'initDate': instance.initDate?.toIso8601String(),
       'endDate': instance.endDate?.toIso8601String(),
       'completed': instance.completed,
-      'person': instance.person,
     };

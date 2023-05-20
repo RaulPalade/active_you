@@ -29,6 +29,8 @@ mixin _$Person {
   String? get role => throw _privateConstructorUsedError;
   List<Workout> get myWorkouts => throw _privateConstructorUsedError;
   List<Goal> get myGoals => throw _privateConstructorUsedError;
+  List<Person> get following => throw _privateConstructorUsedError;
+  List<Person> get followers => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +51,9 @@ abstract class $PersonCopyWith<$Res> {
       String? sex,
       String? role,
       List<Workout> myWorkouts,
-      List<Goal> myGoals});
+      List<Goal> myGoals,
+      List<Person> following,
+      List<Person> followers});
 }
 
 /// @nodoc
@@ -74,6 +78,8 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? role = freezed,
     Object? myWorkouts = null,
     Object? myGoals = null,
+    Object? following = null,
+    Object? followers = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -112,6 +118,14 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           ? _value.myGoals
           : myGoals // ignore: cast_nullable_to_non_nullable
               as List<Goal>,
+      following: null == following
+          ? _value.following
+          : following // ignore: cast_nullable_to_non_nullable
+              as List<Person>,
+      followers: null == followers
+          ? _value.followers
+          : followers // ignore: cast_nullable_to_non_nullable
+              as List<Person>,
     ) as $Val);
   }
 }
@@ -131,7 +145,9 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
       String? sex,
       String? role,
       List<Workout> myWorkouts,
-      List<Goal> myGoals});
+      List<Goal> myGoals,
+      List<Person> following,
+      List<Person> followers});
 }
 
 /// @nodoc
@@ -153,6 +169,8 @@ class __$$_PersonCopyWithImpl<$Res>
     Object? role = freezed,
     Object? myWorkouts = null,
     Object? myGoals = null,
+    Object? following = null,
+    Object? followers = null,
   }) {
     return _then(_$_Person(
       id: null == id
@@ -191,6 +209,14 @@ class __$$_PersonCopyWithImpl<$Res>
           ? _value._myGoals
           : myGoals // ignore: cast_nullable_to_non_nullable
               as List<Goal>,
+      following: null == following
+          ? _value._following
+          : following // ignore: cast_nullable_to_non_nullable
+              as List<Person>,
+      followers: null == followers
+          ? _value._followers
+          : followers // ignore: cast_nullable_to_non_nullable
+              as List<Person>,
     ));
   }
 }
@@ -207,9 +233,13 @@ class _$_Person implements _Person {
       required this.sex,
       required this.role,
       required final List<Workout> myWorkouts,
-      required final List<Goal> myGoals})
+      required final List<Goal> myGoals,
+      required final List<Person> following,
+      required final List<Person> followers})
       : _myWorkouts = myWorkouts,
-        _myGoals = myGoals;
+        _myGoals = myGoals,
+        _following = following,
+        _followers = followers;
 
   factory _$_Person.fromJson(Map<String, dynamic> json) =>
       _$$_PersonFromJson(json);
@@ -244,9 +274,25 @@ class _$_Person implements _Person {
     return EqualUnmodifiableListView(_myGoals);
   }
 
+  final List<Person> _following;
+  @override
+  List<Person> get following {
+    if (_following is EqualUnmodifiableListView) return _following;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_following);
+  }
+
+  final List<Person> _followers;
+  @override
+  List<Person> get followers {
+    if (_followers is EqualUnmodifiableListView) return _followers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_followers);
+  }
+
   @override
   String toString() {
-    return 'Person(id: $id, name: $name, surname: $surname, email: $email, password: $password, sex: $sex, role: $role, myWorkouts: $myWorkouts, myGoals: $myGoals)';
+    return 'Person(id: $id, name: $name, surname: $surname, email: $email, password: $password, sex: $sex, role: $role, myWorkouts: $myWorkouts, myGoals: $myGoals, following: $following, followers: $followers)';
   }
 
   @override
@@ -264,7 +310,11 @@ class _$_Person implements _Person {
             (identical(other.role, role) || other.role == role) &&
             const DeepCollectionEquality()
                 .equals(other._myWorkouts, _myWorkouts) &&
-            const DeepCollectionEquality().equals(other._myGoals, _myGoals));
+            const DeepCollectionEquality().equals(other._myGoals, _myGoals) &&
+            const DeepCollectionEquality()
+                .equals(other._following, _following) &&
+            const DeepCollectionEquality()
+                .equals(other._followers, _followers));
   }
 
   @JsonKey(ignore: true)
@@ -279,7 +329,9 @@ class _$_Person implements _Person {
       sex,
       role,
       const DeepCollectionEquality().hash(_myWorkouts),
-      const DeepCollectionEquality().hash(_myGoals));
+      const DeepCollectionEquality().hash(_myGoals),
+      const DeepCollectionEquality().hash(_following),
+      const DeepCollectionEquality().hash(_followers));
 
   @JsonKey(ignore: true)
   @override
@@ -305,7 +357,9 @@ abstract class _Person implements Person {
       required final String? sex,
       required final String? role,
       required final List<Workout> myWorkouts,
-      required final List<Goal> myGoals}) = _$_Person;
+      required final List<Goal> myGoals,
+      required final List<Person> following,
+      required final List<Person> followers}) = _$_Person;
 
   factory _Person.fromJson(Map<String, dynamic> json) = _$_Person.fromJson;
 
@@ -327,6 +381,10 @@ abstract class _Person implements Person {
   List<Workout> get myWorkouts;
   @override
   List<Goal> get myGoals;
+  @override
+  List<Person> get following;
+  @override
+  List<Person> get followers;
   @override
   @JsonKey(ignore: true)
   _$$_PersonCopyWith<_$_Person> get copyWith =>

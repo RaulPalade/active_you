@@ -18,6 +18,8 @@ class Person with _$Person {
     required String? role,
     required List<Workout> myWorkouts,
     required List<Goal> myGoals,
+    required List<Person> following,
+    required List<Person> followers,
   }) = _Person;
 
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);

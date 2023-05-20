@@ -28,7 +28,6 @@ mixin _$Goal {
   DateTime? get initDate => throw _privateConstructorUsedError;
   DateTime? get endDate => throw _privateConstructorUsedError;
   bool? get completed => throw _privateConstructorUsedError;
-  Person? get person => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,10 +47,7 @@ abstract class $GoalCopyWith<$Res> {
       int? daysPerWeek,
       DateTime? initDate,
       DateTime? endDate,
-      bool? completed,
-      Person? person});
-
-  $PersonCopyWith<$Res>? get person;
+      bool? completed});
 }
 
 /// @nodoc
@@ -75,7 +71,6 @@ class _$GoalCopyWithImpl<$Res, $Val extends Goal>
     Object? initDate = freezed,
     Object? endDate = freezed,
     Object? completed = freezed,
-    Object? person = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -110,23 +105,7 @@ class _$GoalCopyWithImpl<$Res, $Val extends Goal>
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
               as bool?,
-      person: freezed == person
-          ? _value.person
-          : person // ignore: cast_nullable_to_non_nullable
-              as Person?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PersonCopyWith<$Res>? get person {
-    if (_value.person == null) {
-      return null;
-    }
-
-    return $PersonCopyWith<$Res>(_value.person!, (value) {
-      return _then(_value.copyWith(person: value) as $Val);
-    });
   }
 }
 
@@ -144,11 +123,7 @@ abstract class _$$_GoalCopyWith<$Res> implements $GoalCopyWith<$Res> {
       int? daysPerWeek,
       DateTime? initDate,
       DateTime? endDate,
-      bool? completed,
-      Person? person});
-
-  @override
-  $PersonCopyWith<$Res>? get person;
+      bool? completed});
 }
 
 /// @nodoc
@@ -168,7 +143,6 @@ class __$$_GoalCopyWithImpl<$Res> extends _$GoalCopyWithImpl<$Res, _$_Goal>
     Object? initDate = freezed,
     Object? endDate = freezed,
     Object? completed = freezed,
-    Object? person = freezed,
   }) {
     return _then(_$_Goal(
       id: null == id
@@ -203,10 +177,6 @@ class __$$_GoalCopyWithImpl<$Res> extends _$GoalCopyWithImpl<$Res, _$_Goal>
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
               as bool?,
-      person: freezed == person
-          ? _value.person
-          : person // ignore: cast_nullable_to_non_nullable
-              as Person?,
     ));
   }
 }
@@ -222,8 +192,7 @@ class _$_Goal implements _Goal {
       required this.daysPerWeek,
       required this.initDate,
       required this.endDate,
-      required this.completed,
-      required this.person});
+      required this.completed});
 
   factory _$_Goal.fromJson(Map<String, dynamic> json) => _$$_GoalFromJson(json);
 
@@ -243,12 +212,10 @@ class _$_Goal implements _Goal {
   final DateTime? endDate;
   @override
   final bool? completed;
-  @override
-  final Person? person;
 
   @override
   String toString() {
-    return 'Goal(id: $id, name: $name, type: $type, weight: $weight, daysPerWeek: $daysPerWeek, initDate: $initDate, endDate: $endDate, completed: $completed, person: $person)';
+    return 'Goal(id: $id, name: $name, type: $type, weight: $weight, daysPerWeek: $daysPerWeek, initDate: $initDate, endDate: $endDate, completed: $completed)';
   }
 
   @override
@@ -266,14 +233,13 @@ class _$_Goal implements _Goal {
                 other.initDate == initDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.completed, completed) ||
-                other.completed == completed) &&
-            (identical(other.person, person) || other.person == person));
+                other.completed == completed));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, type, weight,
-      daysPerWeek, initDate, endDate, completed, person);
+      daysPerWeek, initDate, endDate, completed);
 
   @JsonKey(ignore: true)
   @override
@@ -298,8 +264,7 @@ abstract class _Goal implements Goal {
       required final int? daysPerWeek,
       required final DateTime? initDate,
       required final DateTime? endDate,
-      required final bool? completed,
-      required final Person? person}) = _$_Goal;
+      required final bool? completed}) = _$_Goal;
 
   factory _Goal.fromJson(Map<String, dynamic> json) = _$_Goal.fromJson;
 
@@ -319,8 +284,6 @@ abstract class _Goal implements Goal {
   DateTime? get endDate;
   @override
   bool? get completed;
-  @override
-  Person? get person;
   @override
   @JsonKey(ignore: true)
   _$$_GoalCopyWith<_$_Goal> get copyWith => throw _privateConstructorUsedError;

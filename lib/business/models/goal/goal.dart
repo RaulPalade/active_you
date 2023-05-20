@@ -16,7 +16,6 @@ class Goal with _$Goal {
     required DateTime? initDate,
     required DateTime? endDate,
     required bool? completed,
-    required Person? person,
   }) = _Goal;
 
   factory Goal.fromJson(Map<String, dynamic> json) => _$GoalFromJson(json);
