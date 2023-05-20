@@ -4,14 +4,9 @@ import 'package:active_you/widgets/my_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ExploreWorkoutsPage extends ConsumerStatefulWidget {
-  const ExploreWorkoutsPage({Key? key}) : super(key: key);
+class ExploreWorkoutsPage extends ConsumerWidget {
+  ExploreWorkoutsPage({Key? key}) : super(key: key);
 
-  @override
-  ConsumerState<ExploreWorkoutsPage> createState() => _ExploreWorkoutsState();
-}
-
-class _ExploreWorkoutsState extends ConsumerState<ExploreWorkoutsPage> {
   final workouts = [
     FakeWorkout("Fullbody Workout", 200, 10, 4),
     FakeWorkout("Lowerbody Workout", 120, 20, 4),
@@ -21,7 +16,7 @@ class _ExploreWorkoutsState extends ConsumerState<ExploreWorkoutsPage> {
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: const MyAppBar(title: "Explore Workouts"),
       body: ListView.builder(

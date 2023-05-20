@@ -8,18 +8,14 @@ import 'package:active_you/widgets/form/password_text_form_field.dart';
 import 'package:active_you/widgets/form/simple_text_form_field.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends ConsumerWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       color: ActiveYouTheme.scaffoldColor,
       child: SafeArea(
@@ -68,9 +64,11 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const Spacer(),
-              LoginButton(onClick: () => {
-                Navigator.popAndPushNamed(context, EndPoint.pageCoordinator)
-              }),
+              LoginButton(
+                  onClick: () => {
+                        Navigator.popAndPushNamed(
+                            context, EndPoint.pageCoordinator)
+                      }),
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                 child: FormDivider(),

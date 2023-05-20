@@ -3,16 +3,12 @@ import 'package:active_you/pages/intro/widget/carousel_item.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class OnBoardingPage extends StatefulWidget {
-  const OnBoardingPage({Key? key}) : super(key: key);
+class OnBoardingPage extends ConsumerWidget {
+  OnBoardingPage({Key? key}) : super(key: key);
 
-  @override
-  State<OnBoardingPage> createState() => _OnBoardingPageState();
-}
-
-class _OnBoardingPageState extends State<OnBoardingPage> {
-  int _pageNumber = 0;
+  final int _pageNumber = 0;
   final List<String> _illustrations = [
     "assets/icons/carousel/frame1.png",
     "assets/icons/carousel/frame2.png",
@@ -28,7 +24,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final PageController controller = PageController();
 
     return Container(
@@ -43,9 +39,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 Expanded(
                   child: PageView(
                     controller: controller,
-                    onPageChanged: (index) => setState(() {
-                      _pageNumber = index;
-                    }),
+                    onPageChanged: (index) => {},
                     children: [
                       CarouselItem(
                         image: Image.asset(_illustrations[_pageNumber]),

@@ -18,12 +18,12 @@ class PageCoordinator extends StatefulWidget {
 class _PageCoordinatorState extends State<PageCoordinator> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _pages = <Widget>[
-    HomePage(),
-    PersonsAndTrainersPage(),
+  static final List<Widget> _pages = <Widget>[
+    const HomePage(),
+    const PersonsAndTrainersPage(),
     ExploreWorkoutsPage(),
-    MyWorkoutsPage(),
-    PersonProfilePage(),
+    const MyWorkoutsPage(),
+    const PersonProfilePage(),
   ];
 
   void _onItemTapped(int index) {

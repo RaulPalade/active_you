@@ -7,18 +7,14 @@ import 'package:active_you/widgets/form/simple_text_form_field.dart';
 import 'package:active_you/widgets/form/unit_measure.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
-class RegistrationInfoPage extends StatefulWidget {
+class RegistrationInfoPage extends ConsumerWidget {
   const RegistrationInfoPage({Key? key}) : super(key: key);
 
   @override
-  State<RegistrationInfoPage> createState() => _RegistrationInfoPageState();
-}
-
-class _RegistrationInfoPageState extends State<RegistrationInfoPage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       color: ActiveYouTheme.scaffoldColor,
       child: SafeArea(

@@ -8,22 +8,16 @@ import 'package:active_you/widgets/form/password_text_form_field.dart';
 import 'package:active_you/widgets/form/simple_text_form_field.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class RegistrationCredentialsPage extends StatefulWidget {
+class RegistrationCredentialsPage extends ConsumerWidget {
   const RegistrationCredentialsPage({Key? key}) : super(key: key);
 
-  @override
-  State<RegistrationCredentialsPage> createState() =>
-      _RegistrationUserCredentialsState();
-}
-
-class _RegistrationUserCredentialsState
-    extends State<RegistrationCredentialsPage> {
-  bool _isChecked = false;
+  final _isChecked = false;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       color: ActiveYouTheme.scaffoldColor,
       child: SafeArea(
@@ -80,11 +74,7 @@ class _RegistrationUserCredentialsState
                           : MaterialStateProperty.all(
                               ActiveYouTheme.grayMediumColor),
                       value: _isChecked,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          _isChecked = value!;
-                        });
-                      },
+                      onChanged: (bool? value) {},
                     ),
                     Expanded(
                       child: Text(

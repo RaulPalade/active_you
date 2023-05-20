@@ -3,19 +3,14 @@ import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/widgets/buttons/primary_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class SuccessRegistrationPage extends StatefulWidget {
+class SuccessRegistrationPage extends ConsumerWidget {
   const SuccessRegistrationPage({Key? key}) : super(key: key);
 
   @override
-  State<SuccessRegistrationPage> createState() =>
-      _SuccessRegistrationPageState();
-}
-
-class _SuccessRegistrationPageState extends State<SuccessRegistrationPage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       color: ActiveYouTheme.scaffoldColor,
       child: SafeArea(

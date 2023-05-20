@@ -20,7 +20,7 @@ PageRoute modalRoute(RouteSettings settings) {
 
     case EndPoint.onBoardingPage:
       return MaterialPageRoute(
-          builder: (_) => const OnBoardingPage(), settings: settings);
+          builder: (_) => OnBoardingPage(), settings: settings);
 
     case EndPoint.login:
       return MaterialPageRoute(
