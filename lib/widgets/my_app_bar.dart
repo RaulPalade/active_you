@@ -2,7 +2,7 @@ import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/widgets/back_button_app_bar.dart';
 import 'package:flutter/material.dart';
 
-class MyAppBar extends StatelessWidget with PreferredSizeWidget {
+class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MyAppBar({Key? key, required this.title}) : super(key: key);
   final String title;
 
