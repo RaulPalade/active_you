@@ -1,3 +1,4 @@
+import 'package:active_you/business/models/workout/workout.dart';
 import 'package:active_you/business/providers/api_provider.dart';
 import 'package:active_you/pages/explore_workouts/explore_workouts_state.dart';
 import 'package:active_you/utils/api_errors.dart';
@@ -27,6 +28,25 @@ class ExploreWorkoutsVM extends StateNotifier<ExploreWorkoutsState> {
       await _catchErrorOnFetch(err);
     }
     tokenLastRequest = null;
+  }
+
+  Future<void> createWorkout(Workout workout) async {
+    try {
+      state = ExploreWorkoutsState(
+          workouts: state.workouts, loading: true);
+
+      final response = await ref
+          .read(restClientPersonProvider)
+          .createWorkout(tokenLastRequest!, workout);
+
+      var updatedWorkouts = state.workouts?.copyWith(
+        myWorkouts: [...state.workouts!.myWorkouts, response],
+      );
+
+      state = state.copyWith(workouts: updatedWorkouts);
+    } catch (err) {
+      await _catchErrorOnFetch(err);
+    }
   }
 
   Future<void> _catchErrorOnFetch(Object err) async {
