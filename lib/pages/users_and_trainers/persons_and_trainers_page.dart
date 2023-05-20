@@ -1,3 +1,6 @@
+import 'package:active_you/business/models/person/person.dart';
+import 'package:active_you/pages/users_and_trainers/persons_and_trainers_state.dart';
+import 'package:active_you/pages/users_and_trainers/persons_and_trainers_vm.dart';
 import 'package:active_you/widgets/item_lists/user_list_item.dart';
 import 'package:active_you/widgets/my_app_bar.dart';
 import 'package:active_you/widgets/tab/my_switch.dart';
@@ -8,7 +11,8 @@ class PersonsAndTrainersPage extends ConsumerStatefulWidget {
   const PersonsAndTrainersPage({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<PersonsAndTrainersPage> createState() => _PersonsAndTrainersState();
+  ConsumerState<PersonsAndTrainersPage> createState() =>
+      _PersonsAndTrainersState();
 }
 
 class _PersonsAndTrainersState extends ConsumerState<PersonsAndTrainersPage>
@@ -51,6 +55,9 @@ class _PersonsAndTrainersState extends ConsumerState<PersonsAndTrainersPage>
 
   @override
   Widget build(BuildContext context) {
+    // final persons = ref.watch(_personsProvider);
+    // final trainers = ref.watch(_trainersProvider);
+
     return Scaffold(
       appBar: const MyAppBar(title: "Users and Trainers"),
       body: Column(
@@ -71,7 +78,8 @@ class _PersonsAndTrainersState extends ConsumerState<PersonsAndTrainersPage>
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 itemCount: fakeUserList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  var listToDisplay = _tabIndex == 0 ? fakeUserList : fakeTrainerList;
+                  var listToDisplay =
+                      _tabIndex == 0 ? fakeUserList : fakeTrainerList;
                   return UserListItem(
                       fullName: listToDisplay[index].fullName,
                       sex: listToDisplay[index].sex,
@@ -90,3 +98,19 @@ class FakePerson {
 
   FakePerson(this.fullName, this.sex);
 }
+
+final _personsAndTrainersPageProvider = StateNotifierProvider.autoDispose<
+    PersonsAndTrainersVM,
+    PersonsAndTrainersState>((ref) => PersonsAndTrainersVM(ref));
+
+final _personsProvider = Provider.autoDispose<List<Person>>((ref) {
+  return ref.watch(_personsAndTrainersPageProvider).persons;
+});
+
+final _trainersProvider = Provider.autoDispose<List<Person>>((ref) {
+  return ref.watch(_personsAndTrainersPageProvider).trainers;
+});
+
+final _loadingProvider = Provider.autoDispose<bool>((ref) {
+  return ref.watch(_personsAndTrainersPageProvider).loading;
+});

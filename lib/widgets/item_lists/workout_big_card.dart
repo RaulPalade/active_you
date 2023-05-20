@@ -8,12 +8,12 @@ class WorkoutBigCard extends StatelessWidget {
       {Key? key,
       required this.workoutName,
       required this.exercises,
-      required this.minutes})
+      required this.type})
       : super(key: key);
 
   final String workoutName;
   final int exercises;
-  final int minutes;
+  final String type;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class WorkoutBigCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "$exercises Exercises | $minutes minutes",
+                    "$exercises Exercises | $type minutes",
                     style: const TextStyle(
                       fontSize: 12,
                       color: ActiveYouTheme.grayDarkColor,
