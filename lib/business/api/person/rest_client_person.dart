@@ -61,7 +61,7 @@ abstract class RestClientPerson {
   @POST("api/v1/persons/follow")
   Future<Person> followPerson(
     @CancelRequest() CancelToken cancelToken,
-    @Path("id") id,
+    @Body() int id,
   );
 
   @POST("api/v1/persons/unfollow/{id}")
