@@ -1,0 +1,1 @@
+enum ErrorApiCall { generic, noConnection }
