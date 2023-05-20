@@ -8,6 +8,7 @@ import 'package:active_you/pages/intro/onboarding_page.dart';
 import 'package:active_you/pages/intro/welcome_page.dart';
 import 'package:active_you/pages/page_coordinator.dart';
 import 'package:active_you/pages/person_profile/person_profile_page.dart';
+import 'package:active_you/pages/users_and_trainers/person_detail_page.dart';
 import 'package:flutter/material.dart';
 
 import 'no_endpoint_found.dart';
@@ -17,6 +18,10 @@ PageRoute modalRoute(RouteSettings settings) {
     case EndPoint.welcomePage:
       return MaterialPageRoute(
           builder: (_) => const WelcomePage(), settings: settings);
+
+    case EndPoint.pageCoordinator:
+      return MaterialPageRoute(
+          builder: (_) => const PageCoordinator(), settings: settings);
 
     case EndPoint.onBoardingPage:
       return MaterialPageRoute(
@@ -47,9 +52,9 @@ PageRoute modalRoute(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (_) => const PersonProfilePage(), settings: settings);
 
-    case EndPoint.pageCoordinator:
+    case EndPoint.personDetail:
       return MaterialPageRoute(
-          builder: (_) => const PageCoordinator(), settings: settings);
+          builder: (_) => const PersonDetailPage(), settings: settings);
 
     default:
       return MaterialPageRoute(

@@ -8,12 +8,12 @@ class ProfileHeader extends StatelessWidget {
       {Key? key,
       required this.fullName,
       required this.currentGoal,
-      required this.onClick})
+      required this.button})
       : super(key: key);
 
   final String fullName;
   final String currentGoal;
-  final Function onClick;
+  final Widget button;
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +58,7 @@ class ProfileHeader extends StatelessWidget {
               height: 42,
               child: Row(
                 children: [
-                  Flexible(
-                      child: PrimaryButton(title: "Edit", onClick: onClick)),
+                  Flexible(child: button),
                 ],
               ),
             ),

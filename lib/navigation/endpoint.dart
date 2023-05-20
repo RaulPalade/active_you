@@ -1,5 +1,7 @@
 class EndPoint {
   static const root = "/";
+  static const pageCoordinator = "page-coordinator";
+
   static const welcomePage = "/welcome-page";
   static const onBoardingPage = "/onboarding-page";
   static const login = "/login";
@@ -7,8 +9,6 @@ class EndPoint {
   static const registerInfo = "/register-info";
   static const successRegistration = "/success-registration";
   static const home = "/home";
-
   static const personProfile = "person-profile";
-
-  static const pageCoordinator = "page-coordinator";
+  static const personDetail = "person-detail";
 }

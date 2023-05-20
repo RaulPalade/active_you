@@ -1,16 +1,12 @@
-import 'package:active_you/pages/person_profile/widget/other_card.dart';
 import 'package:active_you/pages/person_profile/widget/profile_header.dart';
 import 'package:active_you/pages/person_profile/widget/stats_card.dart';
-import 'package:active_you/pages/person_profile/widget/status_card.dart';
-import 'package:active_you/widgets/buttons/primary_button.dart';
+import 'package:active_you/widgets/buttons/follow_button.dart';
 import 'package:active_you/widgets/my_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PersonProfilePage extends ConsumerWidget {
-  const PersonProfilePage({Key? key}) : super(key: key);
-
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+class PersonDetailPage extends ConsumerWidget {
+  const PersonDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,10 +16,10 @@ class PersonProfilePage extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(vertical: 35, horizontal: 30),
         child: Column(
           children: [
-            ProfileHeader(
+            const ProfileHeader(
               fullName: "Michelle Rodriguez",
               currentGoal: "Lose a fat program",
-              button: PrimaryButton(title: "Edit", onClick: () {}),
+              button: FollowButton(followStatus: ["Follow", "Unfollow"]),
             ),
             const SizedBox(height: 25),
             GridView.count(
@@ -50,10 +46,6 @@ class PersonProfilePage extends ConsumerWidget {
                 StatsCard(value: "180", unitMeasure: "Followers"),
               ],
             ),
-            const SizedBox(height: 48),
-            const StatusCard(),
-            const SizedBox(height: 48),
-            const OtherCard(),
           ],
         ),
       ),

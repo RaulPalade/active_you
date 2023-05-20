@@ -1,4 +1,5 @@
 import 'package:active_you/business/models/person/person.dart';
+import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/pages/users_and_trainers/persons_and_trainers_state.dart';
 import 'package:active_you/pages/users_and_trainers/persons_and_trainers_vm.dart';
 import 'package:active_you/widgets/item_lists/user_list_item.dart';
@@ -80,10 +81,15 @@ class _PersonsAndTrainersState extends ConsumerState<PersonsAndTrainersPage>
                 itemBuilder: (BuildContext context, int index) {
                   var listToDisplay =
                       _tabIndex == 0 ? fakeUserList : fakeTrainerList;
-                  return UserListItem(
-                      fullName: listToDisplay[index].fullName,
-                      sex: listToDisplay[index].sex,
-                      onClick: () {});
+                  return GestureDetector(
+                    child: UserListItem(
+                        fullName: listToDisplay[index].fullName,
+                        sex: listToDisplay[index].sex,
+                        onClick: () {}),
+                    onTap: () {
+                      Navigator.pushNamed(context, EndPoint.personDetail);
+                    },
+                  );
                 }),
           ),
         ],
