@@ -1,5 +1,7 @@
 import 'package:active_you/business/api/person/rest_client_person.dart';
 import 'package:active_you/business/api/workout/rest_client_workout.dart';
+import 'package:active_you/business/utils/AccessTokenInterceptor.dart';
+import 'package:active_you/business/utils/SecureStorageManager.dart';
 import 'package:active_you/env/config_prod.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -7,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ApiProvider {
+  SecureStorageManager storageManager = SecureStorageManager();
   static Dio dioDefaultInstance = Dio()
     ..options.connectTimeout = const Duration(seconds: 180)
     ..options.receiveTimeout = const Duration(seconds: 180);
@@ -25,6 +28,7 @@ class ApiProvider {
         responseHeader: false,
         compact: false,
         error: true));
+    dioDefaultInstance.interceptors.add(AccessTokenInterceptor());
   }
 }
 

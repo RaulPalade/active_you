@@ -1,4 +1,6 @@
 import 'package:active_you/business/providers/splash_page_provider.dart';
+import 'package:active_you/pages/auth/login_page.dart';
+import 'package:active_you/pages/intro/welcome_page.dart';
 import 'package:active_you/pages/page_coordinator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,7 +17,7 @@ class SplashPage extends ConsumerWidget {
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => const PageCoordinator(),
+              builder: (context) => const LoginPage(),
             ),
             (route) => false);
       }

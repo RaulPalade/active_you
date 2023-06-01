@@ -19,38 +19,42 @@ class _RestClientPerson implements RestClientPerson {
   String? baseUrl;
 
   @override
-  Future<Person> login(
-    cancelToken,
-    signInData,
+  Future<HttpResponse<dynamic>> login(
+    email,
+    password,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(signInData.toJson());
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'email',
+      email,
+    ));
+    _data.fields.add(MapEntry(
+      'password',
+      password,
+    ));
     final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Person>(Options(
-      method: 'GET',
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'api/v1/login',
+              'login',
               queryParameters: queryParameters,
               data: _data,
-              cancelToken: cancelToken,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Person.fromJson(_result.data!);
-    return value;
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   @override
-  Future<Person> getPersonById(
-    cancelToken,
-    id,
-  ) async {
+  Future<Person> getPersonById(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -66,7 +70,6 @@ class _RestClientPerson implements RestClientPerson {
               'api/v1/persons/${id}',
               queryParameters: queryParameters,
               data: _data,
-              cancelToken: cancelToken,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = Person.fromJson(_result.data!);
@@ -117,7 +120,7 @@ class _RestClientPerson implements RestClientPerson {
     )
             .compose(
               _dio.options,
-              'api/v1/persons/addGoal',
+              'api/v1/goal/addGoal',
               queryParameters: queryParameters,
               data: _data,
               cancelToken: cancelToken,
@@ -144,7 +147,7 @@ class _RestClientPerson implements RestClientPerson {
     )
             .compose(
               _dio.options,
-              'api/v1/persons/removeGoal/${id}',
+              'api/v1/goal/removeGoal/${id}',
               queryParameters: queryParameters,
               data: _data,
               cancelToken: cancelToken,
@@ -172,7 +175,7 @@ class _RestClientPerson implements RestClientPerson {
     )
             .compose(
               _dio.options,
-              'api/v1/workouts/create',
+              'api/v1/workouts/createWorkout',
               queryParameters: queryParameters,
               data: _data,
               cancelToken: cancelToken,
@@ -200,7 +203,7 @@ class _RestClientPerson implements RestClientPerson {
     )
             .compose(
               _dio.options,
-              'api/v1/workouts/save',
+              'api/v1/workouts/saveWorkout',
               queryParameters: queryParameters,
               data: _data,
               cancelToken: cancelToken,
@@ -245,7 +248,7 @@ class _RestClientPerson implements RestClientPerson {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = id;
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<Person>(Options(
       method: 'POST',
@@ -254,7 +257,7 @@ class _RestClientPerson implements RestClientPerson {
     )
             .compose(
               _dio.options,
-              'api/v1/persons/follow/${id}',
+              'api/v1/persons/follow',
               queryParameters: queryParameters,
               data: _data,
               cancelToken: cancelToken,

@@ -42,9 +42,9 @@ class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
 
     if (personResponse.isNotEmpty) {
       for (var person in personResponse) {
-        if (person.role == "Person") {
+        if (person.roles!.contains("USER")) {
           normalPersons.add(person);
-        } else if (person.role == "Trainer") {
+        } else if (person.roles!.contains("TRAINER")) {
           trainers.add(person);
         }
       }

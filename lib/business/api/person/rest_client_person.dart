@@ -11,15 +11,18 @@ part 'rest_client_person.g.dart';
 abstract class RestClientPerson {
   factory RestClientPerson(Dio dio, {String? baseUrl}) = _RestClientPerson;
 
-  @GET("api/v1/login")
-  Future<Person> login(
-    @CancelRequest() CancelToken cancelToken,
-    @Body() SignIn signInData,
+  // @POST("userService/api/v1/users")
+  // Future<HttpResponse<Map<String, dynamic>>> register(
+  //     @CancelRequest() CancelToken cancelToken, @Body() Person person);
+
+  @POST("login")
+  Future<HttpResponse> login(
+    @Part(name: "email") String email,
+    @Part(name: "password") String password,
   );
 
   @GET("api/v1/persons/{id}")
   Future<Person> getPersonById(
-    @CancelRequest() CancelToken cancelToken,
     @Path("id") int id,
   );
 
@@ -28,25 +31,23 @@ abstract class RestClientPerson {
     @CancelRequest() CancelToken cancelToken,
   );
 
-  @POST("api/v1/persons/addGoal")
+  @POST("api/v1/goal/addGoal")
   Future<Goal> addGoal(
-    @CancelRequest() CancelToken cancelToken,
-    @Body() Goal goal,
-  );
+      @CancelRequest() CancelToken cancelToken, @Body() Goal goal);
 
-  @POST("api/v1/persons/removeGoal/{id}")
+  @POST("api/v1/goal/removeGoal/{id}")
   Future<Goal> removeGoal(
     @CancelRequest() CancelToken cancelToken,
     @Path("id") int id,
   );
 
-  @POST("api/v1/workouts/create")
+  @POST("api/v1/workouts/createWorkout")
   Future<Workout> createWorkout(
     @CancelRequest() CancelToken cancelToken,
     @Body() Workout workout,
   );
 
-  @POST("api/v1/workouts/save")
+  @POST("api/v1/workouts/saveWorkout")
   Future<Workout> saveWorkout(
     @CancelRequest() CancelToken cancelToken,
     @Body() Workout workout,

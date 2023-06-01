@@ -1,3 +1,4 @@
+import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/widgets/buttons/link_button.dart';
@@ -45,7 +46,7 @@ class LoginPage extends ConsumerWidget {
               const SizedBox(height: 10),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
                 child: Column(
                   children: [
                     SimpleTextFormField(
@@ -59,16 +60,20 @@ class LoginPage extends ConsumerWidget {
                         title: "login.forgotPassword".tr(),
                         textColor: ActiveYouTheme.grayMediumColor,
                         underline: true,
-                        onClick: () => {}),
+                        onClick: () => {
+
+                    }),
                   ],
                 ),
               ),
               const Spacer(),
               LoginButton(
-                  onClick: () => {
-                        Navigator.popAndPushNamed(
-                            context, EndPoint.pageCoordinator)
-                      }),
+                  onClick: () =>
+                  {
+                    ref.read(sessionProvider.notifier).login("michael.jackson@example.com", "password")
+                    // Navigator.popAndPushNamed(
+                    //     context, EndPoint.pageCoordinator)
+                  }),
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                 child: FormDivider(),
@@ -99,10 +104,11 @@ class LoginPage extends ConsumerWidget {
                       title: "button.register".tr(),
                       textColor: ActiveYouTheme.secondaryLightColor,
                       underline: false,
-                      onClick: () => {
-                            Navigator.pushNamed(
-                                context, EndPoint.registerCredentials)
-                          }),
+                      onClick: () =>
+                      {
+                        Navigator.pushNamed(
+                            context, EndPoint.registerCredentials)
+                      }),
                 ],
               )
             ],
