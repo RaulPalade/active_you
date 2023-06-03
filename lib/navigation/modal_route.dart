@@ -1,7 +1,7 @@
 import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/pages/auth/login/login_page.dart';
 import 'package:active_you/pages/auth/registration/registration_credentials_page.dart';
-import 'package:active_you/pages/auth/registration_info_page.dart';
+import 'package:active_you/pages/auth/registration/registration_info_page.dart';
 import 'package:active_you/pages/auth/success_registration_page.dart';
 import 'package:active_you/pages/home/home_page.dart';
 import 'package:active_you/pages/intro/onboarding_page.dart';

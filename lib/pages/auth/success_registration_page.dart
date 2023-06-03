@@ -11,6 +11,8 @@ class SuccessRegistrationPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentUser = ModalRoute.of(context)?.settings.arguments as String;
+
     return Container(
       color: ActiveYouTheme.scaffoldColor,
       child: SafeArea(
@@ -24,7 +26,7 @@ class SuccessRegistrationPage extends ConsumerWidget {
                   "assets/icons/illustrations/success-registration.svg"),
               const SizedBox(height: 50),
               Text(
-                "${"registrationSuccess.welcomeMessage".tr()}Raul",
+                "${"registrationSuccess.welcomeMessage".tr()}$currentUser",
                 style: const TextStyle(
                     fontFamily: "Poppins-Bold",
                     fontSize: 28,
@@ -40,10 +42,14 @@ class SuccessRegistrationPage extends ConsumerWidget {
                 textAlign: TextAlign.center,
               ),
               const Spacer(),
-              PrimaryButton(
-                  title: "button.goToHome".tr(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: PrimaryButton(
+                  title: "Vai al Login",
                   onClick: () =>
-                      {Navigator.pushNamed(context, EndPoint.personProfile)}),
+                      Navigator.pushReplacementNamed(context, EndPoint.login),
+                ),
+              ),
             ],
           ),
         ),

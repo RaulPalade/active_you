@@ -127,27 +127,50 @@ class RegistrationCredentialsPage extends ConsumerWidget {
   void _goNextPage(BuildContext context, WidgetRef ref) {
     final form = ref.watch(registrationProvider);
 
-    Person currentUser = Person(
-      id: null,
-      name: form.firstName,
-      surname: form.lastName,
-      email: form.email,
-      password: form.password,
-      sex: null,
-      dateOfBirth: null,
-      weight: null,
-      weightUnit: null,
-      height: null,
-      heightUnit: null,
-      roles: null,
-      myWorkouts: null,
-      createdWorkouts: null,
-      myGoals: null,
-      following: null,
-      followers: null,
-    );
+    if (form.firstName.isNotEmpty &&
+        form.lastName.isNotEmpty &&
+        form.email.isNotEmpty &&
+        form.password.isNotEmpty) {
+      Person currentUser = Person(
+        id: null,
+        name: form.firstName,
+        surname: form.lastName,
+        email: form.email,
+        password: form.password,
+        sex: null,
+        dateOfBirth: null,
+        weight: null,
+        weightUnit: null,
+        height: null,
+        heightUnit: null,
+        roles: null,
+        myWorkouts: null,
+        createdWorkouts: null,
+        myGoals: null,
+        following: null,
+        followers: null,
+      );
+      Navigator.pushNamed(context, EndPoint.registerInfo,
+          arguments: currentUser);
+    } else {
+      showFailureSnackBar(context, "Compila tutti i campi");
+    }
+  }
 
-    Navigator.pushNamed(context, EndPoint.registerInfo, arguments: currentUser);
+  void showFailureSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(
+      content: Text(
+        message,
+        style: const TextStyle(
+          fontFamily: "Poppins-Medium",
+          fontSize: 14,
+          color: ActiveYouTheme.whiteColor,
+        ),
+      ),
+      backgroundColor: ActiveYouTheme.secondaryDarkColor,
+      behavior: SnackBarBehavior.floating,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
 

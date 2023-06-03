@@ -6,6 +6,7 @@
   "button.login": "Login",
   "button.register": "Register",
   "button.goToHome": "Go To Home",
+  "button.goToLogin": "Go To Login",
   "main.home": "Home",
   "welcomePage.logo.motto": "Everybody Can Train",
   "welcomePage.getStarted": "Get Started",

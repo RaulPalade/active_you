@@ -1,4 +1,6 @@
 import 'package:active_you/navigation/endpoint.dart';
+import 'package:active_you/pages/intro/onboarding_state.dart';
+import 'package:active_you/pages/intro/onboarding_vm.dart';
 import 'package:active_you/pages/intro/widget/carousel_item.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -8,7 +10,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class OnBoardingPage extends ConsumerWidget {
   OnBoardingPage({Key? key}) : super(key: key);
 
-  final int _pageNumber = 0;
   final List<String> _illustrations = [
     "assets/icons/carousel/frame1.png",
     "assets/icons/carousel/frame2.png",
@@ -26,6 +27,7 @@ class OnBoardingPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final PageController controller = PageController();
+    final pageNumber = ref.watch(_pageNumber);
 
     return Container(
       color: ActiveYouTheme.scaffoldColor,
@@ -39,25 +41,27 @@ class OnBoardingPage extends ConsumerWidget {
                 Expanded(
                   child: PageView(
                     controller: controller,
-                    onPageChanged: (index) => {},
+                    onPageChanged: (index) => ref
+                        .read(_onboardinPageProvider.notifier)
+                        .setPageNumber(index),
                     children: [
                       CarouselItem(
-                        image: Image.asset(_illustrations[_pageNumber]),
+                        image: Image.asset(_illustrations[pageNumber]),
                         title: "onBoardingCarousel.title1".tr(),
                         description: "onBoardingCarousel.description1".tr(),
                       ),
                       CarouselItem(
-                        image: Image.asset(_illustrations[_pageNumber]),
+                        image: Image.asset(_illustrations[pageNumber]),
                         title: "onBoardingCarousel.title2".tr(),
                         description: "onBoardingCarousel.description2".tr(),
                       ),
                       CarouselItem(
-                        image: Image.asset(_illustrations[_pageNumber]),
+                        image: Image.asset(_illustrations[pageNumber]),
                         title: "onBoardingCarousel.title3".tr(),
                         description: "onBoardingCarousel.description3".tr(),
                       ),
                       CarouselItem(
-                        image: Image.asset(_illustrations[_pageNumber]),
+                        image: Image.asset(_illustrations[pageNumber]),
                         title: "onBoardingCarousel.title4".tr(),
                         description: "onBoardingCarousel.description4".tr(),
                       ),
@@ -72,12 +76,12 @@ class OnBoardingPage extends ConsumerWidget {
                     child: IconButton(
                       splashRadius: null,
                       icon: Image.asset(
-                        _buttons[_pageNumber],
+                        _buttons[pageNumber],
                         width: 60,
                       ),
                       onPressed: () {
-                        if (_pageNumber == 3) {
-                          Navigator.pushNamed(context, EndPoint.login);
+                        if (pageNumber == 3) {
+                          Navigator.pushReplacementNamed(context, EndPoint.pageCoordinator);
                         } else {
                           controller.nextPage(
                               duration: const Duration(milliseconds: 300),
@@ -95,3 +99,10 @@ class OnBoardingPage extends ConsumerWidget {
     );
   }
 }
+
+final _onboardinPageProvider =
+    StateNotifierProvider.autoDispose<OnBoardingVM, OnBoardingState>(
+        (ref) => OnBoardingVM(ref));
+
+final _pageNumber = Provider.autoDispose<int>(
+    (ref) => ref.watch(_onboardinPageProvider).pageNumber);

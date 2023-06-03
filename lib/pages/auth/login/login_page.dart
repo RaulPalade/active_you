@@ -77,12 +77,11 @@ class LoginPage extends ConsumerWidget {
               ),
               const Spacer(),
               LoginButton(
-                onClick: () => {
+                onClick: () {
                   ref
                       .read(sessionProvider.notifier)
-                      .login(emailInput, passwordInput)
-                  // Navigator.popAndPushNamed(
-                  //     context, EndPoint.pageCoordinator)
+                      .login(emailInput, passwordInput);
+                  Navigator.popAndPushNamed(context, EndPoint.welcomePage);
                 },
               ),
               const Padding(

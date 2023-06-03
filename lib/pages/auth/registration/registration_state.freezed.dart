@@ -218,9 +218,9 @@ class _$RegistrationStateData implements RegistrationStateData {
       this.password = "",
       this.sex = "Male",
       this.dateOfBirth,
-      this.weight = 0,
+      this.weight = 0.0,
       this.weightUnit = "KG",
-      this.height = 0,
+      this.height = 0.0,
       this.heightUnit = "CM"});
 
   @override

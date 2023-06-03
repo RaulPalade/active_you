@@ -19,7 +19,6 @@ class RegistrationInfoPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUser = ModalRoute.of(context)?.settings.arguments as Person;
-    var formatter = DateFormat('dd-MM-yyyy');
 
     return Container(
       color: ActiveYouTheme.scaffoldColor,
@@ -123,26 +122,33 @@ class RegistrationInfoPage extends ConsumerWidget {
   _registerUserAndGoNext(BuildContext context, WidgetRef ref, Person user) {
     final form = ref.watch(registrationProvider);
 
-    Person currentUser = user.copyWith(
-      sex: form.sex,
-      dateOfBirth: form.dateOfBirth,
-      weight: form.weight,
-      weightUnit: form.weightUnit,
-      height: form.height,
-      heightUnit: form.heightUnit,
-    );
+    if (form.sex.isNotEmpty &&
+        form.weight != 0 &&
+        form.weightUnit.isNotEmpty &&
+        form.height != 0 &&
+        form.heightUnit.isNotEmpty) {
+      Person currentUser = user.copyWith(
+        sex: form.sex,
+        dateOfBirth: form.dateOfBirth,
+        weight: form.weight,
+        weightUnit: form.weightUnit,
+        height: form.height,
+        heightUnit: form.heightUnit,
+      );
 
-    print(currentUser);
-
-    final response = ref.read(sessionProvider.notifier).register(currentUser);
-    response.then((success) {
-      if (success) {
-        showSuccessSnackBar(context, "Registrazione Effettuata!");
-        Navigator.pushNamed(context, EndPoint.successRegistration);
-      } else {
-        showFailureSnackBar(context, "Errore durante la registrazione!");
-      }
-    });
+      final response = ref.read(sessionProvider.notifier).register(currentUser);
+      response.then((success) {
+        if (success) {
+          showSuccessSnackBar(context, "Registrazione Effettuata!");
+          Navigator.pushReplacementNamed(context, EndPoint.successRegistration,
+              arguments: currentUser.name);
+        } else {
+          showFailureSnackBar(context, "Errore durante la registrazione!");
+        }
+      });
+    } else {
+      showFailureSnackBar(context, "Compila tutti i campi");
+    }
   }
 
   void showSuccessSnackBar(BuildContext context, String message) {
