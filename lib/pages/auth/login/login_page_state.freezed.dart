@@ -18,7 +18,6 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LoginPageState {
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
-  bool get passwordHidden => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LoginPageStateCopyWith<LoginPageState> get copyWith =>
@@ -31,7 +30,7 @@ abstract class $LoginPageStateCopyWith<$Res> {
           LoginPageState value, $Res Function(LoginPageState) then) =
       _$LoginPageStateCopyWithImpl<$Res, LoginPageState>;
   @useResult
-  $Res call({String email, String password, bool passwordHidden});
+  $Res call({String email, String password});
 }
 
 /// @nodoc
@@ -49,7 +48,6 @@ class _$LoginPageStateCopyWithImpl<$Res, $Val extends LoginPageState>
   $Res call({
     Object? email = null,
     Object? password = null,
-    Object? passwordHidden = null,
   }) {
     return _then(_value.copyWith(
       email: null == email
@@ -60,10 +58,6 @@ class _$LoginPageStateCopyWithImpl<$Res, $Val extends LoginPageState>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      passwordHidden: null == passwordHidden
-          ? _value.passwordHidden
-          : passwordHidden // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
@@ -76,7 +70,7 @@ abstract class _$$LoginPageDataCopyWith<$Res>
       __$$LoginPageDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String email, String password, bool passwordHidden});
+  $Res call({String email, String password});
 }
 
 /// @nodoc
@@ -92,7 +86,6 @@ class __$$LoginPageDataCopyWithImpl<$Res>
   $Res call({
     Object? email = null,
     Object? password = null,
-    Object? passwordHidden = null,
   }) {
     return _then(_$LoginPageData(
       email: null == email
@@ -103,10 +96,6 @@ class __$$LoginPageDataCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      passwordHidden: null == passwordHidden
-          ? _value.passwordHidden
-          : passwordHidden // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -114,8 +103,7 @@ class __$$LoginPageDataCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoginPageData implements LoginPageData {
-  const _$LoginPageData(
-      {this.email = "", this.password = "", this.passwordHidden = false});
+  const _$LoginPageData({this.email = "", this.password = ""});
 
   @override
   @JsonKey()
@@ -123,13 +111,10 @@ class _$LoginPageData implements LoginPageData {
   @override
   @JsonKey()
   final String password;
-  @override
-  @JsonKey()
-  final bool passwordHidden;
 
   @override
   String toString() {
-    return 'LoginPageState(email: $email, password: $password, passwordHidden: $passwordHidden)';
+    return 'LoginPageState(email: $email, password: $password)';
   }
 
   @override
@@ -139,13 +124,11 @@ class _$LoginPageData implements LoginPageData {
             other is _$LoginPageData &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
-                other.password == password) &&
-            (identical(other.passwordHidden, passwordHidden) ||
-                other.passwordHidden == passwordHidden));
+                other.password == password));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, password, passwordHidden);
+  int get hashCode => Object.hash(runtimeType, email, password);
 
   @JsonKey(ignore: true)
   @override
@@ -155,17 +138,13 @@ class _$LoginPageData implements LoginPageData {
 }
 
 abstract class LoginPageData implements LoginPageState {
-  const factory LoginPageData(
-      {final String email,
-      final String password,
-      final bool passwordHidden}) = _$LoginPageData;
+  const factory LoginPageData({final String email, final String password}) =
+      _$LoginPageData;
 
   @override
   String get email;
   @override
   String get password;
-  @override
-  bool get passwordHidden;
   @override
   @JsonKey(ignore: true)
   _$$LoginPageDataCopyWith<_$LoginPageData> get copyWith =>

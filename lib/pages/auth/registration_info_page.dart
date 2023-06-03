@@ -59,6 +59,7 @@ class RegistrationInfoPage extends ConsumerWidget {
                           child: SimpleTextFormField(
                             hintText: "registrationInfo.weight".tr(),
                             icon: SvgPicture.asset("assets/icons/weight.svg"),
+                            onChaged: () {},
                           ),
                         ),
                         const SizedBox(width: 12),
@@ -72,6 +73,7 @@ class RegistrationInfoPage extends ConsumerWidget {
                           child: SimpleTextFormField(
                             hintText: "registrationInfo.height".tr(),
                             icon: SvgPicture.asset("assets/icons/swap.svg"),
+                            onChaged: () {},
                           ),
                         ),
                         const SizedBox(width: 12),

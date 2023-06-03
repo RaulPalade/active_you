@@ -19,8 +19,8 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String emailInput = ref.watch(loginEmailProvider);
-    String passwordInput = ref.watch(loginPasswordProvider);
+    String emailInput = ref.watch(_loginEmailProvider);
+    String passwordInput = ref.watch(_loginPasswordProvider);
 
     return Container(
       color: ActiveYouTheme.scaffoldColor,
@@ -57,9 +57,15 @@ class LoginPage extends ConsumerWidget {
                     SimpleTextFormField(
                       hintText: "Email",
                       icon: SvgPicture.asset("assets/icons/email.svg"),
+                      onChaged: (email) =>
+                          ref.read(_loginPageProvider.notifier).setEmail(email),
                     ),
                     const SizedBox(height: 10),
-                    const PasswordTextFormField(),
+                    PasswordTextFormField(
+                      onChanged: (password) => ref
+                          .read(_loginPageProvider.notifier)
+                          .setPassword(password),
+                    ),
                     const SizedBox(height: 10),
                     LinkButton(
                         title: "login.forgotPassword".tr(),
@@ -109,9 +115,8 @@ class LoginPage extends ConsumerWidget {
                     title: "button.register".tr(),
                     textColor: ActiveYouTheme.secondaryLightColor,
                     underline: false,
-                    onClick: () => {
-                      Navigator.pushNamed(context, EndPoint.registerCredentials)
-                    },
+                    onClick: () => Navigator.pushReplacementNamed(
+                        context, EndPoint.registerCredentials),
                   ),
                 ],
               )
@@ -123,19 +128,15 @@ class LoginPage extends ConsumerWidget {
   }
 }
 
-final loginPageProvider =
+final _loginPageProvider =
     StateNotifierProvider<LoginPageVM, LoginPageState>((ref) {
   return LoginPageVM(ref);
 });
 
-final loginEmailProvider = Provider<String>((ref) {
-  return ref.watch(loginPageProvider).email;
+final _loginEmailProvider = Provider<String>((ref) {
+  return ref.watch(_loginPageProvider).email;
 });
 
-final loginPasswordProvider = Provider<String>((ref) {
-  return ref.watch(loginPageProvider).password;
-});
-
-final loginPasswordHiddenProvider = Provider<bool>((ref) {
-  return ref.watch(loginPageProvider).passwordHidden;
+final _loginPasswordProvider = Provider<String>((ref) {
+  return ref.watch(_loginPageProvider).password;
 });

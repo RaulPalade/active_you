@@ -1,5 +1,6 @@
 import 'package:active_you/business/models/goal/goal.dart';
 import 'package:active_you/business/models/person/person.dart';
+import 'package:active_you/business/models/person/person_to_register.dart';
 import 'package:active_you/business/models/workout/workout.dart';
 import 'package:active_you/business/providers/api_provider.dart';
 import 'package:active_you/business/providers/session_provider/session_provider_state.dart';
@@ -15,21 +16,21 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
 
   SessionProvider(this.ref) : super(const SessionProviderState());
 
-  // Future<bool> register(Person person) async {
-  //   try {
-  //     final response = await ref
-  //         .read(restClientPersonProvider)
-  //         .register(tokenLastRequest!, person);
-  //     if (response.response.statusCode == 200) {
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   } catch (e) {
-  //     print(e);
-  //     return false;
-  //   }
-  // }
+  Future<bool> register(PersonToRegister person) async {
+    try {
+      final response = await ref
+          .read(restClientPersonProvider)
+          .register(person);
+      if (response.response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print("ERROR: $e");
+      return false;
+    }
+  }
 
   Future<void> login(String email, String password) async {
     print(email);
@@ -150,8 +151,8 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
           .followPerson(tokenLastRequest!, id);
 
       var updatedPerson = state.currentPerson?.copyWith(
-          //following: [...?state.currentPerson!.following, response],
-          );
+        //following: [...?state.currentPerson!.following, response],
+      );
 
       state = state.copyWith(currentPerson: updatedPerson);
     } catch (err) {
@@ -193,13 +194,17 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
 }
 
 final sessionProvider =
-    StateNotifierProvider<SessionProvider, SessionProviderState>(
+StateNotifierProvider<SessionProvider, SessionProviderState>(
         (ref) => SessionProvider(ref));
 
 final currentPersonProvider = Provider<Person?>((ref) {
-  return ref.watch(sessionProvider).currentPerson;
+  return ref
+      .watch(sessionProvider)
+      .currentPerson;
 });
 
 final sessionLoadingProvider = Provider<bool>((ref) {
-  return ref.watch(sessionProvider).loading;
+  return ref
+      .watch(sessionProvider)
+      .loading;
 });

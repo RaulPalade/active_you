@@ -1,5 +1,6 @@
 import 'package:active_you/business/models/goal/goal.dart';
 import 'package:active_you/business/models/person/person.dart';
+import 'package:active_you/business/models/person/person_to_register.dart';
 import 'package:active_you/business/models/workout/workout.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
@@ -10,9 +11,8 @@ part 'rest_client_person.g.dart';
 abstract class RestClientPerson {
   factory RestClientPerson(Dio dio, {String? baseUrl}) = _RestClientPerson;
 
-  // @POST("userService/api/v1/users")
-  // Future<HttpResponse<Map<String, dynamic>>> register(
-  //     @CancelRequest() CancelToken cancelToken, @Body() Person person);
+  @POST("/api/v1/auth/create")
+  Future<HttpResponse> register(@Body() PersonToRegister person);
 
   @POST("login")
   Future<HttpResponse> login(

@@ -7,6 +7,5 @@ class LoginPageState with _$LoginPageState {
   const factory LoginPageState({
     @Default("") String email,
     @Default("") String password,
-    @Default(true) bool passwordHidden,
   }) = LoginPageData;
 }

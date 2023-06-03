@@ -14,7 +14,4 @@ class LoginPageVM extends StateNotifier<LoginPageState> {
     state = state.copyWith(password: password);
   }
 
-  void setHiddenPassword() {
-    state = state.copyWith(passwordHidden: !state.passwordHidden);
-  }
 }

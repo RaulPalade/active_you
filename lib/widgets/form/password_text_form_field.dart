@@ -1,16 +1,28 @@
-import 'package:active_you/pages/auth/login/login_page.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class PasswordTextFormField extends ConsumerWidget {
-  const PasswordTextFormField({Key? key}) : super(key: key);
+class PasswordTextFormField extends StatefulWidget {
+  const PasswordTextFormField({Key? key, required this.onChanged})
+      : super(key: key);
+
+  final Function onChanged;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    bool passwordHidden = ref.watch(loginPasswordHiddenProvider);
+  State<PasswordTextFormField> createState() => _PasswordTextFormFieldState();
+}
 
+class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
+  bool _obscureText = true;
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return SizedBox(
       height: 60,
       child: Card(
@@ -19,10 +31,9 @@ class PasswordTextFormField extends ConsumerWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: TextFormField(
-            onChanged: (password) =>
-                {ref.read(loginPageProvider.notifier).setPassword(password)},
+            onChanged: (password) => widget.onChanged(password),
             autofocus: true,
-            obscureText: !passwordHidden,
+            obscureText: _obscureText,
             decoration: InputDecoration(
               icon: SvgPicture.asset(
                 "assets/icons/password.svg",
@@ -32,10 +43,9 @@ class PasswordTextFormField extends ConsumerWidget {
               hintText: "Password",
               border: InputBorder.none,
               suffixIcon: GestureDetector(
-                onTap: () =>
-                    ref.read(loginPageProvider.notifier).setHiddenPassword(),
+                onTap: _togglePasswordVisibility,
                 child: SvgPicture.asset(
-                  passwordHidden
+                  _obscureText
                       ? "assets/icons/show-password.svg"
                       : "assets/icons/hide-password.svg",
                 ),
