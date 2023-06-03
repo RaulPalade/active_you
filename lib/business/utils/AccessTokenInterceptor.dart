@@ -16,8 +16,8 @@ class AccessTokenInterceptor extends Interceptor {
   Future onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     try {
+      await _storage.deleteAll();
       String? idToken = await _storage.readValue(_storage.idTokenKey);
-      print("NEW TOKEN: $idToken");
       if (idToken != null) {
         options.headers["Authorization"] = 'Bearer $idToken';
         //log("ID TOKEN EXPIRE DATE: ${loginResponse.notBefore}");

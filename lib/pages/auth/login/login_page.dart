@@ -1,5 +1,7 @@
 import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/navigation/endpoint.dart';
+import 'package:active_you/pages/auth/login/login_page_state.dart';
+import 'package:active_you/pages/auth/login/login_page_vm.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/widgets/buttons/link_button.dart';
 import 'package:active_you/widgets/buttons/login_button.dart';
@@ -17,6 +19,9 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    String emailInput = ref.watch(loginEmailProvider);
+    String passwordInput = ref.watch(loginPasswordProvider);
+
     return Container(
       color: ActiveYouTheme.scaffoldColor,
       child: SafeArea(
@@ -46,7 +51,7 @@ class LoginPage extends ConsumerWidget {
               const SizedBox(height: 10),
               Padding(
                 padding:
-                const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
                 child: Column(
                   children: [
                     SimpleTextFormField(
@@ -60,20 +65,20 @@ class LoginPage extends ConsumerWidget {
                         title: "login.forgotPassword".tr(),
                         textColor: ActiveYouTheme.grayMediumColor,
                         underline: true,
-                        onClick: () => {
-
-                    }),
+                        onClick: () => {}),
                   ],
                 ),
               ),
               const Spacer(),
               LoginButton(
-                  onClick: () =>
-                  {
-                    ref.read(sessionProvider.notifier).login("michael.jackson@example.com", "password")
-                    // Navigator.popAndPushNamed(
-                    //     context, EndPoint.pageCoordinator)
-                  }),
+                onClick: () => {
+                  ref
+                      .read(sessionProvider.notifier)
+                      .login(emailInput, passwordInput)
+                  // Navigator.popAndPushNamed(
+                  //     context, EndPoint.pageCoordinator)
+                },
+              ),
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                 child: FormDivider(),
@@ -101,14 +106,13 @@ class LoginPage extends ConsumerWidget {
                     ),
                   ),
                   LinkButton(
-                      title: "button.register".tr(),
-                      textColor: ActiveYouTheme.secondaryLightColor,
-                      underline: false,
-                      onClick: () =>
-                      {
-                        Navigator.pushNamed(
-                            context, EndPoint.registerCredentials)
-                      }),
+                    title: "button.register".tr(),
+                    textColor: ActiveYouTheme.secondaryLightColor,
+                    underline: false,
+                    onClick: () => {
+                      Navigator.pushNamed(context, EndPoint.registerCredentials)
+                    },
+                  ),
                 ],
               )
             ],
@@ -118,3 +122,20 @@ class LoginPage extends ConsumerWidget {
     );
   }
 }
+
+final loginPageProvider =
+    StateNotifierProvider<LoginPageVM, LoginPageState>((ref) {
+  return LoginPageVM(ref);
+});
+
+final loginEmailProvider = Provider<String>((ref) {
+  return ref.watch(loginPageProvider).email;
+});
+
+final loginPasswordProvider = Provider<String>((ref) {
+  return ref.watch(loginPageProvider).password;
+});
+
+final loginPasswordHiddenProvider = Provider<bool>((ref) {
+  return ref.watch(loginPageProvider).passwordHidden;
+});

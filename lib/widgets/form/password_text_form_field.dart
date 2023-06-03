@@ -1,25 +1,16 @@
+import 'package:active_you/pages/auth/login/login_page.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class PasswordTextFormField extends StatefulWidget {
+class PasswordTextFormField extends ConsumerWidget {
   const PasswordTextFormField({Key? key}) : super(key: key);
 
   @override
-  State<PasswordTextFormField> createState() => _PasswordTextFormFieldState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    bool passwordHidden = ref.watch(loginPasswordHiddenProvider);
 
-class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
-  bool _obscureText = true;
-
-  void _togglePasswordVisibility() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return SizedBox(
       height: 60,
       child: Card(
@@ -28,8 +19,10 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: TextFormField(
+            onChanged: (password) =>
+                {ref.read(loginPageProvider.notifier).setPassword(password)},
             autofocus: true,
-            obscureText: _obscureText,
+            obscureText: !passwordHidden,
             decoration: InputDecoration(
               icon: SvgPicture.asset(
                 "assets/icons/password.svg",
@@ -39,9 +32,10 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
               hintText: "Password",
               border: InputBorder.none,
               suffixIcon: GestureDetector(
-                onTap: _togglePasswordVisibility,
+                onTap: () =>
+                    ref.read(loginPageProvider.notifier).setHiddenPassword(),
                 child: SvgPicture.asset(
-                  _obscureText
+                  passwordHidden
                       ? "assets/icons/show-password.svg"
                       : "assets/icons/hide-password.svg",
                 ),

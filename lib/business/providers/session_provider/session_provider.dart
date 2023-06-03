@@ -1,4 +1,3 @@
-import 'package:active_you/business/models/auth/signin/sign_in.dart';
 import 'package:active_you/business/models/goal/goal.dart';
 import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/business/models/workout/workout.dart';
