@@ -1,8 +1,7 @@
-import 'package:active_you/business/models/person/person_to_register.dart';
-import 'package:active_you/business/providers/session_provider/session_provider.dart';
+import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/navigation/endpoint.dart';
-import 'package:active_you/pages/auth/registration_credentials/registration_credentials_page_state.dart';
-import 'package:active_you/pages/auth/registration_credentials/registration_credentials_vm.dart';
+import 'package:active_you/pages/auth/registration/registration_state.dart';
+import 'package:active_you/pages/auth/registration/registration_vm.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/widgets/buttons/link_button.dart';
 import 'package:active_you/widgets/buttons/primary_button.dart';
@@ -46,7 +45,7 @@ class RegistrationCredentialsPage extends ConsumerWidget {
                       hintText: "registrationCredentials.firstName".tr(),
                       icon: SvgPicture.asset("assets/icons/profile.svg"),
                       onChaged: (firstName) => ref
-                          .read(_registrationCredentialsPageProvider.notifier)
+                          .read(registrationProvider.notifier)
                           .setFirstName(firstName),
                     ),
                     const SizedBox(height: 10),
@@ -54,7 +53,7 @@ class RegistrationCredentialsPage extends ConsumerWidget {
                       hintText: "registrationCredentials.lastName".tr(),
                       icon: SvgPicture.asset("assets/icons/profile.svg"),
                       onChaged: (lastName) => ref
-                          .read(_registrationCredentialsPageProvider.notifier)
+                          .read(registrationProvider.notifier)
                           .setLastName(lastName),
                     ),
                     const SizedBox(height: 10),
@@ -62,13 +61,13 @@ class RegistrationCredentialsPage extends ConsumerWidget {
                       hintText: "Email",
                       icon: SvgPicture.asset("assets/icons/email.svg"),
                       onChaged: (email) => ref
-                          .read(_registrationCredentialsPageProvider.notifier)
+                          .read(registrationProvider.notifier)
                           .setEmail(email),
                     ),
                     const SizedBox(height: 10),
                     PasswordTextFormField(
                       onChanged: (password) => ref
-                          .read(_registrationCredentialsPageProvider.notifier)
+                          .read(registrationProvider.notifier)
                           .setPassword(password),
                     ),
                   ],
@@ -80,7 +79,7 @@ class RegistrationCredentialsPage extends ConsumerWidget {
                 child: PrimaryButton(
                     title: "button.register".tr(),
                     onClick: () {
-                      _registerUserAndGoNextPage(context, ref);
+                      _goNextPage(context, ref);
                     }),
               ),
               const Padding(
@@ -125,80 +124,34 @@ class RegistrationCredentialsPage extends ConsumerWidget {
     );
   }
 
-  void showSuccessSnackBar(BuildContext context, String message) {
-    final snackBar = SnackBar(
-      content: Text(
-        message,
-        style: const TextStyle(
-          fontFamily: "Poppins-Medium",
-          fontSize: 14,
-          color: ActiveYouTheme.whiteColor,
-        ),
-      ),
-      backgroundColor: ActiveYouTheme.brandDarkColor,
-      behavior: SnackBarBehavior.floating,
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
+  void _goNextPage(BuildContext context, WidgetRef ref) {
+    final form = ref.watch(registrationProvider);
 
-  void showFailureSnackBar(BuildContext context, String message) {
-    final snackBar = SnackBar(
-      content: Text(
-        message,
-        style: const TextStyle(
-          fontFamily: "Poppins-Medium",
-          fontSize: 14,
-          color: ActiveYouTheme.whiteColor,
-        ),
-      ),
-      backgroundColor: ActiveYouTheme.secondaryDarkColor,
-      behavior: SnackBarBehavior.floating,
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
-
-  void _registerUserAndGoNextPage(BuildContext context, WidgetRef ref) {
-    String firstNameInput = ref.watch(_registrationFirstNameProvider);
-    String lastNameInput = ref.watch(_registrationLastNameProvider);
-    String emailInput = ref.watch(_registrationEmailProvider);
-    String passwordInput = ref.watch(_registrationPasswordProvider);
-
-    PersonToRegister person = PersonToRegister(
-      name: firstNameInput,
-      surname: lastNameInput,
-      email: emailInput,
-      password: passwordInput,
+    Person currentUser = Person(
+      id: null,
+      name: form.firstName,
+      surname: form.lastName,
+      email: form.email,
+      password: form.password,
+      sex: null,
+      dateOfBirth: null,
+      weight: null,
+      weightUnit: null,
+      height: null,
+      heightUnit: null,
+      roles: null,
+      myWorkouts: null,
+      createdWorkouts: null,
+      myGoals: null,
+      following: null,
+      followers: null,
     );
 
-    final response = ref.read(sessionProvider.notifier).register(person);
-    response.then((success) {
-      if (success) {
-        showSuccessSnackBar(context, "Registrazione Effettuata!");
-        Navigator.pushNamed(context, EndPoint.registerInfo);
-      } else {
-        showFailureSnackBar(context, "Errore durante la registrazione!");
-      }
-    });
+    Navigator.pushNamed(context, EndPoint.registerInfo, arguments: currentUser);
   }
 }
 
-final _registrationCredentialsPageProvider = StateNotifierProvider<
-    RegistrationCredentialsVM, RegistrationCredentialsPageState>((ref) {
-  return RegistrationCredentialsVM(ref);
-});
-
-final _registrationFirstNameProvider = Provider<String>((ref) {
-  return ref.watch(_registrationCredentialsPageProvider).firstName;
-});
-
-final _registrationLastNameProvider = Provider<String>((ref) {
-  return ref.watch(_registrationCredentialsPageProvider).lastName;
-});
-
-final _registrationEmailProvider = Provider<String>((ref) {
-  return ref.watch(_registrationCredentialsPageProvider).email;
-});
-
-final _registrationPasswordProvider = Provider<String>((ref) {
-  return ref.watch(_registrationCredentialsPageProvider).password;
+final registrationProvider =
+    StateNotifierProvider<RegistrationVM, RegistrationState>((ref) {
+  return RegistrationVM(ref);
 });

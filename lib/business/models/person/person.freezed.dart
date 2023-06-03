@@ -26,6 +26,11 @@ mixin _$Person {
   String? get email => throw _privateConstructorUsedError;
   String? get password => throw _privateConstructorUsedError;
   String? get sex => throw _privateConstructorUsedError;
+  DateTime? get dateOfBirth => throw _privateConstructorUsedError;
+  double? get weight => throw _privateConstructorUsedError;
+  String? get weightUnit => throw _privateConstructorUsedError;
+  double? get height => throw _privateConstructorUsedError;
+  String? get heightUnit => throw _privateConstructorUsedError;
   List<String>? get roles => throw _privateConstructorUsedError;
   List<Workout>? get myWorkouts => throw _privateConstructorUsedError;
   List<Workout>? get createdWorkouts => throw _privateConstructorUsedError;
@@ -50,6 +55,11 @@ abstract class $PersonCopyWith<$Res> {
       String? email,
       String? password,
       String? sex,
+      DateTime? dateOfBirth,
+      double? weight,
+      String? weightUnit,
+      double? height,
+      String? heightUnit,
       List<String>? roles,
       List<Workout>? myWorkouts,
       List<Workout>? createdWorkouts,
@@ -77,6 +87,11 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? email = freezed,
     Object? password = freezed,
     Object? sex = freezed,
+    Object? dateOfBirth = freezed,
+    Object? weight = freezed,
+    Object? weightUnit = freezed,
+    Object? height = freezed,
+    Object? heightUnit = freezed,
     Object? roles = freezed,
     Object? myWorkouts = freezed,
     Object? createdWorkouts = freezed,
@@ -108,6 +123,26 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
       sex: freezed == sex
           ? _value.sex
           : sex // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateOfBirth: freezed == dateOfBirth
+          ? _value.dateOfBirth
+          : dateOfBirth // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      weight: freezed == weight
+          ? _value.weight
+          : weight // ignore: cast_nullable_to_non_nullable
+              as double?,
+      weightUnit: freezed == weightUnit
+          ? _value.weightUnit
+          : weightUnit // ignore: cast_nullable_to_non_nullable
+              as String?,
+      height: freezed == height
+          ? _value.height
+          : height // ignore: cast_nullable_to_non_nullable
+              as double?,
+      heightUnit: freezed == heightUnit
+          ? _value.heightUnit
+          : heightUnit // ignore: cast_nullable_to_non_nullable
               as String?,
       roles: freezed == roles
           ? _value.roles
@@ -150,6 +185,11 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
       String? email,
       String? password,
       String? sex,
+      DateTime? dateOfBirth,
+      double? weight,
+      String? weightUnit,
+      double? height,
+      String? heightUnit,
       List<String>? roles,
       List<Workout>? myWorkouts,
       List<Workout>? createdWorkouts,
@@ -174,6 +214,11 @@ class __$$_PersonCopyWithImpl<$Res>
     Object? email = freezed,
     Object? password = freezed,
     Object? sex = freezed,
+    Object? dateOfBirth = freezed,
+    Object? weight = freezed,
+    Object? weightUnit = freezed,
+    Object? height = freezed,
+    Object? heightUnit = freezed,
     Object? roles = freezed,
     Object? myWorkouts = freezed,
     Object? createdWorkouts = freezed,
@@ -205,6 +250,26 @@ class __$$_PersonCopyWithImpl<$Res>
       sex: freezed == sex
           ? _value.sex
           : sex // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateOfBirth: freezed == dateOfBirth
+          ? _value.dateOfBirth
+          : dateOfBirth // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      weight: freezed == weight
+          ? _value.weight
+          : weight // ignore: cast_nullable_to_non_nullable
+              as double?,
+      weightUnit: freezed == weightUnit
+          ? _value.weightUnit
+          : weightUnit // ignore: cast_nullable_to_non_nullable
+              as String?,
+      height: freezed == height
+          ? _value.height
+          : height // ignore: cast_nullable_to_non_nullable
+              as double?,
+      heightUnit: freezed == heightUnit
+          ? _value.heightUnit
+          : heightUnit // ignore: cast_nullable_to_non_nullable
               as String?,
       roles: freezed == roles
           ? _value._roles
@@ -244,6 +309,11 @@ class _$_Person implements _Person {
       required this.email,
       required this.password,
       required this.sex,
+      required this.dateOfBirth,
+      required this.weight,
+      required this.weightUnit,
+      required this.height,
+      required this.heightUnit,
       required final List<String>? roles,
       required final List<Workout>? myWorkouts,
       required final List<Workout>? createdWorkouts,
@@ -272,6 +342,16 @@ class _$_Person implements _Person {
   final String? password;
   @override
   final String? sex;
+  @override
+  final DateTime? dateOfBirth;
+  @override
+  final double? weight;
+  @override
+  final String? weightUnit;
+  @override
+  final double? height;
+  @override
+  final String? heightUnit;
   final List<String>? _roles;
   @override
   List<String>? get roles {
@@ -334,7 +414,7 @@ class _$_Person implements _Person {
 
   @override
   String toString() {
-    return 'Person(id: $id, name: $name, surname: $surname, email: $email, password: $password, sex: $sex, roles: $roles, myWorkouts: $myWorkouts, createdWorkouts: $createdWorkouts, myGoals: $myGoals, following: $following, followers: $followers)';
+    return 'Person(id: $id, name: $name, surname: $surname, email: $email, password: $password, sex: $sex, dateOfBirth: $dateOfBirth, weight: $weight, weightUnit: $weightUnit, height: $height, heightUnit: $heightUnit, roles: $roles, myWorkouts: $myWorkouts, createdWorkouts: $createdWorkouts, myGoals: $myGoals, following: $following, followers: $followers)';
   }
 
   @override
@@ -349,6 +429,14 @@ class _$_Person implements _Person {
             (identical(other.password, password) ||
                 other.password == password) &&
             (identical(other.sex, sex) || other.sex == sex) &&
+            (identical(other.dateOfBirth, dateOfBirth) ||
+                other.dateOfBirth == dateOfBirth) &&
+            (identical(other.weight, weight) || other.weight == weight) &&
+            (identical(other.weightUnit, weightUnit) ||
+                other.weightUnit == weightUnit) &&
+            (identical(other.height, height) || other.height == height) &&
+            (identical(other.heightUnit, heightUnit) ||
+                other.heightUnit == heightUnit) &&
             const DeepCollectionEquality().equals(other._roles, _roles) &&
             const DeepCollectionEquality()
                 .equals(other._myWorkouts, _myWorkouts) &&
@@ -371,6 +459,11 @@ class _$_Person implements _Person {
       email,
       password,
       sex,
+      dateOfBirth,
+      weight,
+      weightUnit,
+      height,
+      heightUnit,
       const DeepCollectionEquality().hash(_roles),
       const DeepCollectionEquality().hash(_myWorkouts),
       const DeepCollectionEquality().hash(_createdWorkouts),
@@ -400,6 +493,11 @@ abstract class _Person implements Person {
       required final String? email,
       required final String? password,
       required final String? sex,
+      required final DateTime? dateOfBirth,
+      required final double? weight,
+      required final String? weightUnit,
+      required final double? height,
+      required final String? heightUnit,
       required final List<String>? roles,
       required final List<Workout>? myWorkouts,
       required final List<Workout>? createdWorkouts,
@@ -421,6 +519,16 @@ abstract class _Person implements Person {
   String? get password;
   @override
   String? get sex;
+  @override
+  DateTime? get dateOfBirth;
+  @override
+  double? get weight;
+  @override
+  String? get weightUnit;
+  @override
+  double? get height;
+  @override
+  String? get heightUnit;
   @override
   List<String>? get roles;
   @override

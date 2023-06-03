@@ -12,7 +12,7 @@ abstract class RestClientPerson {
   factory RestClientPerson(Dio dio, {String? baseUrl}) = _RestClientPerson;
 
   @POST("/api/v1/auth/create")
-  Future<HttpResponse> register(@Body() PersonToRegister person);
+  Future<HttpResponse> register(@Body() Person person);
 
   @POST("login")
   Future<HttpResponse> login(

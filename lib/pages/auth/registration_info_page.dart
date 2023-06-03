@@ -1,4 +1,7 @@
+import 'package:active_you/business/models/person/person.dart';
+import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/navigation/endpoint.dart';
+import 'package:active_you/pages/auth/registration/registration_credentials_page.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/widgets/buttons/next_button.dart';
 import 'package:active_you/widgets/form/gender_selection_card.dart';
@@ -15,6 +18,9 @@ class RegistrationInfoPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentUser = ModalRoute.of(context)?.settings.arguments as Person;
+    var formatter = DateFormat('dd-MM-yyyy');
+
     return Container(
       color: ActiveYouTheme.scaffoldColor,
       child: SafeArea(
@@ -47,11 +53,17 @@ class RegistrationInfoPage extends ConsumerWidget {
                     const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
                 child: Column(
                   children: [
-                    const GenderSelectionCard(),
+                    GenderSelectionCard(
+                      onSwitch: (sex) =>
+                          ref.read(registrationProvider.notifier).setSex(sex),
+                    ),
                     const SizedBox(height: 10),
                     MyDatePicker(
-                        selectedDate: DateTime.now(),
-                        onDateSelected: (DateTime date) => {print(date)}),
+                      selectedDate: DateTime.now(),
+                      onDateSelected: (DateTime date) => ref
+                          .read(registrationProvider.notifier)
+                          .setDateOfBirth(date),
+                    ),
                     const SizedBox(height: 10),
                     Row(
                       children: [
@@ -59,11 +71,18 @@ class RegistrationInfoPage extends ConsumerWidget {
                           child: SimpleTextFormField(
                             hintText: "registrationInfo.weight".tr(),
                             icon: SvgPicture.asset("assets/icons/weight.svg"),
-                            onChaged: () {},
+                            onChaged: (weight) => ref
+                                .read(registrationProvider.notifier)
+                                .setWeight(weight),
                           ),
                         ),
                         const SizedBox(width: 12),
-                        const UnitMeasure(unitMeasures: ["KG", "LB"]),
+                        UnitMeasure(
+                          unitMeasures: const ["KG", "LB"],
+                          onChange: (unit) => ref
+                              .read(registrationProvider.notifier)
+                              .setHeightUnit(unit),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 20),
@@ -73,25 +92,88 @@ class RegistrationInfoPage extends ConsumerWidget {
                           child: SimpleTextFormField(
                             hintText: "registrationInfo.height".tr(),
                             icon: SvgPicture.asset("assets/icons/swap.svg"),
-                            onChaged: () {},
+                            onChaged: (height) => ref
+                                .read(registrationProvider.notifier)
+                                .setHeight(height),
                           ),
                         ),
                         const SizedBox(width: 12),
-                        const UnitMeasure(unitMeasures: ["CM", "FT"]),
+                        UnitMeasure(
+                          unitMeasures: const ["CM", "FT"],
+                          onChange: (unit) => ref
+                              .read(registrationProvider.notifier)
+                              .setHeightUnit(unit),
+                        ),
                       ],
                     ),
                   ],
                 ),
               ),
               NextButton(
-                  onClick: () => {
-                        Navigator.pushNamed(
-                            context, EndPoint.successRegistration)
-                      }),
+                onClick: () =>
+                    {_registerUserAndGoNext(context, ref, currentUser)},
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  _registerUserAndGoNext(BuildContext context, WidgetRef ref, Person user) {
+    final form = ref.watch(registrationProvider);
+
+    Person currentUser = user.copyWith(
+      sex: form.sex,
+      dateOfBirth: form.dateOfBirth,
+      weight: form.weight,
+      weightUnit: form.weightUnit,
+      height: form.height,
+      heightUnit: form.heightUnit,
+    );
+
+    print(currentUser);
+
+    final response = ref.read(sessionProvider.notifier).register(currentUser);
+    response.then((success) {
+      if (success) {
+        showSuccessSnackBar(context, "Registrazione Effettuata!");
+        Navigator.pushNamed(context, EndPoint.successRegistration);
+      } else {
+        showFailureSnackBar(context, "Errore durante la registrazione!");
+      }
+    });
+  }
+
+  void showSuccessSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(
+      content: Text(
+        message,
+        style: const TextStyle(
+          fontFamily: "Poppins-Medium",
+          fontSize: 14,
+          color: ActiveYouTheme.whiteColor,
+        ),
+      ),
+      backgroundColor: ActiveYouTheme.brandDarkColor,
+      behavior: SnackBarBehavior.floating,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  void showFailureSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(
+      content: Text(
+        message,
+        style: const TextStyle(
+          fontFamily: "Poppins-Medium",
+          fontSize: 14,
+          color: ActiveYouTheme.whiteColor,
+        ),
+      ),
+      backgroundColor: ActiveYouTheme.secondaryDarkColor,
+      behavior: SnackBarBehavior.floating,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

@@ -3,7 +3,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class GenderSelectionCard extends StatefulWidget {
-  const GenderSelectionCard({super.key});
+  const GenderSelectionCard({super.key, required this.onSwitch});
+
+  final Function onSwitch;
 
   @override
   GenderSelectionCardState createState() => GenderSelectionCardState();
@@ -39,6 +41,11 @@ class GenderSelectionCardState extends State<GenderSelectionCard>
           labelPadding: EdgeInsets.zero,
           onTap: (index) => setState(() {
             _tabIndex = index;
+            if (_tabIndex == 0) {
+              widget.onSwitch("Male");
+            } else {
+              widget.onSwitch("Female");
+            }
           }),
           indicator: BoxDecoration(
             borderRadius: BorderRadius.circular(13.0),

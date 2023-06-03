@@ -2,8 +2,12 @@ import 'package:active_you/theme/active_you_theme.dart';
 import 'package:flutter/material.dart';
 
 class UnitMeasure extends StatefulWidget {
-  const UnitMeasure({Key? key, required this.unitMeasures}) : super(key: key);
+  const UnitMeasure(
+      {Key? key, required this.unitMeasures, required this.onChange})
+      : super(key: key);
   final List<String> unitMeasures;
+
+  final Function onChange;
 
   @override
   State<UnitMeasure> createState() => _UnitMeasureState();
@@ -15,6 +19,7 @@ class _UnitMeasureState extends State<UnitMeasure> {
   void _changeUnitMeasure() {
     setState(() {
       _index = (_index + 1) % widget.unitMeasures.length;
+      widget.onChange(widget.unitMeasures[_index]);
     });
   }
 

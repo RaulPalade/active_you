@@ -15,6 +15,10 @@ class MyDatePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var formatter = DateFormat('dd-MM-yyyy');
+    TextEditingController dateController =
+        TextEditingController(text: formatter.format(selectedDate).toString());
+
     return SizedBox(
       height: 60,
       child: Card(
@@ -23,6 +27,7 @@ class MyDatePicker extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: TextFormField(
+            controller: dateController,
             autofocus: true,
             decoration: InputDecoration(
               icon: GestureDetector(
@@ -39,6 +44,8 @@ class MyDatePicker extends StatelessWidget {
                   ).then((pickedDate) {
                     if (pickedDate != null && pickedDate != selectedDate) {
                       onDateSelected(pickedDate);
+                      dateController.text =
+                          formatter.format(pickedDate).toString();
                     }
                   });
                 },

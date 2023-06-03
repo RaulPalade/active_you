@@ -13,6 +13,13 @@ _$_Person _$$_PersonFromJson(Map<String, dynamic> json) => _$_Person(
       email: json['email'] as String?,
       password: json['password'] as String?,
       sex: json['sex'] as String?,
+      dateOfBirth: json['dateOfBirth'] == null
+          ? null
+          : DateTime.parse(json['dateOfBirth'] as String),
+      weight: (json['weight'] as num?)?.toDouble(),
+      weightUnit: json['weightUnit'] as String?,
+      height: (json['height'] as num?)?.toDouble(),
+      heightUnit: json['heightUnit'] as String?,
       roles:
           (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList(),
       myWorkouts: (json['myWorkouts'] as List<dynamic>?)
@@ -37,6 +44,11 @@ Map<String, dynamic> _$$_PersonToJson(_$_Person instance) => <String, dynamic>{
       'email': instance.email,
       'password': instance.password,
       'sex': instance.sex,
+      'dateOfBirth': instance.dateOfBirth?.toIso8601String(),
+      'weight': instance.weight,
+      'weightUnit': instance.weightUnit,
+      'height': instance.height,
+      'heightUnit': instance.heightUnit,
       'roles': instance.roles,
       'myWorkouts': instance.myWorkouts,
       'createdWorkouts': instance.createdWorkouts,

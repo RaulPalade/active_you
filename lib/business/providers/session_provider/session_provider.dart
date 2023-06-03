@@ -16,7 +16,7 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
 
   SessionProvider(this.ref) : super(const SessionProviderState());
 
-  Future<bool> register(PersonToRegister person) async {
+  Future<bool> register(Person person) async {
     try {
       final response = await ref
           .read(restClientPersonProvider)
