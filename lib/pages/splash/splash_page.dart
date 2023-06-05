@@ -1,3 +1,4 @@
+import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/business/providers/splash_page_provider.dart';
 import 'package:active_you/business/utils/SecureStorageManager.dart';
 import 'package:active_you/pages/auth/login/login_page.dart';
@@ -18,10 +19,13 @@ class SplashPage extends ConsumerWidget {
         SecureStorageManager storage = SecureStorageManager();
         String? idToken = await storage.readValue(storage.idTokenKey);
         DateTime expirationDate = JwtDecoder.getExpirationDate(idToken!);
+        final tokenMap = JwtDecoder.decode(idToken);
+        print(tokenMap["userId"]);
 
         if (expirationDate.isBefore(DateTime.now())) {
           navigateToLoginPage(context);
         } else {
+          ref.read(sessionProvider.notifier).getLoggedPerson(1);
           navigateToPageCoordinator(context);
         }
       }

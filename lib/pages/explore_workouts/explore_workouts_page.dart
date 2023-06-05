@@ -46,14 +46,14 @@ class ExploreWorkoutsPage extends ConsumerWidget {
   }
 }
 
-final _exploreWorkoutsPageProvider =
+final exploreWorkoutsPageProvider =
     StateNotifierProvider.autoDispose<ExploreWorkoutsVM, ExploreWorkoutsState>(
         (ref) => ExploreWorkoutsVM(ref));
 
 final _workoutsProvider = Provider.autoDispose<List<Workout>>((ref) {
-  return ref.watch(_exploreWorkoutsPageProvider).workouts;
+  return ref.watch(exploreWorkoutsPageProvider).workouts;
 });
 
 final _loadingProvider = Provider.autoDispose<bool>((ref) {
-  return ref.watch(_exploreWorkoutsPageProvider).loading;
+  return ref.watch(exploreWorkoutsPageProvider).loading;
 });

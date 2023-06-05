@@ -20,27 +20,28 @@ class _PersonsAndTrainersState extends ConsumerState<PersonsAndTrainersPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   int _tabIndex = 0;
-  final fakeUserList = [
-    FakePerson("Michelle Rodgriguez", "Female"),
-    FakePerson("Michael Johnson", "Male"),
-    FakePerson("Jack Hogan", "Male"),
-    FakePerson("Mario Wallace ", "Male"),
-    FakePerson("Anna Dunlap", "Female"),
-    FakePerson("Tiffany Smith", "Female"),
-    FakePerson("Anna Dunlap", "Female"),
-    FakePerson("Deborah Cohen", "Female"),
-  ];
 
-  final fakeTrainerList = [
-    FakePerson("Jessica Hunt", "Female"),
-    FakePerson("John Carr", "Male"),
-    FakePerson("Michael Pollard", "Male"),
-    FakePerson("Mark Brost ", "Male"),
-    FakePerson("Natalie Bell", "Female"),
-    FakePerson("Sandra Contreras", "Female"),
-    FakePerson("Joanne White", "Female"),
-    FakePerson("Larry Barrett", "Male"),
-  ];
+  // final fakeUserList = [
+  //   FakePerson("Michelle Rodgriguez", "Female"),
+  //   FakePerson("Michael Johnson", "Male"),
+  //   FakePerson("Jack Hogan", "Male"),
+  //   FakePerson("Mario Wallace ", "Male"),
+  //   FakePerson("Anna Dunlap", "Female"),
+  //   FakePerson("Tiffany Smith", "Female"),
+  //   FakePerson("Anna Dunlap", "Female"),
+  //   FakePerson("Deborah Cohen", "Female"),
+  // ];
+  //
+  // final fakeTrainerList = [
+  //   FakePerson("Jessica Hunt", "Female"),
+  //   FakePerson("John Carr", "Male"),
+  //   FakePerson("Michael Pollard", "Male"),
+  //   FakePerson("Mark Brost ", "Male"),
+  //   FakePerson("Natalie Bell", "Female"),
+  //   FakePerson("Sandra Contreras", "Female"),
+  //   FakePerson("Joanne White", "Female"),
+  //   FakePerson("Larry Barrett", "Male"),
+  // ];
 
   @override
   void initState() {
@@ -56,8 +57,8 @@ class _PersonsAndTrainersState extends ConsumerState<PersonsAndTrainersPage>
 
   @override
   Widget build(BuildContext context) {
-    // final persons = ref.watch(_personsProvider);
-    // final trainers = ref.watch(_trainersProvider);
+    final persons = ref.watch(_personsProvider);
+    final trainers = ref.watch(_trainersProvider);
 
     return Scaffold(
       appBar: const MyAppBar(title: "Users and Trainers"),
@@ -71,20 +72,20 @@ class _PersonsAndTrainersState extends ConsumerState<PersonsAndTrainersPage>
               secondOption: "Trainers",
               onSwitch: (index) => setState(() {
                 _tabIndex = index;
+                ref.read(personsAndTrainersPageProvider.notifier).fetchPersons();
               }),
             ),
           ),
           Expanded(
             child: ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: fakeUserList.length,
+                itemCount: _tabIndex == 0 ? persons.length : trainers.length,
                 itemBuilder: (BuildContext context, int index) {
-                  var listToDisplay =
-                      _tabIndex == 0 ? fakeUserList : fakeTrainerList;
+                  var listToDisplay = _tabIndex == 0 ? persons : trainers;
                   return GestureDetector(
                     child: UserListItem(
-                        fullName: listToDisplay[index].fullName,
-                        sex: listToDisplay[index].sex,
+                        fullName: listToDisplay[index].name!,
+                        sex: listToDisplay[index].sex!,
                         onClick: () {}),
                     onTap: () {
                       Navigator.pushNamed(context, EndPoint.personDetail);
@@ -105,18 +106,18 @@ class FakePerson {
   FakePerson(this.fullName, this.sex);
 }
 
-final _personsAndTrainersPageProvider = StateNotifierProvider.autoDispose<
+final personsAndTrainersPageProvider = StateNotifierProvider<
     PersonsAndTrainersVM,
     PersonsAndTrainersState>((ref) => PersonsAndTrainersVM(ref));
 
 final _personsProvider = Provider.autoDispose<List<Person>>((ref) {
-  return ref.watch(_personsAndTrainersPageProvider).persons;
+  return ref.watch(personsAndTrainersPageProvider).persons;
 });
 
 final _trainersProvider = Provider.autoDispose<List<Person>>((ref) {
-  return ref.watch(_personsAndTrainersPageProvider).trainers;
+  return ref.watch(personsAndTrainersPageProvider).trainers;
 });
 
 final _loadingProvider = Provider.autoDispose<bool>((ref) {
-  return ref.watch(_personsAndTrainersPageProvider).loading;
+  return ref.watch(personsAndTrainersPageProvider).loading;
 });

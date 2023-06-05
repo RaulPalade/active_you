@@ -1,3 +1,4 @@
+import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/pages/person_profile/widget/other_card.dart';
 import 'package:active_you/pages/person_profile/widget/profile_header.dart';
 import 'package:active_you/pages/person_profile/widget/stats_card.dart';
@@ -14,6 +15,7 @@ class PersonProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentPerson = ref.watch(currentPersonProvider);
     return Scaffold(
       appBar: const MyAppBar(title: "Profile"),
       body: Padding(
@@ -21,7 +23,7 @@ class PersonProfilePage extends ConsumerWidget {
         child: Column(
           children: [
             ProfileHeader(
-              fullName: "Michelle Rodriguez",
+              fullName: "${currentPerson?.name} ${currentPerson?.surname}",
               currentGoal: "Lose a fat program",
               button: PrimaryButton(title: "Edit", onClick: () {}),
             ),
