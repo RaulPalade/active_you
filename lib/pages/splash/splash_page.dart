@@ -20,12 +20,12 @@ class SplashPage extends ConsumerWidget {
         String? idToken = await storage.readValue(storage.idTokenKey);
         DateTime expirationDate = JwtDecoder.getExpirationDate(idToken!);
         final tokenMap = JwtDecoder.decode(idToken);
-        print(tokenMap["userId"]);
+        String emailLoggedUser = tokenMap["sub"];
 
         if (expirationDate.isBefore(DateTime.now())) {
           navigateToLoginPage(context);
         } else {
-          ref.read(sessionProvider.notifier).getLoggedPerson(1);
+          ref.read(sessionProvider.notifier).getLoggedPerson(emailLoggedUser);
           navigateToPageCoordinator(context);
         }
       }

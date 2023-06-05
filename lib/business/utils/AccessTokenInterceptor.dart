@@ -19,10 +19,8 @@ class AccessTokenInterceptor extends Interceptor {
       if (idToken != null) {
         DateTime expirationDate = JwtDecoder.getExpirationDate(idToken);
         if (expirationDate.isBefore(DateTime.now())) {
-          print("Token Expired");
           await _storage.deleteValue(idToken);
         } else {
-          print("Token has not expired");
           options.headers["Authorization"] = 'Bearer $idToken';
         }
       }

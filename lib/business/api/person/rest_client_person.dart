@@ -26,6 +26,9 @@ abstract class RestClientPerson {
   @GET("/userService/api/v1/users/{id}")
   Future<Person> getPersonById(@Path("id") int id);
 
+  @GET("/userService/api/v1/users/emails")
+  Future<Person> getPersonByEmail(@Query("email") String email);
+
   @GET("/userService/api/v1/users/{id}/goals")
   Future<List<Goal>> getGoals(@Path("id") int id);
 

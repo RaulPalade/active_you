@@ -48,9 +48,9 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
     }
   }
 
-  Future<void> getLoggedPerson(int id) async {
+  Future<void> getLoggedPerson(String email) async {
     try {
-      final currentPerson = await ref.read(restClientPersonProvider).getPersonById(id);
+      final currentPerson = await ref.read(restClientPersonProvider).getPersonByEmail(email);
       state = state.copyWith(currentPerson: currentPerson);
     } catch (e) {
       await _catchErrorOnFetch(e);
