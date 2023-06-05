@@ -19,9 +19,8 @@ class ExploreWorkoutsVM extends StateNotifier<ExploreWorkoutsState> {
       state = const ExploreWorkoutsState(workouts: [], loading: true);
 
       tokenLastRequest = CancelToken();
-      final workoutResponse = await ref
-          .read(restClientWorkoutProvider)
-          .getWorkouts(tokenLastRequest!);
+      final workoutResponse =
+          await ref.read(restClientWorkoutProvider).getWorkouts();
 
       state = ExploreWorkoutsState(workouts: workoutResponse, loading: false);
     } catch (err) {
