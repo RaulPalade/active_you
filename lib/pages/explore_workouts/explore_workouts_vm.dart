@@ -30,25 +30,6 @@ class ExploreWorkoutsVM extends StateNotifier<ExploreWorkoutsState> {
     tokenLastRequest = null;
   }
 
-  Future<void> createWorkout(Workout workout) async {
-    try {
-      state = ExploreWorkoutsState(
-          workouts: state.workouts, loading: true);
-
-      final response = await ref
-          .read(restClientPersonProvider)
-          .createWorkout(tokenLastRequest!, workout);
-
-      var updatedWorkouts = state.workouts?.copyWith(
-        myWorkouts: [...state.workouts!.myWorkouts, response],
-      );
-
-      state = state.copyWith(workouts: updatedWorkouts);
-    } catch (err) {
-      await _catchErrorOnFetch(err);
-    }
-  }
-
   Future<void> _catchErrorOnFetch(Object err) async {
     var connectivityResult = await InternetConnectionChecker().hasConnection;
     ErrorApiCall errorType = ErrorApiCall.generic;

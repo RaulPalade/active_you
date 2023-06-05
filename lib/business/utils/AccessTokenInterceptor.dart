@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:dio/dio.dart';
-
 import 'SecureStorageManager.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 /// [AccessTokenInterceptor] is used to add JWT access token to each call if it is stored in the secure storage.
 class AccessTokenInterceptor extends Interceptor {
@@ -16,11 +15,16 @@ class AccessTokenInterceptor extends Interceptor {
   Future onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     try {
-      await _storage.deleteAll();
       String? idToken = await _storage.readValue(_storage.idTokenKey);
       if (idToken != null) {
-        options.headers["Authorization"] = 'Bearer $idToken';
-        //log("ID TOKEN EXPIRE DATE: ${loginResponse.notBefore}");
+        DateTime expirationDate = JwtDecoder.getExpirationDate(idToken);
+        if (expirationDate.isBefore(DateTime.now())) {
+          print("Token Expired");
+          await _storage.deleteValue(idToken);
+        } else {
+          print("Token has not expired");
+          options.headers["Authorization"] = 'Bearer $idToken';
+        }
       }
       handler.next(options);
     } catch (error) {

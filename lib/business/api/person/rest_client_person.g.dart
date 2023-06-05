@@ -19,31 +19,6 @@ class _RestClientPerson implements RestClientPerson {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<dynamic>> register(person) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(person.toJson());
-    final _result =
-        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/v1/auth/create',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
-    final httpResponse = HttpResponse(value, _result);
-    return httpResponse;
-  }
-
-  @override
   Future<HttpResponse<dynamic>> login(
     email,
     password,
@@ -79,6 +54,56 @@ class _RestClientPerson implements RestClientPerson {
   }
 
   @override
+  Future<HttpResponse<dynamic>> register(person) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(person.toJson());
+    final _result =
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v1/auth/create',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<List<Person>> getPersons() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Person>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/userService/api/v1/users',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => Person.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
   Future<Person> getPersonById(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -92,7 +117,7 @@ class _RestClientPerson implements RestClientPerson {
     )
             .compose(
               _dio.options,
-              'api/v1/persons/${id}',
+              '/userService/api/v1/users/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -102,34 +127,33 @@ class _RestClientPerson implements RestClientPerson {
   }
 
   @override
-  Future<List<Person>> getPersons(cancelToken) async {
+  Future<List<Goal>> getGoals(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Person>>(Options(
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Goal>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'api/v1/persons',
+              '/userService/api/v1/users/${id}/goals',
               queryParameters: queryParameters,
               data: _data,
-              cancelToken: cancelToken,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
-        .map((dynamic i) => Person.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => Goal.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }
 
   @override
-  Future<Goal> addGoal(
-    cancelToken,
+  Future<HttpResponse<dynamic>> addGoal(
+    id,
     goal,
   ) async {
     const _extra = <String, dynamic>{};
@@ -138,185 +162,128 @@ class _RestClientPerson implements RestClientPerson {
     final _data = <String, dynamic>{};
     _data.addAll(goal.toJson());
     final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Goal>(Options(
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'api/v1/goal/addGoal',
+              '/userService/api/v1/users/${id}/goals',
               queryParameters: queryParameters,
               data: _data,
-              cancelToken: cancelToken,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Goal.fromJson(_result.data!);
-    return value;
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   @override
-  Future<Goal> removeGoal(
-    cancelToken,
+  Future<HttpResponse<dynamic>> removeGoal(
     id,
+    goalId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Goal>(Options(
-      method: 'POST',
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
+      method: 'DELETE',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'api/v1/goal/removeGoal/${id}',
+              '/userService/api/v1/users/${id}/goals/${goalId}',
               queryParameters: queryParameters,
               data: _data,
-              cancelToken: cancelToken,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Goal.fromJson(_result.data!);
-    return value;
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   @override
-  Future<Workout> createWorkout(
-    cancelToken,
-    workout,
-  ) async {
+  Future<HttpResponse<dynamic>> createWorkout(workout) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(workout.toJson());
     final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Workout>(Options(
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'api/v1/workouts/createWorkout',
+              '/userService/api/v1/users/createWorkout',
               queryParameters: queryParameters,
               data: _data,
-              cancelToken: cancelToken,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Workout.fromJson(_result.data!);
-    return value;
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   @override
-  Future<Workout> saveWorkout(
-    cancelToken,
-    workout,
-  ) async {
+  Future<HttpResponse<dynamic>> followPerson(personFollow) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(workout.toJson());
+    _data.addAll(personFollow.toJson());
     final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Workout>(Options(
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'api/v1/workouts/saveWorkout',
+              '/userService/api/v1/personFollow/follow',
               queryParameters: queryParameters,
               data: _data,
-              cancelToken: cancelToken,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Workout.fromJson(_result.data!);
-    return value;
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   @override
-  Future<Workout> markWorkoutCompleted(
-    cancelToken,
-    id,
+  Future<HttpResponse<dynamic>> unfollowPerson(
+    from,
+    to,
   ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'from': from,
+      r'to': to,
+    };
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Workout>(Options(
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'api/v1/workouts/${id}',
+              '/userService/api/v1/personFollow/unfollow',
               queryParameters: queryParameters,
               data: _data,
-              cancelToken: cancelToken,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Workout.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<Person> followPerson(
-    cancelToken,
-    id,
-  ) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = id;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Person>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              'api/v1/persons/follow',
-              queryParameters: queryParameters,
-              data: _data,
-              cancelToken: cancelToken,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Person.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<Person> unfollowPerson(
-    cancelToken,
-    id,
-  ) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Person>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              'api/v1/persons/unfollow/${id}',
-              queryParameters: queryParameters,
-              data: _data,
-              cancelToken: cancelToken,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = Person.fromJson(_result.data!);
-    return value;
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

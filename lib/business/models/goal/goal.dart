@@ -1,8 +1,6 @@
-import 'package:active_you/business/models/person/person.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'goal.freezed.dart';
-
 part 'goal.g.dart';
 
 @freezed

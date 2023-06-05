@@ -1,60 +1,59 @@
 import 'package:active_you/business/models/goal/goal.dart';
 import 'package:active_you/business/models/person/person.dart';
-import 'package:active_you/business/models/person/person_to_register.dart';
-import 'package:active_you/business/models/workout/workout.dart';
+import 'package:active_you/business/models/person_follow/person_follow.dart';
 import 'package:active_you/business/providers/api_provider.dart';
 import 'package:active_you/business/providers/session_provider/session_provider_state.dart';
 import 'package:active_you/business/utils/SecureStorageManager.dart';
 import 'package:active_you/utils/api_errors.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class SessionProvider extends StateNotifier<SessionProviderState> {
   final Ref ref;
-  CancelToken? tokenLastRequest;
 
   SessionProvider(this.ref) : super(const SessionProviderState());
 
-  Future<bool> register(Person person) async {
-    try {
-      final response = await ref
-          .read(restClientPersonProvider)
-          .register(person);
-      if (response.response.statusCode == 200) {
-        return true;
-      } else {
-        return false;
-      }
-    } catch (e) {
-      print("ERROR: $e");
-      return false;
-    }
-  }
-
   Future<void> login(String email, String password) async {
-    print(email);
-    print(password);
     try {
       state = const SessionProviderState(currentPerson: null, loading: true);
-      tokenLastRequest = CancelToken();
-      final response = await ref
-          .read(restClientPersonProvider)
-          .login(email, password);
+
+      final response =
+          await ref.read(restClientPersonProvider).login(email, password);
 
       SecureStorageManager storageManager = SecureStorageManager();
       storageManager.writeValue(
           storageManager.idTokenKey, response.data["access_token"]);
 
-      print(response.data["access_token"]);
-
-      // state = SessionProviderState(
-      //   currentPerson: currentPerson,
-      //   loading: false,
-      // );
+      final currentPerson = await getPersonById(0);
+      if (currentPerson != null) {
+        state = state.copyWith(currentPerson: currentPerson, loading: false);
+      }
     } catch (err) {
-      print(err);
       await _catchErrorOnFetch(err);
+    }
+  }
+
+  Future<bool> register(Person person) async {
+    try {
+      final response =
+          await ref.read(restClientPersonProvider).register(person);
+      if (response.response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      _catchErrorOnFetch(err);
+      return false;
+    }
+  }
+
+  Future<Person?> getPersonById(int id) async {
+    try {
+      return await ref.read(restClientPersonProvider).getPersonById(id);
+    } catch (e) {
+      await _catchErrorOnFetch(e);
+      return null;
     }
   }
 
@@ -65,77 +64,37 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
 
       final response = await ref
           .read(restClientPersonProvider)
-          .addGoal(tokenLastRequest!, goal);
+          .addGoal(state.currentPerson!.id!, goal);
 
-      var updatedPerson = state.currentPerson?.copyWith(
-        myGoals: [...state.currentPerson!.myGoals!, response],
-      );
+      if (response.response.statusCode == 200) {
+        var updatedPerson = state.currentPerson?.copyWith(
+          myGoals: [...state.currentPerson!.myGoals!, goal],
+        );
 
-      state = state.copyWith(currentPerson: updatedPerson);
+        state = state.copyWith(currentPerson: updatedPerson);
+      }
     } catch (err) {
       await _catchErrorOnFetch(err);
     }
   }
 
-  Future<void> removeGoal(int id) async {
+  Future<void> removeGoal(int goalId) async {
     try {
       state = SessionProviderState(
           currentPerson: state.currentPerson, loading: true);
 
       final response = await ref
           .read(restClientPersonProvider)
-          .removeGoal(tokenLastRequest!, id);
+          .removeGoal(state.currentPerson!.id!, goalId);
 
-      var updatedPerson = state.currentPerson?.copyWith(
-        myGoals: List<Goal>.from(state.currentPerson!.myGoals!)
-          ..removeWhere((goal) => goal.id == response.id),
-      );
+      if (response.response.statusCode == 200) {
+        var updatedPerson = state.currentPerson?.copyWith(
+          myGoals: List<Goal>.from(state.currentPerson!.myGoals!)
+            ..removeWhere((goal) => goal.id == goalId),
+        );
 
-      state = state.copyWith(currentPerson: updatedPerson);
-    } catch (err) {
-      await _catchErrorOnFetch(err);
-    }
-  }
-
-  Future<void> saveWorkout(Workout workout) async {
-    try {
-      state = SessionProviderState(
-          currentPerson: state.currentPerson, loading: true);
-
-      final response = await ref
-          .read(restClientPersonProvider)
-          .saveWorkout(tokenLastRequest!, workout);
-
-      var updatedPerson = state.currentPerson?.copyWith(
-        myWorkouts: [...state.currentPerson!.myWorkouts!, response],
-      );
-
-      state = state.copyWith(currentPerson: updatedPerson);
-    } catch (err) {
-      await _catchErrorOnFetch(err);
-    }
-  }
-
-  Future<void> markWorkoutCompleted(int id) async {
-    try {
-      state = SessionProviderState(
-          currentPerson: state.currentPerson, loading: true);
-
-      final response = await ref
-          .read(restClientPersonProvider)
-          .markWorkoutCompleted(tokenLastRequest!, id);
-
-      final updatedPerson = state.currentPerson?.copyWith(
-        myWorkouts: state.currentPerson!.myWorkouts!.map((workout) {
-          if (workout.id == response.id) {
-            return workout.copyWith(completed: true);
-          } else {
-            return workout;
-          }
-        }).toList(),
-      );
-
-      state = state.copyWith(currentPerson: updatedPerson);
+        state = state.copyWith(currentPerson: updatedPerson);
+      }
     } catch (err) {
       await _catchErrorOnFetch(err);
     }
@@ -146,15 +105,17 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
       state = SessionProviderState(
           currentPerson: state.currentPerson, loading: true);
 
-      final response = await ref
-          .read(restClientPersonProvider)
-          .followPerson(tokenLastRequest!, id);
+      final response = await ref.read(restClientPersonProvider).followPerson(
+            PersonFollow(from: state.currentPerson!.id!, to: id),
+          );
 
-      var updatedPerson = state.currentPerson?.copyWith(
-        //following: [...?state.currentPerson!.following, response],
-      );
+      if (response.response.statusCode == 200) {
+        var updatedPerson = state.currentPerson?.copyWith(
+          following: [...?state.currentPerson!.following, id],
+        );
 
-      state = state.copyWith(currentPerson: updatedPerson);
+        state = state.copyWith(currentPerson: updatedPerson);
+      }
     } catch (err) {
       await _catchErrorOnFetch(err);
     }
@@ -167,14 +128,20 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
 
       final response = await ref
           .read(restClientPersonProvider)
-          .unfollowPerson(tokenLastRequest!, id);
+          .unfollowPerson(state.currentPerson!.id!, id);
 
-      // var updatedPerson = state.currentPerson?.copyWith(
-      //   following: List<Person>.from(state.currentPerson!.following)
-      //     ..removeWhere((person) => person.id == response.id),
-      // );
+      if (response.response.statusCode == 200) {
+        var currentPerson = state.currentPerson;
+        if (currentPerson != null && currentPerson.following != null) {
+          var updatedFollowing = List<int>.from(currentPerson.following!)
+            ..removeWhere((personId) => personId == id);
 
-      //state = state.copyWith(currentPerson: updatedPerson);
+          var updatedPerson =
+              currentPerson.copyWith(following: updatedFollowing);
+
+          state = state.copyWith(currentPerson: updatedPerson);
+        }
+      }
     } catch (err) {
       await _catchErrorOnFetch(err);
     }
@@ -194,17 +161,13 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
 }
 
 final sessionProvider =
-StateNotifierProvider<SessionProvider, SessionProviderState>(
+    StateNotifierProvider<SessionProvider, SessionProviderState>(
         (ref) => SessionProvider(ref));
 
 final currentPersonProvider = Provider<Person?>((ref) {
-  return ref
-      .watch(sessionProvider)
-      .currentPerson;
+  return ref.watch(sessionProvider).currentPerson;
 });
 
 final sessionLoadingProvider = Provider<bool>((ref) {
-  return ref
-      .watch(sessionProvider)
-      .loading;
+  return ref.watch(sessionProvider).loading;
 });

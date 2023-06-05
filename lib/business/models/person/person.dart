@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:active_you/business/models/goal/goal.dart';
 import 'package:active_you/business/models/workout/workout.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

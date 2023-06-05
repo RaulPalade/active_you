@@ -21,7 +21,7 @@ class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
 
       final personResponse = await ref
           .read(restClientPersonProvider)
-          .getPersons(tokenLastRequest!);
+          .getPersons();
 
       final filteredList = filterPersonsAndTrainers(personResponse);
 
