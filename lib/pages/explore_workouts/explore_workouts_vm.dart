@@ -1,4 +1,3 @@
-import 'package:active_you/business/models/workout/workout.dart';
 import 'package:active_you/business/providers/api_provider.dart';
 import 'package:active_you/pages/explore_workouts/explore_workouts_state.dart';
 import 'package:active_you/utils/api_errors.dart';
