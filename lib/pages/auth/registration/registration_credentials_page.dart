@@ -3,11 +3,13 @@ import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/pages/auth/registration/registration_state.dart';
 import 'package:active_you/pages/auth/registration/registration_vm.dart';
 import 'package:active_you/theme/active_you_theme.dart';
+import 'package:active_you/utils/registration_args.dart';
 import 'package:active_you/widgets/buttons/link_button.dart';
 import 'package:active_you/widgets/buttons/primary_button.dart';
 import 'package:active_you/widgets/buttons/social_button.dart';
 import 'package:active_you/widgets/form/form_divier.dart';
 import 'package:active_you/widgets/form/password_text_form_field.dart';
+import 'package:active_you/widgets/form/role_selection_card.dart';
 import 'package:active_you/widgets/form/simple_text_form_field.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -69,6 +71,11 @@ class RegistrationCredentialsPage extends ConsumerWidget {
                       onChanged: (password) => ref
                           .read(registrationProvider.notifier)
                           .setPassword(password),
+                    ),
+                    const SizedBox(height: 10),
+                    RoleSelectionCard(
+                      onSwitch: (role) =>
+                          ref.read(registrationProvider.notifier).setRole(role),
                     ),
                   ],
                 ),
@@ -150,8 +157,12 @@ class RegistrationCredentialsPage extends ConsumerWidget {
         following: null,
         followers: null,
       );
-      Navigator.pushNamed(context, EndPoint.registerInfo,
-          arguments: currentUser);
+      Navigator.pushNamed(
+        context,
+        EndPoint.registerInfo,
+        arguments:
+            RegistrationArgs(currentUser, ref.watch(registrationProvider).role),
+      );
     } else {
       showFailureSnackBar(context, "Compila tutti i campi");
     }

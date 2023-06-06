@@ -144,7 +144,8 @@ class _RestClientWorkout implements RestClientWorkout {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = personWorkout;
+    final _data = <String, dynamic>{};
+    _data.addAll(personWorkout.toJson());
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'GET',

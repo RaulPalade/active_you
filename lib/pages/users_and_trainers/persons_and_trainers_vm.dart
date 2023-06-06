@@ -24,12 +24,12 @@ class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
           .getPersons();
 
       final filteredList = filterPersonsAndTrainers(personResponse);
-
       state = PersonsAndTrainersState(
         persons: filteredList[0],
         trainers: filteredList[1],
         loading: false,
       );
+
     } catch (err) {
       await _catchErrorOnFetch(err);
     }

@@ -54,12 +54,12 @@ class _RestClientPerson implements RestClientPerson {
   }
 
   @override
-  Future<HttpResponse<dynamic>> register(person) async {
+  Future<HttpResponse<dynamic>> register(personRole) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(person.toJson());
+    _data.addAll(personRole.toJson());
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'POST',

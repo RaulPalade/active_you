@@ -26,6 +26,10 @@ class RegistrationVM extends StateNotifier<RegistrationState> {
     state = state.copyWith(sex: sex);
   }
 
+  void setRole(String role) {
+    state = state.copyWith(role: role);
+  }
+
   void setDateOfBirth(DateTime dateOfBirth) {
     state = state.copyWith(dateOfBirth: dateOfBirth);
   }

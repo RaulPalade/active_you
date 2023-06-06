@@ -10,6 +10,7 @@ class RegistrationState with _$RegistrationState {
     @Default("") String email,
     @Default("") String password,
     @Default("Male") String sex,
+    @Default("USER") String role,
     DateTime? dateOfBirth,
     @Default(0.0) double weight,
     @Default("KG") String weightUnit,

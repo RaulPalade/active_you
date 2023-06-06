@@ -1,6 +1,7 @@
 import 'package:active_you/business/models/goal/goal.dart';
 import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/business/models/person_follow/person_follow.dart';
+import 'package:active_you/business/models/person_role/person_role.dart';
 import 'package:active_you/business/models/workout/workout.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
@@ -18,7 +19,7 @@ abstract class RestClientPerson {
   );
 
   @POST("/api/v1/auth/create")
-  Future<HttpResponse> register(@Body() Person person);
+  Future<HttpResponse> register(@Body() PersonRole personRole);
 
   @GET("/userService/api/v1/users")
   Future<List<Person>> getPersons();

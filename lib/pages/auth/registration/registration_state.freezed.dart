@@ -21,6 +21,7 @@ mixin _$RegistrationState {
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   String get sex => throw _privateConstructorUsedError;
+  String get role => throw _privateConstructorUsedError;
   DateTime? get dateOfBirth => throw _privateConstructorUsedError;
   double get weight => throw _privateConstructorUsedError;
   String get weightUnit => throw _privateConstructorUsedError;
@@ -44,6 +45,7 @@ abstract class $RegistrationStateCopyWith<$Res> {
       String email,
       String password,
       String sex,
+      String role,
       DateTime? dateOfBirth,
       double weight,
       String weightUnit,
@@ -69,6 +71,7 @@ class _$RegistrationStateCopyWithImpl<$Res, $Val extends RegistrationState>
     Object? email = null,
     Object? password = null,
     Object? sex = null,
+    Object? role = null,
     Object? dateOfBirth = freezed,
     Object? weight = null,
     Object? weightUnit = null,
@@ -95,6 +98,10 @@ class _$RegistrationStateCopyWithImpl<$Res, $Val extends RegistrationState>
       sex: null == sex
           ? _value.sex
           : sex // ignore: cast_nullable_to_non_nullable
+              as String,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
               as String,
       dateOfBirth: freezed == dateOfBirth
           ? _value.dateOfBirth
@@ -134,6 +141,7 @@ abstract class _$$RegistrationStateDataCopyWith<$Res>
       String email,
       String password,
       String sex,
+      String role,
       DateTime? dateOfBirth,
       double weight,
       String weightUnit,
@@ -157,6 +165,7 @@ class __$$RegistrationStateDataCopyWithImpl<$Res>
     Object? email = null,
     Object? password = null,
     Object? sex = null,
+    Object? role = null,
     Object? dateOfBirth = freezed,
     Object? weight = null,
     Object? weightUnit = null,
@@ -183,6 +192,10 @@ class __$$RegistrationStateDataCopyWithImpl<$Res>
       sex: null == sex
           ? _value.sex
           : sex // ignore: cast_nullable_to_non_nullable
+              as String,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
               as String,
       dateOfBirth: freezed == dateOfBirth
           ? _value.dateOfBirth
@@ -217,6 +230,7 @@ class _$RegistrationStateData implements RegistrationStateData {
       this.email = "",
       this.password = "",
       this.sex = "Male",
+      this.role = "USER",
       this.dateOfBirth,
       this.weight = 0.0,
       this.weightUnit = "KG",
@@ -239,6 +253,9 @@ class _$RegistrationStateData implements RegistrationStateData {
   @JsonKey()
   final String sex;
   @override
+  @JsonKey()
+  final String role;
+  @override
   final DateTime? dateOfBirth;
   @override
   @JsonKey()
@@ -255,7 +272,7 @@ class _$RegistrationStateData implements RegistrationStateData {
 
   @override
   String toString() {
-    return 'RegistrationState(firstName: $firstName, lastName: $lastName, email: $email, password: $password, sex: $sex, dateOfBirth: $dateOfBirth, weight: $weight, weightUnit: $weightUnit, height: $height, heightUnit: $heightUnit)';
+    return 'RegistrationState(firstName: $firstName, lastName: $lastName, email: $email, password: $password, sex: $sex, role: $role, dateOfBirth: $dateOfBirth, weight: $weight, weightUnit: $weightUnit, height: $height, heightUnit: $heightUnit)';
   }
 
   @override
@@ -271,6 +288,7 @@ class _$RegistrationStateData implements RegistrationStateData {
             (identical(other.password, password) ||
                 other.password == password) &&
             (identical(other.sex, sex) || other.sex == sex) &&
+            (identical(other.role, role) || other.role == role) &&
             (identical(other.dateOfBirth, dateOfBirth) ||
                 other.dateOfBirth == dateOfBirth) &&
             (identical(other.weight, weight) || other.weight == weight) &&
@@ -283,7 +301,7 @@ class _$RegistrationStateData implements RegistrationStateData {
 
   @override
   int get hashCode => Object.hash(runtimeType, firstName, lastName, email,
-      password, sex, dateOfBirth, weight, weightUnit, height, heightUnit);
+      password, sex, role, dateOfBirth, weight, weightUnit, height, heightUnit);
 
   @JsonKey(ignore: true)
   @override
@@ -300,6 +318,7 @@ abstract class RegistrationStateData implements RegistrationState {
       final String email,
       final String password,
       final String sex,
+      final String role,
       final DateTime? dateOfBirth,
       final double weight,
       final String weightUnit,
@@ -316,6 +335,8 @@ abstract class RegistrationStateData implements RegistrationState {
   String get password;
   @override
   String get sex;
+  @override
+  String get role;
   @override
   DateTime? get dateOfBirth;
   @override

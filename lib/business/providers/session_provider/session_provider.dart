@@ -1,6 +1,7 @@
 import 'package:active_you/business/models/goal/goal.dart';
 import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/business/models/person_follow/person_follow.dart';
+import 'package:active_you/business/models/person_role/person_role.dart';
 import 'package:active_you/business/providers/api_provider.dart';
 import 'package:active_you/business/providers/session_provider/session_provider_state.dart';
 import 'package:active_you/business/utils/SecureStorageManager.dart';
@@ -33,10 +34,10 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
     }
   }
 
-  Future<bool> register(Person person) async {
+  Future<bool> register(PersonRole personRole) async {
     try {
       final response =
-          await ref.read(restClientPersonProvider).register(person);
+          await ref.read(restClientPersonProvider).register(personRole);
       if (response.response.statusCode == 200) {
         return true;
       } else {

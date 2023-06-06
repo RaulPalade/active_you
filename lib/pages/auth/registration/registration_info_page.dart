@@ -1,8 +1,11 @@
 import 'package:active_you/business/models/person/person.dart';
+import 'package:active_you/business/models/person_role/person_role.dart';
+import 'package:active_you/business/models/role/role.dart';
 import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/pages/auth/registration/registration_credentials_page.dart';
 import 'package:active_you/theme/active_you_theme.dart';
+import 'package:active_you/utils/registration_args.dart';
 import 'package:active_you/widgets/buttons/next_button.dart';
 import 'package:active_you/widgets/form/gender_selection_card.dart';
 import 'package:active_you/widgets/form/my_date_picker.dart';
@@ -18,7 +21,7 @@ class RegistrationInfoPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentUser = ModalRoute.of(context)?.settings.arguments as Person;
+    final args = ModalRoute.of(context)?.settings.arguments as RegistrationArgs;
 
     return Container(
       color: ActiveYouTheme.scaffoldColor,
@@ -109,8 +112,9 @@ class RegistrationInfoPage extends ConsumerWidget {
                 ),
               ),
               NextButton(
-                onClick: () =>
-                    {_registerUserAndGoNext(context, ref, currentUser)},
+                onClick: () => {
+                  _registerUserAndGoNext(context, ref, args.person, args.role)
+                },
               ),
             ],
           ),
@@ -119,7 +123,8 @@ class RegistrationInfoPage extends ConsumerWidget {
     );
   }
 
-  _registerUserAndGoNext(BuildContext context, WidgetRef ref, Person user) {
+  _registerUserAndGoNext(
+      BuildContext context, WidgetRef ref, Person user, String role) {
     final form = ref.watch(registrationProvider);
 
     if (form.sex.isNotEmpty &&
@@ -136,7 +141,10 @@ class RegistrationInfoPage extends ConsumerWidget {
         heightUnit: form.heightUnit,
       );
 
-      final response = ref.read(sessionProvider.notifier).register(currentUser);
+      PersonRole personRole =
+          PersonRole(person: currentUser, role: Role(id: null, name: role, persons: null));
+
+      final response = ref.read(sessionProvider.notifier).register(personRole);
       response.then((success) {
         if (success) {
           showSuccessSnackBar(context, "Registrazione Effettuata!");
