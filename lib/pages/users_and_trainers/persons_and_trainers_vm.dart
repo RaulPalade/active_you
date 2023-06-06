@@ -1,5 +1,6 @@
 import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/business/providers/api_provider.dart';
+import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/pages/users_and_trainers/persons_and_trainers_state.dart';
 import 'package:active_you/utils/api_errors.dart';
 import 'package:dio/dio.dart';
@@ -19,9 +20,8 @@ class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
       state = const PersonsAndTrainersState(
           persons: [], trainers: [], loading: false);
 
-      final personResponse = await ref
-          .read(restClientPersonProvider)
-          .getPersons();
+      final personResponse =
+          await ref.read(restClientPersonProvider).getPersons();
 
       final filteredList = filterPersonsAndTrainers(personResponse);
       state = PersonsAndTrainersState(
@@ -29,7 +29,6 @@ class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
         trainers: filteredList[1],
         loading: false,
       );
-
     } catch (err) {
       await _catchErrorOnFetch(err);
     }
@@ -39,12 +38,14 @@ class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
     var allPersons = <List<Person>>[];
     var normalPersons = <Person>[];
     var trainers = <Person>[];
+    final currentPerson = ref.watch(currentPersonProvider);
 
     if (personResponse.isNotEmpty) {
       for (var person in personResponse) {
-        if (person.roles!.contains("USER")) {
+        if (person.roles!.contains("USER") && person.id != currentPerson!.id) {
           normalPersons.add(person);
-        } else if (person.roles!.contains("TRAINER")) {
+        } else if (person.roles!.contains("TRAINER") &&
+            person.id != currentPerson!.id) {
           trainers.add(person);
         }
       }
@@ -56,6 +57,15 @@ class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
     return allPersons;
   }
 
+  Future<void> getPersonById(int id) async {
+    try {
+      final person = await ref.read(restClientPersonProvider).getPersonById(id);
+      state = state.copyWith(selectedPerson: person);
+    } catch (e) {
+      await _catchErrorOnFetch(e);
+    }
+  }
+
   Future<void> _catchErrorOnFetch(Object err) async {
     var connectivityResult = await InternetConnectionChecker().hasConnection;
     ErrorApiCall errorType = ErrorApiCall.generic;
@@ -65,6 +75,7 @@ class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
     state = PersonsAndTrainersState(
       persons: state.persons,
       trainers: state.trainers,
+      selectedPerson: state.selectedPerson,
       errorApiCall: errorType,
     );
   }

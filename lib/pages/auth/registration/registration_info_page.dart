@@ -83,7 +83,7 @@ class RegistrationInfoPage extends ConsumerWidget {
                           unitMeasures: const ["KG", "LB"],
                           onChange: (unit) => ref
                               .read(registrationProvider.notifier)
-                              .setHeightUnit(unit),
+                              .setWeightUnit(unit),
                         ),
                       ],
                     ),

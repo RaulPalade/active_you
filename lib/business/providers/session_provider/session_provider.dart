@@ -51,7 +51,8 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
 
   Future<void> getLoggedPerson(String email) async {
     try {
-      final currentPerson = await ref.read(restClientPersonProvider).getPersonByEmail(email);
+      final currentPerson =
+          await ref.read(restClientPersonProvider).getPersonByEmail(email);
       state = state.copyWith(currentPerson: currentPerson);
     } catch (e) {
       await _catchErrorOnFetch(e);
@@ -110,22 +111,33 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
     }
   }
 
-  Future<void> followPerson(int id) async {
+  Future<void> followPerson(Person person) async {
     try {
       state = SessionProviderState(
           currentPerson: state.currentPerson, loading: true);
 
-      final response = await ref.read(restClientPersonProvider).followPerson(
-            PersonFollow(from: state.currentPerson!.id!, to: id),
-          );
+      print(state.currentPerson);
+
+      Map<String, dynamic> from = {"id": state.currentPerson!.id};
+      Map<String, dynamic> to = {"id": person.id};
+
+      Map<String, dynamic> object = {
+        "from": from,
+        "to": to,
+      };
+
+      final response =
+          await ref.read(restClientPersonProvider).followPerson(object);
 
       if (response.response.statusCode == 200) {
         var updatedPerson = state.currentPerson?.copyWith(
-          following: [...?state.currentPerson!.following, id],
+          following: [...?state.currentPerson!.following, person.id!],
         );
 
         state = state.copyWith(currentPerson: updatedPerson);
       }
+
+      print(state.currentPerson);
     } catch (err) {
       await _catchErrorOnFetch(err);
     }
@@ -135,6 +147,7 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
     try {
       state = SessionProviderState(
           currentPerson: state.currentPerson, loading: true);
+      print(state.currentPerson);
 
       final response = await ref
           .read(restClientPersonProvider)
@@ -152,6 +165,8 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
           state = state.copyWith(currentPerson: updatedPerson);
         }
       }
+      print(state.currentPerson);
+
     } catch (err) {
       await _catchErrorOnFetch(err);
     }

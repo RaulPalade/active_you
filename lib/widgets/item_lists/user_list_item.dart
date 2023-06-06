@@ -1,21 +1,18 @@
+import 'package:active_you/business/models/person/person.dart';
+import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/widgets/buttons/follow_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UserListItem extends StatelessWidget {
-  const UserListItem(
-      {Key? key,
-      required this.fullName,
-      required this.sex,
-      required this.onClick})
-      : super(key: key);
+class UserListItem extends ConsumerWidget {
+  const UserListItem({Key? key, required this.person}) : super(key: key);
 
-  final String fullName;
-  final String sex;
-  final Function onClick;
+  final Person person;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentUser = ref.watch(currentPersonProvider);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Container(
@@ -52,7 +49,7 @@ class UserListItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          fullName,
+                          "${person.name} ${person.surname}",
                           style: const TextStyle(
                             fontFamily: "Poppins-Medium",
                             fontSize: 14,
@@ -61,7 +58,7 @@ class UserListItem extends StatelessWidget {
                         ),
                         const SizedBox(height: 5),
                         Text(
-                          sex,
+                          person.sex!,
                           style: const TextStyle(
                             fontSize: 12,
                             color: ActiveYouTheme.grayDarkColor,
@@ -70,7 +67,16 @@ class UserListItem extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const FollowButton(followStatus: ["Follow", "Unfollow"]),
+                  FollowButton(
+                    status: currentUser!.following!.contains(person.id!)
+                        ? "Unfollow"
+                        : "Follow",
+                    onClick: () {
+                      currentUser.following!.contains(person.id!) ?
+                      ref.read(sessionProvider.notifier).unfollowPerson(person.id!) :
+                      ref.read(sessionProvider.notifier).followPerson(person);
+                    },
+                  ),
                 ],
               )
             ],

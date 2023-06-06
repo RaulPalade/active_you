@@ -30,16 +30,10 @@ class StatsCard extends StatelessWidget {
         children: [
           Text(
             value,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: "Poppins-Medium",
               fontSize: 14,
-              foreground: Paint()
-                ..shader = const LinearGradient(colors: [
-                  ActiveYouTheme.brandLightColor,
-                  ActiveYouTheme.brandDarkColor,
-                ]).createShader(
-                  const Rect.fromLTWH(0.0, 0.0, 320.0, 80.0),
-                ),
+              color: ActiveYouTheme.brandDarkColor,
             ),
           ),
           const SizedBox(height: 5),

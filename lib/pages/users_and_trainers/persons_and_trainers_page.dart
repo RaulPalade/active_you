@@ -72,7 +72,9 @@ class _PersonsAndTrainersState extends ConsumerState<PersonsAndTrainersPage>
               secondOption: "Trainers",
               onSwitch: (index) => setState(() {
                 _tabIndex = index;
-                ref.read(personsAndTrainersPageProvider.notifier).fetchPersons();
+                ref
+                    .read(personsAndTrainersPageProvider.notifier)
+                    .fetchPersons();
               }),
             ),
           ),
@@ -83,12 +85,17 @@ class _PersonsAndTrainersState extends ConsumerState<PersonsAndTrainersPage>
                 itemBuilder: (BuildContext context, int index) {
                   var listToDisplay = _tabIndex == 0 ? persons : trainers;
                   return GestureDetector(
-                    child: UserListItem(
-                        fullName: listToDisplay[index].name!,
-                        sex: listToDisplay[index].sex!,
-                        onClick: () {}),
-                    onTap: () {
-                      Navigator.pushNamed(context, EndPoint.personDetail);
+                    child: UserListItem(person: listToDisplay[index]),
+                    onTap: () async {
+                      ref
+                          .read(personsAndTrainersPageProvider.notifier)
+                          .getPersonById(listToDisplay[index].id!)
+                          .whenComplete(() {
+                        final selectedPerson =
+                            ref.watch(_selectedPersonProvider);
+                        Navigator.pushNamed(context, EndPoint.personDetail,
+                            arguments: selectedPerson);
+                      });
                     },
                   );
                 }),
@@ -106,9 +113,9 @@ class FakePerson {
   FakePerson(this.fullName, this.sex);
 }
 
-final personsAndTrainersPageProvider = StateNotifierProvider<
-    PersonsAndTrainersVM,
-    PersonsAndTrainersState>((ref) => PersonsAndTrainersVM(ref));
+final personsAndTrainersPageProvider =
+    StateNotifierProvider<PersonsAndTrainersVM, PersonsAndTrainersState>(
+        (ref) => PersonsAndTrainersVM(ref));
 
 final _personsProvider = Provider.autoDispose<List<Person>>((ref) {
   return ref.watch(personsAndTrainersPageProvider).persons;
@@ -116,6 +123,10 @@ final _personsProvider = Provider.autoDispose<List<Person>>((ref) {
 
 final _trainersProvider = Provider.autoDispose<List<Person>>((ref) {
   return ref.watch(personsAndTrainersPageProvider).trainers;
+});
+
+final _selectedPersonProvider = Provider.autoDispose<Person?>((ref) {
+  return ref.watch(personsAndTrainersPageProvider).selectedPerson;
 });
 
 final _loadingProvider = Provider.autoDispose<bool>((ref) {

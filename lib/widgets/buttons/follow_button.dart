@@ -1,32 +1,20 @@
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:flutter/material.dart';
 
-class FollowButton extends StatefulWidget {
-  const FollowButton({Key? key, required this.followStatus}) : super(key: key);
-  final List<String> followStatus;
+class FollowButton extends StatelessWidget {
+  const FollowButton({
+    Key? key,
+    required this.status,
+    required this.onClick,
+  }) : super(key: key);
 
-  @override
-  State<FollowButton> createState() => _FollowButtonState();
-}
-
-class _FollowButtonState extends State<FollowButton> {
-  int _index = 0;
-
-  void _changeUnitMeasure() {
-    setState(() {
-      _index = (_index + 1) % widget.followStatus.length;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  final String status;
+  final Function onClick;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: _changeUnitMeasure,
+      onTap: () => onClick(),
       child: SizedBox(
         width: 90,
         height: 55,
@@ -43,7 +31,7 @@ class _FollowButtonState extends State<FollowButton> {
             ),
             child: Center(
               child: Text(
-                widget.followStatus[_index],
+                status,
                 style: const TextStyle(
                     fontFamily: "Poppins-Medium",
                     fontSize: 12,

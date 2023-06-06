@@ -20,8 +20,8 @@ PersonFollow _$PersonFollowFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PersonFollow {
-  int? get from => throw _privateConstructorUsedError;
-  int? get to => throw _privateConstructorUsedError;
+  Person? get from => throw _privateConstructorUsedError;
+  Person? get to => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,10 @@ abstract class $PersonFollowCopyWith<$Res> {
           PersonFollow value, $Res Function(PersonFollow) then) =
       _$PersonFollowCopyWithImpl<$Res, PersonFollow>;
   @useResult
-  $Res call({int? from, int? to});
+  $Res call({Person? from, Person? to});
+
+  $PersonCopyWith<$Res>? get from;
+  $PersonCopyWith<$Res>? get to;
 }
 
 /// @nodoc
@@ -58,12 +61,36 @@ class _$PersonFollowCopyWithImpl<$Res, $Val extends PersonFollow>
       from: freezed == from
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as Person?,
       to: freezed == to
           ? _value.to
           : to // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as Person?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PersonCopyWith<$Res>? get from {
+    if (_value.from == null) {
+      return null;
+    }
+
+    return $PersonCopyWith<$Res>(_value.from!, (value) {
+      return _then(_value.copyWith(from: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PersonCopyWith<$Res>? get to {
+    if (_value.to == null) {
+      return null;
+    }
+
+    return $PersonCopyWith<$Res>(_value.to!, (value) {
+      return _then(_value.copyWith(to: value) as $Val);
+    });
   }
 }
 
@@ -75,7 +102,12 @@ abstract class _$$_PersonFollowCopyWith<$Res>
       __$$_PersonFollowCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? from, int? to});
+  $Res call({Person? from, Person? to});
+
+  @override
+  $PersonCopyWith<$Res>? get from;
+  @override
+  $PersonCopyWith<$Res>? get to;
 }
 
 /// @nodoc
@@ -96,11 +128,11 @@ class __$$_PersonFollowCopyWithImpl<$Res>
       from: freezed == from
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as Person?,
       to: freezed == to
           ? _value.to
           : to // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as Person?,
     ));
   }
 }
@@ -114,9 +146,9 @@ class _$_PersonFollow implements _PersonFollow {
       _$$_PersonFollowFromJson(json);
 
   @override
-  final int? from;
+  final Person? from;
   @override
-  final int? to;
+  final Person? to;
 
   @override
   String toString() {
@@ -152,15 +184,16 @@ class _$_PersonFollow implements _PersonFollow {
 
 abstract class _PersonFollow implements PersonFollow {
   const factory _PersonFollow(
-      {required final int? from, required final int? to}) = _$_PersonFollow;
+      {required final Person? from,
+      required final Person? to}) = _$_PersonFollow;
 
   factory _PersonFollow.fromJson(Map<String, dynamic> json) =
       _$_PersonFollow.fromJson;
 
   @override
-  int? get from;
+  Person? get from;
   @override
-  int? get to;
+  Person? get to;
   @override
   @JsonKey(ignore: true)
   _$$_PersonFollowCopyWith<_$_PersonFollow> get copyWith =>

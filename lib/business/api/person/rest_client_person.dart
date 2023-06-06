@@ -44,9 +44,9 @@ abstract class RestClientPerson {
   Future<HttpResponse> createWorkout(@Body() Workout workout);
 
   @POST("/userService/api/v1/personFollow/follow")
-  Future<HttpResponse> followPerson(@Body() PersonFollow personFollow);
+  Future<HttpResponse> followPerson(@Body() Map<String, dynamic> personFollow);
 
-  @POST("/userService/api/v1/personFollow/unfollow")
+  @DELETE("/userService/api/v1/personFollow/unfollow")
   Future<HttpResponse> unfollowPerson(
       @Query("from") int from, @Query("to") int to);
 }

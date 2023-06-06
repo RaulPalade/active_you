@@ -3,6 +3,7 @@ import 'package:active_you/pages/person_profile/widget/other_card.dart';
 import 'package:active_you/pages/person_profile/widget/profile_header.dart';
 import 'package:active_you/pages/person_profile/widget/stats_card.dart';
 import 'package:active_you/pages/person_profile/widget/status_card.dart';
+import 'package:active_you/utils/my_date_utils.dart';
 import 'package:active_you/widgets/buttons/primary_button.dart';
 import 'package:active_you/widgets/my_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -35,10 +36,16 @@ class PersonProfilePage extends ConsumerWidget {
               crossAxisSpacing: 10,
               mainAxisSpacing: 0,
               shrinkWrap: true,
-              children: const [
-                StatsCard(value: "180cm", unitMeasure: "Height"),
-                StatsCard(value: "65", unitMeasure: "Weight"),
-                StatsCard(value: "22yo", unitMeasure: "Age"),
+              children: [
+                StatsCard(
+                    value: currentPerson!.height.toString(),
+                    unitMeasure: currentPerson.heightUnit.toString()),
+                StatsCard(
+                    value: currentPerson.weight.toString(),
+                    unitMeasure: currentPerson.weightUnit.toString()),
+                StatsCard(
+                    value: MyDateUtils.calculateAge(currentPerson.dateOfBirth!),
+                    unitMeasure: "Age"),
               ],
             ),
             GridView.count(
@@ -47,9 +54,13 @@ class PersonProfilePage extends ConsumerWidget {
               crossAxisSpacing: 10,
               mainAxisSpacing: 0,
               shrinkWrap: true,
-              children: const [
-                StatsCard(value: "180", unitMeasure: "Following"),
-                StatsCard(value: "180", unitMeasure: "Followers"),
+              children: [
+                StatsCard(
+                    value: currentPerson.following!.length.toString(),
+                    unitMeasure: "Following"),
+                StatsCard(
+                    value: currentPerson.followers!.length.toString(),
+                    unitMeasure: "Followers"),
               ],
             ),
             const SizedBox(height: 48),

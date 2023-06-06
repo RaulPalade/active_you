@@ -9,6 +9,7 @@ class PersonsAndTrainersState with _$PersonsAndTrainersState {
   const factory PersonsAndTrainersState({
     @Default([]) List<Person> persons,
     @Default([]) List<Person> trainers,
+    Person? selectedPerson,
     @Default(false) loading,
     ErrorApiCall? errorApiCall,
   }) = _PersonsAndTrainersStateData;

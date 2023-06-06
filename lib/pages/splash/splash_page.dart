@@ -17,25 +17,32 @@ class SplashPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(splashPageProvider, (previous, next) async {
       if (!(previous?.endInit ?? false) && next.endInit) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const RegistrationCredentialsPage(),
-          ),
-              (route) => false,
-        );
-        // SecureStorageManager storage = SecureStorageManager();
-        // String? idToken = await storage.readValue(storage.idTokenKey);
-        // DateTime expirationDate = JwtDecoder.getExpirationDate(idToken!);
-        // final tokenMap = JwtDecoder.decode(idToken);
-        // String emailLoggedUser = tokenMap["sub"];
-        //
-        // if (expirationDate.isBefore(DateTime.now())) {
-        //   navigateToLoginPage(context);
-        // } else {
-        //   ref.read(sessionProvider.notifier).getLoggedPerson(emailLoggedUser);
-        //   navigateToPageCoordinator(context);
-        // }
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => const RegistrationCredentialsPage(),
+        //   ),
+        //       (route) => false,
+        // );
+
+
+        SecureStorageManager storage = SecureStorageManager();
+        String? idToken = await storage.readValue(storage.idTokenKey);
+
+        if(idToken == null) {
+          navigateToLoginPage(context);
+        }
+
+        DateTime expirationDate = JwtDecoder.getExpirationDate(idToken!);
+        final tokenMap = JwtDecoder.decode(idToken);
+        String emailLoggedUser = tokenMap["sub"];
+
+        if (expirationDate.isBefore(DateTime.now())) {
+          navigateToLoginPage(context);
+        } else {
+          ref.read(sessionProvider.notifier).getLoggedPerson(emailLoggedUser);
+          navigateToPageCoordinator(context);
+        }
       }
     });
 
