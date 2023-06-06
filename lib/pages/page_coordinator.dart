@@ -22,7 +22,7 @@ class _PageCoordinatorState extends ConsumerState<PageCoordinator> {
   static final List<Widget> _pages = <Widget>[
     const HomePage(),
     const PersonsAndTrainersPage(),
-    ExploreWorkoutsPage(),
+    const ExploreWorkoutsPage(),
     const MyWorkoutsPage(),
     const PersonProfilePage(),
   ];

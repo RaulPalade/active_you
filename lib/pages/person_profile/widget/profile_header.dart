@@ -1,7 +1,5 @@
 import 'package:active_you/theme/active_you_theme.dart';
-import 'package:active_you/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader(

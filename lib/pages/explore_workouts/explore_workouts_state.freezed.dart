@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ExploreWorkoutsState {
-  dynamic get workouts => throw _privateConstructorUsedError;
+  List<Workout> get workouts => throw _privateConstructorUsedError;
   dynamic get loading => throw _privateConstructorUsedError;
   ErrorApiCall? get errorApiCall => throw _privateConstructorUsedError;
 
@@ -31,7 +31,8 @@ abstract class $ExploreWorkoutsStateCopyWith<$Res> {
           $Res Function(ExploreWorkoutsState) then) =
       _$ExploreWorkoutsStateCopyWithImpl<$Res, ExploreWorkoutsState>;
   @useResult
-  $Res call({dynamic workouts, dynamic loading, ErrorApiCall? errorApiCall});
+  $Res call(
+      {List<Workout> workouts, dynamic loading, ErrorApiCall? errorApiCall});
 }
 
 /// @nodoc
@@ -48,15 +49,15 @@ class _$ExploreWorkoutsStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? workouts = freezed,
+    Object? workouts = null,
     Object? loading = freezed,
     Object? errorApiCall = freezed,
   }) {
     return _then(_value.copyWith(
-      workouts: freezed == workouts
+      workouts: null == workouts
           ? _value.workouts
           : workouts // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as List<Workout>,
       loading: freezed == loading
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
@@ -78,7 +79,8 @@ abstract class _$$_ExploreWorkoutsStateDataCopyWith<$Res>
       __$$_ExploreWorkoutsStateDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({dynamic workouts, dynamic loading, ErrorApiCall? errorApiCall});
+  $Res call(
+      {List<Workout> workouts, dynamic loading, ErrorApiCall? errorApiCall});
 }
 
 /// @nodoc
@@ -93,12 +95,15 @@ class __$$_ExploreWorkoutsStateDataCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? workouts = freezed,
+    Object? workouts = null,
     Object? loading = freezed,
     Object? errorApiCall = freezed,
   }) {
     return _then(_$_ExploreWorkoutsStateData(
-      workouts: freezed == workouts ? _value.workouts! : workouts,
+      workouts: null == workouts
+          ? _value._workouts
+          : workouts // ignore: cast_nullable_to_non_nullable
+              as List<Workout>,
       loading: freezed == loading ? _value.loading! : loading,
       errorApiCall: freezed == errorApiCall
           ? _value.errorApiCall
@@ -112,11 +117,20 @@ class __$$_ExploreWorkoutsStateDataCopyWithImpl<$Res>
 
 class _$_ExploreWorkoutsStateData implements _ExploreWorkoutsStateData {
   const _$_ExploreWorkoutsStateData(
-      {this.workouts = const [], this.loading = false, this.errorApiCall});
+      {final List<Workout> workouts = const [],
+      this.loading = false,
+      this.errorApiCall})
+      : _workouts = workouts;
 
+  final List<Workout> _workouts;
   @override
   @JsonKey()
-  final dynamic workouts;
+  List<Workout> get workouts {
+    if (_workouts is EqualUnmodifiableListView) return _workouts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_workouts);
+  }
+
   @override
   @JsonKey()
   final dynamic loading;
@@ -133,7 +147,7 @@ class _$_ExploreWorkoutsStateData implements _ExploreWorkoutsStateData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ExploreWorkoutsStateData &&
-            const DeepCollectionEquality().equals(other.workouts, workouts) &&
+            const DeepCollectionEquality().equals(other._workouts, _workouts) &&
             const DeepCollectionEquality().equals(other.loading, loading) &&
             (identical(other.errorApiCall, errorApiCall) ||
                 other.errorApiCall == errorApiCall));
@@ -142,7 +156,7 @@ class _$_ExploreWorkoutsStateData implements _ExploreWorkoutsStateData {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(workouts),
+      const DeepCollectionEquality().hash(_workouts),
       const DeepCollectionEquality().hash(loading),
       errorApiCall);
 
@@ -156,12 +170,12 @@ class _$_ExploreWorkoutsStateData implements _ExploreWorkoutsStateData {
 
 abstract class _ExploreWorkoutsStateData implements ExploreWorkoutsState {
   const factory _ExploreWorkoutsStateData(
-      {final dynamic workouts,
+      {final List<Workout> workouts,
       final dynamic loading,
       final ErrorApiCall? errorApiCall}) = _$_ExploreWorkoutsStateData;
 
   @override
-  dynamic get workouts;
+  List<Workout> get workouts;
   @override
   dynamic get loading;
   @override

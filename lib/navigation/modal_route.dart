@@ -3,6 +3,7 @@ import 'package:active_you/pages/auth/login/login_page.dart';
 import 'package:active_you/pages/auth/registration/registration_credentials_page.dart';
 import 'package:active_you/pages/auth/registration/registration_info_page.dart';
 import 'package:active_you/pages/auth/success_registration_page.dart';
+import 'package:active_you/pages/explore_workouts/workout_detail_page.dart';
 import 'package:active_you/pages/home/home_page.dart';
 import 'package:active_you/pages/intro/onboarding_page.dart';
 import 'package:active_you/pages/intro/welcome_page.dart';
@@ -55,6 +56,10 @@ PageRoute modalRoute(RouteSettings settings) {
     case EndPoint.personDetail:
       return MaterialPageRoute(
           builder: (_) => const PersonDetailPage(), settings: settings);
+
+    case EndPoint.workoutDetail:
+      return MaterialPageRoute(
+          builder: (_) => const WorkoutDetailPage(), settings: settings);
 
     default:
       return MaterialPageRoute(

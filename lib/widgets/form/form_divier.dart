@@ -6,7 +6,7 @@ class FormDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: const [
+    return const Row(children: [
       Expanded(
           child: Divider(
         color: ActiveYouTheme.grayLightColor,

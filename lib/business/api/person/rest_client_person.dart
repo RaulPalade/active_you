@@ -1,6 +1,5 @@
 import 'package:active_you/business/models/goal/goal.dart';
 import 'package:active_you/business/models/person/person.dart';
-import 'package:active_you/business/models/person_follow/person_follow.dart';
 import 'package:active_you/business/models/person_role/person_role.dart';
 import 'package:active_you/business/models/workout/workout.dart';
 import 'package:dio/dio.dart';

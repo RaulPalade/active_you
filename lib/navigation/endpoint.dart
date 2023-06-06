@@ -11,4 +11,6 @@ class EndPoint {
   static const home = "/home";
   static const personProfile = "person-profile";
   static const personDetail = "person-detail";
+
+  static const workoutDetail = "workout-detail";
 }
