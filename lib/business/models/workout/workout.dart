@@ -1,5 +1,4 @@
 import 'package:active_you/business/models/exercise/exercise.dart';
-import 'package:active_you/business/models/person/person.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'workout.freezed.dart';
@@ -13,10 +12,6 @@ class Workout with _$Workout {
     required int? createdBy,
     required String? name,
     required String? type,
-    required DateTime? initDate,
-    required DateTime? endDate,
-    required bool? completed,
-    required List<Person>? persons,
     required List<Exercise>? exercises,
   }) = _Workout;
 

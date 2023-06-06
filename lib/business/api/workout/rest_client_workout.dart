@@ -25,7 +25,7 @@ abstract class RestClientWorkout {
   @GET("workoutService/api/v1/exercises/{id}")
   Future<Exercise> getExerciseById(@Path("id") int id);
 
-  @GET("workoutService/api/v1/personWorkouts")
+  @POST("workoutService/api/v1/personWorkouts")
   Future<HttpResponse> saveWorkoutForUser(@Body() PersonWorkout personWorkout);
 
   @POST("workoutService/api/v1/personWorkouts/{id}")

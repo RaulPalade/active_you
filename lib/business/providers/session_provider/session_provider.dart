@@ -1,7 +1,8 @@
 import 'package:active_you/business/models/goal/goal.dart';
 import 'package:active_you/business/models/person/person.dart';
-import 'package:active_you/business/models/person_follow/person_follow.dart';
 import 'package:active_you/business/models/person_role/person_role.dart';
+import 'package:active_you/business/models/person_workout/person_workout.dart';
+import 'package:active_you/business/models/workout/workout.dart';
 import 'package:active_you/business/providers/api_provider.dart';
 import 'package:active_you/business/providers/session_provider/session_provider_state.dart';
 import 'package:active_you/business/utils/SecureStorageManager.dart';
@@ -166,7 +167,33 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
         }
       }
       print(state.currentPerson);
+    } catch (err) {
+      await _catchErrorOnFetch(err);
+    }
+  }
 
+  Future<void> saveWorkout(Workout workout) async {
+    try {
+      PersonWorkout personWorkout = PersonWorkout(
+        id: null,
+        idPerson: state.currentPerson!.id,
+        workout: workout,
+        initDate: DateTime.now(),
+        endDate: null,
+        completed: false,
+      );
+
+      final response = await ref
+          .read(restClientWorkoutProvider)
+          .saveWorkoutForUser(personWorkout);
+
+      if (response.response.statusCode == 200) {
+        var updatedPerson = state.currentPerson?.copyWith(
+          myWorkouts: [...?state.currentPerson!.myWorkouts, workout],
+        );
+
+        state = state.copyWith(currentPerson: updatedPerson);
+      }
     } catch (err) {
       await _catchErrorOnFetch(err);
     }

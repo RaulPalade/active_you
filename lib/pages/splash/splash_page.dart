@@ -2,7 +2,6 @@ import 'package:active_you/business/providers/session_provider/session_provider.
 import 'package:active_you/business/providers/splash_page_provider.dart';
 import 'package:active_you/business/utils/SecureStorageManager.dart';
 import 'package:active_you/pages/auth/login/login_page.dart';
-import 'package:active_you/pages/auth/registration/registration_credentials_page.dart';
 import 'package:active_you/pages/page_coordinator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

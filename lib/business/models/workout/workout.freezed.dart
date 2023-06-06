@@ -24,10 +24,6 @@ mixin _$Workout {
   int? get createdBy => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
-  DateTime? get initDate => throw _privateConstructorUsedError;
-  DateTime? get endDate => throw _privateConstructorUsedError;
-  bool? get completed => throw _privateConstructorUsedError;
-  List<Person>? get persons => throw _privateConstructorUsedError;
   List<Exercise>? get exercises => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,10 +41,6 @@ abstract class $WorkoutCopyWith<$Res> {
       int? createdBy,
       String? name,
       String? type,
-      DateTime? initDate,
-      DateTime? endDate,
-      bool? completed,
-      List<Person>? persons,
       List<Exercise>? exercises});
 }
 
@@ -69,10 +61,6 @@ class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
     Object? createdBy = freezed,
     Object? name = freezed,
     Object? type = freezed,
-    Object? initDate = freezed,
-    Object? endDate = freezed,
-    Object? completed = freezed,
-    Object? persons = freezed,
     Object? exercises = freezed,
   }) {
     return _then(_value.copyWith(
@@ -92,22 +80,6 @@ class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
-      initDate: freezed == initDate
-          ? _value.initDate
-          : initDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      endDate: freezed == endDate
-          ? _value.endDate
-          : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      completed: freezed == completed
-          ? _value.completed
-          : completed // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      persons: freezed == persons
-          ? _value.persons
-          : persons // ignore: cast_nullable_to_non_nullable
-              as List<Person>?,
       exercises: freezed == exercises
           ? _value.exercises
           : exercises // ignore: cast_nullable_to_non_nullable
@@ -128,10 +100,6 @@ abstract class _$$_WorkoutCopyWith<$Res> implements $WorkoutCopyWith<$Res> {
       int? createdBy,
       String? name,
       String? type,
-      DateTime? initDate,
-      DateTime? endDate,
-      bool? completed,
-      List<Person>? persons,
       List<Exercise>? exercises});
 }
 
@@ -149,10 +117,6 @@ class __$$_WorkoutCopyWithImpl<$Res>
     Object? createdBy = freezed,
     Object? name = freezed,
     Object? type = freezed,
-    Object? initDate = freezed,
-    Object? endDate = freezed,
-    Object? completed = freezed,
-    Object? persons = freezed,
     Object? exercises = freezed,
   }) {
     return _then(_$_Workout(
@@ -172,22 +136,6 @@ class __$$_WorkoutCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
-      initDate: freezed == initDate
-          ? _value.initDate
-          : initDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      endDate: freezed == endDate
-          ? _value.endDate
-          : endDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      completed: freezed == completed
-          ? _value.completed
-          : completed // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      persons: freezed == persons
-          ? _value._persons
-          : persons // ignore: cast_nullable_to_non_nullable
-              as List<Person>?,
       exercises: freezed == exercises
           ? _value._exercises
           : exercises // ignore: cast_nullable_to_non_nullable
@@ -204,13 +152,8 @@ class _$_Workout implements _Workout {
       required this.createdBy,
       required this.name,
       required this.type,
-      required this.initDate,
-      required this.endDate,
-      required this.completed,
-      required final List<Person>? persons,
       required final List<Exercise>? exercises})
-      : _persons = persons,
-        _exercises = exercises;
+      : _exercises = exercises;
 
   factory _$_Workout.fromJson(Map<String, dynamic> json) =>
       _$$_WorkoutFromJson(json);
@@ -223,22 +166,6 @@ class _$_Workout implements _Workout {
   final String? name;
   @override
   final String? type;
-  @override
-  final DateTime? initDate;
-  @override
-  final DateTime? endDate;
-  @override
-  final bool? completed;
-  final List<Person>? _persons;
-  @override
-  List<Person>? get persons {
-    final value = _persons;
-    if (value == null) return null;
-    if (_persons is EqualUnmodifiableListView) return _persons;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
   final List<Exercise>? _exercises;
   @override
   List<Exercise>? get exercises {
@@ -251,7 +178,7 @@ class _$_Workout implements _Workout {
 
   @override
   String toString() {
-    return 'Workout(id: $id, createdBy: $createdBy, name: $name, type: $type, initDate: $initDate, endDate: $endDate, completed: $completed, persons: $persons, exercises: $exercises)';
+    return 'Workout(id: $id, createdBy: $createdBy, name: $name, type: $type, exercises: $exercises)';
   }
 
   @override
@@ -264,28 +191,13 @@ class _$_Workout implements _Workout {
                 other.createdBy == createdBy) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.initDate, initDate) ||
-                other.initDate == initDate) &&
-            (identical(other.endDate, endDate) || other.endDate == endDate) &&
-            (identical(other.completed, completed) ||
-                other.completed == completed) &&
-            const DeepCollectionEquality().equals(other._persons, _persons) &&
             const DeepCollectionEquality()
                 .equals(other._exercises, _exercises));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      createdBy,
-      name,
-      type,
-      initDate,
-      endDate,
-      completed,
-      const DeepCollectionEquality().hash(_persons),
+  int get hashCode => Object.hash(runtimeType, id, createdBy, name, type,
       const DeepCollectionEquality().hash(_exercises));
 
   @JsonKey(ignore: true)
@@ -308,10 +220,6 @@ abstract class _Workout implements Workout {
       required final int? createdBy,
       required final String? name,
       required final String? type,
-      required final DateTime? initDate,
-      required final DateTime? endDate,
-      required final bool? completed,
-      required final List<Person>? persons,
       required final List<Exercise>? exercises}) = _$_Workout;
 
   factory _Workout.fromJson(Map<String, dynamic> json) = _$_Workout.fromJson;
@@ -324,14 +232,6 @@ abstract class _Workout implements Workout {
   String? get name;
   @override
   String? get type;
-  @override
-  DateTime? get initDate;
-  @override
-  DateTime? get endDate;
-  @override
-  bool? get completed;
-  @override
-  List<Person>? get persons;
   @override
   List<Exercise>? get exercises;
   @override

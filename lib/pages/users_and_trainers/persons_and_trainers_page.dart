@@ -21,28 +21,6 @@ class _PersonsAndTrainersState extends ConsumerState<PersonsAndTrainersPage>
   late TabController _tabController;
   int _tabIndex = 0;
 
-  // final fakeUserList = [
-  //   FakePerson("Michelle Rodgriguez", "Female"),
-  //   FakePerson("Michael Johnson", "Male"),
-  //   FakePerson("Jack Hogan", "Male"),
-  //   FakePerson("Mario Wallace ", "Male"),
-  //   FakePerson("Anna Dunlap", "Female"),
-  //   FakePerson("Tiffany Smith", "Female"),
-  //   FakePerson("Anna Dunlap", "Female"),
-  //   FakePerson("Deborah Cohen", "Female"),
-  // ];
-  //
-  // final fakeTrainerList = [
-  //   FakePerson("Jessica Hunt", "Female"),
-  //   FakePerson("John Carr", "Male"),
-  //   FakePerson("Michael Pollard", "Male"),
-  //   FakePerson("Mark Brost ", "Male"),
-  //   FakePerson("Natalie Bell", "Female"),
-  //   FakePerson("Sandra Contreras", "Female"),
-  //   FakePerson("Joanne White", "Female"),
-  //   FakePerson("Larry Barrett", "Male"),
-  // ];
-
   @override
   void initState() {
     super.initState();

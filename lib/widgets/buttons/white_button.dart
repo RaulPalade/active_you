@@ -24,16 +24,10 @@ class WhiteButton extends StatelessWidget {
           backgroundColor:
               MaterialStateProperty.all(ActiveYouTheme.whiteColor),
           textStyle: MaterialStateProperty.all<TextStyle>(
-            TextStyle(
+            const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              foreground: Paint()
-                ..shader = const LinearGradient(colors: [
-                  ActiveYouTheme.brandLightColor,
-                  ActiveYouTheme.brandDarkColor,
-                ]).createShader(
-                  const Rect.fromLTWH(0.0, 0.0, 320.0, 80.0),
-                ),
+              color: ActiveYouTheme.brandDarkColor,
             ),
           ),
           minimumSize: MaterialStateProperty.all(const Size.fromHeight(60)),

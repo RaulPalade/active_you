@@ -1,19 +1,14 @@
+import 'package:active_you/business/models/workout/workout.dart';
+import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/widgets/buttons/white_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class WorkoutBigCard extends StatelessWidget {
-  const WorkoutBigCard(
-      {Key? key,
-      required this.workoutName,
-      required this.exercises,
-      required this.type})
-      : super(key: key);
+  const WorkoutBigCard({Key? key, required this.workout}) : super(key: key);
 
-  final String workoutName;
-  final int exercises;
-  final String type;
+  final Workout workout;
 
   @override
   Widget build(BuildContext context) {
@@ -34,27 +29,43 @@ class WorkoutBigCard extends StatelessWidget {
                 children: [
                   const SizedBox(height: 20),
                   Text(
-                    workoutName,
+                    workout.name!,
                     style: const TextStyle(
                       fontFamily: "Poppins-Medium",
-                      fontSize: 14,
+                      fontSize: 18,
                       color: ActiveYouTheme.textBlackColor,
                     ),
+                    maxLines: 1,
                   ),
                   Text(
-                    "$exercises Exercises | $type minutes",
+                    workout.exercises!.length > 1
+                        ? "${workout.exercises!.length} Exercises"
+                        : "${workout.exercises!.length} Exercise",
                     style: const TextStyle(
                       fontSize: 12,
                       color: ActiveYouTheme.grayDarkColor,
                     ),
                   ),
+                  Text(
+                    workout.type!,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: ActiveYouTheme.grayDarkColor,
+                    ),
+                    maxLines: 1,
+                  ),
                   const SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   SizedBox(
                     width: 120,
                     height: 40,
-                    child: WhiteButton(title: "View More", onClick: () {}),
+                    child: WhiteButton(
+                        title: "View More",
+                        onClick: () {
+                          Navigator.pushNamed(context, EndPoint.workoutDetail,
+                              arguments: workout);
+                        }),
                   ),
                 ],
               ),
