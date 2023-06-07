@@ -28,6 +28,10 @@ abstract class RestClientWorkout {
   @POST("workoutService/api/v1/personWorkouts")
   Future<HttpResponse> saveWorkoutForUser(@Body() PersonWorkout personWorkout);
 
+  @GET("workoutService/api/v1/personWorkouts")
+  Future<List<PersonWorkout>> getPersonalWorkouts(
+      @Query("personId") int personId);
+
   @POST("workoutService/api/v1/personWorkouts/{id}")
   Future<HttpResponse> deleteWorkoutForUser(@Path("id") int id);
 }

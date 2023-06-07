@@ -165,6 +165,31 @@ class _RestClientWorkout implements RestClientWorkout {
   }
 
   @override
+  Future<List<PersonWorkout>> getPersonalWorkouts(personId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'personId': personId};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<PersonWorkout>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'workoutService/api/v1/personWorkouts',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => PersonWorkout.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
   Future<HttpResponse<dynamic>> deleteWorkoutForUser(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

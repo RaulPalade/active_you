@@ -6,15 +6,13 @@ class WorkoutListItem extends StatelessWidget {
   const WorkoutListItem(
       {Key? key,
       required this.workoutName,
-      required this.calories,
-      required this.minutes,
-      required this.onClick})
+      required this.workoutType,
+      required this.numberExercises})
       : super(key: key);
 
   final String workoutName;
-  final int calories;
-  final int minutes;
-  final Function onClick;
+  final String workoutType;
+  final int numberExercises;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +43,8 @@ class WorkoutListItem extends StatelessWidget {
                   CircleAvatar(
                     radius: 24,
                     backgroundColor: ActiveYouTheme.brandLightColor,
-                    child: SvgPicture.asset("assets/icons/workouts-images/3.svg"),
+                    child:
+                        SvgPicture.asset("assets/icons/workouts-images/3.svg"),
                   ),
                   const SizedBox(width: 15),
                   Expanded(
@@ -63,7 +62,7 @@ class WorkoutListItem extends StatelessWidget {
                         ),
                         const SizedBox(height: 5),
                         Text(
-                          "${calories.toString()} Calories burn | $minutes minutes",
+                          "${workoutType.toString()} | $numberExercises exercises",
                           style: const TextStyle(
                             fontSize: 12,
                             color: ActiveYouTheme.grayDarkColor,

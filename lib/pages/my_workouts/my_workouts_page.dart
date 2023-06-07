@@ -1,8 +1,13 @@
+import 'package:active_you/business/models/person_workout/person_workout.dart';
+import 'package:active_you/navigation/endpoint.dart';
+import 'package:active_you/pages/my_workouts/my_workouts_vm.dart';
 import 'package:active_you/widgets/item_lists/workout_list_item.dart';
 import 'package:active_you/widgets/my_app_bar.dart';
 import 'package:active_you/widgets/tab/my_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'my_workouts_state.dart';
 
 class MyWorkoutsPage extends ConsumerStatefulWidget {
   const MyWorkoutsPage({Key? key}) : super(key: key);
@@ -15,24 +20,6 @@ class _MyWorkoutsPageState extends ConsumerState<MyWorkoutsPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   int _tabIndex = 0;
-
-  final fakeActiveWorkouts = [
-    FakeWorkout("Fullbody Workout", 200, 10, 4),
-    FakeWorkout("Lowerbody Workout", 120, 20, 4),
-    FakeWorkout("Ab Workout", 160, 15, 3),
-    FakeWorkout("Fullbody Workout", 110, 5, 2),
-    FakeWorkout("Lowerbody Workout", 320, 25, 5),
-  ];
-
-  final fakePastWorkouts = [
-    FakeWorkout("Lowerbody Workout", 320, 25, 6),
-    FakeWorkout("Fullbody Workout", 110, 5, 3),
-    FakeWorkout("Lowerbody Workout", 120, 20, 5),
-    FakeWorkout("Ab Workout", 160, 15, 6),
-    FakeWorkout("Fullbody Workout", 200, 10, 1),
-  ];
-
-  List<List<FakeWorkout>> listToDisplay = [];
 
   @override
   void initState() {
@@ -48,8 +35,9 @@ class _MyWorkoutsPageState extends ConsumerState<MyWorkoutsPage>
 
   @override
   Widget build(BuildContext context) {
-    listToDisplay.add(fakeActiveWorkouts);
-    listToDisplay.add(fakePastWorkouts);
+    final activeWorkotus = ref.watch(activeWorkoutsProvider);
+    final completedWorkotus = ref.watch(completedWorkoutsProvider);
+
     return Scaffold(
       appBar: const MyAppBar(title: "My Workouts"),
       body: Column(
@@ -68,13 +56,26 @@ class _MyWorkoutsPageState extends ConsumerState<MyWorkoutsPage>
           Expanded(
             child: ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: listToDisplay[_tabIndex].length,
+                itemCount: _tabIndex == 0
+                    ? activeWorkotus!.length
+                    : completedWorkotus!.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return WorkoutListItem(
-                      workoutName: listToDisplay[_tabIndex][index].name,
-                      calories: listToDisplay[_tabIndex][index].calories,
-                      minutes: listToDisplay[_tabIndex][index].minutes,
-                      onClick: () {});
+                  final list =
+                      _tabIndex == 0 ? activeWorkotus : completedWorkotus;
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        EndPoint.myWorkoutDetail,
+                        arguments: list[index],
+                      );
+                    },
+                    child: WorkoutListItem(
+                      workoutName: list![index].workout!.name!,
+                      workoutType: list[index].workout!.type!,
+                      numberExercises: list[index].workout!.exercises!.length,
+                    ),
+                  );
                 }),
           ),
         ],
@@ -83,11 +84,12 @@ class _MyWorkoutsPageState extends ConsumerState<MyWorkoutsPage>
   }
 }
 
-class FakeWorkout {
-  late final String name;
-  late final int calories;
-  late final int minutes;
-  late final int exercises;
+final myWorkoutsPageProvider =
+    StateNotifierProvider.autoDispose<MyWorkoutsVM, MyWorkoutsState>(
+        (ref) => MyWorkoutsVM(ref));
 
-  FakeWorkout(this.name, this.calories, this.minutes, this.exercises);
-}
+final activeWorkoutsProvider = Provider.autoDispose<List<PersonWorkout>?>(
+    (ref) => ref.watch(myWorkoutsPageProvider).activeWorkouts);
+
+final completedWorkoutsProvider = Provider.autoDispose<List<PersonWorkout>?>(
+    (ref) => ref.watch(myWorkoutsPageProvider).completedWorkouts);

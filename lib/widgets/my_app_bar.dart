@@ -17,10 +17,6 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           color: ActiveYouTheme.blackColor,
         ),
       ),
-      leading: IconButton(
-        icon: const BackButtonAppBar(),
-        onPressed: () => Navigator.pop(context, false),
-      ),
     );
   }
 

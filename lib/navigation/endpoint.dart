@@ -13,4 +13,5 @@ class EndPoint {
   static const personDetail = "person-detail";
 
   static const workoutDetail = "workout-detail";
+  static const myWorkoutDetail = "my-workout-detail";
 }
