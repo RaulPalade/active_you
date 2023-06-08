@@ -30,9 +30,11 @@ class PersonDetailPage extends ConsumerWidget {
                     ? "Unfollow"
                     : "Follow",
                 onClick: () {
-                  currentUser.following!.contains(person.id!) ?
-                  ref.read(sessionProvider.notifier).unfollowPerson(person.id!) :
-                  ref.read(sessionProvider.notifier).followPerson(person);
+                  currentUser.following!.contains(person.id!)
+                      ? ref
+                          .read(sessionProvider.notifier)
+                          .unfollowPerson(person.id!)
+                      : ref.read(sessionProvider.notifier).followPerson(person);
                 },
               ),
             ),
@@ -76,6 +78,4 @@ class PersonDetailPage extends ConsumerWidget {
       ),
     );
   }
-
-
 }

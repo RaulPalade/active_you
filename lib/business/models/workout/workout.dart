@@ -8,7 +8,7 @@ part 'workout.g.dart';
 @freezed
 class Workout with _$Workout {
   const factory Workout({
-    required int id,
+    required int? id,
     required int? createdBy,
     required String? name,
     required String? type,

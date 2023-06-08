@@ -15,23 +15,29 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
 
   SessionProvider(this.ref) : super(const SessionProviderState());
 
-  Future<void> login(String email, String password) async {
+  Future<bool> login(String email, String password) async {
     try {
       state = const SessionProviderState(currentPerson: null, loading: true);
 
       final response =
           await ref.read(restClientPersonProvider).login(email, password);
 
-      SecureStorageManager storageManager = SecureStorageManager();
-      storageManager.writeValue(
-          storageManager.idTokenKey, response.data["access_token"]);
+      if (response.response.statusCode == 200) {
+        SecureStorageManager storageManager = SecureStorageManager();
+        storageManager.writeValue(
+            storageManager.idTokenKey, response.data["access_token"]);
 
-      final currentPerson = await getPersonById(0);
-      if (currentPerson != null) {
-        state = state.copyWith(currentPerson: currentPerson, loading: false);
+        final currentPerson = await getPersonById(0);
+        if (currentPerson != null) {
+          state = state.copyWith(currentPerson: currentPerson, loading: false);
+        }
+        return true;
+      } else {
+        return false;
       }
     } catch (err) {
       await _catchErrorOnFetch(err);
+      return false;
     }
   }
 

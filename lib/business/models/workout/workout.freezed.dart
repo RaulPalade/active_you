@@ -20,7 +20,7 @@ Workout _$WorkoutFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Workout {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   int? get createdBy => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
@@ -37,7 +37,7 @@ abstract class $WorkoutCopyWith<$Res> {
       _$WorkoutCopyWithImpl<$Res, Workout>;
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       int? createdBy,
       String? name,
       String? type,
@@ -57,17 +57,17 @@ class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? createdBy = freezed,
     Object? name = freezed,
     Object? type = freezed,
     Object? exercises = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
@@ -96,7 +96,7 @@ abstract class _$$_WorkoutCopyWith<$Res> implements $WorkoutCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       int? createdBy,
       String? name,
       String? type,
@@ -113,17 +113,17 @@ class __$$_WorkoutCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? createdBy = freezed,
     Object? name = freezed,
     Object? type = freezed,
     Object? exercises = freezed,
   }) {
     return _then(_$_Workout(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
@@ -159,7 +159,7 @@ class _$_Workout implements _Workout {
       _$$_WorkoutFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   final int? createdBy;
   @override
@@ -216,7 +216,7 @@ class _$_Workout implements _Workout {
 
 abstract class _Workout implements Workout {
   const factory _Workout(
-      {required final int id,
+      {required final int? id,
       required final int? createdBy,
       required final String? name,
       required final String? type,
@@ -225,7 +225,7 @@ abstract class _Workout implements Workout {
   factory _Workout.fromJson(Map<String, dynamic> json) = _$_Workout.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
   int? get createdBy;
   @override

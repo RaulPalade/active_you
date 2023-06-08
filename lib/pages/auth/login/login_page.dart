@@ -77,11 +77,18 @@ class LoginPage extends ConsumerWidget {
               ),
               const Spacer(),
               LoginButton(
-                onClick: () {
-                  ref
+                onClick: () async {
+                  final response = ref
                       .read(sessionProvider.notifier)
                       .login(emailInput, passwordInput);
-                  Navigator.popAndPushNamed(context, EndPoint.welcomePage);
+                  response.then((bool success) {
+                    if (success) {
+                      showSuccessSnackBar(context, "Login effettuato!");
+                      Navigator.popAndPushNamed(context, EndPoint.welcomePage);
+                    } else {
+                      showFailureSnackBar(context, "Impossibile effettuare il login");
+                    }
+                  });
                 },
               ),
               const Padding(
@@ -124,6 +131,38 @@ class LoginPage extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  void showSuccessSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(
+      content: Text(
+        message,
+        style: const TextStyle(
+          fontFamily: "Poppins-Medium",
+          fontSize: 14,
+          color: ActiveYouTheme.whiteColor,
+        ),
+      ),
+      backgroundColor: ActiveYouTheme.brandDarkColor,
+      behavior: SnackBarBehavior.floating,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  void showFailureSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(
+      content: Text(
+        message,
+        style: const TextStyle(
+          fontFamily: "Poppins-Medium",
+          fontSize: 14,
+          color: ActiveYouTheme.whiteColor,
+        ),
+      ),
+      backgroundColor: ActiveYouTheme.secondaryDarkColor,
+      behavior: SnackBarBehavior.floating,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
 

@@ -9,6 +9,7 @@ import 'package:active_you/pages/intro/onboarding_page.dart';
 import 'package:active_you/pages/intro/welcome_page.dart';
 import 'package:active_you/pages/my_workouts/my_workout_detail.dart';
 import 'package:active_you/pages/page_coordinator.dart';
+import 'package:active_you/pages/create_workout/create_workout_page.dart';
 import 'package:active_you/pages/person_profile/person_profile_page.dart';
 import 'package:active_you/pages/users_and_trainers/person_detail_page.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +66,10 @@ PageRoute modalRoute(RouteSettings settings) {
     case EndPoint.myWorkoutDetail:
       return MaterialPageRoute(
           builder: (_) => const MyWorkoutDetailPage(), settings: settings);
+
+    case EndPoint.createWorkout:
+      return MaterialPageRoute(
+          builder: (_) => const CreateWorkoutPage(), settings: settings);
 
     default:
       return MaterialPageRoute(
