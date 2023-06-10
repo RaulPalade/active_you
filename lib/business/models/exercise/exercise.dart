@@ -8,11 +8,10 @@ part 'exercise.g.dart';
 @freezed
 class Exercise with _$Exercise {
   const factory Exercise({
-    required int id,
+    required int? id,
     required String? name,
     required int? repetitions,
     required int? series,
-    required List<Workout>? onWorkouts,
   }) = _Exercise;
 
   factory Exercise.fromJson(Map<String, dynamic> json) => _$ExerciseFromJson(json);

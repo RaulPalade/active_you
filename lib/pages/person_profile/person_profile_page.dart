@@ -19,6 +19,7 @@ class PersonProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentPerson = ref.watch(currentPersonProvider);
+    bool isTrainer = currentPerson?.roles?.contains("TRAINER") ?? false;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -29,7 +30,7 @@ class PersonProfilePage extends ConsumerWidget {
             color: ActiveYouTheme.blackColor,
           ),
         ),
-        actions: [
+        actions: isTrainer ? [
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: IconButton(
@@ -43,7 +44,7 @@ class PersonProfilePage extends ConsumerWidget {
               },
             ),
           ),
-        ],
+        ] : null,
       ),
       body: SingleChildScrollView(
         child: Padding(

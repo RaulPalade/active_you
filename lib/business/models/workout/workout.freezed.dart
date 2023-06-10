@@ -21,7 +21,7 @@ Workout _$WorkoutFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Workout {
   int? get id => throw _privateConstructorUsedError;
-  int? get createdBy => throw _privateConstructorUsedError;
+  int? get createdById => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
   List<Exercise>? get exercises => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ abstract class $WorkoutCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      int? createdBy,
+      int? createdById,
       String? name,
       String? type,
       List<Exercise>? exercises});
@@ -58,7 +58,7 @@ class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
   @override
   $Res call({
     Object? id = freezed,
-    Object? createdBy = freezed,
+    Object? createdById = freezed,
     Object? name = freezed,
     Object? type = freezed,
     Object? exercises = freezed,
@@ -68,9 +68,9 @@ class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
+      createdById: freezed == createdById
+          ? _value.createdById
+          : createdById // ignore: cast_nullable_to_non_nullable
               as int?,
       name: freezed == name
           ? _value.name
@@ -97,7 +97,7 @@ abstract class _$$_WorkoutCopyWith<$Res> implements $WorkoutCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      int? createdBy,
+      int? createdById,
       String? name,
       String? type,
       List<Exercise>? exercises});
@@ -114,7 +114,7 @@ class __$$_WorkoutCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? createdBy = freezed,
+    Object? createdById = freezed,
     Object? name = freezed,
     Object? type = freezed,
     Object? exercises = freezed,
@@ -124,9 +124,9 @@ class __$$_WorkoutCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
+      createdById: freezed == createdById
+          ? _value.createdById
+          : createdById // ignore: cast_nullable_to_non_nullable
               as int?,
       name: freezed == name
           ? _value.name
@@ -149,7 +149,7 @@ class __$$_WorkoutCopyWithImpl<$Res>
 class _$_Workout implements _Workout {
   const _$_Workout(
       {required this.id,
-      required this.createdBy,
+      required this.createdById,
       required this.name,
       required this.type,
       required final List<Exercise>? exercises})
@@ -161,7 +161,7 @@ class _$_Workout implements _Workout {
   @override
   final int? id;
   @override
-  final int? createdBy;
+  final int? createdById;
   @override
   final String? name;
   @override
@@ -178,7 +178,7 @@ class _$_Workout implements _Workout {
 
   @override
   String toString() {
-    return 'Workout(id: $id, createdBy: $createdBy, name: $name, type: $type, exercises: $exercises)';
+    return 'Workout(id: $id, createdById: $createdById, name: $name, type: $type, exercises: $exercises)';
   }
 
   @override
@@ -187,8 +187,8 @@ class _$_Workout implements _Workout {
         (other.runtimeType == runtimeType &&
             other is _$_Workout &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.createdBy, createdBy) ||
-                other.createdBy == createdBy) &&
+            (identical(other.createdById, createdById) ||
+                other.createdById == createdById) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.type, type) || other.type == type) &&
             const DeepCollectionEquality()
@@ -197,7 +197,7 @@ class _$_Workout implements _Workout {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, createdBy, name, type,
+  int get hashCode => Object.hash(runtimeType, id, createdById, name, type,
       const DeepCollectionEquality().hash(_exercises));
 
   @JsonKey(ignore: true)
@@ -217,7 +217,7 @@ class _$_Workout implements _Workout {
 abstract class _Workout implements Workout {
   const factory _Workout(
       {required final int? id,
-      required final int? createdBy,
+      required final int? createdById,
       required final String? name,
       required final String? type,
       required final List<Exercise>? exercises}) = _$_Workout;
@@ -227,7 +227,7 @@ abstract class _Workout implements Workout {
   @override
   int? get id;
   @override
-  int? get createdBy;
+  int? get createdById;
   @override
   String? get name;
   @override

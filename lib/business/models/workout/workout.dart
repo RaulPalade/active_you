@@ -9,7 +9,7 @@ part 'workout.g.dart';
 class Workout with _$Workout {
   const factory Workout({
     required int? id,
-    required int? createdBy,
+    required int? createdById,
     required String? name,
     required String? type,
     required List<Exercise>? exercises,

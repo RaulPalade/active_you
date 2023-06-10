@@ -1,3 +1,4 @@
+import 'package:active_you/business/models/exercise/exercise.dart';
 import 'package:active_you/business/models/goal/goal.dart';
 import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/business/models/person_role/person_role.dart';
@@ -40,7 +41,10 @@ abstract class RestClientPerson {
       @Path("id") int id, @Path("goalId") int goalId);
 
   @POST("/userService/api/v1/users/createWorkout")
-  Future<HttpResponse> createWorkout(@Body() Workout workout);
+  Future<int> createWorkout(@Body() Workout workout);
+
+  @POST("/userService/api/v1/users/createExercise")
+  Future<int> createExercise(@Body() Exercise exercise, @Query("id") int id);
 
   @POST("/userService/api/v1/personFollow/follow")
   Future<HttpResponse> followPerson(@Body() Map<String, dynamic> personFollow);

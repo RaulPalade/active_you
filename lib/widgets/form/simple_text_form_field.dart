@@ -16,6 +16,8 @@ class SimpleTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController controller = TextEditingController();
+
     return SizedBox(
       height: 60,
       child: Card(
@@ -24,6 +26,7 @@ class SimpleTextFormField extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: TextFormField(
+            controller: controller,
             onChanged: (value) => onChaged(value),
             autofocus: true,
             decoration: InputDecoration(

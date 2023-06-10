@@ -1,15 +1,16 @@
 import 'package:active_you/navigation/endpoint.dart';
-import 'package:active_you/pages/create_workout/create_workout_state.dart';
-import 'package:active_you/pages/create_workout/create_workout_vm.dart';
+import 'package:active_you/pages/create_workout/create_workout_page.dart';
+import 'package:active_you/pages/page_coordinator.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/widgets/buttons/primary_button.dart';
+import 'package:active_you/widgets/buttons/secondary_button.dart';
 import 'package:active_you/widgets/form/simple_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
-class CreateWorkoutPage extends ConsumerWidget {
-  const CreateWorkoutPage({super.key});
+class CreateExercisePage extends ConsumerWidget {
+  const CreateExercisePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,17 +40,25 @@ class CreateWorkoutPage extends ConsumerWidget {
                     SimpleTextFormField(
                       hintText: "Nome",
                       icon: SvgPicture.asset("assets/icons/profile.svg"),
-                      onChaged: (workoutName) => ref
+                      onChaged: (exerciseName) => ref
                           .read(createWorkoutPageProvider.notifier)
-                          .setWorkoutName(workoutName),
+                          .setExerciseName(exerciseName),
                     ),
                     const SizedBox(height: 10),
                     SimpleTextFormField(
-                      hintText: "Tipo",
+                      hintText: "Ripetizioni",
                       icon: SvgPicture.asset("assets/icons/email.svg"),
-                      onChaged: (workoutType) => ref
+                      onChaged: (repetitions) => ref
                           .read(createWorkoutPageProvider.notifier)
-                          .setWorkoutType(workoutType),
+                          .setExerciseRepetitions(int.parse(repetitions)),
+                    ), //ExerciseCard()
+                    const SizedBox(height: 10),
+                    SimpleTextFormField(
+                      hintText: "Serie",
+                      icon: SvgPicture.asset("assets/icons/email.svg"),
+                      onChaged: (series) => ref
+                          .read(createWorkoutPageProvider.notifier)
+                          .setExerciseSeries(int.parse(series)),
                     ),
                   ],
                 ),
@@ -58,31 +67,44 @@ class CreateWorkoutPage extends ConsumerWidget {
           ),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-            child: PrimaryButton(
-                title: "Salva Workout",
-                onClick: () {
-                  createWorkoutAndGoToCreateExercise(context, ref);
-                }),
+            child: Row(children: [
+              Expanded(
+                  child: PrimaryButton(
+                      title: "Salva",
+                      onClick: () {
+                        addNewExercise(context, ref);
+                      })),
+              const SizedBox(
+                width: 20,
+              ),
+              Expanded(
+                child: SecondaryButton(
+                    title: "Esci",
+                    onClick: () {
+                      Navigator.pop(context);
+                    }),
+              ),
+            ]),
           ),
         ),
       ),
     );
   }
 
-  void createWorkoutAndGoToCreateExercise(BuildContext context, WidgetRef ref) {
+  void addNewExercise(BuildContext context, WidgetRef ref) {
     final form = ref.watch(createWorkoutPageProvider);
-    if (form.workoutName.isNotEmpty && form.workoutType.isNotEmpty) {
-      final res = ref.read(createWorkoutPageProvider.notifier).createWorkout();
+    if (form.exerciseName.isNotEmpty &&
+        form.exerciseRepetitions.toString().isNotEmpty &&
+        form.exerciseSeries.toString().isNotEmpty) {
+      final res = ref.read(createWorkoutPageProvider.notifier).createExercise();
       res.then((success) {
         if (success) {
-          ref.read(createWorkoutPageProvider.notifier).resetWorkoutForm();
+          ref.read(createWorkoutPageProvider.notifier).resetExerciseForm();
           Navigator.pushReplacementNamed(context, EndPoint.createExercise);
         } else {
-          showFailureSnackBar(context, "Impossibile creare l'workout");
+          showFailureSnackBar(context, "Impossibile aggiungere l'esercizio");
         }
       });
-    } else {
-      print("NOOO");
     }
   }
 
@@ -118,7 +140,3 @@ class CreateWorkoutPage extends ConsumerWidget {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
-
-final createWorkoutPageProvider =
-    StateNotifierProvider<CreateWorkoutVM, CreateWorkoutState>(
-        (ref) => CreateWorkoutVM(ref));

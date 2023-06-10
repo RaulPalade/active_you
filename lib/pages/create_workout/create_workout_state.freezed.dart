@@ -16,8 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CreateWorkoutState {
-  String get name => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
+  String get workoutName => throw _privateConstructorUsedError;
+  String get workoutType => throw _privateConstructorUsedError;
+  int get generatedId => throw _privateConstructorUsedError;
+  String get exerciseName => throw _privateConstructorUsedError;
+  int get exerciseRepetitions => throw _privateConstructorUsedError;
+  int get exerciseSeries => throw _privateConstructorUsedError;
   ErrorApiCall? get errorApiCall => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,7 +35,14 @@ abstract class $CreateWorkoutStateCopyWith<$Res> {
           CreateWorkoutState value, $Res Function(CreateWorkoutState) then) =
       _$CreateWorkoutStateCopyWithImpl<$Res, CreateWorkoutState>;
   @useResult
-  $Res call({String name, String type, ErrorApiCall? errorApiCall});
+  $Res call(
+      {String workoutName,
+      String workoutType,
+      int generatedId,
+      String exerciseName,
+      int exerciseRepetitions,
+      int exerciseSeries,
+      ErrorApiCall? errorApiCall});
 }
 
 /// @nodoc
@@ -47,19 +58,39 @@ class _$CreateWorkoutStateCopyWithImpl<$Res, $Val extends CreateWorkoutState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? type = null,
+    Object? workoutName = null,
+    Object? workoutType = null,
+    Object? generatedId = null,
+    Object? exerciseName = null,
+    Object? exerciseRepetitions = null,
+    Object? exerciseSeries = null,
     Object? errorApiCall = freezed,
   }) {
     return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      workoutName: null == workoutName
+          ? _value.workoutName
+          : workoutName // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
+      workoutType: null == workoutType
+          ? _value.workoutType
+          : workoutType // ignore: cast_nullable_to_non_nullable
               as String,
+      generatedId: null == generatedId
+          ? _value.generatedId
+          : generatedId // ignore: cast_nullable_to_non_nullable
+              as int,
+      exerciseName: null == exerciseName
+          ? _value.exerciseName
+          : exerciseName // ignore: cast_nullable_to_non_nullable
+              as String,
+      exerciseRepetitions: null == exerciseRepetitions
+          ? _value.exerciseRepetitions
+          : exerciseRepetitions // ignore: cast_nullable_to_non_nullable
+              as int,
+      exerciseSeries: null == exerciseSeries
+          ? _value.exerciseSeries
+          : exerciseSeries // ignore: cast_nullable_to_non_nullable
+              as int,
       errorApiCall: freezed == errorApiCall
           ? _value.errorApiCall
           : errorApiCall // ignore: cast_nullable_to_non_nullable
@@ -76,7 +107,14 @@ abstract class _$$CreateWorkoutStateDataCopyWith<$Res>
       __$$CreateWorkoutStateDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String type, ErrorApiCall? errorApiCall});
+  $Res call(
+      {String workoutName,
+      String workoutType,
+      int generatedId,
+      String exerciseName,
+      int exerciseRepetitions,
+      int exerciseSeries,
+      ErrorApiCall? errorApiCall});
 }
 
 /// @nodoc
@@ -90,19 +128,39 @@ class __$$CreateWorkoutStateDataCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? type = null,
+    Object? workoutName = null,
+    Object? workoutType = null,
+    Object? generatedId = null,
+    Object? exerciseName = null,
+    Object? exerciseRepetitions = null,
+    Object? exerciseSeries = null,
     Object? errorApiCall = freezed,
   }) {
     return _then(_$CreateWorkoutStateData(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      workoutName: null == workoutName
+          ? _value.workoutName
+          : workoutName // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
+      workoutType: null == workoutType
+          ? _value.workoutType
+          : workoutType // ignore: cast_nullable_to_non_nullable
               as String,
+      generatedId: null == generatedId
+          ? _value.generatedId
+          : generatedId // ignore: cast_nullable_to_non_nullable
+              as int,
+      exerciseName: null == exerciseName
+          ? _value.exerciseName
+          : exerciseName // ignore: cast_nullable_to_non_nullable
+              as String,
+      exerciseRepetitions: null == exerciseRepetitions
+          ? _value.exerciseRepetitions
+          : exerciseRepetitions // ignore: cast_nullable_to_non_nullable
+              as int,
+      exerciseSeries: null == exerciseSeries
+          ? _value.exerciseSeries
+          : exerciseSeries // ignore: cast_nullable_to_non_nullable
+              as int,
       errorApiCall: freezed == errorApiCall
           ? _value.errorApiCall
           : errorApiCall // ignore: cast_nullable_to_non_nullable
@@ -115,20 +173,38 @@ class __$$CreateWorkoutStateDataCopyWithImpl<$Res>
 
 class _$CreateWorkoutStateData implements CreateWorkoutStateData {
   const _$CreateWorkoutStateData(
-      {this.name = "", this.type = "", this.errorApiCall});
+      {this.workoutName = "",
+      this.workoutType = "",
+      this.generatedId = -1,
+      this.exerciseName = "",
+      this.exerciseRepetitions = 0,
+      this.exerciseSeries = 0,
+      this.errorApiCall});
 
   @override
   @JsonKey()
-  final String name;
+  final String workoutName;
   @override
   @JsonKey()
-  final String type;
+  final String workoutType;
+  @override
+  @JsonKey()
+  final int generatedId;
+  @override
+  @JsonKey()
+  final String exerciseName;
+  @override
+  @JsonKey()
+  final int exerciseRepetitions;
+  @override
+  @JsonKey()
+  final int exerciseSeries;
   @override
   final ErrorApiCall? errorApiCall;
 
   @override
   String toString() {
-    return 'CreateWorkoutState(name: $name, type: $type, errorApiCall: $errorApiCall)';
+    return 'CreateWorkoutState(workoutName: $workoutName, workoutType: $workoutType, generatedId: $generatedId, exerciseName: $exerciseName, exerciseRepetitions: $exerciseRepetitions, exerciseSeries: $exerciseSeries, errorApiCall: $errorApiCall)';
   }
 
   @override
@@ -136,14 +212,32 @@ class _$CreateWorkoutStateData implements CreateWorkoutStateData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateWorkoutStateData &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.type, type) || other.type == type) &&
+            (identical(other.workoutName, workoutName) ||
+                other.workoutName == workoutName) &&
+            (identical(other.workoutType, workoutType) ||
+                other.workoutType == workoutType) &&
+            (identical(other.generatedId, generatedId) ||
+                other.generatedId == generatedId) &&
+            (identical(other.exerciseName, exerciseName) ||
+                other.exerciseName == exerciseName) &&
+            (identical(other.exerciseRepetitions, exerciseRepetitions) ||
+                other.exerciseRepetitions == exerciseRepetitions) &&
+            (identical(other.exerciseSeries, exerciseSeries) ||
+                other.exerciseSeries == exerciseSeries) &&
             (identical(other.errorApiCall, errorApiCall) ||
                 other.errorApiCall == errorApiCall));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, type, errorApiCall);
+  int get hashCode => Object.hash(
+      runtimeType,
+      workoutName,
+      workoutType,
+      generatedId,
+      exerciseName,
+      exerciseRepetitions,
+      exerciseSeries,
+      errorApiCall);
 
   @JsonKey(ignore: true)
   @override
@@ -155,14 +249,26 @@ class _$CreateWorkoutStateData implements CreateWorkoutStateData {
 
 abstract class CreateWorkoutStateData implements CreateWorkoutState {
   const factory CreateWorkoutStateData(
-      {final String name,
-      final String type,
+      {final String workoutName,
+      final String workoutType,
+      final int generatedId,
+      final String exerciseName,
+      final int exerciseRepetitions,
+      final int exerciseSeries,
       final ErrorApiCall? errorApiCall}) = _$CreateWorkoutStateData;
 
   @override
-  String get name;
+  String get workoutName;
   @override
-  String get type;
+  String get workoutType;
+  @override
+  int get generatedId;
+  @override
+  String get exerciseName;
+  @override
+  int get exerciseRepetitions;
+  @override
+  int get exerciseSeries;
   @override
   ErrorApiCall? get errorApiCall;
   @override

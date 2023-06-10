@@ -230,28 +230,52 @@ class _RestClientPerson implements RestClientPerson {
   }
 
   @override
-  Future<HttpResponse<dynamic>> createWorkout(workout) async {
+  Future<int> createWorkout(workout) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(workout.toJson());
-    final _result =
-        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
+    final _result = await _dio.fetch<int>(_setStreamType<int>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/userService/api/v1/users/createWorkout',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
-    final httpResponse = HttpResponse(value, _result);
-    return httpResponse;
+        .compose(
+          _dio.options,
+          '/userService/api/v1/users/createWorkout',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
+  Future<int> createExercise(
+    exercise,
+    id,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'id': id};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(exercise.toJson());
+    final _result = await _dio.fetch<int>(_setStreamType<int>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/userService/api/v1/users/createExercise',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
   }
 
   @override

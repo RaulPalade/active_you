@@ -8,7 +8,7 @@ part of 'workout.dart';
 
 _$_Workout _$$_WorkoutFromJson(Map<String, dynamic> json) => _$_Workout(
       id: json['id'] as int?,
-      createdBy: json['createdBy'] as int?,
+      createdById: json['createdById'] as int?,
       name: json['name'] as String?,
       type: json['type'] as String?,
       exercises: (json['exercises'] as List<dynamic>?)
@@ -19,7 +19,7 @@ _$_Workout _$$_WorkoutFromJson(Map<String, dynamic> json) => _$_Workout(
 Map<String, dynamic> _$$_WorkoutToJson(_$_Workout instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'createdBy': instance.createdBy,
+      'createdById': instance.createdById,
       'name': instance.name,
       'type': instance.type,
       'exercises': instance.exercises,

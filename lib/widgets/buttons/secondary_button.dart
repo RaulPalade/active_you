@@ -9,41 +9,38 @@ class SecondaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(99),
-          gradient: const LinearGradient(
-            colors: [
-              ActiveYouTheme.secondaryLightColor,
-              ActiveYouTheme.secondaryDarkColor,
-            ],
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: ActiveYouTheme.grayMediumColor.withOpacity(0.4),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3), // changes position of shadow
-            ),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(99),
+        gradient: const LinearGradient(
+          colors: [
+            ActiveYouTheme.secondaryLightColor,
+            ActiveYouTheme.secondaryDarkColor,
           ],
         ),
-        child: TextButton(
-          style: ButtonStyle(
-            foregroundColor:
-                MaterialStateProperty.all(ActiveYouTheme.whiteColor),
-            textStyle: MaterialStateProperty.all(
-              const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            minimumSize: MaterialStateProperty.all(const Size.fromHeight(60)),
+        boxShadow: [
+          BoxShadow(
+            color: ActiveYouTheme.grayMediumColor.withOpacity(0.4),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: const Offset(0, 3), // changes position of shadow
           ),
-          child: Text(title),
-          onPressed: () => onClick(),
+        ],
+      ),
+      child: TextButton(
+        style: ButtonStyle(
+          foregroundColor:
+              MaterialStateProperty.all(ActiveYouTheme.whiteColor),
+          textStyle: MaterialStateProperty.all(
+            const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          minimumSize: MaterialStateProperty.all(const Size.fromHeight(60)),
         ),
+        child: Text(title),
+        onPressed: () => onClick(),
       ),
     );
   }

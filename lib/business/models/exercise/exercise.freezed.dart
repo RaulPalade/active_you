@@ -20,11 +20,10 @@ Exercise _$ExerciseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Exercise {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   int? get repetitions => throw _privateConstructorUsedError;
   int? get series => throw _privateConstructorUsedError;
-  List<Workout>? get onWorkouts => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,12 +36,7 @@ abstract class $ExerciseCopyWith<$Res> {
   factory $ExerciseCopyWith(Exercise value, $Res Function(Exercise) then) =
       _$ExerciseCopyWithImpl<$Res, Exercise>;
   @useResult
-  $Res call(
-      {int id,
-      String? name,
-      int? repetitions,
-      int? series,
-      List<Workout>? onWorkouts});
+  $Res call({int? id, String? name, int? repetitions, int? series});
 }
 
 /// @nodoc
@@ -58,17 +52,16 @@ class _$ExerciseCopyWithImpl<$Res, $Val extends Exercise>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = freezed,
     Object? repetitions = freezed,
     Object? series = freezed,
-    Object? onWorkouts = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -81,10 +74,6 @@ class _$ExerciseCopyWithImpl<$Res, $Val extends Exercise>
           ? _value.series
           : series // ignore: cast_nullable_to_non_nullable
               as int?,
-      onWorkouts: freezed == onWorkouts
-          ? _value.onWorkouts
-          : onWorkouts // ignore: cast_nullable_to_non_nullable
-              as List<Workout>?,
     ) as $Val);
   }
 }
@@ -96,12 +85,7 @@ abstract class _$$_ExerciseCopyWith<$Res> implements $ExerciseCopyWith<$Res> {
       __$$_ExerciseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int id,
-      String? name,
-      int? repetitions,
-      int? series,
-      List<Workout>? onWorkouts});
+  $Res call({int? id, String? name, int? repetitions, int? series});
 }
 
 /// @nodoc
@@ -115,17 +99,16 @@ class __$$_ExerciseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = freezed,
     Object? repetitions = freezed,
     Object? series = freezed,
-    Object? onWorkouts = freezed,
   }) {
     return _then(_$_Exercise(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -138,10 +121,6 @@ class __$$_ExerciseCopyWithImpl<$Res>
           ? _value.series
           : series // ignore: cast_nullable_to_non_nullable
               as int?,
-      onWorkouts: freezed == onWorkouts
-          ? _value._onWorkouts
-          : onWorkouts // ignore: cast_nullable_to_non_nullable
-              as List<Workout>?,
     ));
   }
 }
@@ -153,34 +132,23 @@ class _$_Exercise implements _Exercise {
       {required this.id,
       required this.name,
       required this.repetitions,
-      required this.series,
-      required final List<Workout>? onWorkouts})
-      : _onWorkouts = onWorkouts;
+      required this.series});
 
   factory _$_Exercise.fromJson(Map<String, dynamic> json) =>
       _$$_ExerciseFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   final String? name;
   @override
   final int? repetitions;
   @override
   final int? series;
-  final List<Workout>? _onWorkouts;
-  @override
-  List<Workout>? get onWorkouts {
-    final value = _onWorkouts;
-    if (value == null) return null;
-    if (_onWorkouts is EqualUnmodifiableListView) return _onWorkouts;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
 
   @override
   String toString() {
-    return 'Exercise(id: $id, name: $name, repetitions: $repetitions, series: $series, onWorkouts: $onWorkouts)';
+    return 'Exercise(id: $id, name: $name, repetitions: $repetitions, series: $series)';
   }
 
   @override
@@ -192,15 +160,12 @@ class _$_Exercise implements _Exercise {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.repetitions, repetitions) ||
                 other.repetitions == repetitions) &&
-            (identical(other.series, series) || other.series == series) &&
-            const DeepCollectionEquality()
-                .equals(other._onWorkouts, _onWorkouts));
+            (identical(other.series, series) || other.series == series));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, repetitions, series,
-      const DeepCollectionEquality().hash(_onWorkouts));
+  int get hashCode => Object.hash(runtimeType, id, name, repetitions, series);
 
   @JsonKey(ignore: true)
   @override
@@ -218,24 +183,21 @@ class _$_Exercise implements _Exercise {
 
 abstract class _Exercise implements Exercise {
   const factory _Exercise(
-      {required final int id,
+      {required final int? id,
       required final String? name,
       required final int? repetitions,
-      required final int? series,
-      required final List<Workout>? onWorkouts}) = _$_Exercise;
+      required final int? series}) = _$_Exercise;
 
   factory _Exercise.fromJson(Map<String, dynamic> json) = _$_Exercise.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
   String? get name;
   @override
   int? get repetitions;
   @override
   int? get series;
-  @override
-  List<Workout>? get onWorkouts;
   @override
   @JsonKey(ignore: true)
   _$$_ExerciseCopyWith<_$_Exercise> get copyWith =>
