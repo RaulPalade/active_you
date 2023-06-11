@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:active_you/business/models/workout/workout.dart';
 import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/theme/active_you_theme.dart';
@@ -12,13 +14,31 @@ class WorkoutBigCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = [
+      ActiveYouTheme.workoutCardBlue,
+      ActiveYouTheme.workoutCard1,
+      ActiveYouTheme.workoutCard2,
+      ActiveYouTheme.workoutCard3,
+      ActiveYouTheme.workoutCard4,
+      ActiveYouTheme.workoutCard5,
+    ];
+
+    final images = [
+      "assets/icons/workouts-images/1.svg",
+      "assets/icons/workouts-images/2.svg",
+      "assets/icons/workouts-images/3.svg"
+    ];
+    final random = Random();
+    int i = random.nextInt(colors.length);
+    int j = random.nextInt(images.length);
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Container(
         height: 180,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: ActiveYouTheme.workoutCardBlue,
+          color: colors[i],
         ),
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -74,7 +94,7 @@ class WorkoutBigCard extends StatelessWidget {
                 radius: MediaQuery.of(context).size.width / 7,
                 backgroundColor: Colors.white70,
                 child: SvgPicture.asset(
-                  "assets/icons/workouts-images/3.svg",
+                  images[j],
                   width: MediaQuery.of(context).size.width / 3,
                 ),
               ),

@@ -49,17 +49,20 @@ class _PageCoordinatorState extends ConsumerState<PageCoordinator> {
         index: _selectedIndex,
         children: _pages,
       ),
-      bottomNavigationBar: CurvedNavigationBar(
-        color: ActiveYouTheme.brandDarkColor,
-        backgroundColor: Colors.transparent,
-        items: [
-          SvgPicture.asset("assets/icons/interface/home.svg"),
-          SvgPicture.asset("assets/icons/interface/3-users.svg"),
-          SvgPicture.asset("assets/icons/interface/search.svg"),
-          SvgPicture.asset("assets/icons/interface/document.svg"),
-          SvgPicture.asset("assets/icons/profile.svg"),
-        ],
-        onTap: _onItemTapped,
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: CurvedNavigationBar(
+          color: ActiveYouTheme.brandDarkColor,
+          backgroundColor: Colors.transparent,
+          items: [
+            SvgPicture.asset("assets/icons/interface/home.svg"),
+            SvgPicture.asset("assets/icons/interface/3-users.svg"),
+            SvgPicture.asset("assets/icons/interface/search.svg"),
+            SvgPicture.asset("assets/icons/interface/document.svg"),
+            SvgPicture.asset("assets/icons/profile.svg"),
+          ],
+          onTap: _onItemTapped,
+        ),
       ),
     );
   }

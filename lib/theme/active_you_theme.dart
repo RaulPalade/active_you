@@ -29,6 +29,11 @@ class ActiveYouTheme {
   static const Color shadowColorBlue = Color(0xFF95ADFE);
 
   static const Color workoutCardBlue = Color(0xFFE7F0FF);
+  static const Color workoutCard1 = Color(0xFFFFF4F4);
+  static const Color workoutCard2 = Color(0xFFF9F5F6);
+  static const Color workoutCard3 = Color(0xFFE3F4F4);
+  static const Color workoutCard4 = Color(0xFFFFBFA9);
+  static const Color workoutCard5 = Color(0xFFF3E99F);
 
   static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,

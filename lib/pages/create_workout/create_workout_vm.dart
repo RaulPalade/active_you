@@ -39,6 +39,10 @@ class CreateWorkoutVM extends StateNotifier<CreateWorkoutState> {
     state = state.copyWith(exerciseSeries: series);
   }
 
+  void setWorkoutIdForExercise(int workoutId) {
+    state = state.copyWith(generatedId: workoutId);
+  }
+
   void resetExerciseForm() {
     state = state.copyWith(
       exerciseName: "",

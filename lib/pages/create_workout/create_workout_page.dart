@@ -86,22 +86,6 @@ class CreateWorkoutPage extends ConsumerWidget {
     }
   }
 
-  void showSuccessSnackBar(BuildContext context, String message) {
-    final snackBar = SnackBar(
-      content: Text(
-        message,
-        style: const TextStyle(
-          fontFamily: "Poppins-Medium",
-          fontSize: 14,
-          color: ActiveYouTheme.whiteColor,
-        ),
-      ),
-      backgroundColor: ActiveYouTheme.brandDarkColor,
-      behavior: SnackBarBehavior.floating,
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
-
   void showFailureSnackBar(BuildContext context, String message) {
     final snackBar = SnackBar(
       content: Text(

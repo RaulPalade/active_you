@@ -92,7 +92,7 @@ class FakePerson {
 }
 
 final personsAndTrainersPageProvider =
-    StateNotifierProvider<PersonsAndTrainersVM, PersonsAndTrainersState>(
+    StateNotifierProvider.autoDispose<PersonsAndTrainersVM, PersonsAndTrainersState>(
         (ref) => PersonsAndTrainersVM(ref));
 
 final _personsProvider = Provider.autoDispose<List<Person>>((ref) {

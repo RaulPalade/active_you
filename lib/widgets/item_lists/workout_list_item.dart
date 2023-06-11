@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,13 +18,31 @@ class WorkoutListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = [
+      ActiveYouTheme.workoutCardBlue,
+      ActiveYouTheme.workoutCard1,
+      ActiveYouTheme.workoutCard2,
+      ActiveYouTheme.workoutCard3,
+      ActiveYouTheme.workoutCard4,
+      ActiveYouTheme.workoutCard5,
+    ];
+
+    final images = [
+      "assets/icons/workouts-images/1.svg",
+      "assets/icons/workouts-images/2.svg",
+      "assets/icons/workouts-images/3.svg"
+    ];
+    final random = Random();
+    int i = random.nextInt(colors.length);
+    int j = random.nextInt(images.length);
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: Colors.white,
+          color: colors[i],
           boxShadow: [
             BoxShadow(
               color: ActiveYouTheme.grayMediumColor.withOpacity(0.1),
@@ -44,7 +64,7 @@ class WorkoutListItem extends StatelessWidget {
                     radius: 24,
                     backgroundColor: ActiveYouTheme.brandLightColor,
                     child:
-                        SvgPicture.asset("assets/icons/workouts-images/3.svg"),
+                        SvgPicture.asset(images[j]),
                   ),
                   const SizedBox(width: 15),
                   Expanded(

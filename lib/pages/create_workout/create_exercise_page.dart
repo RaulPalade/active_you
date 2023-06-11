@@ -1,6 +1,5 @@
 import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/pages/create_workout/create_workout_page.dart';
-import 'package:active_you/pages/page_coordinator.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/widgets/buttons/primary_button.dart';
 import 'package:active_you/widgets/buttons/secondary_button.dart';

@@ -32,7 +32,7 @@ class MyWorkoutsVM extends StateNotifier<MyWorkoutsState> {
     }
   }
 
-  Future<void> markWorkoutAsCompleted(int id) async {
+  Future<bool> markWorkoutAsCompleted(int id) async {
     try {
       final response =
           await ref.read(restClientWorkoutProvider).deleteWorkoutForUser(id);
@@ -41,14 +41,20 @@ class MyWorkoutsVM extends StateNotifier<MyWorkoutsState> {
             state.activeWorkouts?.where((workout) => workout.id != id).toList();
         final completedWorkout =
             state.activeWorkouts?.firstWhere((workout) => workout.id == id);
+
         state = state.copyWith(activeWorkouts: updatedActiveWorkouts);
         state = state.copyWith(completedWorkouts: [
           ...?state.completedWorkouts,
           completedWorkout!
         ]);
+        fetchMyWorkouts();
+        return true;
+      } else {
+        return false;
       }
     } catch (err) {
       await _catchErrorOnFetch(err);
+      return false;
     }
   }
 

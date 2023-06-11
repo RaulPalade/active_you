@@ -178,7 +178,7 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
     }
   }
 
-  Future<void> saveWorkout(Workout workout) async {
+  Future<bool> saveWorkout(Workout workout) async {
     try {
       PersonWorkout personWorkout = PersonWorkout(
         id: null,
@@ -199,9 +199,13 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
         );
 
         state = state.copyWith(currentPerson: updatedPerson);
+        return true;
+      } else {
+        return false;
       }
     } catch (err) {
       await _catchErrorOnFetch(err);
+      return false;
     }
   }
 
