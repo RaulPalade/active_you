@@ -42,12 +42,10 @@ class ExerciseCard extends StatelessWidget {
           CardRow(
             iconPath: "assets/icons/interface/chart.svg",
             title: "Ripetizioni: ${exercise.repetitions}",
-            onClick: () {},
           ),
           CardRow(
             iconPath: "assets/icons/interface/time-circle.svg",
             title: "Serie: ${exercise.series}",
-            onClick: () {},
           ),
         ],
       ),

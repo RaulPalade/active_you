@@ -66,14 +66,14 @@ class PersonProfilePage extends ConsumerWidget {
                 shrinkWrap: true,
                 children: [
                   StatsCard(
-                      value: currentPerson!.height.toString(),
-                      unitMeasure: currentPerson.heightUnit.toString()),
+                      value: currentPerson?.height.toString() ?? "",
+                      unitMeasure: currentPerson?.heightUnit.toString() ?? ""),
                   StatsCard(
-                      value: currentPerson.weight.toString(),
-                      unitMeasure: currentPerson.weightUnit.toString()),
+                      value: currentPerson?.weight.toString() ?? "",
+                      unitMeasure: currentPerson?.weightUnit.toString() ?? ""),
                   StatsCard(
                       value:
-                          MyDateUtils.calculateAge(currentPerson.dateOfBirth!),
+                          MyDateUtils.calculateAge(currentPerson?.dateOfBirth ?? DateTime.now()),
                       unitMeasure: "Age"),
                 ],
               ),
@@ -85,10 +85,10 @@ class PersonProfilePage extends ConsumerWidget {
                 shrinkWrap: true,
                 children: [
                   StatsCard(
-                      value: currentPerson.following!.length.toString(),
+                      value: currentPerson?.following?.length.toString() ?? "",
                       unitMeasure: "Following"),
                   StatsCard(
-                      value: currentPerson.followers!.length.toString(),
+                      value: currentPerson?.followers?.length.toString() ?? "",
                       unitMeasure: "Followers"),
                 ],
               ),

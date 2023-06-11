@@ -3,11 +3,14 @@ import 'package:active_you/pages/auth/login/login_page.dart';
 import 'package:active_you/pages/auth/registration/registration_credentials_page.dart';
 import 'package:active_you/pages/auth/registration/registration_info_page.dart';
 import 'package:active_you/pages/auth/success_registration_page.dart';
+import 'package:active_you/pages/create_goal/create_goal_page.dart';
 import 'package:active_you/pages/create_workout/create_exercise_page.dart';
 import 'package:active_you/pages/explore_workouts/workout_detail_page.dart';
 import 'package:active_you/pages/home/home_page.dart';
 import 'package:active_you/pages/intro/onboarding_page.dart';
 import 'package:active_you/pages/intro/welcome_page.dart';
+import 'package:active_you/pages/my_goals/goal_detail_page.dart';
+import 'package:active_you/pages/my_goals/my_goals_page.dart';
 import 'package:active_you/pages/my_workouts/my_workout_detail.dart';
 import 'package:active_you/pages/page_coordinator.dart';
 import 'package:active_you/pages/create_workout/create_workout_page.dart';
@@ -75,6 +78,18 @@ PageRoute modalRoute(RouteSettings settings) {
     case EndPoint.createExercise:
       return MaterialPageRoute(
           builder: (_) => const CreateExercisePage(), settings: settings);
+
+    case EndPoint.myGoals:
+      return MaterialPageRoute(
+          builder: (_) => const MyGoalsPage(), settings: settings);
+
+    case EndPoint.createGoal:
+      return MaterialPageRoute(
+          builder: (_) => const CreateGoalPage(), settings: settings);
+
+    case EndPoint.goalDetail:
+      return MaterialPageRoute(
+          builder: (_) => const GoalDetailPage(), settings: settings);
 
     default:
       return MaterialPageRoute(

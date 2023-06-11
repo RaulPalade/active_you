@@ -4,6 +4,7 @@ import 'package:active_you/pages/create_workout/create_workout_vm.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/widgets/buttons/primary_button.dart';
 import 'package:active_you/widgets/form/simple_text_form_field.dart';
+import 'package:active_you/widgets/my_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -17,20 +18,11 @@ class CreateWorkoutPage extends ConsumerWidget {
       color: ActiveYouTheme.scaffoldColor,
       child: SafeArea(
         child: Scaffold(
+          appBar: const MyAppBar(title: "Aggiungi Workout"),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 20),
-              const Text(
-                "Crea un nuovo workout",
-                style: TextStyle(
-                  fontFamily: "Poppins-Medium",
-                  fontSize: 16,
-                  color: ActiveYouTheme.textBlackColor,
-                ),
-              ),
-              const SizedBox(height: 10),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 12, horizontal: 24),

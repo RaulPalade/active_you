@@ -17,4 +17,8 @@ class EndPoint {
 
   static const createWorkout = "create-workout";
   static const createExercise = "create-exercise";
+
+  static const myGoals = "my-goals";
+  static const createGoal = "create-goal";
+  static const goalDetail = "goal-detail";
 }

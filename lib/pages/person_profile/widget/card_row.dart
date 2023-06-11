@@ -3,16 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CardRow extends StatelessWidget {
-  const CardRow(
-      {Key? key,
-      required this.iconPath,
-      required this.title,
-      required this.onClick})
-      : super(key: key);
+  const CardRow({
+    Key? key,
+    required this.iconPath,
+    required this.title,
+  }) : super(key: key);
 
   final String iconPath;
   final String title;
-  final Function onClick;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +44,6 @@ class CardRow extends StatelessWidget {
               "assets/icons/arrow-right.svg",
               color: ActiveYouTheme.grayDarkColor,
             ),
-            onTap: () => onClick,
           ),
         ],
       ),

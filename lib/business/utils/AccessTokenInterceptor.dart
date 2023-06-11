@@ -17,6 +17,7 @@ class AccessTokenInterceptor extends Interceptor {
     try {
       String? idToken = await _storage.readValue(_storage.idTokenKey);
       if (idToken != null) {
+        print(idToken);
         DateTime expirationDate = JwtDecoder.getExpirationDate(idToken);
         if (expirationDate.isBefore(DateTime.now())) {
           await _storage.deleteValue(idToken);

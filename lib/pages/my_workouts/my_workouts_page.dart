@@ -35,8 +35,8 @@ class _MyWorkoutsPageState extends ConsumerState<MyWorkoutsPage>
 
   @override
   Widget build(BuildContext context) {
-    final activeWorkotus = ref.watch(activeWorkoutsProvider);
-    final completedWorkotus = ref.watch(completedWorkoutsProvider);
+    final activeWorkouts = ref.watch(activeWorkoutsProvider);
+    final completedWorkouts = ref.watch(completedWorkoutsProvider);
 
     return Scaffold(
       appBar: const MyAppBar(title: "My Workouts"),
@@ -57,11 +57,11 @@ class _MyWorkoutsPageState extends ConsumerState<MyWorkoutsPage>
             child: ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 itemCount: _tabIndex == 0
-                    ? activeWorkotus!.length
-                    : completedWorkotus!.length,
+                    ? activeWorkouts!.length
+                    : completedWorkouts!.length,
                 itemBuilder: (BuildContext context, int index) {
                   final list =
-                      _tabIndex == 0 ? activeWorkotus : completedWorkotus;
+                      _tabIndex == 0 ? activeWorkouts : completedWorkouts;
                   return GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(

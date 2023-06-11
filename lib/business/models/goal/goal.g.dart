@@ -7,7 +7,7 @@ part of 'goal.dart';
 // **************************************************************************
 
 _$_Goal _$$_GoalFromJson(Map<String, dynamic> json) => _$_Goal(
-      id: json['id'] as int,
+      id: json['id'] as int?,
       name: json['name'] as String?,
       type: json['type'] as String?,
       weight: (json['weight'] as num?)?.toDouble(),

@@ -1,41 +1,15 @@
-import 'dart:math';
-
+import 'package:active_you/business/models/goal/goal.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 
-class WorkoutListItem extends StatelessWidget {
-  const WorkoutListItem(
-      {Key? key,
-      required this.workoutName,
-      required this.workoutType,
-      required this.numberExercises})
-      : super(key: key);
+class GoalListItem extends StatelessWidget {
+  const GoalListItem({super.key, required this.goal});
 
-  final String workoutName;
-  final String workoutType;
-  final int numberExercises;
+  final Goal goal;
 
   @override
   Widget build(BuildContext context) {
-    final colors = [
-      ActiveYouTheme.workoutCardBlue,
-      ActiveYouTheme.workoutCard1,
-      ActiveYouTheme.workoutCard2,
-      ActiveYouTheme.workoutCard3,
-      ActiveYouTheme.workoutCard4,
-      ActiveYouTheme.workoutCard5,
-    ];
-
-    final images = [
-      "assets/icons/workouts-images/1.svg",
-      "assets/icons/workouts-images/2.svg",
-      "assets/icons/workouts-images/3.svg"
-    ];
-    final random = Random();
-    int i = random.nextInt(colors.length);
-    int j = random.nextInt(images.length);
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Container(
@@ -60,20 +34,13 @@ class WorkoutListItem extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  CircleAvatar(
-                    radius: 24,
-                    backgroundColor: ActiveYouTheme.brandLightColor,
-                    child:
-                        SvgPicture.asset(images[j]),
-                  ),
-                  const SizedBox(width: 15),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          workoutName,
+                          goal.name!,
                           style: const TextStyle(
                             fontFamily: "Poppins-Medium",
                             fontSize: 14,
@@ -82,7 +49,7 @@ class WorkoutListItem extends StatelessWidget {
                         ),
                         const SizedBox(height: 5),
                         Text(
-                          "${workoutType.toString()} | $numberExercises exercises",
+                          "${goal.type.toString()} | Obiettivo: ${goal.weight} kg",
                           style: const TextStyle(
                             fontSize: 12,
                             color: ActiveYouTheme.grayDarkColor,
@@ -92,7 +59,6 @@ class WorkoutListItem extends StatelessWidget {
                     ),
                   ),
                   SvgPicture.asset("assets/icons/interface/workout-btn.svg"),
-                  //const SizedBox(width: 10),
                 ],
               )
             ],

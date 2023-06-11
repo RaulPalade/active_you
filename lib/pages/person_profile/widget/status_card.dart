@@ -1,3 +1,4 @@
+import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -35,20 +36,26 @@ class StatusCard extends StatelessWidget {
               ),
             ),
           ),
-          CardRow(
-            iconPath: "assets/icons/profile.svg",
-            title: "Personal Workouts",
-            onClick: () {},
+          GestureDetector(
+            child: const CardRow(
+              iconPath: "assets/icons/profile.svg",
+              title: "Personal Workouts",
+            ),
+            onTap: () {},
           ),
-          CardRow(
-            iconPath: "assets/icons/interface/document.svg",
-            title: "Goals",
-            onClick: () {},
+          GestureDetector(
+            child: const CardRow(
+              iconPath: "assets/icons/interface/document.svg",
+              title: "Goals",
+            ),
+            onTap: () => Navigator.pushNamed(context, EndPoint.myGoals),
           ),
-          CardRow(
-            iconPath: "assets/icons/interface/graph.svg",
-            title: "Completed Workouts",
-            onClick: () {},
+          GestureDetector(
+            child: const CardRow(
+              iconPath: "assets/icons/interface/graph.svg",
+              title: "Completed Workouts",
+            ),
+            onTap: () {},
           ),
           const SizedBox(height: 10),
         ],

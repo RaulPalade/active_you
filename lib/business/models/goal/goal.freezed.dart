@@ -20,7 +20,7 @@ Goal _$GoalFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Goal {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
   double? get weight => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $GoalCopyWith<$Res> {
       _$GoalCopyWithImpl<$Res, Goal>;
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       String? name,
       String? type,
       double? weight,
@@ -63,7 +63,7 @@ class _$GoalCopyWithImpl<$Res, $Val extends Goal>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = freezed,
     Object? type = freezed,
     Object? weight = freezed,
@@ -73,10 +73,10 @@ class _$GoalCopyWithImpl<$Res, $Val extends Goal>
     Object? completed = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -116,7 +116,7 @@ abstract class _$$_GoalCopyWith<$Res> implements $GoalCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       String? name,
       String? type,
       double? weight,
@@ -135,7 +135,7 @@ class __$$_GoalCopyWithImpl<$Res> extends _$GoalCopyWithImpl<$Res, _$_Goal>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = freezed,
     Object? type = freezed,
     Object? weight = freezed,
@@ -145,10 +145,10 @@ class __$$_GoalCopyWithImpl<$Res> extends _$GoalCopyWithImpl<$Res, _$_Goal>
     Object? completed = freezed,
   }) {
     return _then(_$_Goal(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -197,7 +197,7 @@ class _$_Goal implements _Goal {
   factory _$_Goal.fromJson(Map<String, dynamic> json) => _$$_GoalFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   final String? name;
   @override
@@ -257,7 +257,7 @@ class _$_Goal implements _Goal {
 
 abstract class _Goal implements Goal {
   const factory _Goal(
-      {required final int id,
+      {required final int? id,
       required final String? name,
       required final String? type,
       required final double? weight,
@@ -269,7 +269,7 @@ abstract class _Goal implements Goal {
   factory _Goal.fromJson(Map<String, dynamic> json) = _$_Goal.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
   String? get name;
   @override

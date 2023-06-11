@@ -22,10 +22,10 @@ class OtherCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
             child: Text(
               "Other",
@@ -38,14 +38,12 @@ class OtherCard extends StatelessWidget {
           CardRow(
             iconPath: "assets/icons/interface/shield.svg",
             title: "Privacy Policy",
-            onClick: () {},
           ),
           CardRow(
             iconPath: "assets/icons/interface/setting.svg",
             title: "Settings",
-            onClick: () {},
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 10),
         ],
       ),
     );
