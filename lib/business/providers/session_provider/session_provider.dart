@@ -36,7 +36,6 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
         return false;
       }
     } catch (err) {
-      await _catchErrorOnFetch(err);
       return false;
     }
   }

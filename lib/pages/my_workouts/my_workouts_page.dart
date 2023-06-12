@@ -85,11 +85,11 @@ class _MyWorkoutsPageState extends ConsumerState<MyWorkoutsPage>
 }
 
 final myWorkoutsPageProvider =
-    StateNotifierProvider.autoDispose<MyWorkoutsVM, MyWorkoutsState>(
+    StateNotifierProvider<MyWorkoutsVM, MyWorkoutsState>(
         (ref) => MyWorkoutsVM(ref));
 
-final activeWorkoutsProvider = Provider.autoDispose<List<PersonWorkout>?>(
+final activeWorkoutsProvider = Provider<List<PersonWorkout>?>(
     (ref) => ref.watch(myWorkoutsPageProvider).activeWorkouts);
 
-final completedWorkoutsProvider = Provider.autoDispose<List<PersonWorkout>?>(
+final completedWorkoutsProvider = Provider<List<PersonWorkout>?>(
     (ref) => ref.watch(myWorkoutsPageProvider).completedWorkouts);

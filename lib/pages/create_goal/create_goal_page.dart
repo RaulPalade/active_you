@@ -52,6 +52,7 @@ class CreateGoalPage extends ConsumerWidget {
                           .read(createGoalPageProvider.notifier)
                           .setWeight(double.parse(series)),
                     ),
+                    const SizedBox(height: 10),
                     SimpleTextFormField(
                       hintText: "Giorni a settimana",
                       icon: SvgPicture.asset("assets/icons/email.svg"),

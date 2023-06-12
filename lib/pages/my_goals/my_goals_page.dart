@@ -35,6 +35,7 @@ class _MyGoalsPageState extends ConsumerState<MyGoalsPage>
 
   @override
   Widget build(BuildContext context) {
+    ref.watch(myGoalsPageProvider.notifier).fetchMyGoals();
     final activeGoals = ref.watch(activeGoalsProvider);
     final completedGoals = ref.watch(completedGoalsProvider);
 
@@ -104,11 +105,11 @@ class _MyGoalsPageState extends ConsumerState<MyGoalsPage>
 }
 
 final myGoalsPageProvider =
-    StateNotifierProvider.autoDispose<MyGoalsVM, MyGoalsState>(
+    StateNotifierProvider<MyGoalsVM, MyGoalsState>(
         (ref) => MyGoalsVM(ref));
 
-final activeGoalsProvider = Provider.autoDispose<List<Goal>?>(
+final activeGoalsProvider = Provider<List<Goal>?>(
     (ref) => ref.watch(myGoalsPageProvider).activeGoals);
 
-final completedGoalsProvider = Provider.autoDispose<List<Goal>?>(
+final completedGoalsProvider = Provider<List<Goal>?>(
     (ref) => ref.watch(myGoalsPageProvider).completedGoals);

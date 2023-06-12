@@ -37,7 +37,7 @@ class _PageCoordinatorState extends ConsumerState<PageCoordinator> {
     if (index == 2) {
       ref.read(exploreWorkoutsPageProvider.notifier).fetchWorkouts();
     }
-    if (index == 3) {
+    if (index == 0 || index == 3) {
       ref.read(myWorkoutsPageProvider.notifier).fetchMyWorkouts();
     }
   }
