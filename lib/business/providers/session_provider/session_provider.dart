@@ -27,15 +27,14 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
         storageManager.writeValue(
             storageManager.idTokenKey, response.data["access_token"]);
 
-        final currentPerson = await getPersonById(0);
-        if (currentPerson != null) {
-          state = state.copyWith(currentPerson: currentPerson, loading: false);
-        }
+        state = state.copyWith(loading: false);
+        await getLoggedPerson(email);
         return true;
       } else {
         return false;
       }
     } catch (err) {
+      print(err);
       return false;
     }
   }

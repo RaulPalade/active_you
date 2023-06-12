@@ -23,8 +23,9 @@ class SplashPage extends ConsumerWidget {
         response.then((String? idToken) {
           if (idToken == null) {
             navigateToLoginPage(context);
+            return;
           }
-          DateTime expirationDate = JwtDecoder.getExpirationDate(idToken!);
+          DateTime expirationDate = JwtDecoder.getExpirationDate(idToken);
           final tokenMap = JwtDecoder.decode(idToken);
           String emailLoggedUser = tokenMap["sub"];
 
