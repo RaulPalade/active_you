@@ -14,34 +14,33 @@ class SplashPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(splashPageProvider, (previous, next) async {
+    ref.listen(splashPageProvider, (previous, next) {
       if (!(previous?.endInit ?? false) && next.endInit) {
-        // Navigator.pushAndRemoveUntil(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => const RegistrationCredentialsPage(),
-        //   ),
-        //       (route) => false,
-        // );
-
 
         SecureStorageManager storage = SecureStorageManager();
-        String? idToken = await storage.readValue(storage.idTokenKey);
+        final response = storage.readValue(storage.idTokenKey);
 
-        if(idToken == null) {
-          navigateToLoginPage(context);
-        }
+        response.then((String? idToken) {
+          if (idToken == null) {
+            navigateToLoginPage(context);
+          }
+          DateTime expirationDate = JwtDecoder.getExpirationDate(idToken!);
+          final tokenMap = JwtDecoder.decode(idToken);
+          String emailLoggedUser = tokenMap["sub"];
 
-        DateTime expirationDate = JwtDecoder.getExpirationDate(idToken!);
-        final tokenMap = JwtDecoder.decode(idToken);
-        String emailLoggedUser = tokenMap["sub"];
-
-        if (expirationDate.isBefore(DateTime.now())) {
-          navigateToLoginPage(context);
-        } else {
-          ref.read(sessionProvider.notifier).getLoggedPerson(emailLoggedUser);
-          navigateToPageCoordinator(context);
-        }
+          if (expirationDate.isBefore(DateTime.now())) {
+            navigateToLoginPage(context);
+          } else {
+            final response = ref
+                .read(sessionProvider.notifier)
+                .getLoggedPerson(emailLoggedUser);
+            response.then((bool success) {
+              if (success) {
+                navigateToPageCoordinator(context);
+              }
+            });
+          }
+        });
       }
     });
 
@@ -88,7 +87,7 @@ class SplashPage extends ConsumerWidget {
       MaterialPageRoute(
         builder: (context) => const LoginPage(),
       ),
-          (route) => false,
+      (route) => false,
     );
   }
 
@@ -98,8 +97,7 @@ class SplashPage extends ConsumerWidget {
       MaterialPageRoute(
         builder: (context) => const PageCoordinator(),
       ),
-          (route) => false,
+      (route) => false,
     );
   }
-
 }

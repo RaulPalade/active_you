@@ -56,13 +56,19 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
     }
   }
 
-  Future<void> getLoggedPerson(String email) async {
+  Future<bool> getLoggedPerson(String email) async {
     try {
       final currentPerson =
           await ref.read(restClientPersonProvider).getPersonByEmail(email);
-      state = state.copyWith(currentPerson: currentPerson);
+      if (currentPerson.email != null) {
+        state = state.copyWith(currentPerson: currentPerson);
+        return true;
+      } else {
+        return false;
+      }
     } catch (e) {
       await _catchErrorOnFetch(e);
+      return false;
     }
   }
 
