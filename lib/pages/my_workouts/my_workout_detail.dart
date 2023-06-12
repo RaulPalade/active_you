@@ -31,50 +31,56 @@ class MyWorkoutDetailPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: MyAppBar(title: personWorkout.workout!.name!),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 35, horizontal: 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Tipologia: ${personWorkout.workout!.type}",
-              style: Theme.of(context).textTheme.titleMedium,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Tipologia: ${personWorkout.workout!.type}",
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                Text(
+                  "Data di inizio: ${initDate.capitalizeFirstLetter()}",
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                completed
+                    ? Text(
+                        "Data di completamento: ${endDate.capitalizeFirstLetter()}",
+                        style: Theme.of(context).textTheme.titleMedium,
+                      )
+                    : Container(),
+                const SizedBox(height: 40),
+                const Text(
+                  "Lista esercizi",
+                  style: TextStyle(
+                    fontFamily: "Poppins-Bold",
+                    fontSize: 26,
+                    color: ActiveYouTheme.brandDarkColor,
+                  ),
+                ),
+              ],
             ),
-            Text(
-              "Data di inizio: ${initDate.capitalizeFirstLetter()}",
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            completed
-                ? Text(
-                    "Data di completamento: ${endDate.capitalizeFirstLetter()}",
-                    style: Theme.of(context).textTheme.titleMedium,
-                  )
-                : Container(),
-            const SizedBox(height: 40),
-            const Text(
-              "Lista esercizi",
-              style: TextStyle(
-                fontFamily: "Poppins-Bold",
-                fontSize: 26,
-                color: ActiveYouTheme.brandDarkColor,
-              ),
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: ListView.builder(
-                  itemCount: personWorkout.workout!.exercises!.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: ExerciseCard(
-                        exercise: personWorkout.workout!.exercises![index],
-                      ),
-                    );
-                  }),
-            ),
-          ],
-        ),
+          ),
+          Expanded(
+            child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                itemCount: personWorkout.workout!.exercises!.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: ExerciseCard(
+                      exercise: personWorkout.workout!.exercises![index],
+                    ),
+                  );
+                }),
+          ),
+        ],
       ),
       bottomNavigationBar: SafeArea(
         child: Visibility(

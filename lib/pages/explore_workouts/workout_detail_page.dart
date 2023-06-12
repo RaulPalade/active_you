@@ -28,13 +28,13 @@ class WorkoutDetailPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: MyAppBar(title: workout.name!),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 35, horizontal: 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(top: 16, left: 24, right: 24),
+            child: Text(
               "Lista esercizi",
               style: TextStyle(
                 fontFamily: "Poppins-Bold",
@@ -42,23 +42,24 @@ class WorkoutDetailPage extends ConsumerWidget {
                 color: ActiveYouTheme.brandDarkColor,
               ),
             ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: ListView.builder(
-                  itemCount: workout.exercises!.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: ExerciseCard(exercise: workout.exercises![index]),
-                    );
-                  }),
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 20),
+          Expanded(
+            child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                itemCount: workout.exercises!.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: ExerciseCard(exercise: workout.exercises![index]),
+                  );
+                }),
+          ),
+        ],
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
           child: isMyWorkout
               ? Row(
                   children: [
