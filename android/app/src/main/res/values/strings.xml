@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">active_you</string>
+    <string name="sp_email">emaul</string>
+    <string name="sp_token">token</string>
+    <string name="sp_name">name</string>
+    <string name="sp_surname">surname</string>
+    <string name="sp_user">user</string>
+    <string name="server_client_id">21970876080-s7n97ulkjtekvgum42p3m408sm00taea.apps.googleusercontent.com</string>
+</resources>
