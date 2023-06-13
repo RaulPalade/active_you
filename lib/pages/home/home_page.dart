@@ -19,6 +19,29 @@ class HomePage extends ConsumerWidget {
     final currentWorkout = ref.watch(myLastWorkoutProvider);
     final currentGoal = ref.watch(myLastGoalProvider);
 
+    if (currentUser == null || currentWorkout == null || currentGoal == null) {
+      return Container(
+        color: ActiveYouTheme.scaffoldColor,
+        child: SafeArea(
+          child: Scaffold(
+            appBar: MyAppBar(title: "Bentornato ${currentUser!.name}"),
+            body: const Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30),
+                child: Text(
+                  "Aggiungi almeno un workout e un goal",
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: ActiveYouTheme.brandDarkColor,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     return Container(
       color: ActiveYouTheme.scaffoldColor,
       child: SafeArea(
@@ -43,7 +66,6 @@ class HomePage extends ConsumerWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: WorkoutBigCard(workout: currentWorkout!.workout!),
               ),
-
               const Padding(
                 padding: EdgeInsets.only(top: 20, left: 24, right: 24),
                 child: Text(
