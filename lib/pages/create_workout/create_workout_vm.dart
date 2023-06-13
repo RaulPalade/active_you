@@ -3,6 +3,7 @@ import 'package:active_you/business/models/workout/workout.dart';
 import 'package:active_you/business/providers/api_provider.dart';
 import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/pages/create_workout/create_workout_state.dart';
+import 'package:active_you/pages/explore_workouts/explore_workouts_page.dart';
 import 'package:active_you/utils/api_errors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -65,6 +66,8 @@ class CreateWorkoutVM extends StateNotifier<CreateWorkoutState> {
       final workoutId =
           await ref.watch(restClientPersonProvider).createWorkout(workout);
 
+      ref.read(exploreWorkoutsPageProvider.notifier).addWorkoutToList(workout);
+
       state = state.copyWith(generatedId: workoutId);
       return workoutId != -1;
     } catch (err) {
@@ -85,6 +88,10 @@ class CreateWorkoutVM extends StateNotifier<CreateWorkoutState> {
       final exerciseId = await ref
           .watch(restClientPersonProvider)
           .createExercise(exercise, state.generatedId);
+
+      ref
+          .read(exploreWorkoutsPageProvider.notifier)
+          .addExerciseToWorkoutExerciseList(exercise, state.generatedId);
 
       return exerciseId != -1;
     } catch (err) {

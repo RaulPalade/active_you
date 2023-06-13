@@ -46,7 +46,7 @@ class HomePage extends ConsumerWidget {
       color: ActiveYouTheme.scaffoldColor,
       child: SafeArea(
         child: Scaffold(
-          appBar: MyAppBar(title: "Bentornato ${currentUser!.name}"),
+          appBar: MyAppBar(title: "Bentornato ${currentUser.name}"),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +64,7 @@ class HomePage extends ConsumerWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: WorkoutBigCard(workout: currentWorkout!.workout!),
+                child: WorkoutBigCard(workout: currentWorkout.workout!),
               ),
               const Padding(
                 padding: EdgeInsets.only(top: 20, left: 24, right: 24),
@@ -79,7 +79,18 @@ class HomePage extends ConsumerWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: GoalBigCard(goal: currentGoal!),
+                child: GoalBigCard(goal: currentGoal),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 20, left: 24, right: 24),
+                child: Text(
+                  "Attività dei miei amici",
+                  style: TextStyle(
+                    fontFamily: "Poppins-Bold",
+                    fontSize: 20,
+                    color: ActiveYouTheme.brandDarkColor,
+                  ),
+                ),
               ),
             ],
           ),

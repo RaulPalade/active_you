@@ -1,3 +1,5 @@
+import 'package:active_you/business/models/exercise/exercise.dart';
+import 'package:active_you/business/models/workout/workout.dart';
 import 'package:active_you/business/providers/api_provider.dart';
 import 'package:active_you/pages/explore_workouts/explore_workouts_state.dart';
 import 'package:active_you/utils/api_errors.dart';
@@ -11,6 +13,22 @@ class ExploreWorkoutsVM extends StateNotifier<ExploreWorkoutsState> {
 
   ExploreWorkoutsVM(this.ref) : super(const ExploreWorkoutsState()) {
     fetchWorkouts();
+  }
+
+  void addWorkoutToList(Workout workout) {
+    state = state.copyWith(workouts: [...state.workouts, workout]);
+  }
+
+  void addExerciseToWorkoutExerciseList(Exercise exercise, int workoutId) {
+    state = state.copyWith(
+      workouts: state.workouts.map((workout) {
+        if (workout.id == workoutId) {
+          final updatedExercises = [...?workout.exercises, exercise];
+          return workout.copyWith(exercises: updatedExercises);
+        }
+        return workout;
+      }).toList(),
+    );
   }
 
   Future<void> fetchWorkouts() async {

@@ -13,6 +13,10 @@ class MyGoalsVM extends StateNotifier<MyGoalsState> {
     fetchMyGoals();
   }
 
+  void addGoalToList(Goal goal) {
+    state = state.copyWith(activeGoals: [...?state.activeGoals, goal]);
+  }
+
   Future<void> fetchMyGoals() async {
     try {
       final currentUser = ref.watch(currentPersonProvider);

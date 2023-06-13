@@ -35,7 +35,6 @@ class _MyGoalsPageState extends ConsumerState<MyGoalsPage>
 
   @override
   Widget build(BuildContext context) {
-    ref.watch(myGoalsPageProvider.notifier).fetchMyGoals();
     final activeGoals = ref.watch(activeGoalsProvider);
     final completedGoals = ref.watch(completedGoalsProvider);
 

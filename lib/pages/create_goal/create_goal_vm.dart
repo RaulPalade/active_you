@@ -3,6 +3,7 @@ import 'package:active_you/business/providers/api_provider.dart';
 import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/business/utils/SecureStorageManager.dart';
 import 'package:active_you/pages/create_goal/create_goal_state.dart';
+import 'package:active_you/pages/my_goals/my_goals_page.dart';
 import 'package:active_you/utils/api_errors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -51,6 +52,7 @@ class CreateGoalVM extends StateNotifier<CreateGoalState> {
           .addGoal(currentUser!.id!, goal);
 
       if (response.response.statusCode == 200) {
+        ref.read(myGoalsPageProvider.notifier).addGoalToList(goal);
         return true;
       } else {
         return false;

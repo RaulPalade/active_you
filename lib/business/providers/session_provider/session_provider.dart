@@ -39,6 +39,16 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
     }
   }
 
+  Future<bool> logout() async {
+    try {
+      SecureStorageManager storage = SecureStorageManager();
+      await storage.deleteValue(storage.idTokenKey);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<bool> register(PersonRole personRole) async {
     try {
       final response =

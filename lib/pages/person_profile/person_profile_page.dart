@@ -6,7 +6,8 @@ import 'package:active_you/pages/person_profile/widget/stats_card.dart';
 import 'package:active_you/pages/person_profile/widget/status_card.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/utils/my_date_utils.dart';
-import 'package:active_you/widgets/buttons/primary_button.dart';
+import 'package:active_you/utils/snackbars.dart';
+import 'package:active_you/widgets/buttons/secondary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -30,21 +31,23 @@ class PersonProfilePage extends ConsumerWidget {
             color: ActiveYouTheme.blackColor,
           ),
         ),
-        actions: isTrainer ? [
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: IconButton(
-              icon: SvgPicture.asset(
-                "assets/icons/interface/plus.svg",
-                width: 32,
-                color: ActiveYouTheme.secondaryDarkColor,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, EndPoint.createWorkout);
-              },
-            ),
-          ),
-        ] : null,
+        actions: isTrainer
+            ? [
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: IconButton(
+                    icon: SvgPicture.asset(
+                      "assets/icons/interface/plus.svg",
+                      width: 32,
+                      color: ActiveYouTheme.secondaryDarkColor,
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, EndPoint.createWorkout);
+                    },
+                  ),
+                ),
+              ]
+            : null,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -54,7 +57,21 @@ class PersonProfilePage extends ConsumerWidget {
               ProfileHeader(
                 fullName: "${currentPerson?.name} ${currentPerson?.surname}",
                 currentGoal: "Lose a fat program",
-                button: PrimaryButton(title: "Edit", onClick: () {}),
+                button: SecondaryButton(
+                    title: "Logout",
+                    onClick: () {
+                      final response =
+                          ref.read(sessionProvider.notifier).logout();
+                      response.then((bool success) {
+                        if (success) {
+                          Navigator.pushReplacementNamed(
+                              context, EndPoint.login);
+                        } else {
+                          SnackBars.showFailureSnackBar(
+                              context, "Impossibile effettuare il logout");
+                        }
+                      });
+                    }),
               ),
               const SizedBox(height: 25),
               GridView.count(
@@ -72,8 +89,8 @@ class PersonProfilePage extends ConsumerWidget {
                       value: currentPerson?.weight.toString() ?? "",
                       unitMeasure: currentPerson?.weightUnit.toString() ?? ""),
                   StatsCard(
-                      value:
-                          MyDateUtils.calculateAge(currentPerson?.dateOfBirth ?? DateTime.now()),
+                      value: MyDateUtils.calculateAge(
+                          currentPerson?.dateOfBirth ?? DateTime.now()),
                       unitMeasure: "Age"),
                 ],
               ),
