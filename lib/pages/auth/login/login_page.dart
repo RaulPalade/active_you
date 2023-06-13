@@ -95,8 +95,11 @@ class LoginPage extends ConsumerWidget {
                 padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                 child: FormDivider(),
               ),
-              SocialButton(
-                logo: SvgPicture.asset("assets/icons/google.svg"),
+              GestureDetector(
+                onTap: () => print("Login with google"),
+                child: SocialButton(
+                  logo: SvgPicture.asset("assets/icons/google.svg"),
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

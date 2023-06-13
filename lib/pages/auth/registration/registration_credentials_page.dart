@@ -93,17 +93,11 @@ class RegistrationCredentialsPage extends ConsumerWidget {
                 padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                 child: FormDivider(),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SocialButton(
-                    logo: SvgPicture.asset("assets/icons/google.svg"),
-                  ),
-                  const SizedBox(width: 24),
-                  SocialButton(
-                    logo: SvgPicture.asset("assets/icons/facebook.svg"),
-                  ),
-                ],
+              GestureDetector(
+                onTap: () => print("Login with google"),
+                child: SocialButton(
+                  logo: SvgPicture.asset("assets/icons/google.svg"),
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
