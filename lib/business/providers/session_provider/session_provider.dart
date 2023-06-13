@@ -70,6 +70,7 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
           await ref.read(restClientPersonProvider).getPersonByEmail(email);
       if (currentPerson.email != null) {
         state = state.copyWith(currentPerson: currentPerson);
+        print(currentPerson);
         return true;
       } else {
         return false;

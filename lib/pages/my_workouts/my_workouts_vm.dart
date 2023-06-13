@@ -19,7 +19,6 @@ class MyWorkoutsVM extends StateNotifier<MyWorkoutsState> {
       final myWorkouts = await ref
           .read(restClientWorkoutProvider)
           .getPersonalWorkouts(currentUser!.id!);
-      print(myWorkouts);
 
       final filteredList = filterMyWorkouts(myWorkouts);
 
