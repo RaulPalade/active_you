@@ -56,6 +56,7 @@ class PersonProfilePage extends ConsumerWidget {
             children: [
               ProfileHeader(
                 fullName: "${currentPerson?.name} ${currentPerson?.surname}",
+                gender: currentPerson!.sex!,
                 currentGoal: "Lose a fat program",
                 button: SecondaryButton(
                     title: "Logout",

@@ -24,6 +24,7 @@ class PersonDetailPage extends ConsumerWidget {
           children: [
             ProfileHeader(
               fullName: "${person.name} ${person.surname}",
+              gender: person.sex!,
               currentGoal: "Lose a fat program",
               button: FollowButton(
                 status: currentUser!.following!.contains(person.id!)

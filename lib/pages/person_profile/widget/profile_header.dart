@@ -5,27 +5,31 @@ class ProfileHeader extends StatelessWidget {
   const ProfileHeader(
       {Key? key,
       required this.fullName,
+      required this.gender,
       required this.currentGoal,
       required this.button})
       : super(key: key);
 
   final String fullName;
+  final String gender;
   final String currentGoal;
   final Widget button;
 
   @override
   Widget build(BuildContext context) {
+    bool isFemale = gender == "Female";
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Row(
           children: [
-            const CircleAvatar(
-              radius: 30,
-              backgroundImage:
-                  AssetImage("assets/images/profile-mock/profile-pic.png"),
-            ),
+            CircleAvatar(
+                radius: 30,
+                backgroundImage: isFemale
+                    ? const AssetImage("assets/images/profile-mock/female.png")
+                    : const AssetImage("assets/images/profile-mock/male.png")),
             const SizedBox(width: 15),
             Expanded(
               child: Column(

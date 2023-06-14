@@ -13,6 +13,8 @@ class UserListItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUser = ref.watch(currentPersonProvider);
+    bool isFemale = person.sex == "Female";
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Container(
@@ -37,34 +39,20 @@ class UserListItem extends ConsumerWidget {
             children: [
               Row(
                 children: [
-                  const CircleAvatar(
-                    radius: 24,
-                    backgroundImage: AssetImage(
-                        "assets/images/profile-mock/profile-pic.png"),
-                  ),
+                  CircleAvatar(
+                      radius: 30,
+                      backgroundImage: isFemale
+                          ? const AssetImage("assets/images/profile-mock/female.png")
+                          : const AssetImage("assets/images/profile-mock/male.png")),
                   const SizedBox(width: 15),
                   Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "${person.name} ${person.surname}",
-                          style: const TextStyle(
-                            fontFamily: "Poppins-Medium",
-                            fontSize: 14,
-                            color: ActiveYouTheme.textBlackColor,
-                          ),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          person.sex!,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: ActiveYouTheme.grayDarkColor,
-                          ),
-                        ),
-                      ],
+                    child: Text(
+                      "${person.name} ${person.surname}",
+                      style: const TextStyle(
+                        fontFamily: "Poppins-Medium",
+                        fontSize: 15,
+                        color: ActiveYouTheme.textBlackColor,
+                      ),
                     ),
                   ),
                   FollowButton(
