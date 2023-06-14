@@ -1,3 +1,4 @@
+import 'package:active_you/business/providers/preferences.dart';
 import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/pages/auth/login/login_page_state.dart';
@@ -21,6 +22,8 @@ class LoginPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     String emailInput = ref.watch(_loginEmailProvider);
     String passwordInput = ref.watch(_loginPasswordProvider);
+    bool tutorialCompleted = ref.watch(preferencesProvider).tutorialCompleted;
+    print(tutorialCompleted);
 
     return Container(
       color: ActiveYouTheme.scaffoldColor,
@@ -83,8 +86,11 @@ class LoginPage extends ConsumerWidget {
                       .login(emailInput, passwordInput);
                   response.then((bool success) {
                     if (success) {
-                      showSuccessSnackBar(context, "Login effettuato!");
-                      Navigator.popAndPushNamed(context, EndPoint.welcomePage);
+                      if(tutorialCompleted) {
+                        Navigator.pushReplacementNamed(context, EndPoint.pageCoordinator);
+                      } else {
+                        Navigator.pushReplacementNamed(context, EndPoint.welcomePage);
+                      }
                     } else {
                       showFailureSnackBar(context, "Impossibile effettuare il login");
                     }

@@ -1,6 +1,8 @@
 import 'package:active_you/business/models/exercise/exercise.dart';
+import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/business/models/workout/workout.dart';
 import 'package:active_you/business/providers/api_provider.dart';
+import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/pages/explore_workouts/explore_workouts_state.dart';
 import 'package:active_you/utils/api_errors.dart';
 import 'package:dio/dio.dart';
@@ -45,6 +47,16 @@ class ExploreWorkoutsVM extends StateNotifier<ExploreWorkoutsState> {
       await _catchErrorOnFetch(err);
     }
     tokenLastRequest = null;
+  }
+
+  Future<void> getWorkoutAuthor(Workout workout) async {
+    Person? person = await ref
+        .read(sessionProvider.notifier)
+        .getPersonById(workout.createdById!);
+
+    if (person != null) {
+      state = state.copyWith(workoutAuthor: person);
+    }
   }
 
   Future<void> _catchErrorOnFetch(Object err) async {

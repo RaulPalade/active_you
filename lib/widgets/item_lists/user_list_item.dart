@@ -1,5 +1,6 @@
 import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/business/providers/session_provider/session_provider.dart';
+import 'package:active_you/pages/users_and_trainers/persons_and_trainers_page.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/widgets/buttons/follow_button.dart';
 import 'package:flutter/material.dart';

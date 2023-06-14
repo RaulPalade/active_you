@@ -1,4 +1,5 @@
 import 'package:active_you/business/models/person/person.dart';
+import 'package:active_you/business/models/workout/workout.dart';
 import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/pages/users_and_trainers/persons_and_trainers_state.dart';
 import 'package:active_you/pages/users_and_trainers/persons_and_trainers_vm.dart';
@@ -71,6 +72,7 @@ class _PersonsAndTrainersState extends ConsumerState<PersonsAndTrainersPage>
                           .whenComplete(() {
                         final selectedPerson =
                             ref.watch(_selectedPersonProvider);
+                        ref.read(personsAndTrainersPageProvider.notifier).getCreatedWorkouts();
                         Navigator.pushNamed(context, EndPoint.personDetail,
                             arguments: selectedPerson);
                       });
@@ -105,6 +107,10 @@ final _trainersProvider = Provider.autoDispose<List<Person>>((ref) {
 
 final _selectedPersonProvider = Provider.autoDispose<Person?>((ref) {
   return ref.watch(personsAndTrainersPageProvider).selectedPerson;
+});
+
+final createdWorkoutsProvider = Provider.autoDispose<List<Workout>>((ref) {
+  return ref.watch(personsAndTrainersPageProvider).createdWorkouts;
 });
 
 final _loadingProvider = Provider.autoDispose<bool>((ref) {

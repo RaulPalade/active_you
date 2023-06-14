@@ -1,3 +1,4 @@
+import 'package:active_you/business/providers/preferences.dart';
 import 'package:active_you/navigation/modal_route.dart';
 import 'package:active_you/pages/splash/splash_page.dart';
 import 'package:active_you/theme/active_you_theme.dart';
@@ -12,6 +13,8 @@ Future<void> initMain() async {
   await EasyLocalization.ensureInitialized();
 
   final container = ProviderContainer();
+  final prefProvider = container.read(preferencesProvider);
+  await prefProvider.initAsync();
 
   runApp(
     UncontrolledProviderScope(

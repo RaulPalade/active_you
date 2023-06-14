@@ -1,3 +1,4 @@
+import 'package:active_you/business/providers/settings_provider/settings_provider.dart';
 import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/pages/intro/onboarding_state.dart';
 import 'package:active_you/pages/intro/onboarding_vm.dart';
@@ -81,6 +82,7 @@ class OnBoardingPage extends ConsumerWidget {
                       ),
                       onPressed: () {
                         if (pageNumber == 3) {
+                          ref.read(settingsProvider.notifier).setTutorialCompleted(true);
                           Navigator.pushReplacementNamed(context, EndPoint.pageCoordinator);
                         } else {
                           controller.nextPage(

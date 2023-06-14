@@ -1,3 +1,4 @@
+import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/business/models/workout/workout.dart';
 import 'package:active_you/pages/explore_workouts/explore_workouts_state.dart';
 import 'package:active_you/widgets/item_lists/workout_big_card.dart';
@@ -36,6 +37,10 @@ final exploreWorkoutsPageProvider =
 
 final _workoutsProvider = Provider.autoDispose<List<Workout>>((ref) {
   return ref.watch(exploreWorkoutsPageProvider).workouts;
+});
+
+final workoutAuthorProvider = Provider.autoDispose<Person?>((ref) {
+  return ref.watch(exploreWorkoutsPageProvider).workoutAuthor;
 });
 
 final _loadingProvider = Provider.autoDispose<bool>((ref) {

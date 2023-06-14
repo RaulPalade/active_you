@@ -1,7 +1,9 @@
+import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/business/models/workout/workout.dart';
 import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/pages/create_workout/create_workout_page.dart';
+import 'package:active_you/pages/explore_workouts/explore_workouts_page.dart';
 import 'package:active_you/pages/my_workouts/my_workouts_page.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/utils/snackbars.dart';
@@ -18,6 +20,7 @@ class WorkoutDetailPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Workout workout = ModalRoute.of(context)?.settings.arguments as Workout;
+    Person? workoutAuthor = ref.watch(workoutAuthorProvider);
     final currentPerson = ref.watch(currentPersonProvider);
     final myWorkouts = ref.watch(activeWorkoutsProvider);
 
@@ -26,14 +29,23 @@ class WorkoutDetailPage extends ConsumerWidget {
         personWorkout.workout!.id == workout.id &&
         personWorkout.idPerson == currentPerson!.id);
 
-    print(isInMyWorkouts);
-
     return Scaffold(
       appBar: MyAppBar(title: workout.name!),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 16, left: 24, right: 24),
+            child: Text(
+              "Autore: ${workoutAuthor?.name ?? ""} ${workoutAuthor?.surname ?? ""}",
+              style: const TextStyle(
+                fontFamily: "Poppins-Bold",
+                fontSize: 14,
+                color: ActiveYouTheme.grayDarkColor,
+              ),
+            ),
+          ),
           const Padding(
             padding: EdgeInsets.only(top: 16, left: 24, right: 24),
             child: Text(
@@ -88,7 +100,7 @@ class WorkoutDetailPage extends ConsumerWidget {
                                 .read(sessionProvider.notifier)
                                 .saveWorkout(workout);
                             response.then((bool success) {
-                              if(success) {
+                              if (success) {
                                 Navigator.pop(context);
                               }
                             });
@@ -97,23 +109,26 @@ class WorkoutDetailPage extends ConsumerWidget {
                       ),
                   ],
                 )
-              : !isInMyWorkouts ? PrimaryButton(
-                  title: 'Salva Workout',
-                  onClick: () {
-                    final response =
-                        ref.read(sessionProvider.notifier).saveWorkout(workout);
-                    response.then((bool success) {
-                      if (success) {
-                        SnackBars.showSuccessSnackBar(
-                            context, "Workout saved!");
-                        Navigator.pop(context);
-                      } else {
-                        SnackBars.showFailureSnackBar(
-                            context, "Failed to save Workout!");
-                      }
-                    });
-                  },
-                ) : null,
+              : !isInMyWorkouts
+                  ? PrimaryButton(
+                      title: 'Salva Workout',
+                      onClick: () {
+                        final response = ref
+                            .read(sessionProvider.notifier)
+                            .saveWorkout(workout);
+                        response.then((bool success) {
+                          if (success) {
+                            SnackBars.showSuccessSnackBar(
+                                context, "Workout saved!");
+                            Navigator.pop(context);
+                          } else {
+                            SnackBars.showFailureSnackBar(
+                                context, "Failed to save Workout!");
+                          }
+                        });
+                      },
+                    )
+                  : null,
         ),
       ),
     );

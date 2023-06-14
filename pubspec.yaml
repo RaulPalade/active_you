@@ -35,7 +35,7 @@ dependencies:
 
   #UTILS
   flutter_secure_storage: ^8.0.0
-  loading_indicator: ^3.1.0
+  shared_preferences: ^2.1.2
 
 dev_dependencies:
   flutter_test:

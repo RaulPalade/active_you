@@ -1,4 +1,5 @@
 import 'package:active_you/business/models/person/person.dart';
+import 'package:active_you/business/models/workout/workout.dart';
 import 'package:active_you/business/providers/api_provider.dart';
 import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/pages/users_and_trainers/persons_and_trainers_state.dart';
@@ -64,6 +65,15 @@ class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
     } catch (e) {
       await _catchErrorOnFetch(e);
     }
+  }
+
+  Future<void> getCreatedWorkouts() async {
+    final workoutResponse =
+        await ref.read(restClientWorkoutProvider).getWorkouts();
+    List<Workout> filterList = workoutResponse
+        .where((workout) => workout.createdById == state.selectedPerson!.id!)
+        .toList();
+    state = state.copyWith(createdWorkouts: filterList);
   }
 
   Future<void> _catchErrorOnFetch(Object err) async {
