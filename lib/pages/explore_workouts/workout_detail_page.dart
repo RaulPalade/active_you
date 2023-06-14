@@ -26,6 +26,8 @@ class WorkoutDetailPage extends ConsumerWidget {
         personWorkout.workout!.id == workout.id &&
         personWorkout.idPerson == currentPerson!.id);
 
+    print(isInMyWorkouts);
+
     return Scaffold(
       appBar: MyAppBar(title: workout.name!),
       body: Column(
@@ -82,15 +84,20 @@ class WorkoutDetailPage extends ConsumerWidget {
                         child: PrimaryButton(
                           title: 'Salva Workout',
                           onClick: () {
-                            ref
+                            final response = ref
                                 .read(sessionProvider.notifier)
                                 .saveWorkout(workout);
+                            response.then((bool success) {
+                              if(success) {
+                                Navigator.pop(context);
+                              }
+                            });
                           },
                         ),
                       ),
                   ],
                 )
-              : PrimaryButton(
+              : !isInMyWorkouts ? PrimaryButton(
                   title: 'Salva Workout',
                   onClick: () {
                     final response =
@@ -106,7 +113,7 @@ class WorkoutDetailPage extends ConsumerWidget {
                       }
                     });
                   },
-                ),
+                ) : null,
         ),
       ),
     );

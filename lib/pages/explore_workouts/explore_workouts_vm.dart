@@ -39,7 +39,8 @@ class ExploreWorkoutsVM extends StateNotifier<ExploreWorkoutsState> {
       final workoutResponse =
           await ref.read(restClientWorkoutProvider).getWorkouts();
 
-      state = ExploreWorkoutsState(workouts: workoutResponse, loading: false);
+      state = ExploreWorkoutsState(
+          workouts: workoutResponse.reversed.toList(), loading: false);
     } catch (err) {
       await _catchErrorOnFetch(err);
     }
