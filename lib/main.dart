@@ -3,8 +3,11 @@ import 'package:active_you/navigation/modal_route.dart';
 import 'package:active_you/pages/splash/splash_page.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'firebase_options.dart';
 
 void main() => initMain();
 
@@ -15,6 +18,10 @@ Future<void> initMain() async {
   final container = ProviderContainer();
   final prefProvider = container.read(preferencesProvider);
   await prefProvider.initAsync();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(
     UncontrolledProviderScope(
