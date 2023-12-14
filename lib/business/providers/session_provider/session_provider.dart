@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:active_you/business/models/goal/goal.dart';
 import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/business/models/person_role/person_role.dart';
@@ -7,6 +9,8 @@ import 'package:active_you/business/providers/api_provider.dart';
 import 'package:active_you/business/providers/session_provider/session_provider_state.dart';
 import 'package:active_you/business/utils/SecureStorageManager.dart';
 import 'package:active_you/utils/api_errors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -51,16 +55,57 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
 
   Future<bool> register(PersonRole personRole) async {
     try {
-      final response =
-          await ref.read(restClientPersonProvider).register(personRole);
-      if (response.response.statusCode == 200) {
-        return true;
-      } else {
-        return false;
-      }
-    } catch (err) {
-      _catchErrorOnFetch(err);
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: personRole.person.email ?? "",
+        password: personRole.person.password ?? "",
+      );
+
+      String userType =
+          personRole.role.name?.toLowerCase() == "user" ? "users" : "trainers";
+      CollectionReference collection =
+          FirebaseFirestore.instance.collection(userType);
+
+      final personData = personRole.person.toJson();
+      removeNullFields(personData);
+      collection.doc(personRole.person.email).set(personData);
+
+      return true;
+    } catch (e) {
+      log(e.toString());
       return false;
+    }
+  }
+
+  void removeObjects(Map<String, dynamic> obj) {
+    obj.removeWhere((key, value) => value is Map);
+  }
+
+  void removeLists(Map<String, dynamic> obj) {
+    obj.removeWhere((key, value) => value is List);
+  }
+
+  void removeNullFields(Map<String, dynamic> obj) {
+    obj.removeWhere((key, value) => value == null || key == 'password');
+  }
+
+  Future<void> _addAllSubcollections(DocumentReference userDocRef,
+      String collectionName, List<dynamic>? dataList) async {
+    log(dataList.toString());
+    if (dataList != null && dataList.isNotEmpty) {
+      final subCollectionRef = userDocRef.collection(collectionName);
+
+      // Rimuovi eventuali documenti preesistenti
+      await subCollectionRef.get().then((snapshot) {
+        for (QueryDocumentSnapshot doc in snapshot.docs) {
+          doc.reference.delete();
+        }
+      });
+
+      // Aggiungi tutti gli elementi della lista come documenti nella sottocollezione
+      for (var i = 0; i < dataList.length; i++) {
+        log(dataList[i].toString());
+        await subCollectionRef.add({'item': dataList[i]});
+      }
     }
   }
 

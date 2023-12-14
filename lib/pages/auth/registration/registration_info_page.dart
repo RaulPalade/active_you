@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/business/models/person_role/person_role.dart';
 import 'package:active_you/business/models/role/role.dart';
@@ -141,8 +143,8 @@ class RegistrationInfoPage extends ConsumerWidget {
         heightUnit: form.heightUnit,
       );
 
-      PersonRole personRole =
-          PersonRole(person: currentUser, role: Role(id: null, name: role, persons: null));
+      PersonRole personRole = PersonRole(
+          person: currentUser, role: Role(id: null, name: role, persons: null));
 
       final response = ref.read(sessionProvider.notifier).register(personRole);
       response.then((success) {

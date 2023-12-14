@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class RegistrationVM extends StateNotifier<RegistrationState> {
   final Ref ref;
 
-  RegistrationVM(this.ref) : super(const RegistrationState());
+  RegistrationVM(this.ref) : super(const RegistrationState()) {
+    setDateOfBirth(DateTime.now());
+  }
 
   void setFirstName(String firstName) {
     state = state.copyWith(firstName: firstName);
