@@ -21,24 +21,13 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
 
   Future<bool> login(String email, String password) async {
     try {
-      state = const SessionProviderState(currentPerson: null, loading: true);
-
-      final response =
-          await ref.read(restClientPersonProvider).login(email, password);
-
-      if (response.response.statusCode == 200) {
-        SecureStorageManager storageManager = SecureStorageManager();
-        storageManager.writeValue(
-            storageManager.idTokenKey, response.data["access_token"]);
-
-        state = state.copyWith(loading: false);
-        await getLoggedPerson(email);
-        return true;
-      } else {
-        return false;
-      }
-    } catch (err) {
-      print(err);
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password
+      );
+      return true;
+    } on FirebaseAuthException catch (e) {
+      log(e.toString());
       return false;
     }
   }
