@@ -20,7 +20,7 @@ Exercise _$ExerciseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Exercise {
-  int? get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   int? get repetitions => throw _privateConstructorUsedError;
   int? get series => throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ abstract class $ExerciseCopyWith<$Res> {
   factory $ExerciseCopyWith(Exercise value, $Res Function(Exercise) then) =
       _$ExerciseCopyWithImpl<$Res, Exercise>;
   @useResult
-  $Res call({int? id, String? name, int? repetitions, int? series});
+  $Res call({String? id, String? name, int? repetitions, int? series});
 }
 
 /// @nodoc
@@ -61,7 +61,7 @@ class _$ExerciseCopyWithImpl<$Res, $Val extends Exercise>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -85,7 +85,7 @@ abstract class _$$_ExerciseCopyWith<$Res> implements $ExerciseCopyWith<$Res> {
       __$$_ExerciseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String? name, int? repetitions, int? series});
+  $Res call({String? id, String? name, int? repetitions, int? series});
 }
 
 /// @nodoc
@@ -108,7 +108,7 @@ class __$$_ExerciseCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -138,7 +138,7 @@ class _$_Exercise implements _Exercise {
       _$$_ExerciseFromJson(json);
 
   @override
-  final int? id;
+  final String? id;
   @override
   final String? name;
   @override
@@ -183,7 +183,7 @@ class _$_Exercise implements _Exercise {
 
 abstract class _Exercise implements Exercise {
   const factory _Exercise(
-      {required final int? id,
+      {required final String? id,
       required final String? name,
       required final int? repetitions,
       required final int? series}) = _$_Exercise;
@@ -191,7 +191,7 @@ abstract class _Exercise implements Exercise {
   factory _Exercise.fromJson(Map<String, dynamic> json) = _$_Exercise.fromJson;
 
   @override
-  int? get id;
+  String? get id;
   @override
   String? get name;
   @override

@@ -1,6 +1,5 @@
 import 'package:active_you/business/models/goal/goal.dart';
 import 'package:active_you/business/models/person/person.dart';
-import 'package:active_you/business/models/person_workout/person_workout.dart';
 import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/pages/home/home_page_state.dart';
 import 'package:active_you/pages/home/home_page_vm.dart';
@@ -18,7 +17,6 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUser = ref.watch(currentPersonProvider);
-    final currentWorkout = ref.watch(myLastWorkoutProvider);
     final currentGoal = ref.watch(myLastGoalProvider);
     final friendsActivity = ref.watch(myFriendsActivityProvider);
 
@@ -29,7 +27,7 @@ class HomePage extends ConsumerWidget {
             true)
         .toList();
 
-    if (currentUser == null || currentWorkout == null || currentGoal == null) {
+    if (currentUser == null || currentGoal == null) {
       return Container(
         color: ActiveYouTheme.scaffoldColor,
         child: SafeArea(
@@ -73,10 +71,10 @@ class HomePage extends ConsumerWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: WorkoutBigCard(workout: currentWorkout.workout!),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 24),
+                //   child: WorkoutBigCard(workout: currentWorkout.workout!),
+                // ),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 60),
                   child: Divider(),
@@ -113,7 +111,7 @@ class HomePage extends ConsumerWidget {
                 ),
                 ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
                   itemCount: filteredFriendsActivity?.length ?? 0,
                   itemBuilder: (BuildContext context, int index) {
@@ -132,9 +130,6 @@ class HomePage extends ConsumerWidget {
 
 final homePageProvider =
     StateNotifierProvider<HomePageVM, HomePageState>((ref) => HomePageVM(ref));
-
-final myLastWorkoutProvider =
-    Provider<PersonWorkout?>((ref) => ref.watch(homePageProvider).lastWorkout);
 
 final myLastGoalProvider =
     Provider<Goal?>((ref) => ref.watch(homePageProvider).lastGoal);

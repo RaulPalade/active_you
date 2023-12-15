@@ -1,4 +1,4 @@
-import 'package:active_you/business/models/person_workout/person_workout.dart';
+import 'package:active_you/business/models/workout/workout.dart';
 import 'package:active_you/pages/my_workouts/my_workouts_page.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/utils/extensions.dart';
@@ -15,22 +15,21 @@ class MyWorkoutDetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    PersonWorkout personWorkout =
-        ModalRoute.of(context)?.settings.arguments as PersonWorkout;
-    bool completed = personWorkout.completed ?? false;
+    Workout workout = ModalRoute.of(context)?.settings.arguments as Workout;
+    bool completed = workout.completed ?? false;
 
-    DateTime dateInit = DateTime.parse(personWorkout.initDate.toString());
+    DateTime dateInit = DateTime.parse(workout.initDate.toString());
 
     String endDate = "";
-    if (personWorkout.endDate != null) {
-      DateTime dateEnd = DateTime.parse(personWorkout.endDate.toString());
+    if (workout.endDate != null) {
+      DateTime dateEnd = DateTime.parse(workout.endDate.toString());
       endDate = DateFormat('EEEE d MMMM yyyy', 'it_IT').format(dateEnd);
     }
 
     String initDate = DateFormat('EEEE d MMMM yyyy', 'it_IT').format(dateInit);
 
     return Scaffold(
-      appBar: MyAppBar(title: personWorkout.workout!.name!),
+      appBar: MyAppBar(title: workout.name!),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +41,7 @@ class MyWorkoutDetailPage extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Tipologia: ${personWorkout.workout!.type}",
+                  "Tipologia: ${workout.type}",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 Text(
@@ -70,12 +69,12 @@ class MyWorkoutDetailPage extends ConsumerWidget {
           Expanded(
             child: ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
-                itemCount: personWorkout.workout!.exercises!.length,
+                itemCount: workout.exercises!.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: ExerciseCard(
-                      exercise: personWorkout.workout!.exercises![index],
+                      exercise: workout.exercises![index],
                     ),
                   );
                 }),
@@ -84,7 +83,7 @@ class MyWorkoutDetailPage extends ConsumerWidget {
       ),
       bottomNavigationBar: SafeArea(
         child: Visibility(
-          visible: personWorkout.completed == false,
+          visible: completed == false,
           child: Padding(
             padding: const EdgeInsets.all(24.0),
             child: PrimaryButton(
@@ -92,7 +91,7 @@ class MyWorkoutDetailPage extends ConsumerWidget {
               onClick: () {
                 final response = ref
                     .read(myWorkoutsPageProvider.notifier)
-                    .markWorkoutAsCompleted(personWorkout.id!);
+                    .markWorkoutAsCompleted(workout.id!);
                 response.then((bool success) {
                   if (success) {
                     SnackBars.showSuccessSnackBar(

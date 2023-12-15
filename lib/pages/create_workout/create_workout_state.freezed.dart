@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CreateWorkoutState {
   String get workoutName => throw _privateConstructorUsedError;
   String get workoutType => throw _privateConstructorUsedError;
-  int get generatedId => throw _privateConstructorUsedError;
+  String get generatedId => throw _privateConstructorUsedError;
   String get exerciseName => throw _privateConstructorUsedError;
   int get exerciseRepetitions => throw _privateConstructorUsedError;
   int get exerciseSeries => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ abstract class $CreateWorkoutStateCopyWith<$Res> {
   $Res call(
       {String workoutName,
       String workoutType,
-      int generatedId,
+      String generatedId,
       String exerciseName,
       int exerciseRepetitions,
       int exerciseSeries,
@@ -78,7 +78,7 @@ class _$CreateWorkoutStateCopyWithImpl<$Res, $Val extends CreateWorkoutState>
       generatedId: null == generatedId
           ? _value.generatedId
           : generatedId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       exerciseName: null == exerciseName
           ? _value.exerciseName
           : exerciseName // ignore: cast_nullable_to_non_nullable
@@ -110,7 +110,7 @@ abstract class _$$CreateWorkoutStateDataCopyWith<$Res>
   $Res call(
       {String workoutName,
       String workoutType,
-      int generatedId,
+      String generatedId,
       String exerciseName,
       int exerciseRepetitions,
       int exerciseSeries,
@@ -148,7 +148,7 @@ class __$$CreateWorkoutStateDataCopyWithImpl<$Res>
       generatedId: null == generatedId
           ? _value.generatedId
           : generatedId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       exerciseName: null == exerciseName
           ? _value.exerciseName
           : exerciseName // ignore: cast_nullable_to_non_nullable
@@ -175,7 +175,7 @@ class _$CreateWorkoutStateData implements CreateWorkoutStateData {
   const _$CreateWorkoutStateData(
       {this.workoutName = "",
       this.workoutType = "",
-      this.generatedId = -1,
+      this.generatedId = "",
       this.exerciseName = "",
       this.exerciseRepetitions = 0,
       this.exerciseSeries = 0,
@@ -189,7 +189,7 @@ class _$CreateWorkoutStateData implements CreateWorkoutStateData {
   final String workoutType;
   @override
   @JsonKey()
-  final int generatedId;
+  final String generatedId;
   @override
   @JsonKey()
   final String exerciseName;
@@ -251,7 +251,7 @@ abstract class CreateWorkoutStateData implements CreateWorkoutState {
   const factory CreateWorkoutStateData(
       {final String workoutName,
       final String workoutType,
-      final int generatedId,
+      final String generatedId,
       final String exerciseName,
       final int exerciseRepetitions,
       final int exerciseSeries,
@@ -262,7 +262,7 @@ abstract class CreateWorkoutStateData implements CreateWorkoutState {
   @override
   String get workoutType;
   @override
-  int get generatedId;
+  String get generatedId;
   @override
   String get exerciseName;
   @override

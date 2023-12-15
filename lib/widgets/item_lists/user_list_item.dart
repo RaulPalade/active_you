@@ -1,6 +1,5 @@
 import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/business/providers/session_provider/session_provider.dart';
-import 'package:active_you/pages/users_and_trainers/persons_and_trainers_page.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/widgets/buttons/follow_button.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +42,10 @@ class UserListItem extends ConsumerWidget {
                   CircleAvatar(
                       radius: 30,
                       backgroundImage: isFemale
-                          ? const AssetImage("assets/images/profile-mock/female.png")
-                          : const AssetImage("assets/images/profile-mock/male.png")),
+                          ? const AssetImage(
+                              "assets/images/profile-mock/female.png")
+                          : const AssetImage(
+                              "assets/images/profile-mock/male.png")),
                   const SizedBox(width: 15),
                   Expanded(
                     child: Text(
@@ -57,13 +58,17 @@ class UserListItem extends ConsumerWidget {
                     ),
                   ),
                   FollowButton(
-                    status: currentUser!.following!.contains(person.id!)
+                    status: currentUser!.following!.contains(person.email!)
                         ? "Unfollow"
                         : "Follow",
                     onClick: () {
-                      currentUser.following!.contains(person.id!) ?
-                      ref.read(sessionProvider.notifier).unfollowPerson(person.id!) :
-                      ref.read(sessionProvider.notifier).followPerson(person);
+                      currentUser.following!.contains(person.email!)
+                          ? ref
+                              .read(sessionProvider.notifier)
+                              .unfollowPerson(person.email!)
+                          : ref
+                              .read(sessionProvider.notifier)
+                              .followPerson(person);
                     },
                   ),
                 ],

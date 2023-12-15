@@ -1,15 +1,17 @@
+import 'dart:developer';
+
 import 'package:active_you/business/models/exercise/exercise.dart';
 import 'package:active_you/business/models/workout/workout.dart';
-import 'package:active_you/business/providers/api_provider.dart';
 import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/pages/create_workout/create_workout_state.dart';
 import 'package:active_you/pages/explore_workouts/explore_workouts_page.dart';
-import 'package:active_you/utils/api_errors.dart';
+import 'package:active_you/utils/firebase_methods.dart';
+import 'package:flutter_guid/flutter_guid.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class CreateWorkoutVM extends StateNotifier<CreateWorkoutState> {
   final Ref ref;
+  FirebaseMethods firebase = FirebaseMethods();
 
   CreateWorkoutVM(this.ref) : super(const CreateWorkoutState());
 
@@ -40,8 +42,8 @@ class CreateWorkoutVM extends StateNotifier<CreateWorkoutState> {
     state = state.copyWith(exerciseSeries: series);
   }
 
-  void setWorkoutIdForExercise(int workoutId) {
-    state = state.copyWith(generatedId: workoutId);
+  void setWorkoutIdForExercise(String workoutId) {
+    state = state.copyWith(generatedId: "");
   }
 
   void resetExerciseForm() {
@@ -57,21 +59,23 @@ class CreateWorkoutVM extends StateNotifier<CreateWorkoutState> {
       final currentUser = ref.watch(currentPersonProvider);
       Workout workout = Workout(
         id: null,
-        createdById: currentUser!.id,
+        createdById: currentUser!.email,
         name: state.workoutName,
         type: state.workoutType,
+        initDate: DateTime.now(),
+        endDate: null,
+        completed: false,
         exercises: null,
       );
 
-      final workoutId =
-          await ref.watch(restClientPersonProvider).createWorkout(workout);
-
+      await firebase.addNewDocument("workouts", null, workout.toJson());
       ref.read(exploreWorkoutsPageProvider.notifier).addWorkoutToList(workout);
 
+      String workoutId = Guid.newGuid.value;
       state = state.copyWith(generatedId: workoutId);
-      return workoutId != -1;
-    } catch (err) {
-      await _catchErrorOnFetch(err);
+      return workoutId != "";
+    } catch (e) {
+      log(e.toString());
       return false;
     }
   }
@@ -79,44 +83,27 @@ class CreateWorkoutVM extends StateNotifier<CreateWorkoutState> {
   Future<bool> createExercise() async {
     try {
       Exercise exercise = Exercise(
-        id: null,
+        id: "",
         name: state.exerciseName,
         repetitions: state.exerciseRepetitions,
         series: state.exerciseSeries,
       );
 
-      final exerciseId = await ref
-          .watch(restClientPersonProvider)
-          .createExercise(exercise, state.generatedId);
+      await firebase.addDocToSubCollection(
+          "workouts", state.generatedId, "workouts", exercise.toJson());
 
       ref
           .read(exploreWorkoutsPageProvider.notifier)
           .addExerciseToWorkoutExerciseList(exercise, state.generatedId);
 
-      return exerciseId != -1;
-    } catch (err) {
-      await _catchErrorOnFetch(err);
+      return true;
+    } catch (e) {
+      log(e.toString());
       return false;
     }
   }
 
   void resetGeneratedId() {
-    state = state.copyWith(generatedId: -1);
-  }
-
-  Future<void> _catchErrorOnFetch(Object err) async {
-    var connectivityResult = await InternetConnectionChecker().hasConnection;
-    ErrorApiCall errorType = ErrorApiCall.generic;
-    if (!connectivityResult) {
-      errorType = ErrorApiCall.noConnection;
-    }
-    state = CreateWorkoutState(
-      workoutName: state.workoutName,
-      workoutType: state.workoutType,
-      exerciseName: state.exerciseName,
-      exerciseRepetitions: state.exerciseRepetitions,
-      exerciseSeries: state.exerciseSeries,
-      errorApiCall: errorType,
-    );
+    state = state.copyWith(generatedId: "");
   }
 }

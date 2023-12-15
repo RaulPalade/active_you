@@ -2,29 +2,23 @@ import 'dart:developer';
 
 import 'package:active_you/business/models/goal/goal.dart';
 import 'package:active_you/business/models/person/person.dart';
-import 'package:active_you/business/models/person_role/person_role.dart';
-import 'package:active_you/business/models/person_workout/person_workout.dart';
 import 'package:active_you/business/models/workout/workout.dart';
-import 'package:active_you/business/providers/api_provider.dart';
 import 'package:active_you/business/providers/session_provider/session_provider_state.dart';
-import 'package:active_you/business/utils/SecureStorageManager.dart';
-import 'package:active_you/utils/api_errors.dart';
+import 'package:active_you/utils/firebase_methods.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class SessionProvider extends StateNotifier<SessionProviderState> {
   final Ref ref;
+  FirebaseMethods firebase = FirebaseMethods();
 
   SessionProvider(this.ref) : super(const SessionProviderState());
 
   Future<bool> login(String email, String password) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: email,
-          password: password
-      );
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
       return true;
     } on FirebaseAuthException catch (e) {
       log(e.toString());
@@ -34,29 +28,25 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
 
   Future<bool> logout() async {
     try {
-      SecureStorageManager storage = SecureStorageManager();
-      await storage.deleteValue(storage.idTokenKey);
+      await FirebaseAuth.instance.signOut();
       return true;
     } catch (e) {
       return false;
     }
   }
 
-  Future<bool> register(PersonRole personRole) async {
+  Future<bool> register(Person person, String role) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: personRole.person.email ?? "",
-        password: personRole.person.password ?? "",
+        email: person.email ?? "",
+        password: person.password ?? "",
       );
 
-      String userType =
-          personRole.role.name?.toLowerCase() == "user" ? "users" : "trainers";
-      CollectionReference collection =
-          FirebaseFirestore.instance.collection(userType);
+      String userType = role.toLowerCase() == "user" ? "users" : "trainers";
+      final personData = person.toJson();
+      clearPersonObject(personData);
 
-      final personData = personRole.person.toJson();
-      removeNullFields(personData);
-      collection.doc(personRole.person.email).set(personData);
+      firebase.addNewDocument(userType, person.email, personData);
 
       return true;
     } catch (e) {
@@ -73,53 +63,33 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
     obj.removeWhere((key, value) => value is List);
   }
 
-  void removeNullFields(Map<String, dynamic> obj) {
-    obj.removeWhere((key, value) => value == null || key == 'password');
-  }
-
-  Future<void> _addAllSubcollections(DocumentReference userDocRef,
-      String collectionName, List<dynamic>? dataList) async {
-    log(dataList.toString());
-    if (dataList != null && dataList.isNotEmpty) {
-      final subCollectionRef = userDocRef.collection(collectionName);
-
-      // Rimuovi eventuali documenti preesistenti
-      await subCollectionRef.get().then((snapshot) {
-        for (QueryDocumentSnapshot doc in snapshot.docs) {
-          doc.reference.delete();
-        }
-      });
-
-      // Aggiungi tutti gli elementi della lista come documenti nella sottocollezione
-      for (var i = 0; i < dataList.length; i++) {
-        log(dataList[i].toString());
-        await subCollectionRef.add({'item': dataList[i]});
-      }
-    }
+  void clearPersonObject(Map<String, dynamic> obj) {
+    obj.removeWhere(
+      (key, value) =>
+          key == 'myWorkouts' ||
+          key == 'createdWorkouts' ||
+          key == 'myGoals' ||
+          key == 'password',
+    );
   }
 
   Future<bool> getLoggedPerson(String email) async {
     try {
-      final currentPerson =
-          await ref.read(restClientPersonProvider).getPersonByEmail(email);
-      if (currentPerson.email != null) {
-        state = state.copyWith(currentPerson: currentPerson);
-        print(currentPerson);
-        return true;
-      } else {
-        return false;
-      }
+      final document = await firebase.getDocumentById("users", email);
+      state = state.copyWith(currentPerson: document.data() as Person);
+      return true;
     } catch (e) {
-      await _catchErrorOnFetch(e);
+      log(e.toString());
       return false;
     }
   }
 
-  Future<Person?> getPersonById(int id) async {
+  Future<Person?> getPersonById(String email) async {
     try {
-      return await ref.read(restClientPersonProvider).getPersonById(id);
+      final document = await firebase.getDocumentById("users", email);
+      return document.data() as Person;
     } catch (e) {
-      await _catchErrorOnFetch(e);
+      log(e.toString());
       return null;
     }
   }
@@ -129,41 +99,41 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
       state = SessionProviderState(
           currentPerson: state.currentPerson, loading: true);
 
-      final response = await ref
-          .read(restClientPersonProvider)
-          .addGoal(state.currentPerson!.id!, goal);
+      await firebase.addDocToSubCollection(
+          "users", state.currentPerson?.email ?? "", "goals", goal);
 
-      if (response.response.statusCode == 200) {
-        var updatedPerson = state.currentPerson?.copyWith(
-          myGoals: [...state.currentPerson!.myGoals!, goal],
-        );
+      var updatedPerson = state.currentPerson?.copyWith(
+        myGoals: [...state.currentPerson!.myGoals!, goal],
+      );
 
-        state = state.copyWith(currentPerson: updatedPerson);
-      }
-    } catch (err) {
-      await _catchErrorOnFetch(err);
+      state = state.copyWith(currentPerson: updatedPerson);
+    } catch (e) {
+      log(e.toString());
     }
   }
 
-  Future<void> removeGoal(int goalId) async {
+  Future<void> removeGoal(String goalId) async {
     try {
       state = SessionProviderState(
           currentPerson: state.currentPerson, loading: true);
 
-      final response = await ref
-          .read(restClientPersonProvider)
-          .removeGoal(state.currentPerson!.id!, goalId);
+      final updateData = {"endDate": DateTime.now(), "completed": true};
+      await firebase.updateSubDocument(
+        "users",
+        state.currentPerson?.email ?? "",
+        "goals",
+        goalId,
+        updateData,
+      );
 
-      if (response.response.statusCode == 200) {
-        var updatedPerson = state.currentPerson?.copyWith(
-          myGoals: List<Goal>.from(state.currentPerson!.myGoals!)
-            ..removeWhere((goal) => goal.id == goalId),
-        );
+      var updatedPerson = state.currentPerson?.copyWith(
+        myGoals: List<Goal>.from(state.currentPerson!.myGoals!)
+          ..removeWhere((goal) => goal.id == goalId),
+      );
 
-        state = state.copyWith(currentPerson: updatedPerson);
-      }
-    } catch (err) {
-      await _catchErrorOnFetch(err);
+      state = state.copyWith(currentPerson: updatedPerson);
+    } catch (e) {
+      log(e.toString());
     }
   }
 
@@ -172,102 +142,78 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
       state = SessionProviderState(
           currentPerson: state.currentPerson, loading: true);
 
-      print(state.currentPerson);
-
-      Map<String, dynamic> from = {"id": state.currentPerson!.id};
-      Map<String, dynamic> to = {"id": person.id};
-
-      Map<String, dynamic> object = {
-        "from": from,
-        "to": to,
+      final following = {
+        "following": FieldValue.arrayUnion([person.email!]),
+      };
+      final followers = {
+        "followers": FieldValue.arrayUnion([state.currentPerson?.email!]),
       };
 
-      final response =
-          await ref.read(restClientPersonProvider).followPerson(object);
+      await firebase.updateMainDocument(
+          "users", state.currentPerson?.email ?? "", following);
+      await firebase.updateMainDocument("users", person.email ?? "", followers);
 
-      if (response.response.statusCode == 200) {
-        var updatedPerson = state.currentPerson?.copyWith(
-          following: [...?state.currentPerson!.following, person.id!],
-        );
+      var updatedPerson = state.currentPerson?.copyWith(
+        following: [...?state.currentPerson!.following, person.email!],
+      );
 
-        state = state.copyWith(currentPerson: updatedPerson);
-      }
-
-      print(state.currentPerson);
-    } catch (err) {
-      await _catchErrorOnFetch(err);
+      state = state.copyWith(currentPerson: updatedPerson);
+    } catch (e) {
+      log(e.toString());
     }
   }
 
-  Future<void> unfollowPerson(int id) async {
+  Future<void> unfollowPerson(String id) async {
     try {
       state = SessionProviderState(
-          currentPerson: state.currentPerson, loading: true);
-      print(state.currentPerson);
+        currentPerson: state.currentPerson,
+        loading: true,
+      );
 
-      final response = await ref
-          .read(restClientPersonProvider)
-          .unfollowPerson(state.currentPerson!.id!, id);
+      var currentPerson = state.currentPerson;
+      if (currentPerson != null && currentPerson.following != null) {
+        var updatedFollowing = List<String>.from(currentPerson.following!)
+          ..remove(id);
+        var updatedPerson = currentPerson.copyWith(following: updatedFollowing);
+        state = state.copyWith(currentPerson: updatedPerson);
 
-      if (response.response.statusCode == 200) {
-        var currentPerson = state.currentPerson;
-        if (currentPerson != null && currentPerson.following != null) {
-          var updatedFollowing = List<int>.from(currentPerson.following!)
-            ..removeWhere((personId) => personId == id);
+        await firebase.updateMainDocument(
+          "users",
+          currentPerson.email ?? "",
+          {"following": updatedFollowing},
+        );
 
-          var updatedPerson =
-              currentPerson.copyWith(following: updatedFollowing);
+        var document = await firebase.getDocumentById("users", id);
+        var unfollowedPerson = document.data() as Person;
+        if (unfollowedPerson.followers != null) {
+          var updatedFollowers = List<String>.from(unfollowedPerson.followers!)
+            ..remove(currentPerson.email);
 
-          state = state.copyWith(currentPerson: updatedPerson);
+          await firebase.updateMainDocument(
+            "users",
+            id,
+            {"followers": updatedFollowers},
+          );
         }
       }
-      print(state.currentPerson);
-    } catch (err) {
-      await _catchErrorOnFetch(err);
+    } catch (e) {
+      log(e.toString());
     }
   }
 
   Future<bool> saveWorkout(Workout workout) async {
     try {
-      PersonWorkout personWorkout = PersonWorkout(
-        id: null,
-        idPerson: state.currentPerson!.id,
-        workout: workout,
-        initDate: DateTime.now(),
-        endDate: null,
-        completed: false,
+      await firebase.addDocToSubCollection(
+          "users", state.currentPerson?.email ?? "", "workouts", workout);
+
+      var updatedPerson = state.currentPerson?.copyWith(
+        myWorkouts: [...?state.currentPerson!.myWorkouts, workout],
       );
-
-      final response = await ref
-          .read(restClientWorkoutProvider)
-          .saveWorkoutForUser(personWorkout);
-
-      if (response.response.statusCode == 200) {
-        var updatedPerson = state.currentPerson?.copyWith(
-          myWorkouts: [...?state.currentPerson!.myWorkouts, workout],
-        );
-
-        state = state.copyWith(currentPerson: updatedPerson);
-        return true;
-      } else {
-        return false;
-      }
+      state = state.copyWith(currentPerson: updatedPerson);
+      return true;
     } catch (err) {
-      await _catchErrorOnFetch(err);
       return false;
     }
-  }
-
-  Future<void> _catchErrorOnFetch(Object err) async {
-    var connectivityResult = await InternetConnectionChecker().hasConnection;
-    ErrorApiCall errorType = ErrorApiCall.generic;
-    if (!connectivityResult) {
-      errorType = ErrorApiCall.noConnection;
-    }
-    state = state = SessionProviderState(
-      currentPerson: state.currentPerson,
-      errorApiCall: errorType,
-    );
   }
 }
 

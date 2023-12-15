@@ -20,7 +20,7 @@ Role _$RoleFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Role {
-  int? get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   List<Person>? get persons => throw _privateConstructorUsedError;
 
@@ -34,7 +34,7 @@ abstract class $RoleCopyWith<$Res> {
   factory $RoleCopyWith(Role value, $Res Function(Role) then) =
       _$RoleCopyWithImpl<$Res, Role>;
   @useResult
-  $Res call({int? id, String? name, List<Person>? persons});
+  $Res call({String? id, String? name, List<Person>? persons});
 }
 
 /// @nodoc
@@ -58,7 +58,7 @@ class _$RoleCopyWithImpl<$Res, $Val extends Role>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -77,7 +77,7 @@ abstract class _$$_RoleCopyWith<$Res> implements $RoleCopyWith<$Res> {
       __$$_RoleCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String? name, List<Person>? persons});
+  $Res call({String? id, String? name, List<Person>? persons});
 }
 
 /// @nodoc
@@ -97,7 +97,7 @@ class __$$_RoleCopyWithImpl<$Res> extends _$RoleCopyWithImpl<$Res, _$_Role>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -122,7 +122,7 @@ class _$_Role implements _Role {
   factory _$_Role.fromJson(Map<String, dynamic> json) => _$$_RoleFromJson(json);
 
   @override
-  final int? id;
+  final String? id;
   @override
   final String? name;
   final List<Person>? _persons;
@@ -171,14 +171,14 @@ class _$_Role implements _Role {
 
 abstract class _Role implements Role {
   const factory _Role(
-      {required final int? id,
+      {required final String? id,
       required final String? name,
       required final List<Person>? persons}) = _$_Role;
 
   factory _Role.fromJson(Map<String, dynamic> json) = _$_Role.fromJson;
 
   @override
-  int? get id;
+  String? get id;
   @override
   String? get name;
   @override

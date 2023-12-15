@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/pages/auth/registration/registration_state.dart';
@@ -94,7 +96,7 @@ class RegistrationCredentialsPage extends ConsumerWidget {
                 child: FormDivider(),
               ),
               GestureDetector(
-                onTap: () => print("Login with google"),
+                onTap: () => log("Login with google"),
                 child: SocialButton(
                   logo: SvgPicture.asset("assets/icons/google.svg"),
                 ),
@@ -133,7 +135,6 @@ class RegistrationCredentialsPage extends ConsumerWidget {
         form.email.isNotEmpty &&
         form.password.isNotEmpty) {
       Person currentUser = Person(
-        id: null,
         name: form.firstName,
         surname: form.lastName,
         email: form.email,
@@ -144,7 +145,6 @@ class RegistrationCredentialsPage extends ConsumerWidget {
         weightUnit: null,
         height: null,
         heightUnit: null,
-        roles: null,
         myWorkouts: null,
         createdWorkouts: null,
         myGoals: null,

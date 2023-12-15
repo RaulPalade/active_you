@@ -33,6 +33,7 @@ dependencies:
   ms_material_color: ^1.0.0
   flutter_svg: ^1.1.6
   curved_navigation_bar: ^1.0.3
+  flutter_guid: ^0.3.1
 
   #UTILS
   flutter_secure_storage: ^8.0.0

@@ -9,7 +9,6 @@ part 'person.g.dart';
 @freezed
 class Person with _$Person {
   const factory Person({
-    required int? id,
     required String? name,
     required String? surname,
     required String? email,
@@ -20,12 +19,11 @@ class Person with _$Person {
     required String? weightUnit,
     required double? height,
     required String? heightUnit,
-    required List<String>? roles,
     required List<Workout>? myWorkouts,
     required List<Workout>? createdWorkouts,
     required List<Goal>? myGoals,
-    required List<int>? following,
-    required List<int>? followers,
+    required List<String>? following,
+    required List<String>? followers,
   }) = _Person;
 
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);

@@ -7,7 +7,7 @@ part of 'exercise.dart';
 // **************************************************************************
 
 _$_Exercise _$$_ExerciseFromJson(Map<String, dynamic> json) => _$_Exercise(
-      id: json['id'] as int?,
+      id: json['id'] as String?,
       name: json['name'] as String?,
       repetitions: json['repetitions'] as int?,
       series: json['series'] as int?,

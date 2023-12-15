@@ -8,7 +8,7 @@ class CreateWorkoutState with _$CreateWorkoutState {
   const factory CreateWorkoutState({
     @Default("") String workoutName,
     @Default("") String workoutType,
-    @Default(-1) int generatedId,
+    @Default("") String generatedId,
     @Default("") String exerciseName,
     @Default(0) int exerciseRepetitions,
     @Default(0) int exerciseSeries,

@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomePageState {
-  PersonWorkout? get lastWorkout => throw _privateConstructorUsedError;
   Goal? get lastGoal => throw _privateConstructorUsedError;
   List<Person>? get friendsActivity => throw _privateConstructorUsedError;
 
@@ -31,12 +30,8 @@ abstract class $HomePageStateCopyWith<$Res> {
           HomePageState value, $Res Function(HomePageState) then) =
       _$HomePageStateCopyWithImpl<$Res, HomePageState>;
   @useResult
-  $Res call(
-      {PersonWorkout? lastWorkout,
-      Goal? lastGoal,
-      List<Person>? friendsActivity});
+  $Res call({Goal? lastGoal, List<Person>? friendsActivity});
 
-  $PersonWorkoutCopyWith<$Res>? get lastWorkout;
   $GoalCopyWith<$Res>? get lastGoal;
 }
 
@@ -53,15 +48,10 @@ class _$HomePageStateCopyWithImpl<$Res, $Val extends HomePageState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? lastWorkout = freezed,
     Object? lastGoal = freezed,
     Object? friendsActivity = freezed,
   }) {
     return _then(_value.copyWith(
-      lastWorkout: freezed == lastWorkout
-          ? _value.lastWorkout
-          : lastWorkout // ignore: cast_nullable_to_non_nullable
-              as PersonWorkout?,
       lastGoal: freezed == lastGoal
           ? _value.lastGoal
           : lastGoal // ignore: cast_nullable_to_non_nullable
@@ -71,18 +61,6 @@ class _$HomePageStateCopyWithImpl<$Res, $Val extends HomePageState>
           : friendsActivity // ignore: cast_nullable_to_non_nullable
               as List<Person>?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PersonWorkoutCopyWith<$Res>? get lastWorkout {
-    if (_value.lastWorkout == null) {
-      return null;
-    }
-
-    return $PersonWorkoutCopyWith<$Res>(_value.lastWorkout!, (value) {
-      return _then(_value.copyWith(lastWorkout: value) as $Val);
-    });
   }
 
   @override
@@ -106,13 +84,8 @@ abstract class _$$HomePageStateDataCopyWith<$Res>
       __$$HomePageStateDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {PersonWorkout? lastWorkout,
-      Goal? lastGoal,
-      List<Person>? friendsActivity});
+  $Res call({Goal? lastGoal, List<Person>? friendsActivity});
 
-  @override
-  $PersonWorkoutCopyWith<$Res>? get lastWorkout;
   @override
   $GoalCopyWith<$Res>? get lastGoal;
 }
@@ -128,15 +101,10 @@ class __$$HomePageStateDataCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? lastWorkout = freezed,
     Object? lastGoal = freezed,
     Object? friendsActivity = freezed,
   }) {
     return _then(_$HomePageStateData(
-      lastWorkout: freezed == lastWorkout
-          ? _value.lastWorkout
-          : lastWorkout // ignore: cast_nullable_to_non_nullable
-              as PersonWorkout?,
       lastGoal: freezed == lastGoal
           ? _value.lastGoal
           : lastGoal // ignore: cast_nullable_to_non_nullable
@@ -153,11 +121,9 @@ class __$$HomePageStateDataCopyWithImpl<$Res>
 
 class _$HomePageStateData implements HomePageStateData {
   const _$HomePageStateData(
-      {this.lastWorkout, this.lastGoal, final List<Person>? friendsActivity})
+      {this.lastGoal, final List<Person>? friendsActivity})
       : _friendsActivity = friendsActivity;
 
-  @override
-  final PersonWorkout? lastWorkout;
   @override
   final Goal? lastGoal;
   final List<Person>? _friendsActivity;
@@ -172,7 +138,7 @@ class _$HomePageStateData implements HomePageStateData {
 
   @override
   String toString() {
-    return 'HomePageState(lastWorkout: $lastWorkout, lastGoal: $lastGoal, friendsActivity: $friendsActivity)';
+    return 'HomePageState(lastGoal: $lastGoal, friendsActivity: $friendsActivity)';
   }
 
   @override
@@ -180,8 +146,6 @@ class _$HomePageStateData implements HomePageStateData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$HomePageStateData &&
-            (identical(other.lastWorkout, lastWorkout) ||
-                other.lastWorkout == lastWorkout) &&
             (identical(other.lastGoal, lastGoal) ||
                 other.lastGoal == lastGoal) &&
             const DeepCollectionEquality()
@@ -189,7 +153,7 @@ class _$HomePageStateData implements HomePageStateData {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, lastWorkout, lastGoal,
+  int get hashCode => Object.hash(runtimeType, lastGoal,
       const DeepCollectionEquality().hash(_friendsActivity));
 
   @JsonKey(ignore: true)
@@ -201,12 +165,9 @@ class _$HomePageStateData implements HomePageStateData {
 
 abstract class HomePageStateData implements HomePageState {
   const factory HomePageStateData(
-      {final PersonWorkout? lastWorkout,
-      final Goal? lastGoal,
+      {final Goal? lastGoal,
       final List<Person>? friendsActivity}) = _$HomePageStateData;
 
-  @override
-  PersonWorkout? get lastWorkout;
   @override
   Goal? get lastGoal;
   @override

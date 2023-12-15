@@ -1,17 +1,16 @@
+import 'dart:developer';
+
 import 'package:active_you/business/models/exercise/exercise.dart';
 import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/business/models/workout/workout.dart';
-import 'package:active_you/business/providers/api_provider.dart';
 import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/pages/explore_workouts/explore_workouts_state.dart';
-import 'package:active_you/utils/api_errors.dart';
-import 'package:dio/dio.dart';
+import 'package:active_you/utils/firebase_methods.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class ExploreWorkoutsVM extends StateNotifier<ExploreWorkoutsState> {
   final Ref ref;
-  CancelToken? tokenLastRequest;
+  FirebaseMethods firebase = FirebaseMethods();
 
   ExploreWorkoutsVM(this.ref) : super(const ExploreWorkoutsState()) {
     fetchWorkouts();
@@ -21,7 +20,7 @@ class ExploreWorkoutsVM extends StateNotifier<ExploreWorkoutsState> {
     state = state.copyWith(workouts: [...state.workouts, workout]);
   }
 
-  void addExerciseToWorkoutExerciseList(Exercise exercise, int workoutId) {
+  void addExerciseToWorkoutExerciseList(Exercise exercise, String workoutId) {
     state = state.copyWith(
       workouts: state.workouts.map((workout) {
         if (workout.id == workoutId) {
@@ -37,16 +36,15 @@ class ExploreWorkoutsVM extends StateNotifier<ExploreWorkoutsState> {
     try {
       state = const ExploreWorkoutsState(workouts: [], loading: true);
 
-      tokenLastRequest = CancelToken();
-      final workoutResponse =
-          await ref.read(restClientWorkoutProvider).getWorkouts();
+      final allDocuments = await firebase.getAllDocuments("workouts");
+      List<Workout> workouts =
+          allDocuments.map((workouts) => workouts.data() as Workout).toList();
 
       state = ExploreWorkoutsState(
-          workouts: workoutResponse.reversed.toList(), loading: false);
-    } catch (err) {
-      await _catchErrorOnFetch(err);
+          workouts: workouts.reversed.toList(), loading: false);
+    } catch (e) {
+      log(e.toString());
     }
-    tokenLastRequest = null;
   }
 
   Future<void> getWorkoutAuthor(Workout workout) async {
@@ -57,15 +55,5 @@ class ExploreWorkoutsVM extends StateNotifier<ExploreWorkoutsState> {
     if (person != null) {
       state = state.copyWith(workoutAuthor: person);
     }
-  }
-
-  Future<void> _catchErrorOnFetch(Object err) async {
-    var connectivityResult = await InternetConnectionChecker().hasConnection;
-    ErrorApiCall errorType = ErrorApiCall.generic;
-    if (!connectivityResult) {
-      errorType = ErrorApiCall.noConnection;
-    }
-    state =
-        ExploreWorkoutsState(workouts: state.workouts, errorApiCall: errorType);
   }
 }

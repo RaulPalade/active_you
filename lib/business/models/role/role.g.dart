@@ -7,7 +7,7 @@ part of 'role.dart';
 // **************************************************************************
 
 _$_Role _$$_RoleFromJson(Map<String, dynamic> json) => _$_Role(
-      id: json['id'] as int?,
+      id: json['id'] as String?,
       name: json['name'] as String?,
       persons: (json['persons'] as List<dynamic>?)
           ?.map((e) => Person.fromJson(e as Map<String, dynamic>))

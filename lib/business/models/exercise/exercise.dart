@@ -1,4 +1,3 @@
-import 'package:active_you/business/models/workout/workout.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'exercise.freezed.dart';
@@ -8,7 +7,7 @@ part 'exercise.g.dart';
 @freezed
 class Exercise with _$Exercise {
   const factory Exercise({
-    required int? id,
+    required String? id,
     required String? name,
     required int? repetitions,
     required int? series,

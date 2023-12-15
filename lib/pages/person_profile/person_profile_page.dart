@@ -20,7 +20,9 @@ class PersonProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentPerson = ref.watch(currentPersonProvider);
-    bool isTrainer = currentPerson?.roles?.contains("TRAINER") ?? false;
+    // TODO FIX roles manage
+    bool isTrainer = true;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -84,14 +86,14 @@ class PersonProfilePage extends ConsumerWidget {
                 shrinkWrap: true,
                 children: [
                   StatsCard(
-                      value: currentPerson?.height.toString() ?? "",
-                      unitMeasure: currentPerson?.heightUnit.toString() ?? ""),
+                      value: currentPerson.height.toString(),
+                      unitMeasure: currentPerson.heightUnit.toString()),
                   StatsCard(
-                      value: currentPerson?.weight.toString() ?? "",
-                      unitMeasure: currentPerson?.weightUnit.toString() ?? ""),
+                      value: currentPerson.weight.toString(),
+                      unitMeasure: currentPerson.weightUnit.toString()),
                   StatsCard(
                       value: MyDateUtils.calculateAge(
-                          currentPerson?.dateOfBirth ?? DateTime.now()),
+                          currentPerson.dateOfBirth ?? DateTime.now()),
                       unitMeasure: "Age"),
                 ],
               ),
@@ -103,10 +105,10 @@ class PersonProfilePage extends ConsumerWidget {
                 shrinkWrap: true,
                 children: [
                   StatsCard(
-                      value: currentPerson?.following?.length.toString() ?? "",
+                      value: currentPerson.following?.length.toString() ?? "",
                       unitMeasure: "Following"),
                   StatsCard(
-                      value: currentPerson?.followers?.length.toString() ?? "",
+                      value: currentPerson.followers?.length.toString() ?? "",
                       unitMeasure: "Followers"),
                 ],
               ),

@@ -7,7 +7,7 @@ part 'role.g.dart';
 @freezed
 class Role with _$Role {
   const factory Role({
-    required int? id,
+    required String? id,
     required String? name,
     required List<Person>? persons,
   }) = _Role;

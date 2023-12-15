@@ -20,7 +20,6 @@ Person _$PersonFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Person {
-  int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get surname => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
@@ -31,12 +30,11 @@ mixin _$Person {
   String? get weightUnit => throw _privateConstructorUsedError;
   double? get height => throw _privateConstructorUsedError;
   String? get heightUnit => throw _privateConstructorUsedError;
-  List<String>? get roles => throw _privateConstructorUsedError;
   List<Workout>? get myWorkouts => throw _privateConstructorUsedError;
   List<Workout>? get createdWorkouts => throw _privateConstructorUsedError;
   List<Goal>? get myGoals => throw _privateConstructorUsedError;
-  List<int>? get following => throw _privateConstructorUsedError;
-  List<int>? get followers => throw _privateConstructorUsedError;
+  List<String>? get following => throw _privateConstructorUsedError;
+  List<String>? get followers => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,8 +47,7 @@ abstract class $PersonCopyWith<$Res> {
       _$PersonCopyWithImpl<$Res, Person>;
   @useResult
   $Res call(
-      {int? id,
-      String? name,
+      {String? name,
       String? surname,
       String? email,
       String? password,
@@ -60,12 +57,11 @@ abstract class $PersonCopyWith<$Res> {
       String? weightUnit,
       double? height,
       String? heightUnit,
-      List<String>? roles,
       List<Workout>? myWorkouts,
       List<Workout>? createdWorkouts,
       List<Goal>? myGoals,
-      List<int>? following,
-      List<int>? followers});
+      List<String>? following,
+      List<String>? followers});
 }
 
 /// @nodoc
@@ -81,7 +77,6 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? name = freezed,
     Object? surname = freezed,
     Object? email = freezed,
@@ -92,7 +87,6 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? weightUnit = freezed,
     Object? height = freezed,
     Object? heightUnit = freezed,
-    Object? roles = freezed,
     Object? myWorkouts = freezed,
     Object? createdWorkouts = freezed,
     Object? myGoals = freezed,
@@ -100,10 +94,6 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? followers = freezed,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -144,10 +134,6 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           ? _value.heightUnit
           : heightUnit // ignore: cast_nullable_to_non_nullable
               as String?,
-      roles: freezed == roles
-          ? _value.roles
-          : roles // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       myWorkouts: freezed == myWorkouts
           ? _value.myWorkouts
           : myWorkouts // ignore: cast_nullable_to_non_nullable
@@ -163,11 +149,11 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
       following: freezed == following
           ? _value.following
           : following // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
+              as List<String>?,
       followers: freezed == followers
           ? _value.followers
           : followers // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
+              as List<String>?,
     ) as $Val);
   }
 }
@@ -179,8 +165,7 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int? id,
-      String? name,
+      {String? name,
       String? surname,
       String? email,
       String? password,
@@ -190,12 +175,11 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
       String? weightUnit,
       double? height,
       String? heightUnit,
-      List<String>? roles,
       List<Workout>? myWorkouts,
       List<Workout>? createdWorkouts,
       List<Goal>? myGoals,
-      List<int>? following,
-      List<int>? followers});
+      List<String>? following,
+      List<String>? followers});
 }
 
 /// @nodoc
@@ -208,7 +192,6 @@ class __$$_PersonCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? name = freezed,
     Object? surname = freezed,
     Object? email = freezed,
@@ -219,7 +202,6 @@ class __$$_PersonCopyWithImpl<$Res>
     Object? weightUnit = freezed,
     Object? height = freezed,
     Object? heightUnit = freezed,
-    Object? roles = freezed,
     Object? myWorkouts = freezed,
     Object? createdWorkouts = freezed,
     Object? myGoals = freezed,
@@ -227,10 +209,6 @@ class __$$_PersonCopyWithImpl<$Res>
     Object? followers = freezed,
   }) {
     return _then(_$_Person(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -271,10 +249,6 @@ class __$$_PersonCopyWithImpl<$Res>
           ? _value.heightUnit
           : heightUnit // ignore: cast_nullable_to_non_nullable
               as String?,
-      roles: freezed == roles
-          ? _value._roles
-          : roles // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
       myWorkouts: freezed == myWorkouts
           ? _value._myWorkouts
           : myWorkouts // ignore: cast_nullable_to_non_nullable
@@ -290,11 +264,11 @@ class __$$_PersonCopyWithImpl<$Res>
       following: freezed == following
           ? _value._following
           : following // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
+              as List<String>?,
       followers: freezed == followers
           ? _value._followers
           : followers // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
+              as List<String>?,
     ));
   }
 }
@@ -303,8 +277,7 @@ class __$$_PersonCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Person implements _Person {
   const _$_Person(
-      {required this.id,
-      required this.name,
+      {required this.name,
       required this.surname,
       required this.email,
       required this.password,
@@ -314,14 +287,12 @@ class _$_Person implements _Person {
       required this.weightUnit,
       required this.height,
       required this.heightUnit,
-      required final List<String>? roles,
       required final List<Workout>? myWorkouts,
       required final List<Workout>? createdWorkouts,
       required final List<Goal>? myGoals,
-      required final List<int>? following,
-      required final List<int>? followers})
-      : _roles = roles,
-        _myWorkouts = myWorkouts,
+      required final List<String>? following,
+      required final List<String>? followers})
+      : _myWorkouts = myWorkouts,
         _createdWorkouts = createdWorkouts,
         _myGoals = myGoals,
         _following = following,
@@ -330,8 +301,6 @@ class _$_Person implements _Person {
   factory _$_Person.fromJson(Map<String, dynamic> json) =>
       _$$_PersonFromJson(json);
 
-  @override
-  final int? id;
   @override
   final String? name;
   @override
@@ -352,16 +321,6 @@ class _$_Person implements _Person {
   final double? height;
   @override
   final String? heightUnit;
-  final List<String>? _roles;
-  @override
-  List<String>? get roles {
-    final value = _roles;
-    if (value == null) return null;
-    if (_roles is EqualUnmodifiableListView) return _roles;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
   final List<Workout>? _myWorkouts;
   @override
   List<Workout>? get myWorkouts {
@@ -392,9 +351,9 @@ class _$_Person implements _Person {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<int>? _following;
+  final List<String>? _following;
   @override
-  List<int>? get following {
+  List<String>? get following {
     final value = _following;
     if (value == null) return null;
     if (_following is EqualUnmodifiableListView) return _following;
@@ -402,9 +361,9 @@ class _$_Person implements _Person {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<int>? _followers;
+  final List<String>? _followers;
   @override
-  List<int>? get followers {
+  List<String>? get followers {
     final value = _followers;
     if (value == null) return null;
     if (_followers is EqualUnmodifiableListView) return _followers;
@@ -414,7 +373,7 @@ class _$_Person implements _Person {
 
   @override
   String toString() {
-    return 'Person(id: $id, name: $name, surname: $surname, email: $email, password: $password, sex: $sex, dateOfBirth: $dateOfBirth, weight: $weight, weightUnit: $weightUnit, height: $height, heightUnit: $heightUnit, roles: $roles, myWorkouts: $myWorkouts, createdWorkouts: $createdWorkouts, myGoals: $myGoals, following: $following, followers: $followers)';
+    return 'Person(name: $name, surname: $surname, email: $email, password: $password, sex: $sex, dateOfBirth: $dateOfBirth, weight: $weight, weightUnit: $weightUnit, height: $height, heightUnit: $heightUnit, myWorkouts: $myWorkouts, createdWorkouts: $createdWorkouts, myGoals: $myGoals, following: $following, followers: $followers)';
   }
 
   @override
@@ -422,7 +381,6 @@ class _$_Person implements _Person {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Person &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.surname, surname) || other.surname == surname) &&
             (identical(other.email, email) || other.email == email) &&
@@ -437,7 +395,6 @@ class _$_Person implements _Person {
             (identical(other.height, height) || other.height == height) &&
             (identical(other.heightUnit, heightUnit) ||
                 other.heightUnit == heightUnit) &&
-            const DeepCollectionEquality().equals(other._roles, _roles) &&
             const DeepCollectionEquality()
                 .equals(other._myWorkouts, _myWorkouts) &&
             const DeepCollectionEquality()
@@ -453,7 +410,6 @@ class _$_Person implements _Person {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      id,
       name,
       surname,
       email,
@@ -464,7 +420,6 @@ class _$_Person implements _Person {
       weightUnit,
       height,
       heightUnit,
-      const DeepCollectionEquality().hash(_roles),
       const DeepCollectionEquality().hash(_myWorkouts),
       const DeepCollectionEquality().hash(_createdWorkouts),
       const DeepCollectionEquality().hash(_myGoals),
@@ -487,8 +442,7 @@ class _$_Person implements _Person {
 
 abstract class _Person implements Person {
   const factory _Person(
-      {required final int? id,
-      required final String? name,
+      {required final String? name,
       required final String? surname,
       required final String? email,
       required final String? password,
@@ -498,17 +452,14 @@ abstract class _Person implements Person {
       required final String? weightUnit,
       required final double? height,
       required final String? heightUnit,
-      required final List<String>? roles,
       required final List<Workout>? myWorkouts,
       required final List<Workout>? createdWorkouts,
       required final List<Goal>? myGoals,
-      required final List<int>? following,
-      required final List<int>? followers}) = _$_Person;
+      required final List<String>? following,
+      required final List<String>? followers}) = _$_Person;
 
   factory _Person.fromJson(Map<String, dynamic> json) = _$_Person.fromJson;
 
-  @override
-  int? get id;
   @override
   String? get name;
   @override
@@ -530,17 +481,15 @@ abstract class _Person implements Person {
   @override
   String? get heightUnit;
   @override
-  List<String>? get roles;
-  @override
   List<Workout>? get myWorkouts;
   @override
   List<Workout>? get createdWorkouts;
   @override
   List<Goal>? get myGoals;
   @override
-  List<int>? get following;
+  List<String>? get following;
   @override
-  List<int>? get followers;
+  List<String>? get followers;
   @override
   @JsonKey(ignore: true)
   _$$_PersonCopyWith<_$_Person> get copyWith =>

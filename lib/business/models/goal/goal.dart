@@ -6,7 +6,7 @@ part 'goal.g.dart';
 @freezed
 class Goal with _$Goal {
   const factory Goal({
-    required int? id,
+    required String? id,
     required String? name,
     required String? type,
     required double? weight,

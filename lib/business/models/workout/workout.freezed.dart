@@ -20,10 +20,13 @@ Workout _$WorkoutFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Workout {
-  int? get id => throw _privateConstructorUsedError;
-  int? get createdById => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String? get createdById => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
+  bool? get completed => throw _privateConstructorUsedError;
+  DateTime? get initDate => throw _privateConstructorUsedError;
+  DateTime? get endDate => throw _privateConstructorUsedError;
   List<Exercise>? get exercises => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,10 +40,13 @@ abstract class $WorkoutCopyWith<$Res> {
       _$WorkoutCopyWithImpl<$Res, Workout>;
   @useResult
   $Res call(
-      {int? id,
-      int? createdById,
+      {String? id,
+      String? createdById,
       String? name,
       String? type,
+      bool? completed,
+      DateTime? initDate,
+      DateTime? endDate,
       List<Exercise>? exercises});
 }
 
@@ -61,17 +67,20 @@ class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
     Object? createdById = freezed,
     Object? name = freezed,
     Object? type = freezed,
+    Object? completed = freezed,
+    Object? initDate = freezed,
+    Object? endDate = freezed,
     Object? exercises = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       createdById: freezed == createdById
           ? _value.createdById
           : createdById // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -80,6 +89,18 @@ class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
+      completed: freezed == completed
+          ? _value.completed
+          : completed // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      initDate: freezed == initDate
+          ? _value.initDate
+          : initDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endDate: freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       exercises: freezed == exercises
           ? _value.exercises
           : exercises // ignore: cast_nullable_to_non_nullable
@@ -96,10 +117,13 @@ abstract class _$$_WorkoutCopyWith<$Res> implements $WorkoutCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int? id,
-      int? createdById,
+      {String? id,
+      String? createdById,
       String? name,
       String? type,
+      bool? completed,
+      DateTime? initDate,
+      DateTime? endDate,
       List<Exercise>? exercises});
 }
 
@@ -117,17 +141,20 @@ class __$$_WorkoutCopyWithImpl<$Res>
     Object? createdById = freezed,
     Object? name = freezed,
     Object? type = freezed,
+    Object? completed = freezed,
+    Object? initDate = freezed,
+    Object? endDate = freezed,
     Object? exercises = freezed,
   }) {
     return _then(_$_Workout(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       createdById: freezed == createdById
           ? _value.createdById
           : createdById // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -136,6 +163,18 @@ class __$$_WorkoutCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
+      completed: freezed == completed
+          ? _value.completed
+          : completed // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      initDate: freezed == initDate
+          ? _value.initDate
+          : initDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endDate: freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       exercises: freezed == exercises
           ? _value._exercises
           : exercises // ignore: cast_nullable_to_non_nullable
@@ -152,6 +191,9 @@ class _$_Workout implements _Workout {
       required this.createdById,
       required this.name,
       required this.type,
+      required this.completed,
+      required this.initDate,
+      required this.endDate,
       required final List<Exercise>? exercises})
       : _exercises = exercises;
 
@@ -159,13 +201,19 @@ class _$_Workout implements _Workout {
       _$$_WorkoutFromJson(json);
 
   @override
-  final int? id;
+  final String? id;
   @override
-  final int? createdById;
+  final String? createdById;
   @override
   final String? name;
   @override
   final String? type;
+  @override
+  final bool? completed;
+  @override
+  final DateTime? initDate;
+  @override
+  final DateTime? endDate;
   final List<Exercise>? _exercises;
   @override
   List<Exercise>? get exercises {
@@ -178,7 +226,7 @@ class _$_Workout implements _Workout {
 
   @override
   String toString() {
-    return 'Workout(id: $id, createdById: $createdById, name: $name, type: $type, exercises: $exercises)';
+    return 'Workout(id: $id, createdById: $createdById, name: $name, type: $type, completed: $completed, initDate: $initDate, endDate: $endDate, exercises: $exercises)';
   }
 
   @override
@@ -191,13 +239,26 @@ class _$_Workout implements _Workout {
                 other.createdById == createdById) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.type, type) || other.type == type) &&
+            (identical(other.completed, completed) ||
+                other.completed == completed) &&
+            (identical(other.initDate, initDate) ||
+                other.initDate == initDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate) &&
             const DeepCollectionEquality()
                 .equals(other._exercises, _exercises));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, createdById, name, type,
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      createdById,
+      name,
+      type,
+      completed,
+      initDate,
+      endDate,
       const DeepCollectionEquality().hash(_exercises));
 
   @JsonKey(ignore: true)
@@ -216,22 +277,31 @@ class _$_Workout implements _Workout {
 
 abstract class _Workout implements Workout {
   const factory _Workout(
-      {required final int? id,
-      required final int? createdById,
+      {required final String? id,
+      required final String? createdById,
       required final String? name,
       required final String? type,
+      required final bool? completed,
+      required final DateTime? initDate,
+      required final DateTime? endDate,
       required final List<Exercise>? exercises}) = _$_Workout;
 
   factory _Workout.fromJson(Map<String, dynamic> json) = _$_Workout.fromJson;
 
   @override
-  int? get id;
+  String? get id;
   @override
-  int? get createdById;
+  String? get createdById;
   @override
   String? get name;
   @override
   String? get type;
+  @override
+  bool? get completed;
+  @override
+  DateTime? get initDate;
+  @override
+  DateTime? get endDate;
   @override
   List<Exercise>? get exercises;
   @override

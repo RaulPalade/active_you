@@ -16,10 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MyWorkoutsState {
-  List<PersonWorkout>? get activeWorkouts => throw _privateConstructorUsedError;
-  List<PersonWorkout>? get completedWorkouts =>
-      throw _privateConstructorUsedError;
-  ErrorApiCall? get errorApiCall => throw _privateConstructorUsedError;
+  List<Workout>? get activeWorkouts => throw _privateConstructorUsedError;
+  List<Workout>? get completedWorkouts => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MyWorkoutsStateCopyWith<MyWorkoutsState> get copyWith =>
@@ -32,10 +30,7 @@ abstract class $MyWorkoutsStateCopyWith<$Res> {
           MyWorkoutsState value, $Res Function(MyWorkoutsState) then) =
       _$MyWorkoutsStateCopyWithImpl<$Res, MyWorkoutsState>;
   @useResult
-  $Res call(
-      {List<PersonWorkout>? activeWorkouts,
-      List<PersonWorkout>? completedWorkouts,
-      ErrorApiCall? errorApiCall});
+  $Res call({List<Workout>? activeWorkouts, List<Workout>? completedWorkouts});
 }
 
 /// @nodoc
@@ -53,21 +48,16 @@ class _$MyWorkoutsStateCopyWithImpl<$Res, $Val extends MyWorkoutsState>
   $Res call({
     Object? activeWorkouts = freezed,
     Object? completedWorkouts = freezed,
-    Object? errorApiCall = freezed,
   }) {
     return _then(_value.copyWith(
       activeWorkouts: freezed == activeWorkouts
           ? _value.activeWorkouts
           : activeWorkouts // ignore: cast_nullable_to_non_nullable
-              as List<PersonWorkout>?,
+              as List<Workout>?,
       completedWorkouts: freezed == completedWorkouts
           ? _value.completedWorkouts
           : completedWorkouts // ignore: cast_nullable_to_non_nullable
-              as List<PersonWorkout>?,
-      errorApiCall: freezed == errorApiCall
-          ? _value.errorApiCall
-          : errorApiCall // ignore: cast_nullable_to_non_nullable
-              as ErrorApiCall?,
+              as List<Workout>?,
     ) as $Val);
   }
 }
@@ -80,10 +70,7 @@ abstract class _$$MyWorkoutsStateDataCopyWith<$Res>
       __$$MyWorkoutsStateDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {List<PersonWorkout>? activeWorkouts,
-      List<PersonWorkout>? completedWorkouts,
-      ErrorApiCall? errorApiCall});
+  $Res call({List<Workout>? activeWorkouts, List<Workout>? completedWorkouts});
 }
 
 /// @nodoc
@@ -99,21 +86,16 @@ class __$$MyWorkoutsStateDataCopyWithImpl<$Res>
   $Res call({
     Object? activeWorkouts = freezed,
     Object? completedWorkouts = freezed,
-    Object? errorApiCall = freezed,
   }) {
     return _then(_$MyWorkoutsStateData(
       activeWorkouts: freezed == activeWorkouts
           ? _value._activeWorkouts
           : activeWorkouts // ignore: cast_nullable_to_non_nullable
-              as List<PersonWorkout>?,
+              as List<Workout>?,
       completedWorkouts: freezed == completedWorkouts
           ? _value._completedWorkouts
           : completedWorkouts // ignore: cast_nullable_to_non_nullable
-              as List<PersonWorkout>?,
-      errorApiCall: freezed == errorApiCall
-          ? _value.errorApiCall
-          : errorApiCall // ignore: cast_nullable_to_non_nullable
-              as ErrorApiCall?,
+              as List<Workout>?,
     ));
   }
 }
@@ -122,16 +104,15 @@ class __$$MyWorkoutsStateDataCopyWithImpl<$Res>
 
 class _$MyWorkoutsStateData implements MyWorkoutsStateData {
   const _$MyWorkoutsStateData(
-      {final List<PersonWorkout>? activeWorkouts = const [],
-      final List<PersonWorkout>? completedWorkouts = const [],
-      this.errorApiCall})
+      {final List<Workout>? activeWorkouts = const [],
+      final List<Workout>? completedWorkouts = const []})
       : _activeWorkouts = activeWorkouts,
         _completedWorkouts = completedWorkouts;
 
-  final List<PersonWorkout>? _activeWorkouts;
+  final List<Workout>? _activeWorkouts;
   @override
   @JsonKey()
-  List<PersonWorkout>? get activeWorkouts {
+  List<Workout>? get activeWorkouts {
     final value = _activeWorkouts;
     if (value == null) return null;
     if (_activeWorkouts is EqualUnmodifiableListView) return _activeWorkouts;
@@ -139,10 +120,10 @@ class _$MyWorkoutsStateData implements MyWorkoutsStateData {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<PersonWorkout>? _completedWorkouts;
+  final List<Workout>? _completedWorkouts;
   @override
   @JsonKey()
-  List<PersonWorkout>? get completedWorkouts {
+  List<Workout>? get completedWorkouts {
     final value = _completedWorkouts;
     if (value == null) return null;
     if (_completedWorkouts is EqualUnmodifiableListView)
@@ -152,11 +133,8 @@ class _$MyWorkoutsStateData implements MyWorkoutsStateData {
   }
 
   @override
-  final ErrorApiCall? errorApiCall;
-
-  @override
   String toString() {
-    return 'MyWorkoutsState(activeWorkouts: $activeWorkouts, completedWorkouts: $completedWorkouts, errorApiCall: $errorApiCall)';
+    return 'MyWorkoutsState(activeWorkouts: $activeWorkouts, completedWorkouts: $completedWorkouts)';
   }
 
   @override
@@ -167,17 +145,14 @@ class _$MyWorkoutsStateData implements MyWorkoutsStateData {
             const DeepCollectionEquality()
                 .equals(other._activeWorkouts, _activeWorkouts) &&
             const DeepCollectionEquality()
-                .equals(other._completedWorkouts, _completedWorkouts) &&
-            (identical(other.errorApiCall, errorApiCall) ||
-                other.errorApiCall == errorApiCall));
+                .equals(other._completedWorkouts, _completedWorkouts));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_activeWorkouts),
-      const DeepCollectionEquality().hash(_completedWorkouts),
-      errorApiCall);
+      const DeepCollectionEquality().hash(_completedWorkouts));
 
   @JsonKey(ignore: true)
   @override
@@ -189,16 +164,13 @@ class _$MyWorkoutsStateData implements MyWorkoutsStateData {
 
 abstract class MyWorkoutsStateData implements MyWorkoutsState {
   const factory MyWorkoutsStateData(
-      {final List<PersonWorkout>? activeWorkouts,
-      final List<PersonWorkout>? completedWorkouts,
-      final ErrorApiCall? errorApiCall}) = _$MyWorkoutsStateData;
+      {final List<Workout>? activeWorkouts,
+      final List<Workout>? completedWorkouts}) = _$MyWorkoutsStateData;
 
   @override
-  List<PersonWorkout>? get activeWorkouts;
+  List<Workout>? get activeWorkouts;
   @override
-  List<PersonWorkout>? get completedWorkouts;
-  @override
-  ErrorApiCall? get errorApiCall;
+  List<Workout>? get completedWorkouts;
   @override
   @JsonKey(ignore: true)
   _$$MyWorkoutsStateDataCopyWith<_$MyWorkoutsStateData> get copyWith =>

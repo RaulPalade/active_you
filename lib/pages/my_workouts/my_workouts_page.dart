@@ -1,4 +1,4 @@
-import 'package:active_you/business/models/person_workout/person_workout.dart';
+import 'package:active_you/business/models/workout/workout.dart';
 import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/pages/my_workouts/my_workouts_vm.dart';
 import 'package:active_you/widgets/item_lists/workout_list_item.dart';
@@ -71,9 +71,9 @@ class _MyWorkoutsPageState extends ConsumerState<MyWorkoutsPage>
                       );
                     },
                     child: WorkoutListItem(
-                      workoutName: list![index].workout!.name!,
-                      workoutType: list[index].workout!.type!,
-                      numberExercises: list[index].workout!.exercises!.length,
+                      workoutName: list![index].name!,
+                      workoutType: list[index].type!,
+                      numberExercises: list[index].exercises!.length,
                     ),
                   );
                 }),
@@ -88,8 +88,8 @@ final myWorkoutsPageProvider =
     StateNotifierProvider<MyWorkoutsVM, MyWorkoutsState>(
         (ref) => MyWorkoutsVM(ref));
 
-final activeWorkoutsProvider = Provider<List<PersonWorkout>?>(
+final activeWorkoutsProvider = Provider<List<Workout>?>(
     (ref) => ref.watch(myWorkoutsPageProvider).activeWorkouts);
 
-final completedWorkoutsProvider = Provider<List<PersonWorkout>?>(
+final completedWorkoutsProvider = Provider<List<Workout>?>(
     (ref) => ref.watch(myWorkoutsPageProvider).completedWorkouts);

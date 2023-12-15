@@ -4,7 +4,6 @@ import 'package:active_you/business/providers/session_provider/session_provider.
 import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/pages/create_workout/create_workout_page.dart';
 import 'package:active_you/pages/explore_workouts/explore_workouts_page.dart';
-import 'package:active_you/pages/my_workouts/my_workouts_page.dart';
 import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/utils/snackbars.dart';
 import 'package:active_you/widgets/buttons/primary_button.dart';
@@ -22,12 +21,10 @@ class WorkoutDetailPage extends ConsumerWidget {
     Workout workout = ModalRoute.of(context)?.settings.arguments as Workout;
     Person? workoutAuthor = ref.watch(workoutAuthorProvider);
     final currentPerson = ref.watch(currentPersonProvider);
-    final myWorkouts = ref.watch(activeWorkoutsProvider);
+    final myWorkouts = currentPerson?.myWorkouts;
 
-    bool isMyWorkout = (workout.createdById == currentPerson?.id);
-    bool isInMyWorkouts = myWorkouts!.any((personWorkout) =>
-        personWorkout.workout!.id == workout.id &&
-        personWorkout.idPerson == currentPerson!.id);
+    bool isMyWorkout = (workout.createdById == currentPerson?.email);
+    bool? isInMyWorkouts = myWorkouts?.contains(workout) ?? false;
 
     return Scaffold(
       appBar: MyAppBar(title: workout.name!),

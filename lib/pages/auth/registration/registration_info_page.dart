@@ -1,8 +1,4 @@
-import 'dart:developer';
-
 import 'package:active_you/business/models/person/person.dart';
-import 'package:active_you/business/models/person_role/person_role.dart';
-import 'package:active_you/business/models/role/role.dart';
 import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/pages/auth/registration/registration_credentials_page.dart';
@@ -143,10 +139,8 @@ class RegistrationInfoPage extends ConsumerWidget {
         heightUnit: form.heightUnit,
       );
 
-      PersonRole personRole = PersonRole(
-          person: currentUser, role: Role(id: null, name: role, persons: null));
-
-      final response = ref.read(sessionProvider.notifier).register(personRole);
+      final response =
+          ref.read(sessionProvider.notifier).register(currentUser, role);
       response.then((success) {
         if (success) {
           showSuccessSnackBar(context, "Registrazione Effettuata!");
