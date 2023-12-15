@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:active_you/business/providers/preferences.dart';
 import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/navigation/endpoint.dart';
@@ -16,14 +18,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginPage extends ConsumerWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     String emailInput = ref.watch(_loginEmailProvider);
     String passwordInput = ref.watch(_loginPasswordProvider);
     bool tutorialCompleted = ref.watch(preferencesProvider).tutorialCompleted;
-    print(tutorialCompleted);
 
     return Container(
       color: ActiveYouTheme.scaffoldColor,
@@ -102,7 +103,7 @@ class LoginPage extends ConsumerWidget {
                 child: FormDivider(),
               ),
               GestureDetector(
-                onTap: () => print("Login with google"),
+                onTap: () => log("Login with google"),
                 child: SocialButton(
                   logo: SvgPicture.asset("assets/icons/google.svg"),
                 ),

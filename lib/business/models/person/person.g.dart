@@ -19,6 +19,7 @@ _$_Person _$$_PersonFromJson(Map<String, dynamic> json) => _$_Person(
       weightUnit: json['weightUnit'] as String?,
       height: (json['height'] as num?)?.toDouble(),
       heightUnit: json['heightUnit'] as String?,
+      role: json['role'] as String?,
       myWorkouts: (json['myWorkouts'] as List<dynamic>?)
           ?.map((e) => Workout.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -47,6 +48,7 @@ Map<String, dynamic> _$$_PersonToJson(_$_Person instance) => <String, dynamic>{
       'weightUnit': instance.weightUnit,
       'height': instance.height,
       'heightUnit': instance.heightUnit,
+      'role': instance.role,
       'myWorkouts': instance.myWorkouts,
       'createdWorkouts': instance.createdWorkouts,
       'myGoals': instance.myGoals,

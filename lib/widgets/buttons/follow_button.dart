@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 class FollowButton extends StatelessWidget {
   const FollowButton({
-    Key? key,
+    super.key,
     required this.status,
     required this.onClick,
-  }) : super(key: key);
+  });
 
   final String status;
   final Function onClick;

@@ -10,7 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class WorkoutBigCard extends ConsumerWidget {
-  const WorkoutBigCard({Key? key, required this.workout}) : super(key: key);
+  const WorkoutBigCard({super.key, required this.workout});
 
   final Workout workout;
 

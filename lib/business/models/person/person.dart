@@ -19,6 +19,7 @@ class Person with _$Person {
     required String? weightUnit,
     required double? height,
     required String? heightUnit,
+    required String? role,
     required List<Workout>? myWorkouts,
     required List<Workout>? createdWorkouts,
     required List<Goal>? myGoals,

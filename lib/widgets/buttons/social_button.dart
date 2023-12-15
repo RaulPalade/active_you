@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SocialButton extends StatelessWidget {
-  const SocialButton({Key? key, required this.logo}) : super(key: key);
+  const SocialButton({super.key, required this.logo});
   final SvgPicture logo;
 
   @override

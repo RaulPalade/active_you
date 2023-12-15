@@ -22,7 +22,6 @@ mixin _$CreateWorkoutState {
   String get exerciseName => throw _privateConstructorUsedError;
   int get exerciseRepetitions => throw _privateConstructorUsedError;
   int get exerciseSeries => throw _privateConstructorUsedError;
-  ErrorApiCall? get errorApiCall => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CreateWorkoutStateCopyWith<CreateWorkoutState> get copyWith =>
@@ -41,8 +40,7 @@ abstract class $CreateWorkoutStateCopyWith<$Res> {
       String generatedId,
       String exerciseName,
       int exerciseRepetitions,
-      int exerciseSeries,
-      ErrorApiCall? errorApiCall});
+      int exerciseSeries});
 }
 
 /// @nodoc
@@ -64,7 +62,6 @@ class _$CreateWorkoutStateCopyWithImpl<$Res, $Val extends CreateWorkoutState>
     Object? exerciseName = null,
     Object? exerciseRepetitions = null,
     Object? exerciseSeries = null,
-    Object? errorApiCall = freezed,
   }) {
     return _then(_value.copyWith(
       workoutName: null == workoutName
@@ -91,10 +88,6 @@ class _$CreateWorkoutStateCopyWithImpl<$Res, $Val extends CreateWorkoutState>
           ? _value.exerciseSeries
           : exerciseSeries // ignore: cast_nullable_to_non_nullable
               as int,
-      errorApiCall: freezed == errorApiCall
-          ? _value.errorApiCall
-          : errorApiCall // ignore: cast_nullable_to_non_nullable
-              as ErrorApiCall?,
     ) as $Val);
   }
 }
@@ -113,8 +106,7 @@ abstract class _$$CreateWorkoutStateDataCopyWith<$Res>
       String generatedId,
       String exerciseName,
       int exerciseRepetitions,
-      int exerciseSeries,
-      ErrorApiCall? errorApiCall});
+      int exerciseSeries});
 }
 
 /// @nodoc
@@ -134,7 +126,6 @@ class __$$CreateWorkoutStateDataCopyWithImpl<$Res>
     Object? exerciseName = null,
     Object? exerciseRepetitions = null,
     Object? exerciseSeries = null,
-    Object? errorApiCall = freezed,
   }) {
     return _then(_$CreateWorkoutStateData(
       workoutName: null == workoutName
@@ -161,10 +152,6 @@ class __$$CreateWorkoutStateDataCopyWithImpl<$Res>
           ? _value.exerciseSeries
           : exerciseSeries // ignore: cast_nullable_to_non_nullable
               as int,
-      errorApiCall: freezed == errorApiCall
-          ? _value.errorApiCall
-          : errorApiCall // ignore: cast_nullable_to_non_nullable
-              as ErrorApiCall?,
     ));
   }
 }
@@ -178,8 +165,7 @@ class _$CreateWorkoutStateData implements CreateWorkoutStateData {
       this.generatedId = "",
       this.exerciseName = "",
       this.exerciseRepetitions = 0,
-      this.exerciseSeries = 0,
-      this.errorApiCall});
+      this.exerciseSeries = 0});
 
   @override
   @JsonKey()
@@ -199,12 +185,10 @@ class _$CreateWorkoutStateData implements CreateWorkoutStateData {
   @override
   @JsonKey()
   final int exerciseSeries;
-  @override
-  final ErrorApiCall? errorApiCall;
 
   @override
   String toString() {
-    return 'CreateWorkoutState(workoutName: $workoutName, workoutType: $workoutType, generatedId: $generatedId, exerciseName: $exerciseName, exerciseRepetitions: $exerciseRepetitions, exerciseSeries: $exerciseSeries, errorApiCall: $errorApiCall)';
+    return 'CreateWorkoutState(workoutName: $workoutName, workoutType: $workoutType, generatedId: $generatedId, exerciseName: $exerciseName, exerciseRepetitions: $exerciseRepetitions, exerciseSeries: $exerciseSeries)';
   }
 
   @override
@@ -223,21 +207,12 @@ class _$CreateWorkoutStateData implements CreateWorkoutStateData {
             (identical(other.exerciseRepetitions, exerciseRepetitions) ||
                 other.exerciseRepetitions == exerciseRepetitions) &&
             (identical(other.exerciseSeries, exerciseSeries) ||
-                other.exerciseSeries == exerciseSeries) &&
-            (identical(other.errorApiCall, errorApiCall) ||
-                other.errorApiCall == errorApiCall));
+                other.exerciseSeries == exerciseSeries));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      workoutName,
-      workoutType,
-      generatedId,
-      exerciseName,
-      exerciseRepetitions,
-      exerciseSeries,
-      errorApiCall);
+  int get hashCode => Object.hash(runtimeType, workoutName, workoutType,
+      generatedId, exerciseName, exerciseRepetitions, exerciseSeries);
 
   @JsonKey(ignore: true)
   @override
@@ -254,8 +229,7 @@ abstract class CreateWorkoutStateData implements CreateWorkoutState {
       final String generatedId,
       final String exerciseName,
       final int exerciseRepetitions,
-      final int exerciseSeries,
-      final ErrorApiCall? errorApiCall}) = _$CreateWorkoutStateData;
+      final int exerciseSeries}) = _$CreateWorkoutStateData;
 
   @override
   String get workoutName;
@@ -269,8 +243,6 @@ abstract class CreateWorkoutStateData implements CreateWorkoutState {
   int get exerciseRepetitions;
   @override
   int get exerciseSeries;
-  @override
-  ErrorApiCall? get errorApiCall;
   @override
   @JsonKey(ignore: true)
   _$$CreateWorkoutStateDataCopyWith<_$CreateWorkoutStateData> get copyWith =>

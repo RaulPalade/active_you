@@ -6,11 +6,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class WorkoutListItem extends StatelessWidget {
   const WorkoutListItem(
-      {Key? key,
+      {super.key,
       required this.workoutName,
       required this.workoutType,
-      required this.numberExercises})
-      : super(key: key);
+      required this.numberExercises});
 
   final String workoutName;
   final String workoutType;
@@ -18,22 +17,12 @@ class WorkoutListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = [
-      ActiveYouTheme.workoutCardBlue,
-      ActiveYouTheme.workoutCard1,
-      ActiveYouTheme.workoutCard2,
-      ActiveYouTheme.workoutCard3,
-      ActiveYouTheme.workoutCard4,
-      ActiveYouTheme.workoutCard5,
-    ];
-
     final images = [
       "assets/icons/workouts-images/1.svg",
       "assets/icons/workouts-images/2.svg",
       "assets/icons/workouts-images/3.svg"
     ];
     final random = Random();
-    int i = random.nextInt(colors.length);
     int j = random.nextInt(images.length);
 
     return Padding(

@@ -1,6 +1,5 @@
 import 'package:active_you/business/models/goal/goal.dart';
 import 'package:active_you/pages/create_goal/create_goal_page.dart';
-import 'package:active_you/theme/active_you_theme.dart';
 import 'package:active_you/utils/extensions.dart';
 import 'package:active_you/utils/snackbars.dart';
 import 'package:active_you/widgets/buttons/primary_button.dart';

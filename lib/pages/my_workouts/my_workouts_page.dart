@@ -10,7 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'my_workouts_state.dart';
 
 class MyWorkoutsPage extends ConsumerStatefulWidget {
-  const MyWorkoutsPage({Key? key}) : super(key: key);
+  const MyWorkoutsPage({super.key});
 
   @override
   ConsumerState<MyWorkoutsPage> createState() => _MyWorkoutsPageState();

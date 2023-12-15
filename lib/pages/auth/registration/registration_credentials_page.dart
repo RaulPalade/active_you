@@ -19,7 +19,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class RegistrationCredentialsPage extends ConsumerWidget {
-  const RegistrationCredentialsPage({Key? key}) : super(key: key);
+  const RegistrationCredentialsPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -145,6 +145,7 @@ class RegistrationCredentialsPage extends ConsumerWidget {
         weightUnit: null,
         height: null,
         heightUnit: null,
+        role: null,
         myWorkouts: null,
         createdWorkouts: null,
         myGoals: null,

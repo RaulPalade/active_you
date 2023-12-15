@@ -1,9 +1,4 @@
-import 'package:active_you/business/models/goal/goal.dart';
-import 'package:active_you/business/models/person/person.dart';
-import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/pages/home/home_page_state.dart';
-import 'package:active_you/pages/my_goals/my_goals_page.dart';
-import 'package:active_you/pages/my_workouts/my_workouts_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomePageVM extends StateNotifier<HomePageState> {

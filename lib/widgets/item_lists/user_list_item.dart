@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserListItem extends ConsumerWidget {
-  const UserListItem({Key? key, required this.person}) : super(key: key);
+  const UserListItem({super.key, required this.person});
 
   final Person person;
 

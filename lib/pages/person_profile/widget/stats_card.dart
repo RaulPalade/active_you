@@ -2,8 +2,7 @@ import 'package:active_you/theme/active_you_theme.dart';
 import 'package:flutter/material.dart';
 
 class StatsCard extends StatelessWidget {
-  const StatsCard({Key? key, required this.value, required this.unitMeasure})
-      : super(key: key);
+  const StatsCard({super.key, required this.value, required this.unitMeasure});
 
   final String value;
   final String unitMeasure;

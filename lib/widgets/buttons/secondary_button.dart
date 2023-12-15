@@ -2,8 +2,7 @@ import 'package:active_you/theme/active_you_theme.dart';
 import 'package:flutter/material.dart';
 
 class SecondaryButton extends StatelessWidget {
-  const SecondaryButton({Key? key, required this.title, required this.onClick})
-      : super(key: key);
+  const SecondaryButton({super.key, required this.title, required this.onClick});
   final String title;
   final Function onClick;
 

@@ -18,7 +18,6 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SessionProviderState {
   Person? get currentPerson => throw _privateConstructorUsedError;
   bool get loading => throw _privateConstructorUsedError;
-  ErrorApiCall? get errorApiCall => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SessionProviderStateCopyWith<SessionProviderState> get copyWith =>
@@ -31,7 +30,7 @@ abstract class $SessionProviderStateCopyWith<$Res> {
           $Res Function(SessionProviderState) then) =
       _$SessionProviderStateCopyWithImpl<$Res, SessionProviderState>;
   @useResult
-  $Res call({Person? currentPerson, bool loading, ErrorApiCall? errorApiCall});
+  $Res call({Person? currentPerson, bool loading});
 
   $PersonCopyWith<$Res>? get currentPerson;
 }
@@ -52,7 +51,6 @@ class _$SessionProviderStateCopyWithImpl<$Res,
   $Res call({
     Object? currentPerson = freezed,
     Object? loading = null,
-    Object? errorApiCall = freezed,
   }) {
     return _then(_value.copyWith(
       currentPerson: freezed == currentPerson
@@ -63,10 +61,6 @@ class _$SessionProviderStateCopyWithImpl<$Res,
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
-      errorApiCall: freezed == errorApiCall
-          ? _value.errorApiCall
-          : errorApiCall // ignore: cast_nullable_to_non_nullable
-              as ErrorApiCall?,
     ) as $Val);
   }
 
@@ -91,7 +85,7 @@ abstract class _$$SessionProviderStateDataCopyWith<$Res>
       __$$SessionProviderStateDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Person? currentPerson, bool loading, ErrorApiCall? errorApiCall});
+  $Res call({Person? currentPerson, bool loading});
 
   @override
   $PersonCopyWith<$Res>? get currentPerson;
@@ -110,7 +104,6 @@ class __$$SessionProviderStateDataCopyWithImpl<$Res>
   $Res call({
     Object? currentPerson = freezed,
     Object? loading = null,
-    Object? errorApiCall = freezed,
   }) {
     return _then(_$SessionProviderStateData(
       currentPerson: freezed == currentPerson
@@ -121,10 +114,6 @@ class __$$SessionProviderStateDataCopyWithImpl<$Res>
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as bool,
-      errorApiCall: freezed == errorApiCall
-          ? _value.errorApiCall
-          : errorApiCall // ignore: cast_nullable_to_non_nullable
-              as ErrorApiCall?,
     ));
   }
 }
@@ -132,20 +121,17 @@ class __$$SessionProviderStateDataCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SessionProviderStateData implements SessionProviderStateData {
-  const _$SessionProviderStateData(
-      {this.currentPerson, this.loading = false, this.errorApiCall});
+  const _$SessionProviderStateData({this.currentPerson, this.loading = false});
 
   @override
   final Person? currentPerson;
   @override
   @JsonKey()
   final bool loading;
-  @override
-  final ErrorApiCall? errorApiCall;
 
   @override
   String toString() {
-    return 'SessionProviderState(currentPerson: $currentPerson, loading: $loading, errorApiCall: $errorApiCall)';
+    return 'SessionProviderState(currentPerson: $currentPerson, loading: $loading)';
   }
 
   @override
@@ -155,14 +141,11 @@ class _$SessionProviderStateData implements SessionProviderStateData {
             other is _$SessionProviderStateData &&
             (identical(other.currentPerson, currentPerson) ||
                 other.currentPerson == currentPerson) &&
-            (identical(other.loading, loading) || other.loading == loading) &&
-            (identical(other.errorApiCall, errorApiCall) ||
-                other.errorApiCall == errorApiCall));
+            (identical(other.loading, loading) || other.loading == loading));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, currentPerson, loading, errorApiCall);
+  int get hashCode => Object.hash(runtimeType, currentPerson, loading);
 
   @JsonKey(ignore: true)
   @override
@@ -176,15 +159,12 @@ class _$SessionProviderStateData implements SessionProviderStateData {
 abstract class SessionProviderStateData implements SessionProviderState {
   const factory SessionProviderStateData(
       {final Person? currentPerson,
-      final bool loading,
-      final ErrorApiCall? errorApiCall}) = _$SessionProviderStateData;
+      final bool loading}) = _$SessionProviderStateData;
 
   @override
   Person? get currentPerson;
   @override
   bool get loading;
-  @override
-  ErrorApiCall? get errorApiCall;
   @override
   @JsonKey(ignore: true)
   _$$SessionProviderStateDataCopyWith<_$SessionProviderStateData>

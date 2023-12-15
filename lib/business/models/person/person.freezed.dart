@@ -30,6 +30,7 @@ mixin _$Person {
   String? get weightUnit => throw _privateConstructorUsedError;
   double? get height => throw _privateConstructorUsedError;
   String? get heightUnit => throw _privateConstructorUsedError;
+  String? get role => throw _privateConstructorUsedError;
   List<Workout>? get myWorkouts => throw _privateConstructorUsedError;
   List<Workout>? get createdWorkouts => throw _privateConstructorUsedError;
   List<Goal>? get myGoals => throw _privateConstructorUsedError;
@@ -57,6 +58,7 @@ abstract class $PersonCopyWith<$Res> {
       String? weightUnit,
       double? height,
       String? heightUnit,
+      String? role,
       List<Workout>? myWorkouts,
       List<Workout>? createdWorkouts,
       List<Goal>? myGoals,
@@ -87,6 +89,7 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
     Object? weightUnit = freezed,
     Object? height = freezed,
     Object? heightUnit = freezed,
+    Object? role = freezed,
     Object? myWorkouts = freezed,
     Object? createdWorkouts = freezed,
     Object? myGoals = freezed,
@@ -134,6 +137,10 @@ class _$PersonCopyWithImpl<$Res, $Val extends Person>
           ? _value.heightUnit
           : heightUnit // ignore: cast_nullable_to_non_nullable
               as String?,
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String?,
       myWorkouts: freezed == myWorkouts
           ? _value.myWorkouts
           : myWorkouts // ignore: cast_nullable_to_non_nullable
@@ -175,6 +182,7 @@ abstract class _$$_PersonCopyWith<$Res> implements $PersonCopyWith<$Res> {
       String? weightUnit,
       double? height,
       String? heightUnit,
+      String? role,
       List<Workout>? myWorkouts,
       List<Workout>? createdWorkouts,
       List<Goal>? myGoals,
@@ -202,6 +210,7 @@ class __$$_PersonCopyWithImpl<$Res>
     Object? weightUnit = freezed,
     Object? height = freezed,
     Object? heightUnit = freezed,
+    Object? role = freezed,
     Object? myWorkouts = freezed,
     Object? createdWorkouts = freezed,
     Object? myGoals = freezed,
@@ -249,6 +258,10 @@ class __$$_PersonCopyWithImpl<$Res>
           ? _value.heightUnit
           : heightUnit // ignore: cast_nullable_to_non_nullable
               as String?,
+      role: freezed == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String?,
       myWorkouts: freezed == myWorkouts
           ? _value._myWorkouts
           : myWorkouts // ignore: cast_nullable_to_non_nullable
@@ -287,6 +300,7 @@ class _$_Person implements _Person {
       required this.weightUnit,
       required this.height,
       required this.heightUnit,
+      required this.role,
       required final List<Workout>? myWorkouts,
       required final List<Workout>? createdWorkouts,
       required final List<Goal>? myGoals,
@@ -321,6 +335,8 @@ class _$_Person implements _Person {
   final double? height;
   @override
   final String? heightUnit;
+  @override
+  final String? role;
   final List<Workout>? _myWorkouts;
   @override
   List<Workout>? get myWorkouts {
@@ -373,7 +389,7 @@ class _$_Person implements _Person {
 
   @override
   String toString() {
-    return 'Person(name: $name, surname: $surname, email: $email, password: $password, sex: $sex, dateOfBirth: $dateOfBirth, weight: $weight, weightUnit: $weightUnit, height: $height, heightUnit: $heightUnit, myWorkouts: $myWorkouts, createdWorkouts: $createdWorkouts, myGoals: $myGoals, following: $following, followers: $followers)';
+    return 'Person(name: $name, surname: $surname, email: $email, password: $password, sex: $sex, dateOfBirth: $dateOfBirth, weight: $weight, weightUnit: $weightUnit, height: $height, heightUnit: $heightUnit, role: $role, myWorkouts: $myWorkouts, createdWorkouts: $createdWorkouts, myGoals: $myGoals, following: $following, followers: $followers)';
   }
 
   @override
@@ -395,6 +411,7 @@ class _$_Person implements _Person {
             (identical(other.height, height) || other.height == height) &&
             (identical(other.heightUnit, heightUnit) ||
                 other.heightUnit == heightUnit) &&
+            (identical(other.role, role) || other.role == role) &&
             const DeepCollectionEquality()
                 .equals(other._myWorkouts, _myWorkouts) &&
             const DeepCollectionEquality()
@@ -420,6 +437,7 @@ class _$_Person implements _Person {
       weightUnit,
       height,
       heightUnit,
+      role,
       const DeepCollectionEquality().hash(_myWorkouts),
       const DeepCollectionEquality().hash(_createdWorkouts),
       const DeepCollectionEquality().hash(_myGoals),
@@ -452,6 +470,7 @@ abstract class _Person implements Person {
       required final String? weightUnit,
       required final double? height,
       required final String? heightUnit,
+      required final String? role,
       required final List<Workout>? myWorkouts,
       required final List<Workout>? createdWorkouts,
       required final List<Goal>? myGoals,
@@ -480,6 +499,8 @@ abstract class _Person implements Person {
   double? get height;
   @override
   String? get heightUnit;
+  @override
+  String? get role;
   @override
   List<Workout>? get myWorkouts;
   @override

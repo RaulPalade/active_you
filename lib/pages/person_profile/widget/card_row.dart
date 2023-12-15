@@ -4,10 +4,10 @@ import 'package:flutter_svg/svg.dart';
 
 class CardRow extends StatelessWidget {
   const CardRow({
-    Key? key,
+    super.key,
     required this.iconPath,
     required this.title,
-  }) : super(key: key);
+  });
 
   final String iconPath;
   final String title;
@@ -24,7 +24,10 @@ class CardRow extends StatelessWidget {
         children: [
           ShaderMask(
             child: SizedBox(
-              child: SvgPicture.asset(iconPath, width: 20, color: Colors.blue),
+              child: SvgPicture.asset(iconPath,
+                  width: 20,
+                  colorFilter:
+                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn)),
             ),
             shaderCallback: (Rect bounds) {
               return linearGradient;
@@ -42,7 +45,8 @@ class CardRow extends StatelessWidget {
           GestureDetector(
             child: SvgPicture.asset(
               "assets/icons/arrow-right.svg",
-              color: ActiveYouTheme.grayDarkColor,
+              colorFilter: const ColorFilter.mode(
+                  ActiveYouTheme.grayDarkColor, BlendMode.srcIn),
             ),
           ),
         ],

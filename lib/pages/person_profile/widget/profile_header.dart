@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader(
-      {Key? key,
+      {super.key,
       required this.fullName,
       required this.gender,
       required this.currentGoal,
-      required this.button})
-      : super(key: key);
+      required this.button});
 
   final String fullName;
   final String gender;

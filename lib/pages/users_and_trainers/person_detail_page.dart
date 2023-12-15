@@ -12,13 +12,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PersonDetailPage extends ConsumerWidget {
-  const PersonDetailPage({Key? key}) : super(key: key);
+  const PersonDetailPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Person person = ModalRoute.of(context)?.settings.arguments as Person;
     final currentUser = ref.watch(currentPersonProvider);
-    bool isTrainer = person.roles?.contains("TRAINER") ?? false;
+    bool isTrainer = person.role == "TRAINER";
 
     final createdWorkouts = ref.watch(createdWorkoutsProvider);
 
@@ -33,14 +33,14 @@ class PersonDetailPage extends ConsumerWidget {
               gender: person.sex!,
               currentGoal: "Lose a fat program",
               button: FollowButton(
-                status: currentUser!.following!.contains(person.id!)
+                status: currentUser!.following!.contains(person.email!)
                     ? "Unfollow"
                     : "Follow",
                 onClick: () {
-                  currentUser.following!.contains(person.id!)
+                  currentUser.following!.contains(person.email!)
                       ? ref
                           .read(sessionProvider.notifier)
-                          .unfollowPerson(person.id!)
+                          .unfollowPerson(person.email!)
                       : ref.read(sessionProvider.notifier).followPerson(person);
                 },
               ),

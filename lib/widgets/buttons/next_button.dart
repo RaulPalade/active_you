@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NextButton extends StatelessWidget {
-  const NextButton({Key? key, required this.onClick}) : super(key: key);
+  const NextButton({super.key, required this.onClick});
   final Function onClick;
 
   @override

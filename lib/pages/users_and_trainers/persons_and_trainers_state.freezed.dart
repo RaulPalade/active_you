@@ -21,7 +21,6 @@ mixin _$PersonsAndTrainersState {
   List<Workout> get createdWorkouts => throw _privateConstructorUsedError;
   Person? get selectedPerson => throw _privateConstructorUsedError;
   dynamic get loading => throw _privateConstructorUsedError;
-  ErrorApiCall? get errorApiCall => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PersonsAndTrainersStateCopyWith<PersonsAndTrainersState> get copyWith =>
@@ -39,8 +38,7 @@ abstract class $PersonsAndTrainersStateCopyWith<$Res> {
       List<Person> trainers,
       List<Workout> createdWorkouts,
       Person? selectedPerson,
-      dynamic loading,
-      ErrorApiCall? errorApiCall});
+      dynamic loading});
 
   $PersonCopyWith<$Res>? get selectedPerson;
 }
@@ -64,7 +62,6 @@ class _$PersonsAndTrainersStateCopyWithImpl<$Res,
     Object? createdWorkouts = null,
     Object? selectedPerson = freezed,
     Object? loading = freezed,
-    Object? errorApiCall = freezed,
   }) {
     return _then(_value.copyWith(
       persons: null == persons
@@ -87,10 +84,6 @@ class _$PersonsAndTrainersStateCopyWithImpl<$Res,
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      errorApiCall: freezed == errorApiCall
-          ? _value.errorApiCall
-          : errorApiCall // ignore: cast_nullable_to_non_nullable
-              as ErrorApiCall?,
     ) as $Val);
   }
 
@@ -121,8 +114,7 @@ abstract class _$$_PersonsAndTrainersStateDataCopyWith<$Res>
       List<Person> trainers,
       List<Workout> createdWorkouts,
       Person? selectedPerson,
-      dynamic loading,
-      ErrorApiCall? errorApiCall});
+      dynamic loading});
 
   @override
   $PersonCopyWith<$Res>? get selectedPerson;
@@ -146,7 +138,6 @@ class __$$_PersonsAndTrainersStateDataCopyWithImpl<$Res>
     Object? createdWorkouts = null,
     Object? selectedPerson = freezed,
     Object? loading = freezed,
-    Object? errorApiCall = freezed,
   }) {
     return _then(_$_PersonsAndTrainersStateData(
       persons: null == persons
@@ -166,10 +157,6 @@ class __$$_PersonsAndTrainersStateDataCopyWithImpl<$Res>
           : selectedPerson // ignore: cast_nullable_to_non_nullable
               as Person?,
       loading: freezed == loading ? _value.loading! : loading,
-      errorApiCall: freezed == errorApiCall
-          ? _value.errorApiCall
-          : errorApiCall // ignore: cast_nullable_to_non_nullable
-              as ErrorApiCall?,
     ));
   }
 }
@@ -182,8 +169,7 @@ class _$_PersonsAndTrainersStateData implements _PersonsAndTrainersStateData {
       final List<Person> trainers = const [],
       final List<Workout> createdWorkouts = const [],
       this.selectedPerson,
-      this.loading = false,
-      this.errorApiCall})
+      this.loading = false})
       : _persons = persons,
         _trainers = trainers,
         _createdWorkouts = createdWorkouts;
@@ -220,12 +206,10 @@ class _$_PersonsAndTrainersStateData implements _PersonsAndTrainersStateData {
   @override
   @JsonKey()
   final dynamic loading;
-  @override
-  final ErrorApiCall? errorApiCall;
 
   @override
   String toString() {
-    return 'PersonsAndTrainersState(persons: $persons, trainers: $trainers, createdWorkouts: $createdWorkouts, selectedPerson: $selectedPerson, loading: $loading, errorApiCall: $errorApiCall)';
+    return 'PersonsAndTrainersState(persons: $persons, trainers: $trainers, createdWorkouts: $createdWorkouts, selectedPerson: $selectedPerson, loading: $loading)';
   }
 
   @override
@@ -239,9 +223,7 @@ class _$_PersonsAndTrainersStateData implements _PersonsAndTrainersStateData {
                 .equals(other._createdWorkouts, _createdWorkouts) &&
             (identical(other.selectedPerson, selectedPerson) ||
                 other.selectedPerson == selectedPerson) &&
-            const DeepCollectionEquality().equals(other.loading, loading) &&
-            (identical(other.errorApiCall, errorApiCall) ||
-                other.errorApiCall == errorApiCall));
+            const DeepCollectionEquality().equals(other.loading, loading));
   }
 
   @override
@@ -251,8 +233,7 @@ class _$_PersonsAndTrainersStateData implements _PersonsAndTrainersStateData {
       const DeepCollectionEquality().hash(_trainers),
       const DeepCollectionEquality().hash(_createdWorkouts),
       selectedPerson,
-      const DeepCollectionEquality().hash(loading),
-      errorApiCall);
+      const DeepCollectionEquality().hash(loading));
 
   @JsonKey(ignore: true)
   @override
@@ -268,8 +249,7 @@ abstract class _PersonsAndTrainersStateData implements PersonsAndTrainersState {
       final List<Person> trainers,
       final List<Workout> createdWorkouts,
       final Person? selectedPerson,
-      final dynamic loading,
-      final ErrorApiCall? errorApiCall}) = _$_PersonsAndTrainersStateData;
+      final dynamic loading}) = _$_PersonsAndTrainersStateData;
 
   @override
   List<Person> get persons;
@@ -281,8 +261,6 @@ abstract class _PersonsAndTrainersStateData implements PersonsAndTrainersState {
   Person? get selectedPerson;
   @override
   dynamic get loading;
-  @override
-  ErrorApiCall? get errorApiCall;
   @override
   @JsonKey(ignore: true)
   _$$_PersonsAndTrainersStateDataCopyWith<_$_PersonsAndTrainersStateData>

@@ -13,15 +13,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class PersonProfilePage extends ConsumerWidget {
-  const PersonProfilePage({Key? key}) : super(key: key);
+  const PersonProfilePage({super.key});
 
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentPerson = ref.watch(currentPersonProvider);
-    // TODO FIX roles manage
-    bool isTrainer = true;
+    bool isTrainer = currentPerson?.role == "TRAINER" ? true : false;
 
     return Scaffold(
       appBar: AppBar(
@@ -41,7 +40,8 @@ class PersonProfilePage extends ConsumerWidget {
                     icon: SvgPicture.asset(
                       "assets/icons/interface/plus.svg",
                       width: 32,
-                      color: ActiveYouTheme.secondaryDarkColor,
+                      colorFilter: const ColorFilter.mode(
+                          ActiveYouTheme.secondaryDarkColor, BlendMode.srcIn),
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, EndPoint.createWorkout);

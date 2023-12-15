@@ -23,7 +23,6 @@ mixin _$CreateGoalState {
   DateTime? get initDate => throw _privateConstructorUsedError;
   DateTime? get endDate => throw _privateConstructorUsedError;
   bool get completed => throw _privateConstructorUsedError;
-  ErrorApiCall? get errorApiCall => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CreateGoalStateCopyWith<CreateGoalState> get copyWith =>
@@ -43,8 +42,7 @@ abstract class $CreateGoalStateCopyWith<$Res> {
       int daysPerWeek,
       DateTime? initDate,
       DateTime? endDate,
-      bool completed,
-      ErrorApiCall? errorApiCall});
+      bool completed});
 }
 
 /// @nodoc
@@ -67,7 +65,6 @@ class _$CreateGoalStateCopyWithImpl<$Res, $Val extends CreateGoalState>
     Object? initDate = freezed,
     Object? endDate = freezed,
     Object? completed = null,
-    Object? errorApiCall = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -98,10 +95,6 @@ class _$CreateGoalStateCopyWithImpl<$Res, $Val extends CreateGoalState>
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
               as bool,
-      errorApiCall: freezed == errorApiCall
-          ? _value.errorApiCall
-          : errorApiCall // ignore: cast_nullable_to_non_nullable
-              as ErrorApiCall?,
     ) as $Val);
   }
 }
@@ -121,8 +114,7 @@ abstract class _$$CreateGoalStateDataCopyWith<$Res>
       int daysPerWeek,
       DateTime? initDate,
       DateTime? endDate,
-      bool completed,
-      ErrorApiCall? errorApiCall});
+      bool completed});
 }
 
 /// @nodoc
@@ -143,7 +135,6 @@ class __$$CreateGoalStateDataCopyWithImpl<$Res>
     Object? initDate = freezed,
     Object? endDate = freezed,
     Object? completed = null,
-    Object? errorApiCall = freezed,
   }) {
     return _then(_$CreateGoalStateData(
       name: null == name
@@ -174,10 +165,6 @@ class __$$CreateGoalStateDataCopyWithImpl<$Res>
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
               as bool,
-      errorApiCall: freezed == errorApiCall
-          ? _value.errorApiCall
-          : errorApiCall // ignore: cast_nullable_to_non_nullable
-              as ErrorApiCall?,
     ));
   }
 }
@@ -192,8 +179,7 @@ class _$CreateGoalStateData implements CreateGoalStateData {
       this.daysPerWeek = 0,
       this.initDate,
       this.endDate,
-      this.completed = false,
-      this.errorApiCall});
+      this.completed = false});
 
   @override
   @JsonKey()
@@ -214,12 +200,10 @@ class _$CreateGoalStateData implements CreateGoalStateData {
   @override
   @JsonKey()
   final bool completed;
-  @override
-  final ErrorApiCall? errorApiCall;
 
   @override
   String toString() {
-    return 'CreateGoalState(name: $name, type: $type, weight: $weight, daysPerWeek: $daysPerWeek, initDate: $initDate, endDate: $endDate, completed: $completed, errorApiCall: $errorApiCall)';
+    return 'CreateGoalState(name: $name, type: $type, weight: $weight, daysPerWeek: $daysPerWeek, initDate: $initDate, endDate: $endDate, completed: $completed)';
   }
 
   @override
@@ -236,14 +220,12 @@ class _$CreateGoalStateData implements CreateGoalStateData {
                 other.initDate == initDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.completed, completed) ||
-                other.completed == completed) &&
-            (identical(other.errorApiCall, errorApiCall) ||
-                other.errorApiCall == errorApiCall));
+                other.completed == completed));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, name, type, weight, daysPerWeek,
-      initDate, endDate, completed, errorApiCall);
+      initDate, endDate, completed);
 
   @JsonKey(ignore: true)
   @override
@@ -261,8 +243,7 @@ abstract class CreateGoalStateData implements CreateGoalState {
       final int daysPerWeek,
       final DateTime? initDate,
       final DateTime? endDate,
-      final bool completed,
-      final ErrorApiCall? errorApiCall}) = _$CreateGoalStateData;
+      final bool completed}) = _$CreateGoalStateData;
 
   @override
   String get name;
@@ -278,8 +259,6 @@ abstract class CreateGoalStateData implements CreateGoalState {
   DateTime? get endDate;
   @override
   bool get completed;
-  @override
-  ErrorApiCall? get errorApiCall;
   @override
   @JsonKey(ignore: true)
   _$$CreateGoalStateDataCopyWith<_$CreateGoalStateData> get copyWith =>

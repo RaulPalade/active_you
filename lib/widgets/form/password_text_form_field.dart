@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class PasswordTextFormField extends StatefulWidget {
-  const PasswordTextFormField({Key? key, required this.onChanged})
-      : super(key: key);
+  const PasswordTextFormField({super.key, required this.onChanged});
 
   final Function onChanged;
 
@@ -37,7 +36,8 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
             decoration: InputDecoration(
               icon: SvgPicture.asset(
                 "assets/icons/password.svg",
-                color: ActiveYouTheme.grayDarkColor,
+                colorFilter: const ColorFilter.mode(
+                    ActiveYouTheme.grayDarkColor, BlendMode.srcIn),
               ),
               iconColor: ActiveYouTheme.grayDarkColor,
               hintText: "Password",

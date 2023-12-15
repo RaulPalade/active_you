@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 class CarouselItem extends StatelessWidget {
   const CarouselItem({
-    Key? key,
+    super.key,
     required this.image,
     required this.title,
     required this.description,
-  }) : super(key: key);
+  });
 
   final Image image;
   final String title;

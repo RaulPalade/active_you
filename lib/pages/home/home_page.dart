@@ -6,13 +6,12 @@ import 'package:active_you/pages/home/home_page_vm.dart';
 import 'package:active_you/pages/home/widgets/friend_activity_card.dart';
 import 'package:active_you/pages/home/widgets/goal_big_card.dart';
 import 'package:active_you/theme/active_you_theme.dart';
-import 'package:active_you/widgets/item_lists/workout_big_card.dart';
 import 'package:active_you/widgets/my_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomePage extends ConsumerWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

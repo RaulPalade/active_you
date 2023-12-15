@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/pages/create_workout/create_workout_state.dart';
 import 'package:active_you/pages/create_workout/create_workout_vm.dart';
@@ -74,7 +76,7 @@ class CreateWorkoutPage extends ConsumerWidget {
         }
       });
     } else {
-      print("NOOO");
+      log("NOOO");
     }
   }
 

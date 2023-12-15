@@ -1,4 +1,3 @@
-import 'package:active_you/utils/api_errors.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'create_goal_state.freezed.dart';
@@ -13,6 +12,5 @@ class CreateGoalState with _$CreateGoalState {
     DateTime? initDate,
     DateTime? endDate,
     @Default(false) bool completed,
-    ErrorApiCall? errorApiCall,
   }) = CreateGoalStateData;
 }

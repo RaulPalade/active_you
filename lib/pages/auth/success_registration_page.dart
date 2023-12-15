@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SuccessRegistrationPage extends ConsumerWidget {
-  const SuccessRegistrationPage({Key? key}) : super(key: key);
+  const SuccessRegistrationPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

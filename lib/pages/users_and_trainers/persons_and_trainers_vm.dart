@@ -1,11 +1,11 @@
+import 'dart:developer';
+
 import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/business/models/workout/workout.dart';
 import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/pages/users_and_trainers/persons_and_trainers_state.dart';
-import 'package:active_you/utils/api_errors.dart';
 import 'package:active_you/utils/firebase_methods.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
   final Ref ref;
@@ -20,8 +20,9 @@ class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
       state = const PersonsAndTrainersState(
           persons: [], trainers: [], loading: false);
 
+      final allDocuments = await firebase.getAllDocuments("users");
       final personResponse =
-          await ref.read(restClientPersonProvider).getPersons();
+          allDocuments.map((p) => p.data() as Person).toList();
 
       final filteredList = filterPersonsAndTrainers(personResponse);
       state = PersonsAndTrainersState(
@@ -29,8 +30,8 @@ class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
         trainers: filteredList[1],
         loading: false,
       );
-    } catch (err) {
-      await _catchErrorOnFetch(err);
+    } catch (e) {
+      log(e.toString());
     }
   }
 
@@ -42,10 +43,10 @@ class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
 
     if (personResponse.isNotEmpty) {
       for (var person in personResponse) {
-        if (person.roles!.contains("USER") && person.id != currentPerson!.id) {
+        if (person.role == "USER" && person.email != currentPerson!.email) {
           normalPersons.add(person);
-        } else if (person.roles!.contains("TRAINER") &&
-            person.id != currentPerson!.id) {
+        } else if (person.role == "TRAINER" &&
+            person.email != currentPerson!.email) {
           trainers.add(person);
         }
       }
@@ -63,30 +64,18 @@ class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
       Person person = document.data() as Person;
       state = state.copyWith(selectedPerson: person);
     } catch (e) {
-      await _catchErrorOnFetch(e);
+      log(e.toString());
     }
   }
 
   Future<void> getCreatedWorkouts() async {
-    final workoutResponse =
-        await ref.read(restClientWorkoutProvider).getWorkouts();
-    List<Workout> filterList = workoutResponse
-        .where((workout) => workout.createdById == state.selectedPerson!.id!)
+    final allDocuments = await firebase.getAllDocuments("workouts");
+    List<Workout> allWorkouts =
+        allDocuments.map((w) => w.data() as Workout).toList();
+
+    List<Workout> filterList = allWorkouts
+        .where((workout) => workout.createdById == state.selectedPerson!.email!)
         .toList();
     state = state.copyWith(createdWorkouts: filterList);
-  }
-
-  Future<void> _catchErrorOnFetch(Object err) async {
-    var connectivityResult = await InternetConnectionChecker().hasConnection;
-    ErrorApiCall errorType = ErrorApiCall.generic;
-    if (!connectivityResult) {
-      errorType = ErrorApiCall.noConnection;
-    }
-    state = PersonsAndTrainersState(
-      persons: state.persons,
-      trainers: state.trainers,
-      selectedPerson: state.selectedPerson,
-      errorApiCall: errorType,
-    );
   }
 }

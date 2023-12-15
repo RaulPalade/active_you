@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PersonsAndTrainersPage extends ConsumerStatefulWidget {
-  const PersonsAndTrainersPage({Key? key}) : super(key: key);
+  const PersonsAndTrainersPage({super.key});
 
   @override
   ConsumerState<PersonsAndTrainersPage> createState() =>
@@ -68,11 +68,13 @@ class _PersonsAndTrainersState extends ConsumerState<PersonsAndTrainersPage>
                     onTap: () async {
                       ref
                           .read(personsAndTrainersPageProvider.notifier)
-                          .getPersonById(listToDisplay[index].id!)
+                          .getPersonById(listToDisplay[index].email!)
                           .whenComplete(() {
                         final selectedPerson =
                             ref.watch(_selectedPersonProvider);
-                        ref.read(personsAndTrainersPageProvider.notifier).getCreatedWorkouts();
+                        ref
+                            .read(personsAndTrainersPageProvider.notifier)
+                            .getCreatedWorkouts();
                         Navigator.pushNamed(context, EndPoint.personDetail,
                             arguments: selectedPerson);
                       });
@@ -93,9 +95,9 @@ class FakePerson {
   FakePerson(this.fullName, this.sex);
 }
 
-final personsAndTrainersPageProvider =
-    StateNotifierProvider.autoDispose<PersonsAndTrainersVM, PersonsAndTrainersState>(
-        (ref) => PersonsAndTrainersVM(ref));
+final personsAndTrainersPageProvider = StateNotifierProvider.autoDispose<
+    PersonsAndTrainersVM,
+    PersonsAndTrainersState>((ref) => PersonsAndTrainersVM(ref));
 
 final _personsProvider = Provider.autoDispose<List<Person>>((ref) {
   return ref.watch(personsAndTrainersPageProvider).persons;
@@ -111,8 +113,4 @@ final _selectedPersonProvider = Provider.autoDispose<Person?>((ref) {
 
 final createdWorkoutsProvider = Provider.autoDispose<List<Workout>>((ref) {
   return ref.watch(personsAndTrainersPageProvider).createdWorkouts;
-});
-
-final _loadingProvider = Provider.autoDispose<bool>((ref) {
-  return ref.watch(personsAndTrainersPageProvider).loading;
 });

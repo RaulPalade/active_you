@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 
 class UnitMeasure extends StatefulWidget {
   const UnitMeasure(
-      {Key? key, required this.unitMeasures, required this.onChange})
-      : super(key: key);
+      {super.key, required this.unitMeasures, required this.onChange});
   final List<String> unitMeasures;
 
   final Function onChange;

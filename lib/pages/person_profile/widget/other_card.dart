@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'card_row.dart';
 
 class OtherCard extends StatelessWidget {
-  const OtherCard({Key? key}) : super(key: key);
+  const OtherCard({super.key});
 
   @override
   Widget build(BuildContext context) {

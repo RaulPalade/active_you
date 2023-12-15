@@ -33,7 +33,8 @@ class MyDatePicker extends StatelessWidget {
               icon: GestureDetector(
                 child: SvgPicture.asset(
                   "assets/icons/calendar.svg",
-                  color: ActiveYouTheme.grayDarkColor,
+                  colorFilter: const ColorFilter.mode(
+                      ActiveYouTheme.grayDarkColor, BlendMode.srcIn),
                 ),
                 onTap: () {
                   showDatePicker(

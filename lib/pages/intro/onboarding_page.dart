@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class OnBoardingPage extends ConsumerWidget {
-  OnBoardingPage({Key? key}) : super(key: key);
+  OnBoardingPage({super.key});
 
   final List<String> _illustrations = [
     "assets/icons/carousel/frame1.png",

@@ -10,7 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class PageCoordinator extends ConsumerStatefulWidget {
-  const PageCoordinator({Key? key}) : super(key: key);
+  const PageCoordinator({super.key});
 
   @override
   ConsumerState<PageCoordinator> createState() => _PageCoordinatorState();

@@ -76,8 +76,12 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
   Future<bool> getLoggedPerson(String email) async {
     try {
       final document = await firebase.getDocumentById("users", email);
-      state = state.copyWith(currentPerson: document.data() as Person);
-      return true;
+      if (document.data() != null) {
+        state = state.copyWith(currentPerson: document.data() as Person);
+        return true;
+      } else {
+        return false;
+      }
     } catch (e) {
       log(e.toString());
       return false;

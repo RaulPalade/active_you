@@ -18,7 +18,6 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$MyGoalsState {
   List<Goal>? get activeGoals => throw _privateConstructorUsedError;
   List<Goal>? get completedGoals => throw _privateConstructorUsedError;
-  ErrorApiCall? get errorApiCall => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MyGoalsStateCopyWith<MyGoalsState> get copyWith =>
@@ -31,10 +30,7 @@ abstract class $MyGoalsStateCopyWith<$Res> {
           MyGoalsState value, $Res Function(MyGoalsState) then) =
       _$MyGoalsStateCopyWithImpl<$Res, MyGoalsState>;
   @useResult
-  $Res call(
-      {List<Goal>? activeGoals,
-      List<Goal>? completedGoals,
-      ErrorApiCall? errorApiCall});
+  $Res call({List<Goal>? activeGoals, List<Goal>? completedGoals});
 }
 
 /// @nodoc
@@ -52,7 +48,6 @@ class _$MyGoalsStateCopyWithImpl<$Res, $Val extends MyGoalsState>
   $Res call({
     Object? activeGoals = freezed,
     Object? completedGoals = freezed,
-    Object? errorApiCall = freezed,
   }) {
     return _then(_value.copyWith(
       activeGoals: freezed == activeGoals
@@ -63,10 +58,6 @@ class _$MyGoalsStateCopyWithImpl<$Res, $Val extends MyGoalsState>
           ? _value.completedGoals
           : completedGoals // ignore: cast_nullable_to_non_nullable
               as List<Goal>?,
-      errorApiCall: freezed == errorApiCall
-          ? _value.errorApiCall
-          : errorApiCall // ignore: cast_nullable_to_non_nullable
-              as ErrorApiCall?,
     ) as $Val);
   }
 }
@@ -79,10 +70,7 @@ abstract class _$$MyGoalsStateDataCopyWith<$Res>
       __$$MyGoalsStateDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {List<Goal>? activeGoals,
-      List<Goal>? completedGoals,
-      ErrorApiCall? errorApiCall});
+  $Res call({List<Goal>? activeGoals, List<Goal>? completedGoals});
 }
 
 /// @nodoc
@@ -98,7 +86,6 @@ class __$$MyGoalsStateDataCopyWithImpl<$Res>
   $Res call({
     Object? activeGoals = freezed,
     Object? completedGoals = freezed,
-    Object? errorApiCall = freezed,
   }) {
     return _then(_$MyGoalsStateData(
       activeGoals: freezed == activeGoals
@@ -109,10 +96,6 @@ class __$$MyGoalsStateDataCopyWithImpl<$Res>
           ? _value._completedGoals
           : completedGoals // ignore: cast_nullable_to_non_nullable
               as List<Goal>?,
-      errorApiCall: freezed == errorApiCall
-          ? _value.errorApiCall
-          : errorApiCall // ignore: cast_nullable_to_non_nullable
-              as ErrorApiCall?,
     ));
   }
 }
@@ -122,8 +105,7 @@ class __$$MyGoalsStateDataCopyWithImpl<$Res>
 class _$MyGoalsStateData implements MyGoalsStateData {
   const _$MyGoalsStateData(
       {final List<Goal>? activeGoals = const [],
-      final List<Goal>? completedGoals = const [],
-      this.errorApiCall})
+      final List<Goal>? completedGoals = const []})
       : _activeGoals = activeGoals,
         _completedGoals = completedGoals;
 
@@ -150,11 +132,8 @@ class _$MyGoalsStateData implements MyGoalsStateData {
   }
 
   @override
-  final ErrorApiCall? errorApiCall;
-
-  @override
   String toString() {
-    return 'MyGoalsState(activeGoals: $activeGoals, completedGoals: $completedGoals, errorApiCall: $errorApiCall)';
+    return 'MyGoalsState(activeGoals: $activeGoals, completedGoals: $completedGoals)';
   }
 
   @override
@@ -165,17 +144,14 @@ class _$MyGoalsStateData implements MyGoalsStateData {
             const DeepCollectionEquality()
                 .equals(other._activeGoals, _activeGoals) &&
             const DeepCollectionEquality()
-                .equals(other._completedGoals, _completedGoals) &&
-            (identical(other.errorApiCall, errorApiCall) ||
-                other.errorApiCall == errorApiCall));
+                .equals(other._completedGoals, _completedGoals));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_activeGoals),
-      const DeepCollectionEquality().hash(_completedGoals),
-      errorApiCall);
+      const DeepCollectionEquality().hash(_completedGoals));
 
   @JsonKey(ignore: true)
   @override
@@ -187,15 +163,12 @@ class _$MyGoalsStateData implements MyGoalsStateData {
 abstract class MyGoalsStateData implements MyGoalsState {
   const factory MyGoalsStateData(
       {final List<Goal>? activeGoals,
-      final List<Goal>? completedGoals,
-      final ErrorApiCall? errorApiCall}) = _$MyGoalsStateData;
+      final List<Goal>? completedGoals}) = _$MyGoalsStateData;
 
   @override
   List<Goal>? get activeGoals;
   @override
   List<Goal>? get completedGoals;
-  @override
-  ErrorApiCall? get errorApiCall;
   @override
   @JsonKey(ignore: true)
   _$$MyGoalsStateDataCopyWith<_$MyGoalsStateData> get copyWith =>

@@ -2,7 +2,7 @@ import 'package:active_you/theme/active_you_theme.dart';
 import 'package:flutter/material.dart';
 
 class FormDivider extends StatelessWidget {
-  const FormDivider({Key? key}) : super(key: key);
+  const FormDivider({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -55,7 +55,8 @@ class _MyGoalsPageState extends ConsumerState<MyGoalsPage>
               icon: SvgPicture.asset(
                 "assets/icons/interface/plus.svg",
                 width: 32,
-                color: ActiveYouTheme.brandDarkColor,
+                colorFilter: const ColorFilter.mode(
+                    ActiveYouTheme.brandDarkColor, BlendMode.srcIn),
               ),
               onPressed: () {
                 Navigator.pushNamed(context, EndPoint.createGoal);
@@ -104,11 +105,10 @@ class _MyGoalsPageState extends ConsumerState<MyGoalsPage>
 }
 
 final myGoalsPageProvider =
-    StateNotifierProvider<MyGoalsVM, MyGoalsState>(
-        (ref) => MyGoalsVM(ref));
+    StateNotifierProvider<MyGoalsVM, MyGoalsState>((ref) => MyGoalsVM(ref));
 
-final activeGoalsProvider = Provider<List<Goal>?>(
-    (ref) => ref.watch(myGoalsPageProvider).activeGoals);
+final activeGoalsProvider =
+    Provider<List<Goal>?>((ref) => ref.watch(myGoalsPageProvider).activeGoals);
 
 final completedGoalsProvider = Provider<List<Goal>?>(
     (ref) => ref.watch(myGoalsPageProvider).completedGoals);

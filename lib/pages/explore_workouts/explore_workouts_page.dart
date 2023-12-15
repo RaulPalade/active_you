@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'explore_workouts_vm.dart';
 
 class ExploreWorkoutsPage extends ConsumerWidget {
-  const ExploreWorkoutsPage({Key? key}) : super(key: key);
+  const ExploreWorkoutsPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,8 +41,4 @@ final _workoutsProvider = Provider.autoDispose<List<Workout>>((ref) {
 
 final workoutAuthorProvider = Provider.autoDispose<Person?>((ref) {
   return ref.watch(exploreWorkoutsPageProvider).workoutAuthor;
-});
-
-final _loadingProvider = Provider.autoDispose<bool>((ref) {
-  return ref.watch(exploreWorkoutsPageProvider).loading;
 });

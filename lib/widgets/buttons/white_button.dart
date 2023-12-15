@@ -2,8 +2,7 @@ import 'package:active_you/theme/active_you_theme.dart';
 import 'package:flutter/material.dart';
 
 class WhiteButton extends StatelessWidget {
-  const WhiteButton({Key? key, required this.title, required this.onClick})
-      : super(key: key);
+  const WhiteButton({super.key, required this.title, required this.onClick});
   final String title;
   final Function onClick;
 

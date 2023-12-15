@@ -4,11 +4,10 @@ import 'package:flutter_svg/svg.dart';
 
 class SimpleTextFormField extends StatelessWidget {
   const SimpleTextFormField(
-      {Key? key,
+      {super.key,
       required this.hintText,
       required this.icon,
-      required this.onChaged})
-      : super(key: key);
+      required this.onChaged});
 
   final String hintText;
   final SvgPicture icon;

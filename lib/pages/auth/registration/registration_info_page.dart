@@ -15,7 +15,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
 class RegistrationInfoPage extends ConsumerWidget {
-  const RegistrationInfoPage({Key? key}) : super(key: key);
+  const RegistrationInfoPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -136,6 +136,7 @@ class RegistrationInfoPage extends ConsumerWidget {
         weight: form.weight,
         weightUnit: form.weightUnit,
         height: form.height,
+        role: role,
         heightUnit: form.heightUnit,
       );
 
