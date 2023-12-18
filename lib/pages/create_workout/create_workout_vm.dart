@@ -43,7 +43,7 @@ class CreateWorkoutVM extends StateNotifier<CreateWorkoutState> {
   }
 
   void setWorkoutIdForExercise(String workoutId) {
-    state = state.copyWith(generatedId: "");
+    state = state.copyWith(generatedId: workoutId);
   }
 
   void resetExerciseForm() {

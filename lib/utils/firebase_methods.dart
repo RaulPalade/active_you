@@ -35,7 +35,7 @@ class FirebaseMethods {
       await subCollectionRef.doc(subDocumentId).set(data);
       return true;
     } catch (e) {
-      log(e.toString());
+      log("addDocToSubCollection: ${e.toString()}");
       return false;
     }
   }

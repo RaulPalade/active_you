@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:active_you/business/models/exercise/exercise.dart';
 import 'package:active_you/business/models/goal/goal.dart';
 import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/business/models/workout/workout.dart';
@@ -214,19 +215,39 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
 
   Future<bool> saveWorkout(Workout workout) async {
     try {
-      await firebase.addDocToSubCollection(
-          "users",
-          state.currentPerson?.email ?? "",
-          "workouts",
-          workout.id ?? "",
-          workout);
+      final workoutData = workout.toJson();
+      workoutData.removeWhere((key, value) => key == 'exercises');
+      log(workoutData.toString());
 
+      await firebase.addDocToSubCollection(
+        "users",
+        state.currentPerson?.email ?? "",
+        "workouts",
+        workout.id ?? "",
+        workoutData,
+      );
+
+      if (workout.exercises != null && workout.exercises!.isNotEmpty) {
+        await Future.forEach(workout.exercises!, (Exercise exercise) async {
+          await firebase.addDocToSubCollection(
+            "users",
+            state.currentPerson?.email ?? "",
+            "workouts/${workout.id}/exercises",
+            exercise.id ?? "",
+            exercise.toJson(),
+          );
+        });
+      }
+
+      // Aggiorna lo stato dell'utente aggiungendo il nuovo workout
       var updatedPerson = state.currentPerson?.copyWith(
         myWorkouts: [...?state.currentPerson!.myWorkouts, workout],
       );
+
       state = state.copyWith(currentPerson: updatedPerson);
       return true;
     } catch (err) {
+      log(err.toString());
       return false;
     }
   }
