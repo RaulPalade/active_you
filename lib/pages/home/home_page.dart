@@ -31,7 +31,7 @@ class HomePage extends ConsumerWidget {
         color: ActiveYouTheme.scaffoldColor,
         child: SafeArea(
           child: Scaffold(
-            appBar: MyAppBar(title: "Bentornato ${currentUser!.name}"),
+            appBar: MyAppBar(title: "Bentornato ${currentUser?.name ?? ""}"),
             body: const Center(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
