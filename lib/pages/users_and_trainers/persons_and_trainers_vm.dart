@@ -21,10 +21,19 @@ class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
           persons: [], trainers: [], loading: false);
 
       final allDocuments = await firebase.getAllDocuments("users");
-      final personResponse =
-          allDocuments.map((p) => p.data() as Person).toList();
 
-      final filteredList = filterPersonsAndTrainers(personResponse);
+      final personResponse = allDocuments
+          .map((p) {
+            final data = p.data();
+            return data != null && data is Map<String, dynamic>
+                ? Person.fromJson(data)
+                : null;
+          })
+          .where((person) => person != null)
+          .toList();
+
+      final filteredList =
+          filterPersonsAndTrainers(personResponse.cast<Person>());
       state = PersonsAndTrainersState(
         persons: filteredList[0],
         trainers: filteredList[1],
@@ -61,8 +70,13 @@ class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
   Future<void> getPersonById(String id) async {
     try {
       final document = await firebase.getDocumentById("users", id);
-      Person person = document.data() as Person;
-      state = state.copyWith(selectedPerson: person);
+      log("Logged person: ${document.data().toString()}");
+
+      final data = document.data();
+      if (data != null && data is Map<String, dynamic>) {
+        final person = Person.fromJson(data);
+        state = state.copyWith(selectedPerson: person);
+      }
     } catch (e) {
       log(e.toString());
     }

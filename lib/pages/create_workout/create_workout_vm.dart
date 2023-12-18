@@ -57,8 +57,10 @@ class CreateWorkoutVM extends StateNotifier<CreateWorkoutState> {
   Future<bool> createWorkout() async {
     try {
       final currentUser = ref.watch(currentPersonProvider);
+      String workoutId = Guid.newGuid.value;
+      log("WorkoutID: $workoutId");
       Workout workout = Workout(
-        id: null,
+        id: workoutId,
         createdById: currentUser!.email,
         name: state.workoutName,
         type: state.workoutType,
@@ -68,10 +70,9 @@ class CreateWorkoutVM extends StateNotifier<CreateWorkoutState> {
         exercises: null,
       );
 
-      await firebase.addNewDocument("workouts", null, workout.toJson());
+      await firebase.addNewDocument("workouts", workoutId, workout.toJson());
       ref.read(exploreWorkoutsPageProvider.notifier).addWorkoutToList(workout);
 
-      String workoutId = Guid.newGuid.value;
       state = state.copyWith(generatedId: workoutId);
       return workoutId != "";
     } catch (e) {
@@ -82,15 +83,16 @@ class CreateWorkoutVM extends StateNotifier<CreateWorkoutState> {
 
   Future<bool> createExercise() async {
     try {
+      String exerciseId = Guid.newGuid.value;
       Exercise exercise = Exercise(
-        id: "",
+        id: exerciseId,
         name: state.exerciseName,
         repetitions: state.exerciseRepetitions,
         series: state.exerciseSeries,
       );
 
-      await firebase.addDocToSubCollection(
-          "workouts", state.generatedId, "workouts", exercise.toJson());
+      await firebase.addDocToSubCollection("workouts", state.generatedId,
+          "exercises", exerciseId, exercise.toJson());
 
       ref
           .read(exploreWorkoutsPageProvider.notifier)

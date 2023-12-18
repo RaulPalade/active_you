@@ -20,7 +20,7 @@ class SplashPage extends ConsumerWidget {
         } else {
           final response = ref
               .read(sessionProvider.notifier)
-              .getLoggedPerson(FirebaseAuth.instance.currentUser!.email!);
+              .getLoggedPerson(FirebaseAuth.instance.currentUser?.email ?? "");
           response.then((bool success) {
             if (success) {
               navigateToPageCoordinator(context);

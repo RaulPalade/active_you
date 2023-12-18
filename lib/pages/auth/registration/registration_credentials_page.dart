@@ -149,8 +149,8 @@ class RegistrationCredentialsPage extends ConsumerWidget {
         myWorkouts: null,
         createdWorkouts: null,
         myGoals: null,
-        following: null,
-        followers: null,
+        following: [],
+        followers: [],
       );
       Navigator.pushNamed(
         context,

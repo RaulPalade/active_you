@@ -16,8 +16,13 @@ class FirebaseMethods {
     }
   }
 
-  Future<bool> addDocToSubCollection(String collectionPath, String idCollection,
-      String subCollection, Object data) async {
+  Future<bool> addDocToSubCollection(
+    String collectionPath,
+    String idCollection,
+    String subCollection,
+    String subDocumentId,
+    Object data,
+  ) async {
     try {
       CollectionReference collection =
           FirebaseFirestore.instance.collection(collectionPath);
@@ -26,7 +31,8 @@ class FirebaseMethods {
       CollectionReference subCollectionRef =
           documentReference.collection(subCollection);
 
-      await subCollectionRef.add(data);
+      // Utilizza set invece di add per specificare l'ID del subdocumento
+      await subCollectionRef.doc(subDocumentId).set(data);
       return true;
     } catch (e) {
       log(e.toString());

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:active_you/business/models/person/person.dart';
 import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/pages/person_profile/widget/profile_header.dart';
@@ -16,6 +18,7 @@ class PersonDetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    log("Modal Route: ${ModalRoute.of(context)!.settings.arguments.toString()}");
     Person person = ModalRoute.of(context)?.settings.arguments as Person;
     final currentUser = ref.watch(currentPersonProvider);
     bool isTrainer = person.role == "TRAINER";
@@ -30,17 +33,17 @@ class PersonDetailPage extends ConsumerWidget {
           children: [
             ProfileHeader(
               fullName: "${person.name} ${person.surname}",
-              gender: person.sex!,
+              gender: person.sex ?? "Not known",
               currentGoal: "Lose a fat program",
               button: FollowButton(
-                status: currentUser!.following!.contains(person.email!)
+                status: currentUser!.following!.contains(person.email ?? "")
                     ? "Unfollow"
                     : "Follow",
                 onClick: () {
-                  currentUser.following!.contains(person.email!)
+                  currentUser.following!.contains(person.email ?? "")
                       ? ref
                           .read(sessionProvider.notifier)
-                          .unfollowPerson(person.email!)
+                          .unfollowPerson(person.email ?? "")
                       : ref.read(sessionProvider.notifier).followPerson(person);
                 },
               ),

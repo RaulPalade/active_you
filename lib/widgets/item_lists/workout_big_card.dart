@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:math';
 
 import 'package:active_you/business/models/workout/workout.dart';
@@ -16,6 +17,7 @@ class WorkoutBigCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    print(workout);
     final colors = [
       ActiveYouTheme.workoutCardBlue,
       ActiveYouTheme.workoutCard1,

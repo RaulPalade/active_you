@@ -7,6 +7,7 @@ import 'package:active_you/business/providers/session_provider/session_provider_
 import 'package:active_you/utils/firebase_methods.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_guid/flutter_guid.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SessionProvider extends StateNotifier<SessionProviderState> {
@@ -42,11 +43,10 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
         password: person.password ?? "",
       );
 
-      String userType = role.toLowerCase() == "user" ? "users" : "trainers";
       final personData = person.toJson();
       clearPersonObject(personData);
 
-      firebase.addNewDocument(userType, person.email, personData);
+      firebase.addNewDocument("users", person.email, personData);
 
       return true;
     } catch (e) {
@@ -74,9 +74,10 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
   }
 
   Future<bool> getLoggedPerson(String email) async {
+    log(FirebaseAuth.instance.currentUser.toString());
     try {
       final document = await firebase.getDocumentById("users", email);
-      log(document.data().toString());
+      log("Logged person: ${document.data().toString()}");
 
       final data = document.data();
       if (data != null && data is Map<String, dynamic>) {
@@ -106,12 +107,14 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
     try {
       state = SessionProviderState(
           currentPerson: state.currentPerson, loading: true);
+      String goalId = Guid.newGuid.value;
+      Goal updatedGoal = goal.copyWith(id: goalId);
 
-      await firebase.addDocToSubCollection(
-          "users", state.currentPerson?.email ?? "", "goals", goal);
+      await firebase.addDocToSubCollection("users",
+          state.currentPerson?.email ?? "", "goals", goalId, updatedGoal);
 
       var updatedPerson = state.currentPerson?.copyWith(
-        myGoals: [...state.currentPerson!.myGoals!, goal],
+        myGoals: [...state.currentPerson!.myGoals!, updatedGoal],
       );
 
       state = state.copyWith(currentPerson: updatedPerson);
@@ -212,7 +215,11 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
   Future<bool> saveWorkout(Workout workout) async {
     try {
       await firebase.addDocToSubCollection(
-          "users", state.currentPerson?.email ?? "", "workouts", workout);
+          "users",
+          state.currentPerson?.email ?? "",
+          "workouts",
+          workout.id ?? "",
+          workout);
 
       var updatedPerson = state.currentPerson?.copyWith(
         myWorkouts: [...?state.currentPerson!.myWorkouts, workout],

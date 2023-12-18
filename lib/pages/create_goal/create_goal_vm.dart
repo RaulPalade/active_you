@@ -5,6 +5,7 @@ import 'package:active_you/business/providers/session_provider/session_provider.
 import 'package:active_you/pages/create_goal/create_goal_state.dart';
 import 'package:active_you/pages/my_goals/my_goals_page.dart';
 import 'package:active_you/utils/firebase_methods.dart';
+import 'package:flutter_guid/flutter_guid.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CreateGoalVM extends StateNotifier<CreateGoalState> {
@@ -36,8 +37,10 @@ class CreateGoalVM extends StateNotifier<CreateGoalState> {
   Future<bool> addGoal() async {
     try {
       final currentUser = ref.watch(currentPersonProvider);
+      String goalId = Guid.newGuid.value;
+
       Goal goal = Goal(
-        id: null,
+        id: goalId,
         name: state.name,
         type: state.type,
         weight: state.weight,
@@ -48,7 +51,7 @@ class CreateGoalVM extends StateNotifier<CreateGoalState> {
       );
 
       await firebase.addDocToSubCollection(
-          "users", currentUser?.email ?? "", "goals", goal.toJson());
+          "users", currentUser?.email ?? "", "goals", goalId, goal.toJson());
 
       ref.read(myGoalsPageProvider.notifier).addGoalToList(goal);
       return true;
