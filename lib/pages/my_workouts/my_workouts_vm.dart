@@ -1,9 +1,11 @@
 import 'dart:developer';
 
+import 'package:active_you/business/models/exercise/exercise.dart';
 import 'package:active_you/business/models/workout/workout.dart';
 import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/pages/my_workouts/my_workouts_state.dart';
 import 'package:active_you/utils/firebase_methods.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyWorkoutsVM extends StateNotifier<MyWorkoutsState> {
@@ -19,11 +21,37 @@ class MyWorkoutsVM extends StateNotifier<MyWorkoutsState> {
       final currentUser = ref.watch(currentPersonProvider);
 
       final allDocuments = await firebase.getSubCollection(
-          "users", currentUser?.email ?? "", "workouts");
-      final myWorkouts =
-          allDocuments.docs.map((w) => w.data() as Workout).toList();
+        "users",
+        currentUser?.email ?? "",
+        "workouts",
+      );
 
-      final filteredList = filterMyWorkouts(myWorkouts);
+      List<Workout> myWorkouts =
+          await Future.wait(allDocuments.docs.map((w) async {
+        final data = w.data();
+        if (data != null && data is Map<String, dynamic>) {
+          Workout mainWorkout = Workout.fromJson(data);
+
+          // Recupera la sottocollezione degli esercizi
+          QuerySnapshot exercisesSnapshot =
+              await w.reference.collection('exercises').get();
+
+          // Mappa gli esercizi e aggiungili al documento principale
+          List<Exercise> exercises = exercisesSnapshot.docs
+              .map((exercise) =>
+                  Exercise.fromJson(exercise.data() as Map<String, dynamic>))
+              .toList();
+
+          mainWorkout = mainWorkout.copyWith(exercises: exercises);
+
+          return mainWorkout;
+        } else {
+          return Workout.fromJson(data as Map<String, dynamic>);
+        }
+      }));
+
+      final filteredList =
+          filterMyWorkouts(myWorkouts.whereType<Workout>().toList());
 
       state = state.copyWith(
         activeWorkouts: filteredList[0],
@@ -38,7 +66,10 @@ class MyWorkoutsVM extends StateNotifier<MyWorkoutsState> {
     try {
       final currentUser = ref.watch(currentPersonProvider);
 
-      final updateData = {"completed": true};
+      final updateData = {
+        "completed": true,
+        "endDate": DateTime.now().toIso8601String()
+      };
       await firebase.updateSubDocument(
         "users",
         currentUser?.email ?? "",

@@ -46,7 +46,7 @@ class CreateGoalVM extends StateNotifier<CreateGoalState> {
         weight: state.weight,
         daysPerWeek: state.daysPerWeek,
         initDate: DateTime.now(),
-        endDate: null,
+        endDate: DateTime.now(),
         completed: false,
       );
 
@@ -64,7 +64,7 @@ class CreateGoalVM extends StateNotifier<CreateGoalState> {
     try {
       final currentUser = ref.watch(currentPersonProvider);
 
-      final updateData = {"endDate": DateTime.now(), "completed": true};
+      final updateData = {"endDate": DateTime.now().toIso8601String(), "completed": true};
       await firebase.updateSubDocument(
         "users",
         currentUser?.email ?? "",

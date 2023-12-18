@@ -58,7 +58,6 @@ class CreateWorkoutVM extends StateNotifier<CreateWorkoutState> {
     try {
       final currentUser = ref.watch(currentPersonProvider);
       String workoutId = Guid.newGuid.value;
-      log("WorkoutID: $workoutId");
       Workout workout = Workout(
         id: workoutId,
         createdById: currentUser!.email,

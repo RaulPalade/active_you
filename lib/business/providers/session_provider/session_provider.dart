@@ -129,7 +129,7 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
       state = SessionProviderState(
           currentPerson: state.currentPerson, loading: true);
 
-      final updateData = {"endDate": DateTime.now(), "completed": true};
+      final updateData = {"endDate": DateTime.now().toIso8601String(), "completed": true};
       await firebase.updateSubDocument(
         "users",
         state.currentPerson?.email ?? "",
@@ -217,7 +217,6 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
     try {
       final workoutData = workout.toJson();
       workoutData.removeWhere((key, value) => key == 'exercises');
-      log(workoutData.toString());
 
       await firebase.addDocToSubCollection(
         "users",
@@ -239,7 +238,6 @@ class SessionProvider extends StateNotifier<SessionProviderState> {
         });
       }
 
-      // Aggiorna lo stato dell'utente aggiungendo il nuovo workout
       var updatedPerson = state.currentPerson?.copyWith(
         myWorkouts: [...?state.currentPerson!.myWorkouts, workout],
       );

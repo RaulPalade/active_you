@@ -24,7 +24,17 @@ class MyGoalsVM extends StateNotifier<MyGoalsState> {
 
       final response = await firebase.getSubCollection(
           "users", currentUser?.email ?? "", "goals");
-      List<Goal> myGoals = response.docs.map((e) => e.data() as Goal).toList();
+
+      List<Goal> myGoals = response.docs
+          .map((e) {
+        final data = e.data();
+        return data != null && data is Map<String, dynamic>
+            ? Goal.fromJson(data)
+            : null;
+      })
+          .whereType<Goal>()
+          .toList();
+
       final filteredList = filterMyGoals(myGoals);
 
       state = state.copyWith(
@@ -61,7 +71,7 @@ class MyGoalsVM extends StateNotifier<MyGoalsState> {
     try {
       final currentUser = ref.watch(currentPersonProvider);
 
-      final updateData = {"endDate": DateTime.now(), "completed": true};
+      final updateData = {"endDate": DateTime.now().toIso8601String(), "completed": true};
       firebase.updateSubDocument(
           "users", currentUser?.email ?? "", "goals", goalId, updateData);
 

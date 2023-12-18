@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:active_you/business/providers/session_provider/session_provider.dart';
 import 'package:active_you/navigation/endpoint.dart';
 import 'package:active_you/pages/person_profile/widget/other_card.dart';
@@ -20,6 +22,7 @@ class PersonProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentPerson = ref.watch(currentPersonProvider);
+    log(currentPerson.toString());
     bool isTrainer = currentPerson?.role == "TRAINER" ? true : false;
 
     return Scaffold(
