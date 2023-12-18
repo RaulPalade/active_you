@@ -75,8 +75,6 @@ class CreateWorkoutPage extends ConsumerWidget {
           showFailureSnackBar(context, "Impossibile creare l'workout");
         }
       });
-    } else {
-      log("NOOO");
     }
   }
 

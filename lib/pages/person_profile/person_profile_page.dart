@@ -22,7 +22,6 @@ class PersonProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentPerson = ref.watch(currentPersonProvider);
-    log(currentPerson.toString());
     bool isTrainer = currentPerson?.role == "TRAINER" ? true : false;
 
     return Scaffold(

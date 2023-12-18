@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HomePageState {
   Goal? get lastGoal => throw _privateConstructorUsedError;
+  Workout? get lastWorkout => throw _privateConstructorUsedError;
   List<Person>? get friendsActivity => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +31,8 @@ abstract class $HomePageStateCopyWith<$Res> {
           HomePageState value, $Res Function(HomePageState) then) =
       _$HomePageStateCopyWithImpl<$Res, HomePageState>;
   @useResult
-  $Res call({Goal? lastGoal, List<Person>? friendsActivity});
+  $Res call(
+      {Goal? lastGoal, Workout? lastWorkout, List<Person>? friendsActivity});
 
   $GoalCopyWith<$Res>? get lastGoal;
 }
@@ -49,6 +51,7 @@ class _$HomePageStateCopyWithImpl<$Res, $Val extends HomePageState>
   @override
   $Res call({
     Object? lastGoal = freezed,
+    Object? lastWorkout = freezed,
     Object? friendsActivity = freezed,
   }) {
     return _then(_value.copyWith(
@@ -56,6 +59,10 @@ class _$HomePageStateCopyWithImpl<$Res, $Val extends HomePageState>
           ? _value.lastGoal
           : lastGoal // ignore: cast_nullable_to_non_nullable
               as Goal?,
+      lastWorkout: freezed == lastWorkout
+          ? _value.lastWorkout
+          : lastWorkout // ignore: cast_nullable_to_non_nullable
+              as Workout?,
       friendsActivity: freezed == friendsActivity
           ? _value.friendsActivity
           : friendsActivity // ignore: cast_nullable_to_non_nullable
@@ -84,7 +91,8 @@ abstract class _$$HomePageStateDataCopyWith<$Res>
       __$$HomePageStateDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Goal? lastGoal, List<Person>? friendsActivity});
+  $Res call(
+      {Goal? lastGoal, Workout? lastWorkout, List<Person>? friendsActivity});
 
   @override
   $GoalCopyWith<$Res>? get lastGoal;
@@ -102,6 +110,7 @@ class __$$HomePageStateDataCopyWithImpl<$Res>
   @override
   $Res call({
     Object? lastGoal = freezed,
+    Object? lastWorkout = freezed,
     Object? friendsActivity = freezed,
   }) {
     return _then(_$HomePageStateData(
@@ -109,6 +118,10 @@ class __$$HomePageStateDataCopyWithImpl<$Res>
           ? _value.lastGoal
           : lastGoal // ignore: cast_nullable_to_non_nullable
               as Goal?,
+      lastWorkout: freezed == lastWorkout
+          ? _value.lastWorkout
+          : lastWorkout // ignore: cast_nullable_to_non_nullable
+              as Workout?,
       friendsActivity: freezed == friendsActivity
           ? _value._friendsActivity
           : friendsActivity // ignore: cast_nullable_to_non_nullable
@@ -121,11 +134,13 @@ class __$$HomePageStateDataCopyWithImpl<$Res>
 
 class _$HomePageStateData implements HomePageStateData {
   const _$HomePageStateData(
-      {this.lastGoal, final List<Person>? friendsActivity})
+      {this.lastGoal, this.lastWorkout, final List<Person>? friendsActivity})
       : _friendsActivity = friendsActivity;
 
   @override
   final Goal? lastGoal;
+  @override
+  final Workout? lastWorkout;
   final List<Person>? _friendsActivity;
   @override
   List<Person>? get friendsActivity {
@@ -138,7 +153,7 @@ class _$HomePageStateData implements HomePageStateData {
 
   @override
   String toString() {
-    return 'HomePageState(lastGoal: $lastGoal, friendsActivity: $friendsActivity)';
+    return 'HomePageState(lastGoal: $lastGoal, lastWorkout: $lastWorkout, friendsActivity: $friendsActivity)';
   }
 
   @override
@@ -149,11 +164,16 @@ class _$HomePageStateData implements HomePageStateData {
             (identical(other.lastGoal, lastGoal) ||
                 other.lastGoal == lastGoal) &&
             const DeepCollectionEquality()
+                .equals(other.lastWorkout, lastWorkout) &&
+            const DeepCollectionEquality()
                 .equals(other._friendsActivity, _friendsActivity));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, lastGoal,
+  int get hashCode => Object.hash(
+      runtimeType,
+      lastGoal,
+      const DeepCollectionEquality().hash(lastWorkout),
       const DeepCollectionEquality().hash(_friendsActivity));
 
   @JsonKey(ignore: true)
@@ -166,10 +186,13 @@ class _$HomePageStateData implements HomePageStateData {
 abstract class HomePageStateData implements HomePageState {
   const factory HomePageStateData(
       {final Goal? lastGoal,
+      final Workout? lastWorkout,
       final List<Person>? friendsActivity}) = _$HomePageStateData;
 
   @override
   Goal? get lastGoal;
+  @override
+  Workout? get lastWorkout;
   @override
   List<Person>? get friendsActivity;
   @override

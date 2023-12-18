@@ -18,7 +18,6 @@ class PersonDetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    log("Modal Route: ${ModalRoute.of(context)!.settings.arguments.toString()}");
     Person person = ModalRoute.of(context)?.settings.arguments as Person;
     final currentUser = ref.watch(currentPersonProvider);
     bool isTrainer = person.role == "TRAINER";

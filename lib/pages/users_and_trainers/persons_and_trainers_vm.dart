@@ -70,7 +70,6 @@ class PersonsAndTrainersVM extends StateNotifier<PersonsAndTrainersState> {
   Future<void> getPersonById(String id) async {
     try {
       final document = await firebase.getDocumentById("users", id);
-      log("Logged person: ${document.data().toString()}");
 
       final data = document.data();
       if (data != null && data is Map<String, dynamic>) {
