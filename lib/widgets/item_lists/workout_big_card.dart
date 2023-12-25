@@ -99,7 +99,7 @@ class WorkoutBigCard extends ConsumerWidget {
                 radius: MediaQuery
                     .of(context)
                     .size
-                    .width / 7,
+                    .width / 9,
                 backgroundColor: Colors.white70,
                 child: SvgPicture.asset(
                   images[j],

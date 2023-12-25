@@ -92,7 +92,7 @@ class GoalBigCard extends StatelessWidget {
               ),
               const Spacer(),
               CircleAvatar(
-                radius: MediaQuery.of(context).size.width / 7,
+                radius: MediaQuery.of(context).size.width / 9,
                 backgroundColor: Colors.white70,
                 child: SvgPicture.asset(
                   images[j],

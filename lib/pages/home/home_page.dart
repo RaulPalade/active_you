@@ -5,7 +5,9 @@ import 'package:active_you/pages/home/home_page_state.dart';
 import 'package:active_you/pages/home/home_page_vm.dart';
 import 'package:active_you/pages/home/widgets/friend_activity_card.dart';
 import 'package:active_you/pages/home/widgets/goal_big_card.dart';
+import 'package:active_you/pages/my_workouts/my_workouts_page.dart';
 import 'package:active_you/theme/active_you_theme.dart';
+import 'package:active_you/widgets/item_lists/workout_big_card.dart';
 import 'package:active_you/widgets/my_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,6 +19,7 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUser = ref.watch(currentPersonProvider);
     final currentGoal = ref.watch(myLastGoalProvider);
+    final currentWorkouts = ref.watch(activeWorkoutsProvider);
     final friendsActivity = ref.watch(myFriendsActivityProvider);
 
     final filteredFriendsActivity = friendsActivity
@@ -70,10 +73,16 @@ class HomePage extends ConsumerWidget {
                     ),
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(horizontal: 24),
-                //   child: WorkoutBigCard(workout: currentWorkout.workout!),
-                // ),
+                if (currentWorkouts != null && currentWorkouts.isNotEmpty) ...[
+                  ListView.builder(
+                      padding: const EdgeInsets.all(8),
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: currentWorkouts.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return WorkoutBigCard(workout: currentWorkouts[index]);
+                      }),
+                ],
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 60),
                   child: Divider(),
@@ -111,10 +120,12 @@ class HomePage extends ConsumerWidget {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
                   itemCount: filteredFriendsActivity?.length ?? 0,
                   itemBuilder: (BuildContext context, int index) {
-                    return FriendActivityCard(friend: filteredFriendsActivity![index]);
+                    return FriendActivityCard(
+                        friend: filteredFriendsActivity![index]);
                   },
                 ),
               ],
@@ -123,7 +134,6 @@ class HomePage extends ConsumerWidget {
         ),
       ),
     );
-
   }
 }
 
